@@ -24,7 +24,9 @@ export function absoluteUrl(path: string): string {
   return `${SITE_ORIGIN}${path}`;
 }
 
-/** 从 URL 路径推断语言，无 /en 前缀一律返回默认语言 */
+/** 从 URL 路径推断语言，无 /en 前缀一律返回默认语言。
+ *  注意："/en"（无尾斜杠）也视为英文，仅为兼容手输 URL；
+ *  路由层会统一 301 到带尾斜杠的规范路径。 */
 export function langFromPath(path: string): Lang {
   return path === "/en" || path.startsWith("/en/") ? "en" : DEFAULT_LANG;
 }

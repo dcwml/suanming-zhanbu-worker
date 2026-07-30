@@ -26,5 +26,6 @@ describe("langFromPath", () => {
     expect(langFromPath("/zh/")).toBe("zh");
     expect(langFromPath("/whatever")).toBe("zh");
     expect(langFromPath("/")).toBe("zh");
+    expect(langFromPath("/english")).toBe("zh");
   });
 });
