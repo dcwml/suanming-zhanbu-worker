@@ -22,7 +22,7 @@ export interface PageEntry {
   content: Record<Lang, string>;
 }
 
-export const PAGES: PageEntry[] = [
+export const PAGES: readonly PageEntry[] = [
   {
     slug: "",
     inNav: true,

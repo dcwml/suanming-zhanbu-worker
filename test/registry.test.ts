@@ -26,7 +26,7 @@ describe("registry", () => {
   it("content fragments do not contain <html>/<head>/<body> tags", () => {
     for (const page of [...PAGES, { content: NOT_FOUND_CONTENT }]) {
       for (const lang of ["zh", "en"] as const) {
-        expect(page.content[lang]).not.toMatch(/<(html|head|body)\b/i);
+        expect(page.content[lang]).not.toMatch(/<\/?(html|head|body)\b/i);
       }
     }
   });
