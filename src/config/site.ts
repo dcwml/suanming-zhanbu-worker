@@ -14,6 +14,7 @@ export const OTHER_LANG: Record<Lang, Lang> = { zh: "en", en: "zh" };
 export const HREFLANG_CODE: Record<Lang, string> = { zh: "zh-CN", en: "en" };
 export const OG_LOCALE: Record<Lang, string> = { zh: "zh_CN", en: "en_US" };
 export const HTML_LANG: Record<Lang, string> = { zh: "zh-CN", en: "en" };
+export const OG_IMAGE_PATH = "/assets/og-default.png";
 
 /** 页面规范路径：首页 /zh/，内容页 /zh/sample/ */
 export function pagePath(lang: Lang, slug: string): string {

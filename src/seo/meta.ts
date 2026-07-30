@@ -1,8 +1,11 @@
 import type { PageEntry } from "../pages/registry";
 import {
+  DEFAULT_LANG,
   HREFLANG_CODE,
   LANGS,
+  OG_IMAGE_PATH,
   OG_LOCALE,
+  OTHER_LANG,
   SITE_NAME,
   SITE_NAME_EN,
   SITE_SLOGAN,
@@ -39,14 +42,14 @@ export function buildHead(page: PageEntry, lang: Lang): string {
   const canonical = absoluteUrl(pagePath(lang, page.slug));
   const title = escapeHtml(pageTitle(page, lang));
   const description = escapeHtml(meta.description);
-  const image = absoluteUrl("/assets/og-default.png");
-  const otherLang = LANGS.find((l) => l !== lang)!;
+  const image = absoluteUrl(OG_IMAGE_PATH);
+  const otherLang = OTHER_LANG[lang];
 
   const hreflangs = LANGS.map(
     (l) =>
       `<link rel="alternate" hreflang="${HREFLANG_CODE[l]}" href="${absoluteUrl(pagePath(l, page.slug))}">`,
   ).join("\n    ");
-  const xDefault = `<link rel="alternate" hreflang="x-default" href="${absoluteUrl(pagePath("zh", page.slug))}">`;
+  const xDefault = `<link rel="alternate" hreflang="x-default" href="${absoluteUrl(pagePath(DEFAULT_LANG, page.slug))}">`;
 
   return [
     `<meta charset="utf-8">`,
