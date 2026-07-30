@@ -60,10 +60,13 @@ describe("pageJsonLd", () => {
 
 describe("breadcrumbJsonLd", () => {
   it("home has one crumb, content page has two", () => {
-    const homeItems = (breadcrumbJsonLd(home, "zh") as { itemListElement: unknown[] }).itemListElement;
-    const articleItems = (breadcrumbJsonLd(article, "en") as { itemListElement: unknown[] }).itemListElement;
+    const homeItems = (breadcrumbJsonLd(home, "zh") as { itemListElement: { position: number }[] }).itemListElement;
+    const articleItems = (breadcrumbJsonLd(article, "en") as { itemListElement: { position: number }[] }).itemListElement;
     expect(homeItems).toHaveLength(1);
     expect(articleItems).toHaveLength(2);
+    expect(homeItems[0].position).toBe(1);
+    expect(articleItems[0].position).toBe(1);
+    expect(articleItems[1].position).toBe(2);
   });
 });
 

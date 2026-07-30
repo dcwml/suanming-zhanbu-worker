@@ -20,7 +20,7 @@ export function toJsonLdScript(data: object): string {
   return `<script type="application/ld+json">${JSON.stringify(data).replace(/</g, "\\u003c")}</script>`;
 }
 
-export function websiteJsonLd(): object {
+export function websiteJsonLd(): Record<string, unknown> {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
@@ -31,7 +31,7 @@ export function websiteJsonLd(): object {
   };
 }
 
-export function pageJsonLd(page: PageEntry, lang: Lang): object {
+export function pageJsonLd(page: PageEntry, lang: Lang): Record<string, unknown> {
   return {
     "@context": "https://schema.org",
     "@type": page.jsonldType ?? "WebPage",
@@ -42,7 +42,7 @@ export function pageJsonLd(page: PageEntry, lang: Lang): object {
   };
 }
 
-export function breadcrumbJsonLd(page: PageEntry, lang: Lang): object {
+export function breadcrumbJsonLd(page: PageEntry, lang: Lang): Record<string, unknown> {
   const items: BreadcrumbItem[] = [
     {
       "@type": "ListItem",
