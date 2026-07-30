@@ -7,6 +7,6 @@
     "directory": "./public"
   },
   "rules": [
-    { "type": "Text", "include": ["**/*.html"] }
+    { "type": "Text", "globs": ["**/*.html"] }
   ]
 }
