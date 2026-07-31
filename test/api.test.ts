@@ -34,4 +34,11 @@ describe("unknown api routes", () => {
     expect(body.ok).toBe(false);
     expect(body.error.code).toBe("not_found");
   });
+
+  it("truncates very long paths in the 404 message", async () => {
+    const res = await api.fetch(req(`/api/${"x".repeat(500)}`));
+    expect(res.status).toBe(404);
+    const body = (await res.json()) as { ok: boolean; error: { message: string } };
+    expect(body.error.message.length).toBeLessThan(200);
+  });
 });

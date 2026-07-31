@@ -23,7 +23,14 @@ api.post("/echo", async (c) => {
 // 兜底：/api/* 未命中一律返回 JSON 404（而非 HTML 404 页）
 api.all("*", (c) =>
   c.json(
-    { ok: false, error: { code: "not_found", message: `API endpoint not found: ${c.req.path}` } },
+    {
+      ok: false,
+      error: {
+        code: "not_found",
+        // 截断路径回显，避免超长路径放大响应体 / 日志注入
+        message: `API endpoint not found: ${c.req.path.slice(0, 128)}`,
+      },
+    },
     404,
   ),
 );
