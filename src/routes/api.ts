@@ -1,0 +1,33 @@
+import { Hono } from "hono";
+
+/**
+ * /api/* 预留接口层。
+ * 统一响应壳：{ ok: true, data } / { ok: false, error: { code, message } }
+ * 未来接入 LLM 时按同样模式新增接口，例如 POST /api/divine。
+ */
+export const api = new Hono().basePath("/api");
+
+api.post("/echo", async (c) => {
+  let body: unknown;
+  try {
+    body = await c.req.json();
+  } catch {
+    return c.json(
+      { ok: false, error: { code: "invalid_json", message: "Request body must be valid JSON." } },
+      400,
+    );
+  }
+  return c.json({ ok: true, data: { echo: body } });
+});
+
+// 兜底：/api/* 未命中一律返回 JSON 404（而非 HTML 404 页）
+api.all("*", (c) =>
+  c.json(
+    { ok: false, error: { code: "not_found", message: `API endpoint not found: ${c.req.path}` } },
+    404,
+  ),
+);
+
+api.onError((_err, c) =>
+  c.json({ ok: false, error: { code: "internal_error", message: "Internal Server Error" } }, 500),
+);
