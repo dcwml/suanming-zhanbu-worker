@@ -71,3 +71,150 @@ code {
   text-align: center;
   padding: 1.25rem 1rem;
 }
+
+/* ---------- 八字排盘页 ---------- */
+
+.bazi-form {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--bg);
+  border: 1px solid #e5ddd2;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(43, 38, 34, 0.06);
+}
+
+.bazi-field {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  align-items: center;
+  border: none;
+  margin: 0 0 0.5rem;
+  padding: 0;
+}
+
+.bazi-field legend {
+  float: left;
+  margin-right: 0.5rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.bazi-field label { font-size: 0.95rem; }
+
+.bazi-field input[type="number"] {
+  width: 5.5rem;
+  padding: 0.25rem 0.4rem;
+  border: 1px solid #d8cfc2;
+  border-radius: 4px;
+  font: inherit;
+}
+
+.bazi-field select {
+  padding: 0.25rem 0.4rem;
+  border: 1px solid #d8cfc2;
+  border-radius: 4px;
+  font: inherit;
+  max-width: 100%;
+}
+
+.bazi-submit {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.45rem 1.6rem;
+  font: inherit;
+  cursor: pointer;
+}
+
+.bazi-submit:hover { opacity: 0.9; }
+
+.bazi-form-error { color: #b3261e; margin: 0.5rem 0 0; font-size: 0.9rem; }
+
+.bazi-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+  margin: 1rem 0;
+}
+
+.bazi-table th,
+.bazi-table td {
+  border: 1px solid #e5ddd2;
+  padding: 0.4rem 0.5rem;
+  text-align: center;
+  vertical-align: top;
+}
+
+.bazi-table th {
+  background: #f0e9df;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.bazi-table .bazi-gan { font-size: 1.3rem; font-weight: 700; }
+
+.wx-金 { color: #b8860b; }
+.wx-木 { color: #2e7d32; }
+.wx-水 { color: #1565c0; }
+.wx-火 { color: #c62828; }
+.wx-土 { color: #6d4c41; }
+
+.bazi-extra { font-size: 0.92rem; color: var(--fg); }
+.bazi-extra dt { font-weight: 600; color: var(--muted); }
+.bazi-extra dd { margin: 0 0 0.4rem; }
+
+.bazi-dayun {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.bazi-dayun-item {
+  flex: 0 0 auto;
+  border: 1px solid #e5ddd2;
+  border-radius: 6px;
+  padding: 0.4rem 0.7rem;
+  text-align: center;
+  font-size: 0.85rem;
+  background: #fff;
+}
+
+.bazi-dayun-item.current {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+.bazi-card {
+  border: 1px solid #e5ddd2;
+  border-radius: 8px;
+  background: #fff;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+}
+
+.bazi-card h3 { margin-top: 0; }
+
+.bazi-card .status { color: var(--muted); font-size: 0.9rem; }
+
+.bazi-card .status.error { color: #b3261e; }
+
+.bazi-retry {
+  background: none;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  border-radius: 6px;
+  padding: 0.25rem 1rem;
+  font: inherit;
+  cursor: pointer;
+}
+
+.bazi-disclaimer { color: var(--muted); font-size: 0.85rem; }
+
+@keyframes bazi-blink { 50% { opacity: 0.4; } }
+.bazi-card .status.loading { animation: bazi-blink 1.2s infinite; }
