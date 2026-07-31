@@ -26,7 +26,7 @@ describe("renderPage", () => {
   });
 
   it("embeds the body fragment and footer", () => {
-    expect(html).toContain("探索命理与占卜的世界");
+    expect(html).toContain("以传统命理与占卜的智慧，观照当下，启迪未来");
     expect(html).toContain("site-footer");
     expect(enHtml).toContain("How to Add a Page");
   });

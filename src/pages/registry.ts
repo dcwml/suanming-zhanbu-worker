@@ -31,8 +31,8 @@ export const PAGES: readonly PageEntry[] = [
     slug: "",
     inNav: true,
     meta: {
-      zh: { title: "首页", description: "玄命阁首页：八字命理、塔罗占卜与传统文化专栏。" },
-      en: { title: "Home", description: "Xuanming Pavilion: BaZi, tarot and traditional culture." },
+      zh: { title: "首页", description: "玄命阁：在线八字排盘与六爻起卦，天干地支、五行入门。" },
+      en: { title: "Home", description: "Xuanming Pavilion: free BaZi chart reading and I Ching casting, with introductions to Heavenly Stems, Earthly Branches and the Five Elements." },
     },
     content: { zh: homeZh, en: homeEn },
   },
