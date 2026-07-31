@@ -5,6 +5,10 @@ import { buildHead, buildPlainHead } from "../seo/meta";
 import { renderFooter } from "./footer";
 import { renderNav } from "./nav";
 
+/** 哨兵 slug：仅用于让导航不高亮任何真实页面；双下划线命名与真实 slug 命名空间不相交 */
+const SENTINEL_NOTFOUND = "__notfound__";
+const SENTINEL_ERROR = "__error__";
+
 function layout(lang: Lang, head: string, nav: string, main: string): string {
   return `<!DOCTYPE html>
 <html lang="${HTML_LANG[lang]}">
@@ -31,7 +35,7 @@ export function renderPage(page: PageEntry, lang: Lang): string {
 
 export function renderNotFound(lang: Lang): string {
   const title = lang === "zh" ? `页面未找到 - ${SITE_NAME}` : `Page Not Found - ${SITE_NAME_EN}`;
-  return layout(lang, buildPlainHead(lang, title), renderNav(lang, "__notfound__"), NOT_FOUND_CONTENT[lang]);
+  return layout(lang, buildPlainHead(lang, title), renderNav(lang, SENTINEL_NOTFOUND, ""), NOT_FOUND_CONTENT[lang]);
 }
 
 export function renderError(lang: Lang): string {
@@ -40,5 +44,5 @@ export function renderError(lang: Lang): string {
     lang === "zh"
       ? "      <h1>服务器错误</h1>\n      <p>请稍后再试。</p>"
       : "      <h1>Server Error</h1>\n      <p>Please try again later.</p>";
-  return layout(lang, buildPlainHead(lang, title), renderNav(lang, "__error__"), body);
+  return layout(lang, buildPlainHead(lang, title), renderNav(lang, SENTINEL_ERROR, ""), body);
 }

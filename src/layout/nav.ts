@@ -2,8 +2,9 @@ import { OTHER_LANG, pagePath, type Lang } from "../config/site";
 import { navPages } from "../pages/registry";
 import { escapeHtml } from "../seo/meta";
 
-/** 顶部导航：链接由注册表生成，含语言切换 */
-export function renderNav(lang: Lang, currentSlug: string): string {
+/** langSwitchSlug 缺省时语言切换指向当前页的另一语言版本；
+ *  404/500 等无真实页面的场景应显式传 "" 指向对方语言首页。 */
+export function renderNav(lang: Lang, currentSlug: string, langSwitchSlug?: string): string {
   const links = navPages()
     .map((p) => {
       const active = p.slug === currentSlug ? ' class="active" aria-current="page"' : "";
@@ -18,6 +19,6 @@ export function renderNav(lang: Lang, currentSlug: string): string {
       <div class="nav-links">
         ${links}
       </div>
-      <a class="lang-switch" href="${pagePath(other, currentSlug)}">${switchLabel}</a>
+      <a class="lang-switch" href="${pagePath(other, langSwitchSlug ?? currentSlug)}">${switchLabel}</a>
     </nav>`;
 }

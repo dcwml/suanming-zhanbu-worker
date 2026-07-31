@@ -41,6 +41,8 @@ describe("renderNotFound", () => {
     expect(zh).toContain('content="noindex"');
     expect(zh).toContain("页面未找到");
     expect(en).toContain("Page Not Found");
+    expect(zh).toContain('class="lang-switch" href="/en/"');
+    expect(en).toContain('class="lang-switch" href="/zh/"');
   });
 });
 
