@@ -225,7 +225,8 @@ code {
 .liuyao-question-label input { display: block; width: 100%; margin-top: 0.5rem; padding: 0.5rem; font-size: 1rem; }
 .liuyao-line { margin: 0.75rem 0; padding: 0.5rem 1rem; }
 .liuyao-line legend { font-weight: 600; }
-.liuyao-line label { display: inline-block; margin-right: 1rem; cursor: pointer; }
+.liuyao-line label { display: flex; align-items: center; gap: 0.4rem; cursor: pointer; padding: 0.3rem 0; }
+.liuyao-line label input { flex-shrink: 0; }
 
 /* 爻线预览（上爻在顶部） */
 .liuyao-preview { margin: 1rem 0; display: flex; flex-direction: column; align-items: center; gap: 6px; }
@@ -248,4 +249,5 @@ code {
 .liuyao-retry { margin-top: 1rem; }
 .liuyao-cast { display: block; margin: 1.5rem auto; padding: 0.6rem 2rem; font-size: 1.1rem; }
 .liuyao-cast:disabled { opacity: 0.5; cursor: not-allowed; }
+#liuyao-interpret-btn { padding: 0.6rem 2rem; font-size: 1.1rem; cursor: pointer; }
 .liuyao-error { color: #c0392b; }
