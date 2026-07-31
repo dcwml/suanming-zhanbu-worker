@@ -127,3 +127,20 @@ describe("bazi page", () => {
     expect(json.ok).toBe(false);
   });
 });
+
+describe("liuyao page", () => {
+  it("serves /zh/liuyao/ with form skeleton and scripts", async () => {
+    const res = await SELF.fetch("http://localhost/zh/liuyao/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain('id="liuyao-app"');
+    expect(html).toContain("/assets/liuyao.js");
+  });
+
+  it("serves /en/liuyao/ in English", async () => {
+    const res = await SELF.fetch("http://localhost/en/liuyao/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain('data-lang="en"');
+  });
+});

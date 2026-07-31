@@ -1,0 +1,41 @@
+<div class="liuyao-app" id="liuyao-app" data-lang="en">
+  <h1>I Ching Hexagram Casting</h1>
+  <p class="lead">Prepare three coins, focus your mind, cast six times, and receive an I Ching hexagram reading.</p>
+
+  <section class="liuyao-step" id="liuyao-step1">
+    <h2>Step 1 · Preparation</h2>
+    <p class="liuyao-guide">Prepare three identical coins. Calm your mind and focus on what you wish to ask.</p>
+    <p class="liuyao-rules">Casting rules: toss all three coins together; if a coin lands on its edge, redo that toss; record each result, six tosses in total (from the bottom line to the top).</p>
+    <label class="liuyao-question-label">Your question
+      <input type="text" id="liuyao-question" maxlength="200" placeholder="e.g. Will my career improve soon?" required>
+    </label>
+  </section>
+
+  <section class="liuyao-step" id="liuyao-step2">
+    <h2>Step 2 · Record Tosses</h2>
+    <fieldset class="liuyao-field">
+      <legend>Define coin sides</legend>
+      <select id="liuyao-coindef">
+        <option value="default" selected>Inscribed/heads side = Yin, other side = Yang</option>
+        <option value="flipped">Inscribed/heads side = Yang, other side = Yin</option>
+      </select>
+    </fieldset>
+    <div id="liuyao-lines"></div>
+    <div class="liuyao-preview" id="liuyao-preview" aria-live="polite"></div>
+  </section>
+
+  <section class="liuyao-step" id="liuyao-step3">
+    <h2>Step 3 · Result &amp; Reading</h2>
+    <div id="liuyao-result" hidden></div>
+    <button type="button" id="liuyao-interpret-btn" hidden>Start Reading</button>
+    <section id="liuyao-interpret" class="liuyao-interpret" hidden>
+      <p class="liuyao-disclaimer">Readings are for entertainment purposes only and do not constitute professional advice.</p>
+      <article class="liuyao-card"><div class="liuyao-card-body"></div></article>
+    </section>
+    <p class="liuyao-error" id="liuyao-error" role="alert" hidden></p>
+  </section>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js" defer></script>
+<script src="/assets/liuyao.js" defer></script>

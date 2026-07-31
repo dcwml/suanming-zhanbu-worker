@@ -5,6 +5,8 @@ import sampleZh from "../content/sample.zh.html";
 import sampleEn from "../content/sample.en.html";
 import baziZh from "../content/bazi.zh.html";
 import baziEn from "../content/bazi.en.html";
+import liuyaoZh from "../content/liuyao.zh.html";
+import liuyaoEn from "../content/liuyao.en.html";
 import notfoundZh from "../content/notfound.zh.html";
 import notfoundEn from "../content/notfound.en.html";
 
@@ -42,6 +44,15 @@ export const PAGES: readonly PageEntry[] = [
       en: { title: "BaZi Chart", description: "Free BaZi Four-Pillars calculator with AI readings of your chart, luck cycles and yearly outlook." },
     },
     content: { zh: baziZh, en: baziEn },
+  },
+  {
+    slug: "liuyao",
+    inNav: true,
+    meta: {
+      zh: { title: "六爻起卦", description: "在线六爻起卦：铜钱摇卦、周易卦辞，AI 智能解读吉凶趋势。" },
+      en: { title: "I Ching Casting", description: "Free online I Ching coin-toss hexagram casting with AI-powered readings." },
+    },
+    content: { zh: liuyaoZh, en: liuyaoEn },
   },
   {
     slug: "sample",

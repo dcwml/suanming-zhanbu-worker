@@ -1,0 +1,41 @@
+<div class="liuyao-app" id="liuyao-app" data-lang="zh">
+  <h1>六爻起卦</h1>
+  <p class="lead">备好三枚铜钱或硬币，静心凝神，手动投掷六次起卦，获取周易卦辞解读。</p>
+
+  <section class="liuyao-step" id="liuyao-step1">
+    <h2>第一步 · 准备</h2>
+    <p class="liuyao-guide">准备三枚相同的铜钱或硬币。静心凝神，集中意念于所问之事。</p>
+    <p class="liuyao-rules">投掷规则：三枚同时投掷；若硬币立起则作废重投；每次记录结果，共投掷六次（从初爻到上爻）。</p>
+    <label class="liuyao-question-label">所求之事
+      <input type="text" id="liuyao-question" maxlength="200" placeholder="例如：近期事业是否有转机" required>
+    </label>
+  </section>
+
+  <section class="liuyao-step" id="liuyao-step2">
+    <h2>第二步 · 投掷录入</h2>
+    <fieldset class="liuyao-field">
+      <legend>规定正反</legend>
+      <select id="liuyao-coindef">
+        <option value="default" selected>有字/图案面 = 字（阴），另一面 = 背（阳）</option>
+        <option value="flipped">有字/图案面 = 背（阳），另一面 = 字（阴）</option>
+      </select>
+    </fieldset>
+    <div id="liuyao-lines"></div>
+    <div class="liuyao-preview" id="liuyao-preview" aria-live="polite"></div>
+  </section>
+
+  <section class="liuyao-step" id="liuyao-step3">
+    <h2>第三步 · 结果与解读</h2>
+    <div id="liuyao-result" hidden></div>
+    <button type="button" id="liuyao-interpret-btn" hidden>开始解读</button>
+    <section id="liuyao-interpret" class="liuyao-interpret" hidden>
+      <p class="liuyao-disclaimer">以下解读仅供娱乐参考，不构成任何专业建议。</p>
+      <article class="liuyao-card"><div class="liuyao-card-body"></div></article>
+    </section>
+    <p class="liuyao-error" id="liuyao-error" role="alert" hidden></p>
+  </section>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js" defer></script>
+<script src="/assets/liuyao.js" defer></script>
