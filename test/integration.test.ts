@@ -97,3 +97,32 @@ describe("api via worker", () => {
     expect(await res.json()).toEqual({ ok: true, data: { echo: { a: 1 } } });
   });
 });
+
+describe("bazi page", () => {
+  it("serves /zh/bazi/ with form and scripts", async () => {
+    const res = await SELF.fetch("http://localhost/zh/bazi/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain('id="bazi-form"');
+    expect(html).toContain("lunar.min.js");
+    expect(html).toContain("/assets/bazi.js");
+  });
+
+  it("serves /en/bazi/ in English", async () => {
+    const res = await SELF.fetch("http://localhost/en/bazi/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain('data-lang="en"');
+  });
+
+  it("full-stack: invalid interpret request gets JSON 400", async () => {
+    const res = await SELF.fetch("http://localhost/api/bazi/interpret", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ part: "nope" }),
+    });
+    expect(res.status).toBe(400);
+    const json = (await res.json()) as { ok: boolean };
+    expect(json.ok).toBe(false);
+  });
+});

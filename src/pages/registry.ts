@@ -3,6 +3,8 @@ import homeZh from "../content/home.zh.html";
 import homeEn from "../content/home.en.html";
 import sampleZh from "../content/sample.zh.html";
 import sampleEn from "../content/sample.en.html";
+import baziZh from "../content/bazi.zh.html";
+import baziEn from "../content/bazi.en.html";
 import notfoundZh from "../content/notfound.zh.html";
 import notfoundEn from "../content/notfound.en.html";
 
@@ -31,6 +33,15 @@ export const PAGES: readonly PageEntry[] = [
       en: { title: "Home", description: "Xuanming Pavilion: BaZi, tarot and traditional culture." },
     },
     content: { zh: homeZh, en: homeEn },
+  },
+  {
+    slug: "bazi",
+    inNav: true,
+    meta: {
+      zh: { title: "八字排盘", description: "在线八字排盘：四柱十神、大运流年，AI 智能解读命局走势。" },
+      en: { title: "BaZi Chart", description: "Free BaZi Four-Pillars calculator with AI readings of your chart, luck cycles and yearly outlook." },
+    },
+    content: { zh: baziZh, en: baziEn },
   },
   {
     slug: "sample",

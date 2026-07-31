@@ -15,6 +15,8 @@ describe("buildSitemapXml", () => {
     expect(xml).toContain("<loc>https://example.com/en/</loc>");
     expect(xml).toContain("<loc>https://example.com/zh/sample/</loc>");
     expect(xml).toContain("<loc>https://example.com/en/sample/</loc>");
+    expect(xml).toContain("<loc>https://example.com/zh/bazi/</loc>");
+    expect(xml).toContain("<loc>https://example.com/en/bazi/</loc>");
   });
 
   it("adds xhtml:link alternates per url", () => {

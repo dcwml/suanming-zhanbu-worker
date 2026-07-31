@@ -1,0 +1,57 @@
+<div class="bazi-app" id="bazi-app" data-lang="en">
+  <h1>BaZi Chart Calculator</h1>
+  <p class="lead">Enter your birth time to cast a Four-Pillars chart and get AI readings of your destiny, luck cycles and this year's outlook.</p>
+
+  <form class="bazi-form" id="bazi-form">
+    <fieldset class="bazi-field">
+      <legend>Calendar</legend>
+      <label><input type="radio" name="calendar" value="solar" checked> Solar</label>
+      <label><input type="radio" name="calendar" value="lunar"> Lunar</label>
+      <label id="bazi-leap-wrap" hidden><input type="checkbox" id="bazi-leap"> Leap month</label>
+    </fieldset>
+    <div class="bazi-field">
+      <label>Year <input type="number" id="bazi-year" min="1900" max="2100" value="1990" required></label>
+      <label>Month <input type="number" id="bazi-month" min="1" max="12" value="1" required></label>
+      <label>Day <input type="number" id="bazi-day" min="1" max="31" value="1" required></label>
+      <label>Hour
+        <select id="bazi-hour">
+          <option value="0">早子 Early Zi 23:00-00:59 (same day)</option>
+          <option value="2">丑 Chou 01:00-02:59</option>
+          <option value="4">寅 Yin 03:00-04:59</option>
+          <option value="6">卯 Mao 05:00-06:59</option>
+          <option value="8">辰 Chen 07:00-08:59</option>
+          <option value="10">巳 Si 09:00-10:59</option>
+          <option value="12" selected>午 Wu 11:00-12:59</option>
+          <option value="14">未 Wei 13:00-14:59</option>
+          <option value="16">申 Shen 15:00-16:59</option>
+          <option value="18">酉 You 17:00-18:59</option>
+          <option value="20">戌 Xu 19:00-20:59</option>
+          <option value="22">亥 Hai 21:00-22:59</option>
+          <option value="23">晚子 Late Zi 23:00-23:59 (next day)</option>
+        </select>
+      </label>
+    </div>
+    <fieldset class="bazi-field">
+      <legend>Gender</legend>
+      <label><input type="radio" name="gender" value="male" checked> Male</label>
+      <label><input type="radio" name="gender" value="female"> Female</label>
+    </fieldset>
+    <button type="submit" class="bazi-submit">Cast Chart</button>
+    <p class="bazi-form-error" id="bazi-form-error" role="alert" hidden></p>
+  </form>
+
+  <section id="bazi-result" class="bazi-result" hidden aria-live="polite"></section>
+
+  <section id="bazi-interpret" class="bazi-interpret" hidden>
+    <h2>AI Reading</h2>
+    <p class="bazi-disclaimer">Readings are AI-generated for entertainment only and do not constitute professional advice.</p>
+    <article class="bazi-card" id="card-bazi"><h3>Natal Chart Reading</h3><div class="bazi-card-body"></div></article>
+    <article class="bazi-card" id="card-dayun"><h3>Luck Cycles Reading</h3><div class="bazi-card-body"></div></article>
+    <article class="bazi-card" id="card-liunian"><h3>This Year &amp; Monthly Reading</h3><div class="bazi-card-body"></div></article>
+  </section>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lunar-javascript/1.7.5/lunar.min.js" defer onerror="var s=document.createElement('script');s.src='https://cdn.staticfile.org/lunar-javascript/1.7.5/lunar.min.js';document.head.appendChild(s)"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js" defer></script>
+<script src="/assets/bazi.js" defer></script>
