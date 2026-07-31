@@ -41,9 +41,9 @@ export function registerBaziRoutes(api: Hono<{ Bindings: BaziEnv }>): void {
     const r = await callLlm(c.env ?? {}, buildSystemPrompt(lang), buildUserPrompt(part, lang, chart));
     if (!r.ok) {
       const messages: Record<typeof r.code, string> = {
-        not_configured: "LLM service is not configured.",
-        upstream_error: "LLM service returned an error, please retry.",
-        upstream_timeout: "LLM service timed out, please retry.",
+        not_configured: "Service is not configured.",
+        upstream_error: "Service returned an error, please retry.",
+        upstream_timeout: "Service timed out, please retry.",
       };
       return c.json(err(r.code, messages[r.code]), r.status);
     }

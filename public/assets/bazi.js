@@ -1,4 +1,4 @@
-/* 八字排盘页脚本：lunar-javascript 排盘 → 渲染结果 → 串行请求三段 AI 解读 */
+/* 八字排盘页脚本：lunar-javascript 排盘 → 渲染结果 → 串行请求三段命理解读 */
 (function () {
   "use strict";
 

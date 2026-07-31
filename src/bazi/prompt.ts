@@ -60,12 +60,15 @@ function daYunText(chart: BaziChart): string {
 function nowText(chart: BaziChart): string {
   const now = chart.now;
   const liuNian = now.liuNian.map((n) => `${n.year}年 ${n.ganZhi}（虚岁 ${n.age}）`).join("\n");
-  const liuYue = now.liuYue.map((m) => `${m.month}月 ${m.ganZhi}`).join("\n");
+  const currentMonth = now.ganZhi.month;
+  const liuYue = now.liuYue
+    .map((m) => `${m.ganZhi}月${m.ganZhi === currentMonth ? " ←当前月" : ""}`)
+    .join("\n");
   return [
     `今日公历：${now.solar}（农历 ${now.lunar}）`,
-    `当前干支：${now.ganZhi.year}年 ${now.ganZhi.month}月 ${now.ganZhi.day}日`,
+    `当前干支三柱：${now.ganZhi.year}年 ${now.ganZhi.month}月 ${now.ganZhi.day}日`,
     `流年（含未来）：\n${liuNian}`,
-    `今年流月：\n${liuYue}`,
+    `今年十二节气月（干支月）：\n${liuYue}`,
   ].join("\n");
 }
 
@@ -78,9 +81,9 @@ const TASKS: Record<Part, Record<Lang, string>> = {
     zh: "请逐步解读上面列出的各步大运走势（每步 2-3 句），并重点详细分析标注「当前大运」的一步。",
     en: "Interpret each luck cycle (Da Yun) listed above in 2-3 sentences, with an in-depth analysis of the one marked as current.",
   },
-  liunian: {
-    zh: "请结合命局与当前大运，解读今年流年运势；然后按月解读今年 12 个流月，其中今日所在的当前月份要尤其详细（单独小节、篇幅加倍）。",
-    en: "Based on the chart and current luck cycle, interpret this year's annual luck, then interpret each of the 12 monthly cycles; give the current month (containing today) an extra-detailed section of its own.",
+ liunian: {
+    zh: "请结合命局与当前大运，解读今年流年运势；然后逐一解读上面列出的 12 个干支月（节气月），其中标注「当前月」的要尤其详细（单独小节、篇幅加倍）。注意：月份以干支为准，不要按公历月份描述。",
+    en: "Based on the chart and current luck cycle, interpret this year's annual luck, then interpret each of the 12 GanZhi months (sectional months) listed above; give the one marked as current an extra-detailed section. Note: months are identified by GanZhi stems-branches, not Gregorian calendar months.",
   },
 };
 

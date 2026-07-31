@@ -34,12 +34,15 @@ describe("buildUserPrompt", () => {
     expect(p).toContain("当前大运");
   });
 
-  it("liunian part includes now info, liunian and liuyue", () => {
+  it("liunian part includes now info, liunian and liuyue by ganzhi", () => {
     const p = buildUserPrompt("liunian", "zh", chart);
     expect(p).toContain("2026");
-    expect(p).toContain("乙未");
-    expect(p).toContain("流月");
+    expect(p).toContain("乙未月");
+    expect(p).toContain("节气月");
+    expect(p).toContain("当前月");
     expect(p).toContain("2026-07-31");
+    // 不应出现纯公历月份序号格式（如 "7月 乙未"）
+    expect(p).not.toMatch(/\d+月 [\u4e00-\u9fff]{2}/);
   });
 
   it("en prompt keeps chinese ganzhi terms", () => {
