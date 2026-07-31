@@ -45,6 +45,22 @@ describe("pages", () => {
     expect(html).toContain("How to Add a Page");
   });
 
+  it("zh home renders tool cards with CTA links", async () => {
+    const res = await fetchNoFollow("/zh/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain('class="tool-cta" href="/zh/bazi/"');
+    expect(html).toContain('class="tool-cta" href="/zh/liuyao/"');
+  });
+
+  it("en home renders tool cards with CTA links", async () => {
+    const res = await fetchNoFollow("/en/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain('class="tool-cta" href="/en/bazi/"');
+    expect(html).toContain('class="tool-cta" href="/en/liuyao/"');
+  });
+
   it("serves sitemap.xml", async () => {
     const res = await fetchNoFollow("/sitemap.xml");
     expect(res.status).toBe(200);
