@@ -2,7 +2,7 @@ import type { InterpretRequest } from "../../src/liuyao/types";
 
 /**
  * 合法的六爻解读请求体夹具。
- * lines [7,9,8,6,7,8] → 本卦「雷水解」(40)，动爻在第 2、4 爻 → 变卦「雷风恒」(32)。
+ * lines 含 2 个动爻（第 2、4 爻）；primary/changed 文本为示意值（后端不重算卦象）。
  * 每次调用返回全新对象，测试可安全修改。
  */
 export function validRequest(): InterpretRequest {
