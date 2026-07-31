@@ -4,6 +4,12 @@ import { NOT_FOUND_CONTENT } from "../pages/registry";
 import { buildHead, buildPlainHead } from "../seo/meta";
 import { renderFooter } from "./footer";
 import { renderNav } from "./nav";
+import bodyStartSnippet from "./snippets/body-start.html";
+import headSnippet from "./snippets/head.html";
+
+/** 全站静态片段（验证 meta/GTM 等第三方代码），仅信任仓库内受控内容，不经转义直接注入 */
+const HEAD_SNIPPET = headSnippet.trim();
+const BODY_START_SNIPPET = bodyStartSnippet.trim();
 
 /** 哨兵 slug：仅用于让导航不高亮任何真实页面；双下划线命名与真实 slug 命名空间不相交 */
 const SENTINEL_NOTFOUND = "__notfound__";
@@ -14,9 +20,11 @@ function layout(lang: Lang, head: string, nav: string, main: string): string {
 <html lang="${HTML_LANG[lang]}">
   <head>
     ${head}
+    ${HEAD_SNIPPET}
     <link rel="stylesheet" href="/assets/style.css">
   </head>
   <body>
+    ${BODY_START_SNIPPET}
     <header class="site-header">
       ${nav}
     </header>

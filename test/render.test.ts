@@ -1,5 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { renderError, renderNotFound, renderPage } from "../src/layout/render";
+import bodyStartSnippet from "../src/layout/snippets/body-start.html";
+import headSnippet from "../src/layout/snippets/head.html";
 import { findPage } from "../src/pages/registry";
 
 describe("renderPage", () => {
@@ -32,9 +34,22 @@ describe("renderPage", () => {
   it("links the stylesheet", () => {
     expect(html).toContain('<link rel="stylesheet" href="/assets/style.css">');
   });
+
+  it("injects head and body-start snippets", () => {
+    expect(html).toContain(headSnippet.trim());
+    expect(html).toContain(bodyStartSnippet.trim());
+    // 片段在 </head> 之前、<body> 之后
+    expect(html.indexOf(headSnippet.trim())).toBeLessThan(html.indexOf("</head>"));
+    expect(html.indexOf(bodyStartSnippet.trim())).toBeGreaterThan(html.indexOf("<body>"));
+  });
 });
 
 describe("renderNotFound", () => {
+  it("also injects snippets", () => {
+    expect(renderNotFound("zh")).toContain(headSnippet.trim());
+    expect(renderNotFound("zh")).toContain(bodyStartSnippet.trim());
+  });
+
   it("is noindex and localized", () => {
     const zh = renderNotFound("zh");
     const en = renderNotFound("en");

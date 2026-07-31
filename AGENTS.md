@@ -32,6 +32,7 @@ src/
   layout/nav.ts       导航 + 语言切换（第三参 langSwitchSlug 供错误页指向对方语言首页）
   layout/footer.ts    页脚
   layout/render.ts    renderPage / renderNotFound / renderError（组装完整 HTML）
+  layout/snippets/    全站静态片段：head.html（验证 meta/GTM 等 <head> 代码）、body-start.html（GTM noscript 等 <body> 开头代码），原样注入所有页面含 404/500，只放仓库内受控代码
   routes/pages.ts     页面路由：/ 与无尾斜杠路径 301 → /:lang/:slug/
   routes/api.ts       /api/* 子应用：JSON 响应壳、404/500 均返回 JSON
   html.d.ts           *.html 模块的 ambient 声明（配合 wrangler Text rules）
