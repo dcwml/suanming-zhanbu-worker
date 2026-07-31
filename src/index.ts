@@ -12,6 +12,10 @@ app.route("/", pages);
 
 app.notFound((c) => c.html(renderNotFound(langFromPath(c.req.path)), 404));
 
-app.onError((_err, c) => c.html(renderError(langFromPath(c.req.path)), 500));
+app.onError((err, c) => {
+  // 记录到 Cloudflare dashboard 便于排查，响应体不泄露细节
+  console.error(err);
+  return c.html(renderError(langFromPath(c.req.path)), 500);
+});
 
 export default app;

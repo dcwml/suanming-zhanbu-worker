@@ -73,6 +73,12 @@ describe("404 handling", () => {
     expect(await res.text()).toContain("页面未找到");
   });
 
+  it("deep path beyond /:lang/:slug/ returns 404", async () => {
+    const res = await fetchNoFollow("/zh/sample/extra/");
+    expect(res.status).toBe(404);
+    expect(await res.text()).toContain("页面未找到");
+  });
+
   it("unknown /api path returns JSON 404", async () => {
     const res = await fetchNoFollow("/api/nope");
     expect(res.status).toBe(404);
