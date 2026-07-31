@@ -19,6 +19,8 @@ npm run purge        # 清空 Cloudflare zone 缓存；附加 URL 参数可只�
 
 提交前必须通过：`npm test` + `npm run typecheck`。测试结束时 Windows 上可能出现 miniflare 临时目录 EBUSY 警告，属无害噪音，不代表失败。
 
+LLM 密钥：本地开发在 `.dev.vars` 配置 `LLM_API_KEY`（不入库）；生产部署前执行 `wrangler secret put LLM_API_KEY`。`LLM_BASE_URL`/`LLM_MODEL` 是普通 vars，在 `wrangler.jsonc` 里改。
+
 ## 目录结构与职责
 
 ```
@@ -34,11 +36,14 @@ src/
   layout/footer.ts    页脚
   layout/render.ts    renderPage / renderNotFound / renderError（组装完整 HTML）
   layout/snippets/    全站静态片段：head.html（验证 meta/GTM 等 <head> 代码）、body-start.html（GTM noscript 等 <body> 开头代码），原样注入所有页面含 404/500，只放仓库内受控代码
+  bazi/               八字解读模块：validate 请求校验 / prompt 提示词 / llm OpenAI 兼容客户端 / types 共享类型
   routes/pages.ts     页面路由：/ 与无尾斜杠路径 301 → /:lang/:slug/
   routes/api.ts       /api/* 子应用：JSON 响应壳、404/500 均返回 JSON
+  routes/bazi.ts      POST /api/bazi/interpret：校验→限流→LLM→Markdown 返回
   html.d.ts           *.html 模块的 ambient 声明（配合 wrangler Text rules）
-public/assets/        静态资源（style.css、og-default.png），由 Workers assets 直接服务
-test/                 8 个测试文件、56 个测试（SELF.fetch 集成测试 + 单元测试）
+public/assets/        静态资源（style.css、og-default.png、bazi.js），由 Workers assets 直接服务
+  bazi.js             前端 lunar-javascript 排盘 + 三段串行解读渲染
+test/                 12 个测试文件、91 个测试（SELF.fetch 集成测试 + 单元测试）
 ```
 
 ## 核心约定（改代码前必读）
@@ -47,7 +52,7 @@ test/                 8 个测试文件、56 个测试（SELF.fetch 集成测试
 2. **URL 只有一种拼法**：所有绝对 URL 必须经 `absoluteUrl(pagePath(lang, slug))` 生成；正式 URL 均带尾斜杠，无尾斜杠路径由路由层 301。禁止手拼 `https://...` 字符串。
 3. **占位域名**：`SITE_ORIGIN` 当前为 `https://example.com`，上线前只改这一处。写测试时断言应基于 `SITE_ORIGIN` 常量而非硬编码域名。
 4. **转义纪律**：插入 HTML 属性/文本一律过 `escapeHtml`；JSON-LD 一律经 `toJsonLdScript`（内部把 `<` 转 `\u003c`）。正文片段是唯一被信任的原始 HTML（仓库内受控内容）。
-5. **API 形状**：`/api/*` 统一返回 `{ ok: true, data }` 或 `{ ok: false, error: { code, message } }`；错误响应不得回显未截断的用户输入（现有 404 用 `slice(0, 128)`）。未来 LLM 接口（如 `POST /api/divine`）沿用此模式加在 `routes/api.ts`。
+5. **API 形状**：`/api/*` 统一返回 `{ ok: true, data }` 或 `{ ok: false, error: { code, message } }`；错误响应不得回显未截断的用户输入（现有 404 用 `slice(0, 128)`）。未来 LLM 接口（如 `POST /api/divine`）沿用此模式加在 `routes/api.ts`。已落地实例：`POST /api/bazi/interpret`（见 `src/routes/bazi.ts`，错误码 invalid_request/rate_limited/not_configured/upstream_error/upstream_timeout）。
 6. **双语对称**：任何页面/文案改动必须同时覆盖 zh 与 en；`Lang` 类型收紧为 `"zh" | "en"`，新增语言需从 `site.ts` 的语言表全套扩展。
 7. **wrangler 配置陷阱**：Text 模块规则字段是 `rules[].globs`（不是 `include`）；`assets.directory` 必须存在，否则 vitest pool 启动失败。
 8. **TDD**：本仓库按测试先行开发。改行为先改/加测试；`SELF.fetch` 集成测试放 `test/integration.test.ts`，纯函数单测按模块拆分。
@@ -80,4 +85,4 @@ test/                 8 个测试文件、56 个测试（SELF.fetch 集成测试
 
 ## 上线前检查清单（同 README）
 
-`SITE_ORIGIN` 改正式域名 → 替换 `og-default.png`（1200×630）→ 确认 Cloudflare Git 集成 → Google Rich Results Test 抽查 JSON-LD。
+`SITE_ORIGIN` 改正式域名 → 替换 `og-default.png`（1200×630）→ 确认 Cloudflare Git 集成 → `wrangler secret put LLM_API_KEY` → Google Rich Results Test 抽查 JSON-LD。
