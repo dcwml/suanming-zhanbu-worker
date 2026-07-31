@@ -14,6 +14,7 @@ npm test             # vitest run（@cloudflare/vitest-pool-workers，真实 Wor
 npm run test:watch   # vitest watch
 npm run typecheck    # tsc --noEmit
 npm run deploy       # 手动部署（正常情况由 Git 集成自动触发，勿随意执行）
+npm run purge        # 清空 Cloudflare zone 缓存；附加 URL 参数可只清指定地址（凭证见 purge-cache.js 头部注释）
 ```
 
 提交前必须通过：`npm test` + `npm run typecheck`。测试结束时 Windows 上可能出现 miniflare 临时目录 EBUSY 警告，属无害噪音，不代表失败。
