@@ -33,6 +33,7 @@
       age: "岁", loading: "正在生成解读…", waiting: "等待上一段完成…",
       retry: "重试", failed: "解读失败：", invalidDate: "日期无效，请检查输入",
       libLoading: "排盘组件加载中，请稍候重试",
+      mdLibLoading: "解读组件未完全加载，请稍后重试",
     },
     en: {
       rows: ["Main Star", "Stem", "Branch", "Hidden", "Sub Stars", "Stage", "Self-Sit", "Void", "NaYin"],
@@ -43,6 +44,7 @@
       age: "age", loading: "Generating reading…", waiting: "Waiting for previous part…",
       retry: "Retry", failed: "Reading failed: ", invalidDate: "Invalid date, please check input",
       libLoading: "Calculator library still loading, please retry",
+      mdLibLoading: "Reading components not fully loaded, please retry later",
     },
   }[LANG];
 
@@ -56,8 +58,6 @@
   }
 
   /* ---------- 排盘 ---------- */
-
-  var currentChart = null; // 提交后缓存，供解读请求复用
 
   function pillarData(ec, part) {
     // part: Year/Month/Day/Time，封装 lunar-javascript EightChar 的同名 getter
@@ -223,6 +223,7 @@
   /* ---------- 解读请求（串行） ---------- */
 
   var PART_IDS = ["bazi", "dayun", "liunian"];
+  var chainVersion = 0; // 每次提交递增，旧链据此丢弃过期的 DOM 写入
 
   function cardBody(part) {
     return document.querySelector("#card-" + part + " .bazi-card-body");
@@ -245,14 +246,18 @@
   }
 
   function renderMarkdown(part, md) {
+    // marked/DOMPurify 由 CDN 异步加载，未就绪时抛友好文案（走现有 catch/重试路径）
+    if (typeof DOMPurify === "undefined" || typeof marked === "undefined") {
+      throw new Error(T.mdLibLoading);
+    }
     cardBody(part).innerHTML = DOMPurify.sanitize(marked.parse(md));
   }
 
-  function requestPart(part) {
+  function requestPart(part, chartSnapshot) {
     return fetch("/api/bazi/interpret", {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ part: part, lang: LANG, chart: currentChart }),
+      body: JSON.stringify({ part: part, lang: LANG, chart: chartSnapshot }),
     }).then(function (res) {
       return res.json().then(function (json) {
         if (!json.ok) throw new Error(json.error && json.error.message ? json.error.message : "HTTP " + res.status);
@@ -261,19 +266,23 @@
     });
   }
 
-  /* 从 startIndex 开始串行执行；失败则停在当前段，重试成功后继续后续段 */
-  function runChain(startIndex) {
+  /* 从 startIndex 开始串行执行；失败则停在当前段，重试成功后继续后续段。
+     链绑定提交时的 chartSnapshot 与 version，版本过期（用户重新排盘）则丢弃不写 DOM */
+  function runChain(startIndex, chartSnapshot, version) {
+    if (version !== chainVersion) return;
     if (startIndex >= PART_IDS.length) return;
     var part = PART_IDS[startIndex];
     setStatus(part, "loading", T.loading, false);
     for (var j = startIndex + 1; j < PART_IDS.length; j++) {
       setStatus(PART_IDS[j], "", T.waiting, false);
     }
-    requestPart(part).then(function (md) {
+    requestPart(part, chartSnapshot).then(function (md) {
+      if (version !== chainVersion) return;
       renderMarkdown(part, md);
-      runChain(startIndex + 1);
+      runChain(startIndex + 1, chartSnapshot, version);
     }).catch(function (e) {
-      setStatus(part, "error", T.failed + e.message, true, function () { runChain(startIndex); });
+      if (version !== chainVersion) return;
+      setStatus(part, "error", T.failed + e.message, true, function () { runChain(startIndex, chartSnapshot, version); });
     });
   }
 
@@ -315,14 +324,15 @@
       return;
     }
     renderResult(chart);
-    // API 只传校验过的字段，display 剔除
-    currentChart = {
+    // API 只传校验过的字段，display 剔除；快照随链传递，避免再次提交后新旧链混用
+    var chartSnapshot = {
       gender: chart.gender, solar: chart.solar, lunar: chart.lunar, pillars: chart.pillars,
       dayMaster: chart.dayMaster, wuxingCount: chart.wuxingCount, qiYun: chart.qiYun,
       daYun: chart.daYun, now: chart.now,
     };
     document.getElementById("bazi-interpret").hidden = false;
-    runChain(0);
+    chainVersion++;
+    runChain(0, chartSnapshot, chainVersion);
     document.getElementById("bazi-result").scrollIntoView({ behavior: "smooth" });
   });
 })();
