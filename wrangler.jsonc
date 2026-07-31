@@ -9,6 +9,17 @@
   "rules": [
     { "type": "Text", "globs": ["**/*.html"] }
   ],
+  "vars": {
+    "LLM_BASE_URL": "https://apihub.agnes-ai.com",
+    "LLM_MODEL": "agnes-2.0-flash"
+  },
+  "ratelimits": [
+    {
+      "name": "BAZI_RATE_LIMITER",
+      "namespace_id": "1001",
+      "simple": { "limit": 10, "period": 60 }
+    }
+  ],
   "observability": {
     "enabled": false,
     "head_sampling_rate": 1,
