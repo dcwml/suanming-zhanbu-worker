@@ -251,3 +251,52 @@ code {
 .liuyao-cast:disabled { opacity: 0.5; cursor: not-allowed; }
 #liuyao-interpret-btn { padding: 0.6rem 2rem; font-size: 1.1rem; cursor: pointer; }
 .liuyao-error { color: #c0392b; }
+
+/* ---------- 首页 ---------- */
+
+.home-hero {
+  text-align: center;
+  padding: 2.5rem 0 1.5rem;
+}
+
+.home-hero h1 { margin-bottom: 0.5rem; }
+
+.home-tools {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1.5rem 0 2.5rem;
+}
+
+.tool-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e5ddd2;
+  border-radius: 8px;
+  background: #fff;
+  padding: 1.25rem;
+}
+
+.tool-card h2 { margin-top: 0; }
+
+.tool-features {
+  color: var(--muted);
+  font-size: 0.88rem;
+  margin: 0.25rem 0 1rem;
+}
+
+.tool-cta {
+  margin-top: auto;
+  align-self: flex-start;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 6px;
+  padding: 0.45rem 1.6rem;
+  text-decoration: none;
+}
+
+.tool-cta:hover { opacity: 0.9; }
+
+@media (max-width: 560px) {
+  .home-tools { grid-template-columns: 1fr; }
+}
