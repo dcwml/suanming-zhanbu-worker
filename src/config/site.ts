@@ -1,7 +1,7 @@
 export type Lang = "zh" | "en";
 
 /** 站点源（上线前改这一处即可全站生效） */
-export const SITE_ORIGIN = "https://example.com";
+export const SITE_ORIGIN = "https://suanming-zhanbu.com";
 
 export const SITE_NAME = "玄命阁";
 export const SITE_NAME_EN = "Xuanming Pavilion";
