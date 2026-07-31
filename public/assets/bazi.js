@@ -80,6 +80,11 @@
   function buildChart(input) {
     var solar;
     if (input.calendar === "solar") {
+      // lunar-javascript 对公历溢出日期（如 2 月 30 日）不抛错，需自行往返校验
+      var probe = new Date(input.year, input.month - 1, input.day);
+      if (probe.getFullYear() !== input.year || probe.getMonth() !== input.month - 1 || probe.getDate() !== input.day) {
+        throw new Error("invalid date");
+      }
       solar = Solar.fromYmdHms(input.year, input.month, input.day, input.hour, 0, 0);
     } else {
       // 农历；闰月用负月份（lunar-javascript 约定）
