@@ -31,7 +31,7 @@ npm run typecheck
 
 ## 上线前检查清单
 
-- [ ] 将 `src/config/site.ts` 的 `SITE_ORIGIN` 改为正式域名（canonical/hreflang/sitemap 全部依赖它）。
+- [x] 将 `src/config/site.ts` 的 `SITE_ORIGIN` 改为正式域名（已设为 `https://suanming-zhanbu.com`，canonical/hreflang/sitemap 全部依赖它）。
 - [ ] 替换 `public/assets/og-default.png` 为正式 1200×630 分享图。
 - [ ] 确认 Cloudflare Git 集成已连接并完成首次部署。
 - [ ] 执行 `wrangler secret put LLM_API_KEY` 配置生产 LLM 密钥。

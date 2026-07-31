@@ -1,5 +1,6 @@
 import { SELF } from "cloudflare:test";
 import { describe, expect, it } from "vitest";
+import { SITE_ORIGIN } from "../src/config/site";
 
 function fetchNoFollow(path: string, init?: RequestInit): Promise<Response> {
   return SELF.fetch(`https://example.com${path}`, { redirect: "manual", ...init });
@@ -31,7 +32,7 @@ describe("pages", () => {
     expect(res.status).toBe(200);
     const html = await res.text();
     expect(html).toContain('<html lang="zh-CN">');
-    expect(html).toContain('<link rel="canonical" href="https://example.com/zh/">');
+    expect(html).toContain(`<link rel="canonical" href="${SITE_ORIGIN}/zh/">`);
     expect(html).toContain('hreflang="x-default"');
     expect(html).toContain('application/ld+json');
   });

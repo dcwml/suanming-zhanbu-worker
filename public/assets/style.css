@@ -75,9 +75,6 @@ code {
 /* ---------- 八字排盘页 ---------- */
 
 .bazi-form {
-  position: sticky;
-  top: 0;
-  z-index: 10;
   background: var(--bg);
   border: 1px solid #e5ddd2;
   border-radius: 8px;

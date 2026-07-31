@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { SITE_ORIGIN } from "../src/config/site";
 import type { PageEntry } from "../src/pages/registry";
 import {
   buildJsonLdScripts,
@@ -42,7 +43,7 @@ describe("websiteJsonLd", () => {
   it("describes the site", () => {
     const d = websiteJsonLd() as Record<string, unknown>;
     expect(d["@type"]).toBe("WebSite");
-    expect(d.url).toBe("https://example.com/");
+    expect(d.url).toBe(`${SITE_ORIGIN}/`);
   });
 });
 
@@ -53,7 +54,7 @@ describe("pageJsonLd", () => {
   });
   it("carries url and inLanguage", () => {
     const d = pageJsonLd(article, "zh") as Record<string, unknown>;
-    expect(d.url).toBe("https://example.com/zh/sample/");
+    expect(d.url).toBe(`${SITE_ORIGIN}/zh/sample/`);
     expect(d.inLanguage).toBe("zh-CN");
   });
 });

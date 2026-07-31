@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { SITE_ORIGIN } from "../src/config/site";
 import type { PageEntry } from "../src/pages/registry";
 import { buildHead, buildPlainHead, escapeHtml } from "../src/seo/meta";
 
@@ -38,17 +39,17 @@ describe("buildHead", () => {
     expect(head).toContain('<meta name="description" content="描述">');
   });
   it("emits canonical", () => {
-    expect(head).toContain('<link rel="canonical" href="https://example.com/zh/sample/">');
+    expect(head).toContain(`<link rel="canonical" href="${SITE_ORIGIN}/zh/sample/">`);
   });
   it("emits hreflang zh-CN, en and x-default pointing to zh", () => {
-    expect(head).toContain('hreflang="zh-CN" href="https://example.com/zh/sample/"');
-    expect(head).toContain('hreflang="en" href="https://example.com/en/sample/"');
-    expect(head).toContain('hreflang="x-default" href="https://example.com/zh/sample/"');
+    expect(head).toContain(`hreflang="zh-CN" href="${SITE_ORIGIN}/zh/sample/"`);
+    expect(head).toContain(`hreflang="en" href="${SITE_ORIGIN}/en/sample/"`);
+    expect(head).toContain(`hreflang="x-default" href="${SITE_ORIGIN}/zh/sample/"`);
   });
   it("emits og tags", () => {
     expect(head).toContain('<meta property="og:type" content="article">');
-    expect(head).toContain('<meta property="og:url" content="https://example.com/zh/sample/">');
-    expect(head).toContain('<meta property="og:image" content="https://example.com/assets/og-default.png">');
+    expect(head).toContain(`<meta property="og:url" content="${SITE_ORIGIN}/zh/sample/">`);
+    expect(head).toContain(`<meta property="og:image" content="${SITE_ORIGIN}/assets/og-default.png">`);
     expect(head).toContain('<meta property="og:locale" content="zh_CN">');
     expect(head).toContain('<meta property="og:locale:alternate" content="en_US">');
   });

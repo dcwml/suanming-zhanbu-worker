@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { absoluteUrl, langFromPath, pagePath } from "../src/config/site";
+import { absoluteUrl, langFromPath, pagePath, SITE_ORIGIN } from "../src/config/site";
 
 describe("pagePath", () => {
   it("home page path", () => {
@@ -12,8 +12,8 @@ describe("pagePath", () => {
 });
 
 describe("absoluteUrl", () => {
-  it("prefixes the placeholder origin", () => {
-    expect(absoluteUrl("/zh/")).toBe("https://example.com/zh/");
+  it("prefixes the site origin", () => {
+    expect(absoluteUrl("/zh/")).toBe(`${SITE_ORIGIN}/zh/`);
   });
 });
 
