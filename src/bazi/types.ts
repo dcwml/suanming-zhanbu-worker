@@ -1,4 +1,7 @@
 import type { Lang } from "../config/site";
+import type { LlmEnv, RateLimiter } from "../llm";
+
+export type { RateLimiter } from "../llm";
 
 export type Part = "bazi" | "dayun" | "liunian";
 
@@ -63,14 +66,6 @@ export interface InterpretRequest {
   chart: BaziChart;
 }
 
-/** Cloudflare Rate Limiting 绑定的最小接口（不引入完整 workers-types） */
-export interface RateLimiter {
-  limit(options: { key: string }): Promise<{ success: boolean }>;
-}
-
-export interface BaziEnv {
-  LLM_BASE_URL?: string;
-  LLM_MODEL?: string;
-  LLM_API_KEY?: string;
+export interface BaziEnv extends LlmEnv {
   BAZI_RATE_LIMITER?: RateLimiter;
 }
