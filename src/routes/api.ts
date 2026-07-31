@@ -1,11 +1,13 @@
 import { Hono } from "hono";
+import { registerBaziRoutes } from "./bazi";
+import type { BaziEnv } from "../bazi/types";
 
 /**
  * /api/* 预留接口层。
  * 统一响应壳：{ ok: true, data } / { ok: false, error: { code, message } }
  * 未来接入 LLM 时按同样模式新增接口，例如 POST /api/divine。
  */
-export const api = new Hono().basePath("/api");
+export const api = new Hono<{ Bindings: BaziEnv }>().basePath("/api");
 
 api.post("/echo", async (c) => {
   let body: unknown;
@@ -19,6 +21,8 @@ api.post("/echo", async (c) => {
   }
   return c.json({ ok: true, data: { echo: body } });
 });
+
+registerBaziRoutes(api);
 
 // 兜底：/api/* 未命中一律返回 JSON 404（而非 HTML 404 页）
 api.all("*", (c) =>
