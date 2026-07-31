@@ -215,3 +215,37 @@ code {
 
 @keyframes bazi-blink { 50% { opacity: 0.4; } }
 .bazi-card .status.loading { animation: bazi-blink 1.2s infinite; }
+
+/* ===== 六爻起卦页 ===== */
+.liuyao-app { max-width: 800px; margin: 0 auto; }
+.liuyao-step { margin: 2rem 0; padding: 1.5rem; border: 1px solid var(--border, #e0e0e0); border-radius: 8px; }
+.liuyao-step h2 { margin-top: 0; }
+.liuyao-guide, .liuyao-rules { color: var(--text-muted, #666); line-height: 1.7; }
+.liuyao-question-label { display: block; margin-top: 1rem; font-weight: 600; }
+.liuyao-question-label input { display: block; width: 100%; margin-top: 0.5rem; padding: 0.5rem; font-size: 1rem; }
+.liuyao-line { margin: 0.75rem 0; padding: 0.5rem 1rem; }
+.liuyao-line legend { font-weight: 600; }
+.liuyao-line label { display: inline-block; margin-right: 1rem; cursor: pointer; }
+
+/* 爻线预览（上爻在顶部） */
+.liuyao-preview { margin: 1rem 0; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.yaoline { width: 180px; height: 16px; position: relative; }
+.yaoline.yang { background: #333; }
+.yaoline.yin { background: linear-gradient(to right, #333 0 42%, transparent 42% 58%, #333 58% 100%); }
+.yaoline.moving::after { content: "○"; position: absolute; right: -24px; top: -2px; color: #c0392b; font-size: 14px; }
+.yaoline.pending { background: repeating-linear-gradient(90deg, #ddd 0 8px, transparent 8px 16px); }
+
+/* 结果区 */
+.liuyao-hex-display { display: flex; gap: 2rem; justify-content: center; margin: 1.5rem 0; flex-wrap: wrap; }
+.liuyao-hex-card { text-align: center; }
+.liuyao-symbol { font-size: 4rem; line-height: 1.2; color: #333; }
+
+/* 解读区 */
+.liuyao-interpret { margin-top: 2rem; }
+.liuyao-disclaimer { color: var(--text-muted, #666); font-size: 0.9rem; }
+.liuyao-card { padding: 1.5rem; border: 1px solid var(--border, #e0e0e0); border-radius: 8px; }
+.status.loading { color: var(--text-muted, #666); }
+.liuyao-retry { margin-top: 1rem; }
+.liuyao-cast { display: block; margin: 1.5rem auto; padding: 0.6rem 2rem; font-size: 1.1rem; }
+.liuyao-cast:disabled { opacity: 0.5; cursor: not-allowed; }
+.liuyao-error { color: #c0392b; }
