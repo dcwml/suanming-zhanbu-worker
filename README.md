@@ -11,7 +11,7 @@ npm test           # vitest（含 Workers 运行时集成测试）
 npm run typecheck
 ```
 
-八字解读接口需要 LLM 密钥：本地在 `.dev.vars` 配置 `LLM_API_KEY`（不入库）；`LLM_BASE_URL`/`LLM_MODEL` 在 `wrangler.jsonc` 的 `vars` 中。
+LLM 解读接口（八字、六爻）需要 LLM 密钥：本地在 `.dev.vars` 配置 `LLM_API_KEY`（不入库）；`LLM_BASE_URL`/`LLM_MODEL` 在 `wrangler.jsonc` 的 `vars` 中。
 
 ## 新增一个页面（三步）
 
@@ -27,7 +27,7 @@ npm run typecheck
 
 ## API
 
-接口挂在 `/api/*`，统一响应壳 `{ ok, data | error: { code, message } }`。示例：`POST /api/echo`。已接入 LLM 的实例：`POST /api/bazi/interpret`（八字解读，见 `src/routes/bazi.ts`，带限流 10 req/60s），后续 LLM 接口按同模式新增。
+接口挂在 `/api/*`，统一响应壳 `{ ok, data | error: { code, message } }`。示例：`POST /api/echo`。已接入 LLM 的实例：`POST /api/bazi/interpret`（八字解读，见 `src/routes/bazi.ts`，限流 10 req/60s）、`POST /api/liuyao/interpret`（六爻解读，见 `src/routes/liuyao.ts`，限流 10 req/60s），后续 LLM 接口按同模式新增。
 
 ## 上线前检查清单
 
