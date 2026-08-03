@@ -1,4 +1,5 @@
 import type { PageEntry } from "../pages/registry";
+import type { DailyPost } from "../pages/daily";
 import {
   HREFLANG_CODE,
   SITE_NAME,
@@ -63,6 +64,31 @@ export function breadcrumbJsonLd(page: PageEntry, lang: Lang): Record<string, un
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: items,
+  };
+}
+
+export function articleJsonLd(post: DailyPost, lang: Lang): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.meta[lang].title,
+    description: post.meta[lang].description,
+    datePublished: post.date,
+    dateModified: post.date,
+    author: { "@type": "Organization", name: lang === "zh" ? SITE_NAME : SITE_NAME_EN },
+    url: absoluteUrl(pagePath(lang, `daily/${post.date}`)),
+    mainEntityOfPage: { "@type": "WebPage", "@id": absoluteUrl(pagePath(lang, `daily/${post.date}`)) },
+    inLanguage: HREFLANG_CODE[lang],
+  };
+}
+
+export function collectionPageJsonLd(lang: Lang): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: lang === "zh" ? "今日宜忌" : "Daily Almanac",
+    url: absoluteUrl(pagePath(lang, "daily")),
+    inLanguage: HREFLANG_CODE[lang],
   };
 }
 

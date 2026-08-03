@@ -16,7 +16,7 @@ export const OG_LOCALE: Record<Lang, string> = { zh: "zh_CN", en: "en_US" };
 export const HTML_LANG: Record<Lang, string> = { zh: "zh-CN", en: "en" };
 export const OG_IMAGE_PATH = "/assets/og-default.png";
 
-/** 页面规范路径：首页 /zh/，内容页 /zh/sample/ */
+/** 页面规范路径：首页 /zh/，内容页 /zh/bazi/ */
 export function pagePath(lang: Lang, slug: string): string {
   return slug === "" ? `/${lang}/` : `/${lang}/${slug}/`;
 }

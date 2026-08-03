@@ -2,12 +2,24 @@ import { describe, expect, it } from "vitest";
 import { SITE_ORIGIN } from "../src/config/site";
 import type { PageEntry } from "../src/pages/registry";
 import {
+  articleJsonLd,
   buildJsonLdScripts,
   breadcrumbJsonLd,
+  collectionPageJsonLd,
   pageJsonLd,
   toJsonLdScript,
   websiteJsonLd,
 } from "../src/seo/jsonld";
+import type { DailyPost } from "../src/pages/daily";
+
+const dailyFixture: DailyPost = {
+  date: "2026-08-03",
+  meta: {
+    zh: { title: "测试日宜忌", description: "描述" },
+    en: { title: "Test Daily", description: "Desc" },
+  },
+  content: { zh: "<p>zh</p>", en: "<p>en</p>" },
+};
 
 const home: PageEntry = {
   slug: "",
@@ -77,5 +89,31 @@ describe("buildJsonLdScripts", () => {
   });
   it("non-home excludes WebSite script", () => {
     expect(buildJsonLdScripts(article, "zh")).not.toContain('"WebSite"');
+  });
+});
+
+describe("articleJsonLd", () => {
+  it("emits Article type with date and author", () => {
+    const d = articleJsonLd(dailyFixture, "zh") as Record<string, unknown>;
+    expect(d["@type"]).toBe("Article");
+    expect(d.headline).toBe("测试日宜忌");
+    expect(d.datePublished).toBe("2026-08-03");
+    expect(d.dateModified).toBe("2026-08-03");
+    expect(d.author).toEqual({ "@type": "Organization", name: "玄命阁" });
+    expect(d.url).toBe(`${SITE_ORIGIN}/zh/daily/2026-08-03/`);
+  });
+
+  it("uses en author name for en", () => {
+    const d = articleJsonLd(dailyFixture, "en") as Record<string, unknown>;
+    expect((d.author as { name: string }).name).toBe("Xuanming Pavilion");
+  });
+});
+
+describe("collectionPageJsonLd", () => {
+  it("emits CollectionPage pointing to archive url", () => {
+    const d = collectionPageJsonLd("zh") as Record<string, unknown>;
+    expect(d["@type"]).toBe("CollectionPage");
+    expect(d.url).toBe(`${SITE_ORIGIN}/zh/daily/`);
+    expect(d.name).toBe("今日宜忌");
   });
 });

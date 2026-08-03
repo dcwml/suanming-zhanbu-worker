@@ -6,7 +6,7 @@ import { findPage } from "../src/pages/registry";
 
 describe("renderPage", () => {
   const html = renderPage(findPage("")!, "zh");
-  const enHtml = renderPage(findPage("sample")!, "en");
+  const enHtml = renderPage(findPage("bazi")!, "en");
 
   it("is a full document with correct lang attribute", () => {
     expect(html.startsWith("<!DOCTYPE html>")).toBe(true);
@@ -16,13 +16,14 @@ describe("renderPage", () => {
 
   it("renders nav with links to all nav pages and highlights current", () => {
     expect(html).toContain('href="/zh/"');
-    expect(html).toContain('href="/zh/sample/"');
+    expect(html).toContain('href="/zh/bazi/"');
+    expect(html).toContain('href="/zh/daily/"');
     expect(html).toContain('aria-current="page"');
   });
 
   it("renders language switch pointing to the same page in the other language", () => {
     expect(html).toContain('class="lang-switch" href="/en/"');
-    expect(enHtml).toContain('class="lang-switch" href="/zh/sample/"');
+    expect(enHtml).toContain('class="lang-switch" href="/zh/bazi/"');
   });
 
   it("renders brand link with seal logo pointing to language home", () => {
@@ -37,6 +38,7 @@ describe("renderPage", () => {
     expect(html).toContain('class="footer-bottom"');
     expect(html).toContain("命理 · 占卜 · 传统文化");
     expect(html).toContain("内容仅供娱乐参考");
+    expect(html).toContain('href="/zh/daily/"');
     expect(enHtml).toContain("Fortune · Divination · Tradition");
     expect(enHtml).toContain("For entertainment purposes only");
   });
@@ -48,7 +50,7 @@ describe("renderPage", () => {
   it("embeds the body fragment and footer", () => {
     expect(html).toContain("以传统命理与占卜的智慧，观照当下，启迪未来");
     expect(html).toContain("site-footer");
-    expect(enHtml).toContain("How to Add a Page");
+    expect(enHtml).toContain("BaZi");
   });
 
   it("links the stylesheet", () => {

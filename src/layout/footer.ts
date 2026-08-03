@@ -1,5 +1,6 @@
 import { SITE_NAME, SITE_NAME_EN, SITE_SLOGAN, SITE_SLOGAN_EN, pagePath, type Lang } from "../config/site";
 import { findPage } from "../pages/registry";
+import { DAILY_ARCHIVE_META } from "../pages/daily";
 import { escapeHtml } from "../seo/meta";
 
 export function renderFooter(lang: Lang): string {
@@ -18,9 +19,9 @@ export function renderFooter(lang: Lang): string {
   const toolLinks = ["bazi", "liuyao"]
     .map((slug) => `<a href="${pagePath(lang, slug)}">${title(slug)}</a>`)
     .join("\n          ");
-  const aboutLinks = ["", "sample"]
-    .map((slug) => `<a href="${pagePath(lang, slug)}">${title(slug)}</a>`)
-    .join("\n          ");
+  const homeLink = `<a href="${pagePath(lang, "")}">${title("")}</a>`;
+  const dailyLink = `<a href="${pagePath(lang, DAILY_ARCHIVE_META.slug)}">${escapeHtml(DAILY_ARCHIVE_META.title[lang])}</a>`;
+  const aboutLinks = [homeLink, dailyLink].join("\n          ");
 
   return `<footer class="site-footer">
       <div class="footer-main">

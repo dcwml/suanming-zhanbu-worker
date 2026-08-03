@@ -1,8 +1,6 @@
 import type { Lang } from "../config/site";
 import homeZh from "../content/home.zh.html";
 import homeEn from "../content/home.en.html";
-import sampleZh from "../content/sample.zh.html";
-import sampleEn from "../content/sample.en.html";
 import baziZh from "../content/bazi.zh.html";
 import baziEn from "../content/bazi.en.html";
 import liuyaoZh from "../content/liuyao.zh.html";
@@ -53,16 +51,6 @@ export const PAGES: readonly PageEntry[] = [
       en: { title: "I Ching Casting", description: "Free online I Ching coin-toss hexagram casting with AI-powered readings." },
     },
     content: { zh: liuyaoZh, en: liuyaoEn },
-  },
-  {
-    slug: "sample",
-    inNav: true,
-    jsonldType: "Article",
-    meta: {
-      zh: { title: "示例文章", description: "演示如何以正文片段方式新增一个页面。" },
-      en: { title: "Sample Article", description: "Shows how to add a page using body fragments." },
-    },
-    content: { zh: sampleZh, en: sampleEn },
   },
 ];
 

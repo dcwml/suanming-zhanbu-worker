@@ -1,7 +1,9 @@
-import { HTML_LANG, SITE_NAME, SITE_NAME_EN, type Lang } from "../config/site";
+import { HTML_LANG, SITE_NAME, SITE_NAME_EN, pagePath, type Lang } from "../config/site";
 import type { PageEntry } from "../pages/registry";
 import { NOT_FOUND_CONTENT } from "../pages/registry";
-import { buildHead, buildPlainHead } from "../seo/meta";
+import type { DailyArchiveItem, DailyPost } from "../pages/daily";
+import { DAILY_ARCHIVE_META } from "../pages/daily";
+import { buildDailyArchiveHead, buildDailyPostHead, buildHead, buildPlainHead } from "../seo/meta";
 import { renderFooter } from "./footer";
 import { renderNav } from "./nav";
 import bodyStartSnippet from "./snippets/body-start.html";
@@ -53,4 +55,27 @@ export function renderError(lang: Lang): string {
       ? "      <h1>服务器错误</h1>\n      <p>请稍后再试。</p>"
       : "      <h1>Server Error</h1>\n      <p>Please try again later.</p>";
   return layout(lang, buildPlainHead(lang, title), renderNav(lang, SENTINEL_ERROR, ""), body);
+}
+
+/** daily 单篇：导航高亮归档页（slug="daily"），语言切换指向同日期另一语言版 */
+export function renderDailyPost(post: DailyPost, lang: Lang): string {
+  return layout(
+    lang,
+    buildDailyPostHead(post, lang),
+    renderNav(lang, "daily", `daily/${post.date}`),
+    post.content[lang],
+  );
+}
+
+/** daily 归档页：按日期倒序列出文章链接 */
+export function renderDailyArchive(items: DailyArchiveItem[], lang: Lang): string {
+  const title = DAILY_ARCHIVE_META.title[lang];
+  const links = items
+    .map(
+      (item) =>
+        `      <article class="daily-archive-item">\n        <h2><a href="${pagePath(lang, `daily/${item.date}`)}">${item.title[lang]}</a></h2>\n      </article>`,
+    )
+    .join("\n");
+  const main = `      <h1>${title}</h1>\n${links}`;
+  return layout(lang, buildDailyArchiveHead(lang), renderNav(lang, "daily", "daily"), main);
 }

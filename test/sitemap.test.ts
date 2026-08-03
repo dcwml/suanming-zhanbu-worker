@@ -14,21 +14,25 @@ describe("buildSitemapXml", () => {
   it("lists every page in both languages", () => {
     expect(xml).toContain(`<loc>${SITE_ORIGIN}/zh/</loc>`);
     expect(xml).toContain(`<loc>${SITE_ORIGIN}/en/</loc>`);
-    expect(xml).toContain(`<loc>${SITE_ORIGIN}/zh/sample/</loc>`);
-    expect(xml).toContain(`<loc>${SITE_ORIGIN}/en/sample/</loc>`);
     expect(xml).toContain(`<loc>${SITE_ORIGIN}/zh/bazi/</loc>`);
     expect(xml).toContain(`<loc>${SITE_ORIGIN}/en/bazi/</loc>`);
+    expect(xml).toContain(`<loc>${SITE_ORIGIN}/zh/daily/</loc>`);
+    expect(xml).toContain(`<loc>${SITE_ORIGIN}/en/daily/</loc>`);
   });
 
   it("adds xhtml:link alternates per url", () => {
-    expect(xml).toContain(`<xhtml:link rel="alternate" hreflang="zh-CN" href="${SITE_ORIGIN}/zh/sample/"/>`);
-    expect(xml).toContain(`<xhtml:link rel="alternate" hreflang="en" href="${SITE_ORIGIN}/en/sample/"/>`);
     expect(xml).toContain(`<xhtml:link rel="alternate" hreflang="zh-CN" href="${SITE_ORIGIN}/zh/"/>`);
     expect(xml).toContain(`<xhtml:link rel="alternate" hreflang="en" href="${SITE_ORIGIN}/en/"/>`);
   });
 
   it("does not list the 404 page", () => {
     expect(xml).not.toContain("404");
+  });
+
+  it("includes daily posts with bilingual alternates", () => {
+    expect(xml).toContain(`<loc>${SITE_ORIGIN}/zh/daily/2026-08-03/</loc>`);
+    expect(xml).toContain(`<xhtml:link rel="alternate" hreflang="zh-CN" href="${SITE_ORIGIN}/zh/daily/2026-08-03/"/>`);
+    expect(xml).toContain(`<xhtml:link rel="alternate" hreflang="en" href="${SITE_ORIGIN}/en/daily/2026-08-03/"/>`);
   });
 });
 

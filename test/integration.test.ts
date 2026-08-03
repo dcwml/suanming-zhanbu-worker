@@ -18,12 +18,6 @@ describe("redirects", () => {
     expect(res.status).toBe(301);
     expect(res.headers.get("location")).toBe("/zh/");
   });
-
-  it("redirects /en/sample to /en/sample/", async () => {
-    const res = await fetchNoFollow("/en/sample");
-    expect(res.status).toBe(301);
-    expect(res.headers.get("location")).toBe("/en/sample/");
-  });
 });
 
 describe("pages", () => {
@@ -35,14 +29,6 @@ describe("pages", () => {
     expect(html).toContain(`<link rel="canonical" href="${SITE_ORIGIN}/zh/">`);
     expect(html).toContain('hreflang="x-default"');
     expect(html).toContain('application/ld+json');
-  });
-
-  it("renders en sample page", async () => {
-    const res = await fetchNoFollow("/en/sample/");
-    expect(res.status).toBe(200);
-    const html = await res.text();
-    expect(html).toContain('<html lang="en"');
-    expect(html).toContain("How to Add a Page");
   });
 
   it("zh home renders tool cards with CTA links", async () => {
@@ -95,6 +81,61 @@ describe("pages", () => {
   });
 });
 
+describe("daily", () => {
+  it("renders zh daily archive", async () => {
+    const res = await fetchNoFollow("/zh/daily/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain("今日宜忌");
+  });
+
+  it("renders en daily archive", async () => {
+    const res = await fetchNoFollow("/en/daily/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain("Daily Almanac");
+  });
+
+  it("renders existing zh daily post", async () => {
+    const res = await fetchNoFollow("/zh/daily/2026-08-03/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain("daily-almanac");
+    expect(html).toContain("daily-zodiac");
+    expect(html).toContain("daily-story");
+  });
+
+  it("renders existing en daily post", async () => {
+    const res = await fetchNoFollow("/en/daily/2026-08-03/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain("daily-almanac");
+  });
+
+  it("redirects /zh/daily/2026-08-03 to trailing-slash", async () => {
+    const res = await fetchNoFollow("/zh/daily/2026-08-03");
+    expect(res.status).toBe(301);
+    expect(res.headers.get("location")).toBe("/zh/daily/2026-08-03/");
+  });
+
+  it("redirects /zh/daily to /zh/daily/", async () => {
+    const res = await fetchNoFollow("/zh/daily");
+    expect(res.status).toBe(301);
+    expect(res.headers.get("location")).toBe("/zh/daily/");
+  });
+
+  it("returns 404 for non-existent daily date", async () => {
+    const res = await fetchNoFollow("/zh/daily/2099-01-01/");
+    expect(res.status).toBe(404);
+    expect(await res.text()).toContain("页面未找到");
+  });
+
+  it("returns 404 for invalid date format", async () => {
+    const res = await fetchNoFollow("/zh/daily/not-a-date/");
+    expect(res.status).toBe(404);
+  });
+});
+
 describe("404 handling", () => {
   it("unknown page returns HTML 404 with noindex", async () => {
     const res = await fetchNoFollow("/zh/nope/");
@@ -111,7 +152,7 @@ describe("404 handling", () => {
   });
 
   it("deep path beyond /:lang/:slug/ returns 404", async () => {
-    const res = await fetchNoFollow("/zh/sample/extra/");
+    const res = await fetchNoFollow("/zh/bazi/extra/");
     expect(res.status).toBe(404);
     expect(await res.text()).toContain("页面未找到");
   });
