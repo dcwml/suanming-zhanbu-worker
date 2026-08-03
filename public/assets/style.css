@@ -634,3 +634,243 @@ code {
 @media (max-width: 560px) {
   .features-grid { grid-template-columns: 1fr; }
 }
+
+/* ========== 每日宜忌 · 老黄历通胜式样式 ========== */
+
+/* A 段：黄历主体框 */
+.daily-almanac {
+  border: 3px double var(--gold);
+  border-radius: 4px;
+  background: var(--paper);
+  padding: 1.5rem 1.75rem;
+  margin: 2rem 0;
+  box-shadow:
+    0 0 0 1px rgba(176, 141, 87, 0.15),
+    0 4px 16px rgba(43, 38, 34, 0.06);
+  position: relative;
+}
+
+/* 顶部装饰线 */
+.daily-almanac::before {
+  content: "";
+  display: block;
+  width: 60%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 0 auto 1.25rem;
+}
+
+.daily-almanac > h2 {
+  text-align: center;
+  font-size: 1.5rem;
+  color: var(--accent);
+  letter-spacing: 0.15em;
+  margin: 0 0 1.25rem;
+  font-weight: 700;
+}
+
+/* 日期区 */
+.daily-date {
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--muted);
+  margin: 0 0 0.35rem;
+}
+
+/* 干支信息网格 */
+.daily-ganzhi-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  max-width: 400px;
+  margin: 1rem auto 1.25rem;
+}
+
+.daily-ganzhi-item {
+  background: linear-gradient(135deg, #fdfbf7, #f8f3eb);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.6rem 0.75rem;
+  text-align: center;
+}
+
+.daily-ganzhi-item .label {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-bottom: 0.2rem;
+}
+
+.daily-ganzhi-item .value {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--fg);
+}
+
+/* 宜忌容器 */
+.daily-yiji {
+  margin: 1.25rem 0;
+}
+
+.daily-yi,
+.daily-ji {
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+/* 宜 - 吉利色 */
+.daily-yi {
+  background: rgba(138, 51, 36, 0.05);
+  border-left: 3px solid var(--accent);
+  color: var(--accent-dark);
+}
+
+.daily-yi::before {
+  content: "◆ 宜 ";
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* 忌 - 警示色 */
+.daily-ji {
+  background: rgba(74, 74, 74, 0.04);
+  border-left: 3px solid #888;
+  color: #555;
+}
+
+.daily-ji::before {
+  content: "✕ 忌 ";
+  font-weight: 700;
+  color: #666;
+}
+
+/* 解读区 */
+.daily-interpretation {
+  margin-top: 1.25rem;
+  padding: 0.85rem 1.1rem;
+  background: linear-gradient(135deg, #faf8f4, #f5f0e8);
+  border-radius: 6px;
+  border-left: 3px solid var(--gold);
+  font-size: 0.94rem;
+  line-height: 1.8;
+  color: var(--fg);
+}
+
+/* 底部装饰线 */
+.daily-almanac::after {
+  content: "";
+  display: block;
+  width: 40%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 1.25rem auto 0;
+}
+
+/* ========== B 段：生肖运势 ========== */
+
+.daily-zodiac {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  background: var(--paper);
+  box-shadow: 0 2px 8px rgba(43, 38, 34, 0.04);
+}
+
+.daily-zodiac h2 {
+  font-size: 1.3rem;
+  color: var(--accent);
+  margin: 0 0 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.daily-zodiac h2::before {
+  content: "♔";
+  font-size: 1.4rem;
+  color: var(--gold);
+}
+
+.daily-zodiac p {
+  font-size: 0.96rem;
+  line-height: 1.8;
+}
+
+.daily-zodiac-others {
+  margin-top: 0.85rem !important;
+  padding: 0.6rem 0.85rem;
+  background: rgba(176, 141, 87, 0.06);
+  border-radius: 4px;
+  font-size: 0.88rem !important;
+  color: var(--muted) !important;
+}
+
+/* ========== C 段：玄学科普 ========== */
+
+.daily-story {
+  margin: 2rem 0;
+  padding: 1.25rem 0;
+}
+
+.daily-story h2 {
+  font-size: 1.25rem;
+  color: var(--fg);
+  margin: 0 0 0.85rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px dashed var(--border);
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.daily-story h2::before {
+  content: "📜";
+  font-size: 1.1rem;
+}
+
+.daily-story p {
+  font-size: 0.95rem;
+  line-height: 1.85;
+  color: var(--fg);
+  text-align: justify;
+}
+
+/* ========== 响应式适配 ========== */
+
+@media (max-width: 640px) {
+  .daily-almanac {
+    padding: 1.1rem 1rem;
+    margin: 1.5rem -0.5rem;
+    border-width: 2px;
+  }
+
+  .daily-almanac h2 { font-size: 1.3rem; }
+
+  .daily-ganzhi-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.45rem;
+  }
+
+  .daily-ganzhi-item { padding: 0.5rem 0.6rem; }
+  .daily-ganzhi-item .value { font-size: 1rem; }
+
+  .daily-yi,
+  .daily-ji {
+    padding: 0.6rem 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .daily-interpretation {
+    padding: 0.7rem 0.85rem;
+    font-size: 0.9rem;
+  }
+
+  .daily-zodiac { padding: 1.1rem; margin: 1.5rem -0.5rem; }
+  .daily-story { padding: 1rem 0; }
+}

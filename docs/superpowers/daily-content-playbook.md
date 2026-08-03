@@ -41,21 +41,44 @@ npm run almanac -- YYYY-MM-DD
 
 ### 第 3 步：撰写 A 段（黄历宜忌 + 解读）
 
-基于第 2 步的 JSON，写中文 A 段。结构模板（参考首篇 `2026-08-03.zh.html`）：
+基于第 2 步的 JSON，写中文 A 段。**必须使用「老黄历通胜式」统一格式**，结构模板如下：
 
 ```html
 <section class="daily-almanac">
   <h2>今日宜忌</h2>
   <p class="daily-date">{solar}（农历{lunar}）</p>
-  <p>日柱：<strong>{dayGanZhi}</strong>　五行：<strong>{wuxing}</strong>　纳音：{naYin}</p>
-  <p>当日生肖：<strong>{zodiac}</strong>　冲煞：冲<strong>{chongZodiac}</strong>煞{方位}</p>
+  <div class="daily-ganzhi-grid">
+    <div class="daily-ganzhi-item">
+      <span class="label">日柱</span>
+      <span class="value">{dayGanZhi}</span>
+    </div>
+    <div class="daily-ganzhi-item">
+      <span class="label">五行</span>
+      <span class="value">{wuxing}</span>
+    </div>
+    <div class="daily-ganzhi-item">
+      <span class="label">纳音</span>
+      <span class="value">{naYin}</span>
+    </div>
+    <div class="daily-ganzhi-item">
+      <span class="label">冲煞</span>
+      <span class="value">冲{chongZodiac}煞{方位}</span>
+    </div>
+  </div>
+  <p style="text-align:center; margin: 0.5rem 0; font-size: 0.9rem; color: var(--muted);">当日生肖：<strong>{zodiac}</strong></p>
   <div class="daily-yiji">
-    <p class="daily-yi">宜：{yi 列表，用 · 分隔}</p>
-    <p class="daily-ji">忌：{ji 列表，用 · 分隔}</p>
+    <p class="daily-yi">{yi 列表，用 · 分隔}</p>
+    <p class="daily-ji">{ji 列表，用 · 分隔}</p>
   </div>
   <p class="daily-interpretation">{2–4 句解读}</p>
 </section>
 ```
+
+**格式要点**：
+- 干支信息必须用 `daily-ganzhi-grid` 四宫格展示（日柱/五行/纳音/冲煞），不要用纯文本 `<p>` 拼接
+- 当日生肖单独成行居中显示
+- 宜/忌列表前缀由 CSS `::before` 自动渲染（◆ 宜 / ✕ 忌），HTML 中不需要写"宜："或"忌："
+- 解读段用 `daily-interpretation` 类，会自动带左侧金色竖条和淡色背景
 
 **解读段撰写要点**：
 - 解释「为什么」宜这些、忌那些，而非堆砌术语
@@ -152,6 +175,26 @@ npm run almanac -- YYYY-MM-DD
 - 文本中的 `&` 写成 `&amp;`（HTML 转义纪律）
 - 动态强调用 `<strong>`，不用 `<b>`
 - 三段用语义化 `<section>` 包裹，class 固定为 `daily-almanac` / `daily-zodiac` / `daily-story`
+- **A 段必须使用「老黄历通胜式」结构**（见第 3 步模板），核心要素：
+  - `daily-ganzhi-grid` 四宫格：日柱 / 五行 / 纳音 / 冲煞
+  - 当日生肖单独居中行
+  - `daily-yi` / `daily-ji` 宜忌块（CSS 自动加前缀图标）
+  - `daily-interpretation` 解读块（带左侧金色竖条）
+- **禁止使用旧版纯文本 `<p>` 拼接干支信息**的写法（已废弃）
+
+## 视觉样式说明
+
+所有每日内容页面共用 `public/assets/style.css` 中的「老黄历通胜式」样式（选择器以 `.daily-` 开头），无需在 HTML 中写内联样式（除模板中标注的生肖行外）。
+
+| 区域 | CSS 类 | 视觉特征 |
+|---|---|---|
+| 黄历主体 | `.daily-almanac` | 金色双线边框 + 顶部/底部装饰线 + 阴影 |
+| 干支网格 | `.daily-ganzhi-grid` > `.daily-ganzhi-item` | 2×2 卡片网格，淡色背景 |
+| 宜 | `.daily-yi` | 朱红左侧竖条 + 浅红背景 + ◆ 图标 |
+| 忌 | `.daily-ji` | 灰色左侧竖条 + 浅灰背景 + ✕ 图标 |
+| 解读 | `.daily-interpretation` | 金色左侧竖条 + 渐变背景 |
+| 生肖运势 | `.daily-zodiac` | 左侧金色粗边框 + ♔ 图标 |
+| 科普 | `.daily-story` | 虚线底分隔 + 📜 图标 |
 
 ## 常见问题
 
