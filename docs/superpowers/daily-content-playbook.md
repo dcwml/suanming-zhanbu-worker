@@ -30,7 +30,12 @@ npm run almanac -- YYYY-MM-DD
 | 字段 | 含义 | 用在哪段 |
 |---|---|---|
 | `solar` / `lunar` | 公历 / 农历日期 | A 段头部 |
-| `dayGanZhi` / `dayGan` / `dayZhi` | 日柱干支 / 天干 / 地支 | A 段核心 |
+| **四柱** |||
+| `yearGanZhi` | 年柱干支 | A 段四柱 |
+| `monthGanZhi` | 月柱干支 | A 段四柱 |
+| `dayGanZhi` / `dayGan` / `dayZhi` | 日柱干支 / 天干 / 地支 | A 段四柱 + 核心 |
+| `hourGanZhi` | 时柱干支（子时例） | A 段四柱 |
+| **日柱详情** |||
 | `wuxing` | 日干五行 | A 段核心 |
 | `zodiac` | 当日地支生肖（= B 段主角） | A 段 + B 段 |
 | `chongZodiac` | 被冲生肖 | A 段冲煞 |
@@ -47,6 +52,26 @@ npm run almanac -- YYYY-MM-DD
 <section class="daily-almanac">
   <h2>今日宜忌</h2>
   <p class="daily-date">{solar}（农历{lunar}）</p>
+  <div class="daily-sizhu">
+    <div class="daily-sizhu-item">
+      <span class="sizhu-label">年柱</span>
+      <span class="sizhu-value">{yearGanZhi}</span>
+    </div>
+    <div class="daily-sizhu-item">
+      <span class="sizhu-label">月柱</span>
+      <span class="sizhu-value">{monthGanZhi}</span>
+    </div>
+    <div class="daily-sizhu-item sizhu-day">
+      <span class="sizhu-label">日柱</span>
+      <span class="sizhu-value">{dayGanZhi}</span>
+      <span class="sizhu-note">今日</span>
+    </div>
+    <div class="daily-sizhu-item">
+      <span class="sizhu-label">时柱</span>
+      <span class="sizhu-value">{hourGanZhi}</span>
+      <span class="sizhu-note">子时例</span>
+    </div>
+  </div>
   <div class="daily-ganzhi-grid">
     <div class="daily-ganzhi-item">
       <span class="label">日柱</span>
@@ -75,7 +100,8 @@ npm run almanac -- YYYY-MM-DD
 ```
 
 **格式要点**：
-- 干支信息必须用 `daily-ganzhi-grid` 四宫格展示（日柱/五行/纳音/冲煞），不要用纯文本 `<p>` 拼接
+- **四柱**必须用 `daily-sizhu` 横排展示（年/月/日/时），日柱加 `sizhu-day` 高亮，时柱标注"子时例"
+- 干支详情用 `daily-ganzhi-grid` 四宫格展示（日柱/五行/纳音/冲煞），不要用纯文本 `<p>` 拼接
 - 当日生肖单独成行居中显示
 - 宜/忌列表前缀由 CSS `::before` 自动渲染（◆ 宜 / ✕ 忌），HTML 中不需要写"宜："或"忌："
 - 解读段用 `daily-interpretation` 类，会自动带左侧金色竖条和淡色背景
@@ -176,6 +202,7 @@ npm run almanac -- YYYY-MM-DD
 - 动态强调用 `<strong>`，不用 `<b>`
 - 三段用语义化 `<section>` 包裹，class 固定为 `daily-almanac` / `daily-zodiac` / `daily-story`
 - **A 段必须使用「老黄历通胜式」结构**（见第 3 步模板），核心要素：
+  - `daily-sizhu` 四柱横排：年/月/日/时（日柱 `sizhu-day` 高亮，时柱标注子时例）
   - `daily-ganzhi-grid` 四宫格：日柱 / 五行 / 纳音 / 冲煞
   - 当日生肖单独居中行
   - `daily-yi` / `daily-ji` 宜忌块（CSS 自动加前缀图标）
@@ -189,6 +216,7 @@ npm run almanac -- YYYY-MM-DD
 | 区域 | CSS 类 | 视觉特征 |
 |---|---|---|
 | 黄历主体 | `.daily-almanac` | 金色双线边框 + 顶部/底部装饰线 + 阴影 |
+| **四柱** | `.daily-sizhu` > `.daily-sizhu-item` | 横排 4 卡片，日柱金色高亮（`sizhu-day`） |
 | 干支网格 | `.daily-ganzhi-grid` > `.daily-ganzhi-item` | 2×2 卡片网格，淡色背景 |
 | 宜 | `.daily-yi` | 朱红左侧竖条 + 浅红背景 + ◆ 图标 |
 | 忌 | `.daily-ji` | 灰色左侧竖条 + 浅灰背景 + ✕ 图标 |

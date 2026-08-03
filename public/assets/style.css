@@ -677,6 +677,58 @@ code {
   margin: 0 0 0.35rem;
 }
 
+/* 四柱 */
+.daily-sizhu {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0.85rem 0 1.1rem;
+  flex-wrap: wrap;
+}
+
+.daily-sizhu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 4.2rem;
+  padding: 0.5rem 0.75rem;
+  background: linear-gradient(180deg, #fdfbf7, #f8f3eb);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  position: relative;
+}
+
+.daily-sizhu-item .sizhu-label {
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.15rem;
+}
+
+.daily-sizhu-item .sizhu-value {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--fg);
+  letter-spacing: 0.12em;
+}
+
+/* 日柱高亮（当日主柱） */
+.daily-sizhu-item.sizhu-day {
+  border-color: var(--gold);
+  background: linear-gradient(180deg, #fef9f0, #f5ede0);
+  box-shadow: 0 0 0 1px rgba(176, 141, 87, 0.25);
+}
+
+.daily-sizhu-item.sizhu-day .sizhu-value {
+  color: var(--accent);
+}
+
+.daily-sizhu-item .sizhu-note {
+  font-size: 0.65rem;
+  color: var(--gold);
+  margin-top: 0.1rem;
+}
+
 /* 干支信息网格 */
 .daily-ganzhi-grid {
   display: grid;

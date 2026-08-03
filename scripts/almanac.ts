@@ -29,10 +29,21 @@ function compute(dateStr: string) {
   const jiShen = lunar.getDayJiShen(); // 吉神
   const xiongSha = lunar.getDayXiongSha(); // 凶煞
 
+  // 四柱
+  const yearGanZhi = lunar.getYearInGanZhi(); // 年柱
+  const monthGanZhi = lunar.getMonthInGanZhi(); // 月柱
+  // 时柱：以子时（23:00-01:00）为例，由日干起"五鼠遁"推算时干
+  const hourGanZhi = computeHourGanZhi(dayGan, "子"); // 时柱（子时）
+
   return {
     solar: `${y}年${m}月${d}日`,
     lunar: lunar.toString(),
+    // 四柱
+    yearGanZhi,
+    monthGanZhi,
     dayGanZhi,
+    hourGanZhi,
+    // 日柱详情
     dayGan,
     dayZhi,
     wuxing,
@@ -47,6 +58,20 @@ function compute(dateStr: string) {
     jiShen,
     xiongSha,
   };
+}
+
+/** 五鼠遁：根据日干推算子时的天干 */
+function computeHourGanZhi(dayGan: string, hourZhi: string): string {
+  // 日干 → 子时天干映射（五鼠遁日起）
+  const ZI_GAN: Record<string, string> = {
+    甲: "甲", 己: "甲",   // 甲己还加甲
+    乙: "丙", 庚: "丙",   // 乙庚丙作初
+    丙: "戊", 辛: "戊",   // 丙辛从戊起
+    丁: "庚", 壬: "庚",   // 丁壬庚子居
+    戊: "壬", 癸: "壬",   // 戊癸何方发，壬子是真途
+  };
+  const gan = ZI_GAN[dayGan] ?? "?";
+  return `${gan}${hourZhi}`;
 }
 
 const arg = process.argv[2];
