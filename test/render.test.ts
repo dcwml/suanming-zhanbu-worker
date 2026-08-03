@@ -25,6 +25,26 @@ describe("renderPage", () => {
     expect(enHtml).toContain('class="lang-switch" href="/zh/sample/"');
   });
 
+  it("renders brand link with seal logo pointing to language home", () => {
+    expect(html).toContain('class="site-brand" href="/zh/"');
+    expect(html).toContain('class="brand-logo" src="/assets/logo.png" alt="玄命阁"');
+    expect(enHtml).toContain('class="site-brand" href="/en/"');
+    expect(enHtml).toContain('alt="Xuanming Pavilion"');
+  });
+
+  it("renders multi-column footer with brand, links and disclaimer", () => {
+    expect(html).toContain('class="footer-main"');
+    expect(html).toContain('class="footer-bottom"');
+    expect(html).toContain("命理 · 占卜 · 传统文化");
+    expect(html).toContain("内容仅供娱乐参考");
+    expect(enHtml).toContain("Fortune · Divination · Tradition");
+    expect(enHtml).toContain("For entertainment purposes only");
+  });
+
+  it("links favicon to the seal logo", () => {
+    expect(html).toContain('<link rel="icon" type="image/png" href="/assets/logo.png">');
+  });
+
   it("embeds the body fragment and footer", () => {
     expect(html).toContain("以传统命理与占卜的智慧，观照当下，启迪未来");
     expect(html).toContain("site-footer");

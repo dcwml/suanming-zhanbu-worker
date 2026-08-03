@@ -32,8 +32,8 @@ src/
   seo/meta.ts         buildHead（title/canonical/hreflang/og/twitter）、escapeHtml
   seo/jsonld.ts       JSON-LD 构建与 </script> 注入转义
   seo/sitemap.ts      sitemap.xml（双语 alternates）与 robots.txt
-  layout/nav.ts       导航 + 语言切换（第三参 langSwitchSlug 供错误页指向对方语言首页）
-  layout/footer.ts    页脚
+  layout/nav.ts       品牌块（logo.png + 站名）+ 导航 + 语言切换（第三参 langSwitchSlug 供错误页指向对方语言首页）
+  layout/footer.ts    多栏页脚（品牌栏 + 工具/关于链接列 + 底栏版权免责；链接标题取 registry 单一来源）
   layout/render.ts    renderPage / renderNotFound / renderError（组装完整 HTML）
   layout/snippets/    全站静态片段：head.html（验证 meta/GTM 等 <head> 代码）、body-start.html（GTM noscript 等 <body> 开头代码），原样注入所有页面含 404/500，只放仓库内受控代码
   llm.ts              ★ 共享 LLM 客户端：callLlm（OpenAI 兼容）、LlmEnv、RateLimiter 接口
@@ -44,10 +44,10 @@ src/
   routes/bazi.ts      POST /api/bazi/interpret：限流→校验→LLM→Markdown 返回
   routes/liuyao.ts    POST /api/liuyao/interpret：限流→校验→LLM→Markdown 返回
   html.d.ts           *.html 模块的 ambient 声明（配合 wrangler Text rules）
-public/assets/        静态资源（style.css、og-default.png、bazi.js、liuyao.js），由 Workers assets 直接服务
+public/assets/        静态资源（style.css、logo.png（印章 LOGO，兼作 favicon）、og-default.png、bazi.js、liuyao.js），由 Workers assets 直接服务
   bazi.js             前端 lunar-javascript 排盘 + 三段串行解读渲染
   liuyao.js           前端 64 卦文本表 + King Wen 查表算法 + 三步投币起卦 + 单段解读渲染
-test/                 18 个测试文件、122 个测试（SELF.fetch 集成测试 + 单元测试）
+test/                 15 个测试文件、130 个测试（SELF.fetch 集成测试 + 单元测试）
 ```
 
 ## 核心约定（改代码前必读）

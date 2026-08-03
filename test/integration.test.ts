@@ -61,6 +61,26 @@ describe("pages", () => {
     expect(html).toContain('class="tool-cta" href="/en/liuyao/"');
   });
 
+  it("zh home renders new template sections", async () => {
+    const res = await fetchNoFollow("/zh/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain("home-features");
+    expect(html).toContain("home-steps");
+    expect(html).toContain("home-testimonials");
+    expect(html).toContain("home-cta-banner");
+  });
+
+  it("en home renders new template sections", async () => {
+    const res = await fetchNoFollow("/en/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain("home-features");
+    expect(html).toContain("home-steps");
+    expect(html).toContain("home-testimonials");
+    expect(html).toContain("home-cta-banner");
+  });
+
   it("serves sitemap.xml", async () => {
     const res = await fetchNoFollow("/sitemap.xml");
     expect(res.status).toBe(200);

@@ -1,4 +1,4 @@
-import { OTHER_LANG, pagePath, type Lang } from "../config/site";
+import { OTHER_LANG, SITE_NAME, SITE_NAME_EN, pagePath, type Lang } from "../config/site";
 import { navPages } from "../pages/registry";
 import { escapeHtml } from "../seo/meta";
 
@@ -14,8 +14,13 @@ export function renderNav(lang: Lang, currentSlug: string, langSwitchSlug?: stri
 
   const other = OTHER_LANG[lang];
   const switchLabel = other === "en" ? "English" : "中文";
+  const siteName = lang === "zh" ? SITE_NAME : SITE_NAME_EN;
 
   return `<nav class="site-nav" aria-label="${lang === "zh" ? "主导航" : "Main navigation"}">
+      <a class="site-brand" href="${pagePath(lang, "")}">
+        <img class="brand-logo" src="/assets/logo.png" alt="${escapeHtml(siteName)}" width="36" height="36">
+        <span class="brand-name">${escapeHtml(siteName)}</span>
+      </a>
       <div class="nav-links">
         ${links}
       </div>

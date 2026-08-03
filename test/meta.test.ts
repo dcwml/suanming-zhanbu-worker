@@ -65,6 +65,9 @@ describe("buildHead", () => {
     expect(homeHead).toContain('<meta property="og:type" content="website">');
     expect(homeHead).toContain("玄命阁 - 命理 · 占卜 · 传统文化");
   });
+  it("emits favicon link", () => {
+    expect(head).toContain('<link rel="icon" type="image/png" href="/assets/logo.png">');
+  });
 });
 
 describe("buildPlainHead", () => {
@@ -73,5 +76,6 @@ describe("buildPlainHead", () => {
     expect(head).toContain('<meta name="robots" content="noindex">');
     expect(head).toContain("<title>Page Not Found</title>");
     expect(head).not.toContain("canonical");
+    expect(head).toContain('<link rel="icon" type="image/png" href="/assets/logo.png">');
   });
 });

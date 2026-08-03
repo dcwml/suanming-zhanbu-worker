@@ -54,6 +54,7 @@ export function buildHead(page: PageEntry, lang: Lang): string {
   return [
     `<meta charset="utf-8">`,
     `<meta name="viewport" content="width=device-width, initial-scale=1">`,
+    `<link rel="icon" type="image/png" href="/assets/logo.png">`,
     `<title>${title}</title>`,
     `<meta name="description" content="${description}">`,
     `<link rel="canonical" href="${canonical}">`,
@@ -81,6 +82,7 @@ export function buildPlainHead(lang: Lang, titleText: string): string {
   return [
     `<meta charset="utf-8">`,
     `<meta name="viewport" content="width=device-width, initial-scale=1">`,
+    `<link rel="icon" type="image/png" href="/assets/logo.png">`,
     `<meta name="robots" content="noindex">`,
     `<title>${escapeHtml(titleText)}</title>`,
   ].join("\n    ");
