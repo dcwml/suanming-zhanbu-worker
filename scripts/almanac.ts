@@ -29,6 +29,18 @@ function compute(dateStr: string) {
   const jiShen = lunar.getDayJiShen(); // 吉神
   const xiongSha = lunar.getDayXiongSha(); // 凶煞
 
+  // 方位神（喜神/财神/福神）
+  const xiShen = lunar.getDayPositionXiDesc(); // 喜神方位
+  const caiShen = lunar.getDayPositionCaiDesc(); // 财神方位
+  const fuShen = lunar.getDayPositionFuDesc(); // 福神方位
+
+  // 节气：当日节气（空串 = 非节气日）+ 前后最近节气
+  const jieQi = lunar.getJieQi();
+  const prevJieQiNode = lunar.getPrevJieQi(true); // includeEnd=true：节气日当天该节气即为"上一节气"
+  const nextJieQiNode = lunar.getNextJieQi(true);
+  const prevJieQi = { name: prevJieQiNode.getName(), solar: prevJieQiNode.getSolar().toYmd() };
+  const nextJieQi = { name: nextJieQiNode.getName(), solar: nextJieQiNode.getSolar().toYmd() };
+
   // 四柱
   const yearGanZhi = lunar.getYearInGanZhi(); // 年柱
   const monthGanZhi = lunar.getMonthInGanZhi(); // 月柱
@@ -57,6 +69,14 @@ function compute(dateStr: string) {
     ji,
     jiShen,
     xiongSha,
+    // 方位神
+    xiShen,
+    caiShen,
+    fuShen,
+    // 节气（jieQi 为空串表示当日非节气日）
+    jieQi,
+    prevJieQi,
+    nextJieQi,
   };
 }
 

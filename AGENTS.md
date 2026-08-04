@@ -15,7 +15,7 @@ npm run test:watch   # vitest watch
 npm run typecheck    # tsc --noEmit
 npm run deploy       # 手动部署（正常情况由 Git 集成自动触发，勿随意执行）
 npm run purge        # 清空 Cloudflare zone 缓存；附加 URL 参数可只清指定地址（凭证见 purge-cache.js 头部注释）
-npm run almanac -- YYYY-MM-DD  # 生成期工具：输出指定日期的历法数据（干支、宜忌、冲煞、生肖等）
+npm run almanac -- YYYY-MM-DD  # 生成期工具：输出指定日期的历法数据（干支、宜忌、冲煞、喜/财/福神方位、节气、吉神凶煞、生肖等）
 ```
 
 提交前必须通过：`npm test` + `npm run typecheck`。测试结束时 Windows 上可能出现 miniflare 临时目录 EBUSY 警告，属无害噪音，不代表失败。
@@ -48,7 +48,7 @@ src/
   routes/liuyao.ts     POST /api/liuyao/interpret：限流→校验→LLM→Markdown 返回
   html.d.ts           *.html 模块的 ambient 声明（配合 wrangler Text rules）
 scripts/
-  almanac.ts          生成期工具：用 lunar-javascript 输出指定日期历法数据（干支、宜忌、冲煞、纳音等）
+  almanac.ts          生成期工具：用 lunar-javascript 输出指定日期历法数据（干支、宜忌、冲煞、纳音、喜/财/福神方位、节气、吉神凶煞等）
 public/assets/        静态资源（style.css、logo.png（印章 LOGO，兼作 favicon）、og-default.png、bazi.js、liuyao.js），由 Workers assets 直接服务
   bazi.js             前端 lunar-javascript 排盘 + 三段串行解读渲染
   liuyao.js           前端 64 卦文本表 + King Wen 查表算法 + 三步投币起卦 + 单段解读渲染
@@ -83,7 +83,7 @@ test/                 17 个测试文件、151 个测试（SELF.fetch 集成测�
 
 | 段 | class | 内容 | 数据来源 |
 |---|---|---|---|
-| A | `daily-almanac` | 黄历宜忌（干支、五行、冲煞、宜/忌）+ 解读文字 | `npm run almanac -- YYYY-MM-DD` |
+| A | `daily-almanac` | 黄历宜忌（四柱干支、五行、纳音、冲煞、喜/财/福神方位、节气、吉神凶煞、宜/忌）+ 解读文字 | `npm run almanac -- YYYY-MM-DD` |
 | B | `daily-zodiac` | 当日地支对应生肖为单一主角运势 | 手写（当日地支决定主角） |
 | C | `daily-story` | 围绕当日主题的玄学科普/典故 | 手写 |
 

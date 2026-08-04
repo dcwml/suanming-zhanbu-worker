@@ -42,7 +42,10 @@ npm run almanac -- YYYY-MM-DD
 | `naYin` | 纳音 | A 段（可选展示） |
 | `tianShen` / `tianShenLuck` | 天神 / 吉凶 | A 段解读 |
 | `yi` / `ji` | 宜 / 忌（库自带权威数据） | A 段宜忌列表 |
-| `jiShen` / `xiongSha` | 吉神 / 凶煞 | A 段解读（可选） |
+| `jiShen` / `xiongSha` | 吉神宜趋 / 凶煞宜忌 | A 段神煞行 |
+| `xiShen` / `caiShen` / `fuShen` | 喜神 / 财神 / 福神方位 | A 段方位卡 |
+| `jieQi` | 当日节气（空串 = 非节气日） | A 段节气行 |
+| `prevJieQi` / `nextJieQi` | 前后最近节气（名称 + 公历日期） | A 段节气行 |
 
 ### 第 3 步：撰写 A 段（黄历宜忌 + 解读）
 
@@ -52,6 +55,7 @@ npm run almanac -- YYYY-MM-DD
 <section class="daily-almanac">
   <h2>今日宜忌</h2>
   <p class="daily-date">{solar}（农历{lunar}）</p>
+  <p class="daily-jieqi">节气：{prevJieQi.name}（{月}月{日}日）— {nextJieQi.name}（{月}月{日}日）</p>
   <div class="daily-sizhu">
     <div class="daily-sizhu-item">
       <span class="sizhu-label">年柱</span>
@@ -90,10 +94,28 @@ npm run almanac -- YYYY-MM-DD
       <span class="value">冲{chongZodiac}煞{方位}</span>
     </div>
   </div>
+  <div class="daily-shenwei">
+    <div class="daily-shenwei-item">
+      <span class="label">喜神</span>
+      <span class="value">{xiShen}</span>
+    </div>
+    <div class="daily-shenwei-item">
+      <span class="label">财神</span>
+      <span class="value">{caiShen}</span>
+    </div>
+    <div class="daily-shenwei-item">
+      <span class="label">福神</span>
+      <span class="value">{fuShen}</span>
+    </div>
+  </div>
   <p style="text-align:center; margin: 0.5rem 0; font-size: 0.9rem; color: var(--muted);">当日生肖：<strong>{zodiac}</strong></p>
   <div class="daily-yiji">
     <p class="daily-yi">{yi 列表，用 · 分隔}</p>
     <p class="daily-ji">{ji 列表，用 · 分隔}</p>
+  </div>
+  <div class="daily-shensha">
+    <p class="daily-jishen">吉神宜趋：{jiShen 列表，用 · 分隔}</p>
+    <p class="daily-xiongsha">凶煞宜忌：{xiongSha 列表，用 · 分隔}</p>
   </div>
   <p class="daily-interpretation">{2–4 句解读}</p>
 </section>
@@ -102,6 +124,9 @@ npm run almanac -- YYYY-MM-DD
 **格式要点**：
 - **四柱**必须用 `daily-sizhu` 横排展示（年/月/日/时），日柱加 `sizhu-day` 高亮，时柱标注"子时例"
 - 干支详情用 `daily-ganzhi-grid` 四宫格展示（日柱/五行/纳音/冲煞），不要用纯文本 `<p>` 拼接
+- 节气行 `daily-jieqi` 紧跟日期行：一般写「节气：{prev}（X月X日）— {next}（X月X日）」；若 `jieQi` 非空（当日即节气日），改写「节气：今日{jieQi}（X月X日）」
+- 喜神/财神/福神方位用 `daily-shenwei` 三卡横排，紧随干支网格
+- 吉神宜趋/凶煞宜忌用 `daily-shensha` 两行居中小字，紧随宜忌块；列表照实列全，用 ` · ` 分隔，不删减
 - 当日生肖单独成行居中显示
 - 宜/忌列表前缀由 CSS `::before` 自动渲染（◆ 宜 / ✕ 忌），HTML 中不需要写"宜："或"忌："
 - 解读段用 `daily-interpretation` 类，会自动带左侧金色竖条和淡色背景
@@ -111,6 +136,7 @@ npm run almanac -- YYYY-MM-DD
 - 结合当日干支五行生克（如"甲木""丙火"，木生火主生发）
 - 结合吉神/凶煞的象意（如"天德合主贵人""勾陈主阻滞但可化解"）
 - 结合天神吉凶给出整体基调判断
+- 当日恰逢节气或临近节气交接时，可纳入节气因素（如"立秋将至，金气渐旺"）
 - 篇幅 2–4 句，不宜过长
 
 ### 第 4 步：撰写 B 段（生肖运势 · 当日主角）
@@ -159,6 +185,9 @@ npm run almanac -- YYYY-MM-DD
 - 干支术语保留「拼音 + 汉字」（如 `Jǐ Yǒu 己酉`）
 - 生肖用「英文 + 汉字」（如 `Rooster 鸡`）
 - 宜忌项用英文意译（如"纳财"→"collecting wealth"）
+- 节气行用英文节气名 + 汉字（如 `Major Heat (大暑)`），日期简写（如 `Jul 23`）
+- 方位神标签用 Joy God / Wealth God / Fortune God，方位用普通英文（East / Northeast 等）
+- 神煞名用「拼音 + 汉字」（如 `Qīnglóng 青龙`），前缀用 Auspicious spirits / Inauspicious spirits
 - 文案按英文习惯重写，非逐字直译
 
 ### 第 7 步：注册文章并提交审核
@@ -202,10 +231,13 @@ npm run almanac -- YYYY-MM-DD
 - 动态强调用 `<strong>`，不用 `<b>`
 - 三段用语义化 `<section>` 包裹，class 固定为 `daily-almanac` / `daily-zodiac` / `daily-story`
 - **A 段必须使用「老黄历通胜式」结构**（见第 3 步模板），核心要素：
+  - `daily-jieqi` 节气行（日期行下方）
   - `daily-sizhu` 四柱横排：年/月/日/时（日柱 `sizhu-day` 高亮，时柱标注子时例）
   - `daily-ganzhi-grid` 四宫格：日柱 / 五行 / 纳音 / 冲煞
+  - `daily-shenwei` 喜神/财神/福神方位三卡（干支网格之后）
   - 当日生肖单独居中行
   - `daily-yi` / `daily-ji` 宜忌块（CSS 自动加前缀图标）
+  - `daily-shensha` 吉神宜趋/凶煞宜忌行（宜忌块之后）
   - `daily-interpretation` 解读块（带左侧金色竖条）
 - **禁止使用旧版纯文本 `<p>` 拼接干支信息**的写法（已废弃）
 
@@ -216,10 +248,13 @@ npm run almanac -- YYYY-MM-DD
 | 区域 | CSS 类 | 视觉特征 |
 |---|---|---|
 | 黄历主体 | `.daily-almanac` | 金色双线边框 + 顶部/底部装饰线 + 阴影 |
+| 节气行 | `.daily-jieqi` | 居中小字，灰色弱化 |
 | **四柱** | `.daily-sizhu` > `.daily-sizhu-item` | 横排 4 卡片，日柱金色高亮（`sizhu-day`） |
 | 干支网格 | `.daily-ganzhi-grid` > `.daily-ganzhi-item` | 2×2 卡片网格，淡色背景 |
+| 方位神 | `.daily-shenwei` > `.daily-shenwei-item` | 横排 3 卡片，方位值朱红色 |
 | 宜 | `.daily-yi` | 朱红左侧竖条 + 浅红背景 + ◆ 图标 |
 | 忌 | `.daily-ji` | 灰色左侧竖条 + 浅灰背景 + ✕ 图标 |
+| 神煞行 | `.daily-shensha` | 居中小字两行，吉神朱红 / 凶煞灰 |
 | 解读 | `.daily-interpretation` | 金色左侧竖条 + 渐变背景 |
 | 生肖运势 | `.daily-zodiac` | 左侧金色粗边框 + ♔ 图标 |
 | 科普 | `.daily-story` | 虚线底分隔 + 📜 图标 |

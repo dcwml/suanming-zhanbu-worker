@@ -760,6 +760,61 @@ code {
   color: var(--fg);
 }
 
+/* 节气行 */
+.daily-jieqi {
+  text-align: center;
+  margin: 0.25rem 0 1rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* 方位神（喜神/财神/福神） */
+.daily-shenwei {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
+  max-width: 400px;
+  margin: 0 auto 1.25rem;
+}
+
+.daily-shenwei-item {
+  background: linear-gradient(135deg, #fdfbf7, #f8f3eb);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.5rem 0.6rem;
+  text-align: center;
+}
+
+.daily-shenwei-item .label {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-bottom: 0.2rem;
+}
+
+.daily-shenwei-item .value {
+  display: block;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* 吉神宜趋 / 凶煞宜忌 */
+.daily-shensha {
+  margin: 1rem 0 0;
+  text-align: center;
+  font-size: 0.85rem;
+  line-height: 2;
+}
+
+.daily-shensha .daily-jishen {
+  color: var(--accent-dark);
+}
+
+.daily-shensha .daily-xiongsha {
+  color: var(--muted);
+}
+
 /* 宜忌容器 */
 .daily-yiji {
   margin: 1.25rem 0;
@@ -911,6 +966,10 @@ code {
 
   .daily-ganzhi-item { padding: 0.5rem 0.6rem; }
   .daily-ganzhi-item .value { font-size: 1rem; }
+
+  .daily-shenwei { gap: 0.45rem; }
+  .daily-shenwei-item { padding: 0.45rem 0.5rem; }
+  .daily-shenwei-item .value { font-size: 0.95rem; }
 
   .daily-yi,
   .daily-ji {
