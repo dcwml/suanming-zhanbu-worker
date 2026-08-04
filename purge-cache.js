@@ -59,6 +59,7 @@ const res = await fetch(`https://api.cloudflare.com/client/v4/zones/${zoneId}/pu
 const result = await res.json().catch(() => null);
 
 if (res.ok && result?.success) {
+  console.log(result);
   console.log(
     files.length > 0
       ? `已清理 ${files.length} 个 URL 的缓存：\n${files.map((f) => `  ${f}`).join("\n")}`
