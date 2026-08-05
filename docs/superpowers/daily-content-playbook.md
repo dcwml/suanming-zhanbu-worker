@@ -33,16 +33,16 @@ npm run almanac -- YYYY-MM-DD
 | **四柱** |||
 | `yearGanZhi` | 年柱干支 | A 段四柱 |
 | `monthGanZhi` | 月柱干支 | A 段四柱 |
-| `dayGanZhi` / `dayGan` / `dayZhi` | 日柱干支 / 天干 / 地支 | A 段四柱 + 核心 |
+| `dayGanZhi` / `dayGan` / `dayZhi` | 日柱干支 / 天干 / 地支 | A 段四柱（仅左列展示一次） |
 | `hourGanZhi` | 时柱干支（子时例） | A 段四柱 |
 | **日柱详情** |||
-| `wuxing` | 日干五行 | A 段核心 |
-| `zodiac` | 当日地支生肖（= B 段主角） | A 段 + B 段 |
-| `chongZodiac` | 被冲生肖 | A 段冲煞 |
-| `naYin` | 纳音 | A 段（可选展示） |
+| `wuxing` | 日干五行 | A 段干支右列 |
+| `zodiac` | 当日地支生肖（= B 段主角） | B 段标题 + 正文 |
+| `chongZodiac` | 被冲生肖 | A 段「冲」行 |
+| `naYin` | 纳音 | A 段干支右列 |
 | `tianShen` / `tianShenLuck` | 天神 / 吉凶 | A 段解读 |
 | `yi` / `ji` | 宜 / 忌（库自带权威数据） | A 段宜忌列表 |
-| `jiShen` / `xiongSha` | 吉神宜趋 / 凶煞宜忌 | A 段神煞行 |
+| `jiShen` / `xiongSha` | 吉神宜趋 / 凶煞宜忌 | A 段神煞卡片 |
 | `xiShen` / `caiShen` / `fuShen` | 喜神 / 财神 / 福神方位 | A 段方位卡 |
 | `jieQi` | 当日节气（空串 = 非节气日） | A 段节气行 |
 | `prevJieQi` / `nextJieQi` | 前后最近节气（名称 + 公历日期） | A 段节气行 |
@@ -56,42 +56,43 @@ npm run almanac -- YYYY-MM-DD
   <h2>今日宜忌</h2>
   <p class="daily-date">{solar}（农历{lunar}）</p>
   <p class="daily-jieqi">节气：{prevJieQi.name}（{月}月{日}日）— {nextJieQi.name}（{月}月{日}日）</p>
-  <div class="daily-sizhu">
-    <div class="daily-sizhu-item">
-      <span class="sizhu-label">年柱</span>
-      <span class="sizhu-value">{yearGanZhi}</span>
+  <div class="daily-pillars">
+    <div class="daily-sizhu">
+      <div class="daily-sizhu-item">
+        <span class="sizhu-label">年柱</span>
+        <span class="sizhu-value">{yearGanZhi}</span>
+      </div>
+      <div class="daily-sizhu-item">
+        <span class="sizhu-label">月柱</span>
+        <span class="sizhu-value">{monthGanZhi}</span>
+      </div>
+      <div class="daily-sizhu-item sizhu-day">
+        <span class="sizhu-label">日柱</span>
+        <span class="sizhu-value">{dayGanZhi}</span>
+      </div>
+      <div class="daily-sizhu-item">
+        <span class="sizhu-label">时柱</span>
+        <span class="sizhu-value">{hourGanZhi}</span>
+      </div>
+      <p class="daily-sizhu-note">以子时为例</p>
     </div>
-    <div class="daily-sizhu-item">
-      <span class="sizhu-label">月柱</span>
-      <span class="sizhu-value">{monthGanZhi}</span>
-    </div>
-    <div class="daily-sizhu-item sizhu-day">
-      <span class="sizhu-label">日柱</span>
-      <span class="sizhu-value">{dayGanZhi}</span>
-      <span class="sizhu-note">今日</span>
-    </div>
-    <div class="daily-sizhu-item">
-      <span class="sizhu-label">时柱</span>
-      <span class="sizhu-value">{hourGanZhi}</span>
-      <span class="sizhu-note">子时例</span>
-    </div>
-  </div>
-  <div class="daily-ganzhi-grid">
-    <div class="daily-ganzhi-item">
-      <span class="label">日柱</span>
-      <span class="value">{dayGanZhi}</span>
-    </div>
-    <div class="daily-ganzhi-item">
-      <span class="label">五行</span>
-      <span class="value">{wuxing}</span>
-    </div>
-    <div class="daily-ganzhi-item">
-      <span class="label">纳音</span>
-      <span class="value">{naYin}</span>
-    </div>
-    <div class="daily-ganzhi-item">
-      <span class="label">冲煞</span>
-      <span class="value">冲{chongZodiac}煞{方位}</span>
+    <div class="daily-ganzhi-grid">
+      <div class="daily-ganzhi-item">
+        <span class="label">五行</span>
+        <span class="value">{wuxing}</span>
+      </div>
+      <div class="daily-ganzhi-item">
+        <span class="label">纳音</span>
+        <span class="value">{naYin}</span>
+      </div>
+      <div class="daily-ganzhi-item">
+        <span class="label">冲</span>
+        <span class="value">{chongZodiac}</span>
+      </div>
+      <div class="daily-ganzhi-item">
+        <span class="label">煞</span>
+        <span class="value">{煞方位}</span>
+      </div>
     </div>
   </div>
   <div class="daily-shenwei">
@@ -108,26 +109,35 @@ npm run almanac -- YYYY-MM-DD
       <span class="value">{fuShen}</span>
     </div>
   </div>
-  <p style="text-align:center; margin: 0.5rem 0; font-size: 0.9rem; color: var(--muted);">当日生肖：<strong>{zodiac}</strong></p>
-  <div class="daily-yiji">
-    <p class="daily-yi">{yi 列表，用 · 分隔}</p>
-    <p class="daily-ji">{ji 列表，用 · 分隔}</p>
-  </div>
-  <div class="daily-shensha">
-    <p class="daily-jishen">吉神宜趋：{jiShen 列表，用 · 分隔}</p>
-    <p class="daily-xiongsha">凶煞宜忌：{xiongSha 列表，用 · 分隔}</p>
+  <div class="daily-yiji-split">
+    <div class="daily-yiji-col">
+      <div class="daily-jishen">
+        <span class="shensha-title">吉神宜趋</span>
+        <p class="shensha-list">{jiShen 列表，用 · 分隔}</p>
+      </div>
+      <p class="daily-yi">{yi 列表，用 · 分隔}</p>
+    </div>
+    <div class="daily-yiji-col">
+      <div class="daily-xiongsha">
+        <span class="shensha-title">凶煞宜忌</span>
+        <p class="shensha-list">{xiongSha 列表，用 · 分隔}</p>
+      </div>
+      <p class="daily-ji">{ji 列表，用 · 分隔}</p>
+    </div>
   </div>
   <p class="daily-interpretation">{2–4 句解读}</p>
 </section>
 ```
 
 **格式要点**：
-- **四柱**必须用 `daily-sizhu` 横排展示（年/月/日/时），日柱加 `sizhu-day` 高亮，时柱标注"子时例"
-- 干支详情用 `daily-ganzhi-grid` 四宫格展示（日柱/五行/纳音/冲煞），不要用纯文本 `<p>` 拼接
+- **四柱**用 `daily-sizhu` 左列纵排（小字标签在上、大字干支在下），日柱保留 `sizhu-day` 高亮，列尾用 `daily-sizhu-note` 小字「以子时为例」
+- 五行/纳音/冲/煞用 `daily-ganzhi-grid` 右列纵排；**不含日柱**（四柱里已有，避免重复），「冲」「煞」分两行、不合并
+- 两列由 `daily-pillars` 包裹成左右分栏（窄屏自动折回上下，由 CSS 处理，HTML 不需要额外适配）
 - 节气行 `daily-jieqi` 紧跟日期行：一般写「节气：{prev}（X月X日）— {next}（X月X日）」；若 `jieQi` 非空（当日即节气日），改写「节气：今日{jieQi}（X月X日）」
-- 喜神/财神/福神方位用 `daily-shenwei` 三卡横排，紧随干支网格
-- 吉神宜趋/凶煞宜忌用 `daily-shensha` 两行居中小字，紧随宜忌块；列表照实列全，用 ` · ` 分隔，不删减
-- 当日生肖单独成行居中显示
+- 喜神/财神/福神方位用 `daily-shenwei` 三卡横排，紧随分栏之后
+- **煞方位不在 almanac 输出中**，按日支三合推导：寅/午/戌日煞北、申/子/辰日煞南、巳/酉/丑日煞东、亥/卯/未日煞西
+- 吉神/凶煞用 `daily-jishen` / `daily-xiongsha` 卡片（内含 `shensha-title` 标题与 `shensha-list` 列表），与宜、忌配对放入 `daily-yiji-split`：左列吉神+宜，右列凶煞+忌；两列各自堆叠，不强制行对齐；列表照实列全，用 ` · ` 分隔，不删减
+- **不再写「当日生肖」独立行**——生肖信息由 B 段标题「生肖运势 · {zodiac}」承载
 - 宜/忌列表前缀由 CSS `::before` 自动渲染（◆ 宜 / ✕ 忌），HTML 中不需要写"宜："或"忌："
 - 解读段用 `daily-interpretation` 类，会自动带左侧金色竖条和淡色背景
 
@@ -232,29 +242,30 @@ npm run almanac -- YYYY-MM-DD
 - 三段用语义化 `<section>` 包裹，class 固定为 `daily-almanac` / `daily-zodiac` / `daily-story`
 - **A 段必须使用「老黄历通胜式」结构**（见第 3 步模板），核心要素：
   - `daily-jieqi` 节气行（日期行下方）
-  - `daily-sizhu` 四柱横排：年/月/日/时（日柱 `sizhu-day` 高亮，时柱标注子时例）
-  - `daily-ganzhi-grid` 四宫格：日柱 / 五行 / 纳音 / 冲煞
-  - `daily-shenwei` 喜神/财神/福神方位三卡（干支网格之后）
-  - 当日生肖单独居中行
-  - `daily-yi` / `daily-ji` 宜忌块（CSS 自动加前缀图标）
-  - `daily-shensha` 吉神宜趋/凶煞宜忌行（宜忌块之后）
+  - `daily-pillars` 左右分栏：左列 `daily-sizhu` 四柱纵排（日柱 `sizhu-day` 高亮，列尾「以子时为例」小字），右列 `daily-ganzhi-grid` 五行/纳音/冲/煞纵排
+  - `daily-shenwei` 喜神/财神/福神方位三卡（分栏之后）
+  - `daily-yiji-split` 左右分栏：左列 `daily-jishen` 卡片 + `daily-yi`，右列 `daily-xiongsha` 卡片 + `daily-ji`（前缀图标由 CSS 自动添加）
   - `daily-interpretation` 解读块（带左侧金色竖条）
+  - 不写独立生肖行（生肖由 B 段标题承载）
 - **禁止使用旧版纯文本 `<p>` 拼接干支信息**的写法（已废弃）
 
 ## 视觉样式说明
 
-所有每日内容页面共用 `public/assets/style.css` 中的「老黄历通胜式」样式（选择器以 `.daily-` 开头），无需在 HTML 中写内联样式（除模板中标注的生肖行外）。
+所有每日内容页面共用 `public/assets/style.css` 中的「老黄历通胜式」样式（选择器以 `.daily-` 开头），无需在 HTML 中写内联样式。
 
 | 区域 | CSS 类 | 视觉特征 |
 |---|---|---|
 | 黄历主体 | `.daily-almanac` | 金色双线边框 + 顶部/底部装饰线 + 阴影 |
 | 节气行 | `.daily-jieqi` | 居中小字，灰色弱化 |
-| **四柱** | `.daily-sizhu` > `.daily-sizhu-item` | 横排 4 卡片，日柱金色高亮（`sizhu-day`） |
-| 干支网格 | `.daily-ganzhi-grid` > `.daily-ganzhi-item` | 2×2 卡片网格，淡色背景 |
+| **干支分栏** | `.daily-pillars` | 左右分栏容器（窄屏折回上下） |
+| 四柱 | `.daily-pillars` > `.daily-sizhu` | 左列纵排：小字标签在上、大字干支在下，日柱金色高亮（`sizhu-day`），列尾说明小字 |
+| 干支右列 | `.daily-pillars` > `.daily-ganzhi-grid` | 五行/纳音/冲/煞纵排，样式同左列 |
 | 方位神 | `.daily-shenwei` > `.daily-shenwei-item` | 横排 3 卡片，方位值朱红色 |
+| 宜忌分栏 | `.daily-yiji-split` > `.daily-yiji-col` | 左右分栏，每列各自堆叠（吉神→宜 / 凶煞→忌） |
+| 吉神卡 | `.daily-jishen` | 浅红背景 + 红边卡片，标题「吉神宜趋」 |
+| 凶煞卡 | `.daily-xiongsha` | 浅灰背景 + 灰边卡片，标题「凶煞宜忌」 |
 | 宜 | `.daily-yi` | 朱红左侧竖条 + 浅红背景 + ◆ 图标 |
 | 忌 | `.daily-ji` | 灰色左侧竖条 + 浅灰背景 + ✕ 图标 |
-| 神煞行 | `.daily-shensha` | 居中小字两行，吉神朱红 / 凶煞灰 |
 | 解读 | `.daily-interpretation` | 金色左侧竖条 + 渐变背景 |
 | 生肖运势 | `.daily-zodiac` | 左侧金色粗边框 + ♔ 图标 |
 | 科普 | `.daily-story` | 虚线底分隔 + 📜 图标 |
