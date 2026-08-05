@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260805Zh from "../content/daily/2026-08-05.zh.html";
+import daily20260805En from "../content/daily/2026-08-05.en.html";
 import daily20260804Zh from "../content/daily/2026-08-04.zh.html";
 import daily20260804En from "../content/daily/2026-08-04.en.html";
 import daily20260803Zh from "../content/daily/2026-08-03.zh.html";
@@ -24,6 +26,14 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-08-05",
+    meta: {
+      zh: { title: "2026年8月5日宜忌·猪", description: "2026年8月5日黄历宜忌：宜订盟纳采、移徙入宅、立券交易、竖柱上梁，忌嫁娶安葬破土，冲蛇煞西；生肖猪今日运势与纳音钗钏金科普。" },
+      en: { title: "Daily Almanac — August 5, 2026 (Pig)", description: "August 5, 2026 Chinese almanac: favorable for engagement, moving into a new home, contracts and construction; avoid marriage, burial and ground-breaking; Pig zodiac fortune and the Hairpin Gold Nayin." },
+    },
+    content: { zh: daily20260805Zh, en: daily20260805En },
+  },
   {
     date: "2026-08-04",
     meta: {
