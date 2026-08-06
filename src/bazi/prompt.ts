@@ -1,5 +1,5 @@
 import type { Lang } from "../config/site";
-import type { BaziChart, Part, PillarData } from "./types";
+import type { BaziChart, Part, PillarData, ShenShaItem } from "./types";
 
 export function buildSystemPrompt(lang: Lang): string {
   if (lang === "zh") {
@@ -28,13 +28,18 @@ function pillarLine(name: string, p: PillarData): string {
   return `${name}：${p.ganZhi}（主星 ${p.shiShenGan}；藏干 ${p.hideGan}；副星 ${p.shiShenZhi}；纳音 ${p.naYin}；空亡 ${p.xunKong}）`;
 }
 
+/** 神煞列表 → 文本，如 "天乙贵人(日柱)、文昌(时柱)" 或 "无" */
+function ssLine(items: ShenShaItem[]): string {
+  return items.map((i) => `${i.name}(${i.pillars.join("、")})`).join("、") || "无";
+}
+
 /** 排盘基础信息文本，中英共用（汉字术语保留，由 system prompt 决定输出语言） */
 function chartText(chart: BaziChart): string {
   const px = chart.pillars;
   const wx = Object.entries(chart.wuxingCount)
     .map(([k, v]) => `${k}${v}`)
     .join(" ");
-  return [
+  const lines = [
     `性别：${chart.gender === "male" ? "男" : "女"}`,
     `出生公历：${chart.solar}`,
     `出生农历：${chart.lunar}`,
@@ -45,7 +50,13 @@ function chartText(chart: BaziChart): string {
     `日主：${chart.dayMaster}`,
     `五行统计：${wx}`,
     `起运：${chart.qiYun}`,
-  ].join("\n");
+  ];
+  // 神煞为可选字段；有命中时追加一行概览，无则不输出
+  const ss = chart.shenSha;
+  if (ss && (ss.auspicious.length || ss.inauspicious.length)) {
+    lines.push(`命局神煞：吉神 ${ssLine(ss.auspicious)}；凶煞 ${ssLine(ss.inauspicious)}`);
+  }
+  return lines.join("\n");
 }
 
 function daYunText(chart: BaziChart): string {
@@ -74,8 +85,8 @@ function nowText(chart: BaziChart): string {
 
 const TASKS: Record<Part, Record<Lang, string>> = {
   bazi: {
-    zh: "请解读这个八字命局：日主强弱与格局、五行喜忌、性格特点、事业财运、感情婚姻、健康提示。600 字左右。",
-    en: "Interpret this natal chart: day-master strength and structure, favourable/unfavourable elements, personality, career and wealth, relationships, health reminders. About 500 words.",
+    zh: "请解读这个八字命局：日主强弱与格局、五行喜忌、性格特点、事业财运、感情婚姻、健康提示。如有命局神煞可作辅助参考（正统子平以五行十神为主，神煞辅之）。600 字左右。",
+    en: "Interpret this natal chart: day-master strength and structure, favourable/unfavourable elements, personality, career and wealth, relationships, health reminders. If natal ShenSha (auspicious/inauspicious stars) are provided, use them as supplementary reference (orthodox Ziping prioritises elements and Ten Gods, with ShenSha as secondary). About 500 words.",
   },
   dayun: {
     zh: "请逐步解读上面列出的各步大运走势（每步 2-3 句），并重点详细分析标注「当前大运」的一步。",

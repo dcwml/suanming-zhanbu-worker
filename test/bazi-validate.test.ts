@@ -64,4 +64,10 @@ describe("validateInterpretRequest", () => {
     (body.chart.wuxingCount as Record<string, number>)["风"] = 1;
     expect(validateInterpretRequest(body).ok).toBe(false);
   });
+
+  it("accepts request without shensha (optional field)", () => {
+    const body = validBody();
+    delete (body.chart as { shenSha?: unknown }).shenSha;
+    expect(validateInterpretRequest(body).ok).toBe(true);
+  });
 });

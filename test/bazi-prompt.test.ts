@@ -27,6 +27,30 @@ describe("buildUserPrompt", () => {
     expect(p).not.toContain("流月");
   });
 
+  it("bazi part includes shensha overview when present", () => {
+    const p = buildUserPrompt("bazi", "zh", chart);
+    expect(p).toContain("命局神煞：吉神");
+    expect(p).toContain("天乙贵人");
+    expect(p).toContain("魁罡");
+    expect(p).toContain("吉神");
+    expect(p).toContain("凶煞");
+  });
+
+  it("bazi part omits shensha data line when field is absent (graceful degradation)", () => {
+    const noSs = validChart();
+    delete noSs.shenSha;
+    const p = buildUserPrompt("bazi", "zh", noSs);
+    // 任务指示文字含"命局神煞"四字，但不应出现数据行"命局神煞：吉神"
+    expect(p).not.toContain("命局神煞：吉神");
+  });
+
+  it("bazi part omits shensha data line when both lists are empty", () => {
+    const emptySs = validChart();
+    emptySs.shenSha = { auspicious: [], inauspicious: [] };
+    const p = buildUserPrompt("bazi", "zh", emptySs);
+    expect(p).not.toContain("命局神煞：吉神");
+  });
+
   it("dayun part lists all dayun and marks the current one", () => {
     const p = buildUserPrompt("dayun", "zh", chart);
     expect(p).toContain("壬午");

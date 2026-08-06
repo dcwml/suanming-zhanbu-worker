@@ -33,6 +33,24 @@ export function validChart(): BaziChart {
         { month: 7, ganZhi: "乙未" },
       ],
     },
+    // 命局神煞（日干庚、年支午、月支巳，手算结果）：
+    //   吉神：天乙贵人(庚→丑未，命中时柱未)、月德贵人(巳酉丑→庚，日干庚)、
+    //         福星贵人(庚→午，命中年柱午)、学堂(庚→巳，命中月柱巳)、将星(寅午戌→午，命中年柱午)
+    //   凶煞：亡神(寅午戌→巳，命中月柱巳)、孤辰寡宿(巳午未→申辰，命中日柱辰)、魁罡(庚辰∈魁罡集)
+    shenSha: {
+      auspicious: [
+        { name: "天乙贵人", pillars: ["时柱"] },
+        { name: "月德贵人", pillars: ["日柱"] },
+        { name: "福星贵人", pillars: ["年柱"] },
+        { name: "学堂", pillars: ["月柱"] },
+        { name: "将星", pillars: ["年柱"] },
+      ],
+      inauspicious: [
+        { name: "亡神", pillars: ["月柱"] },
+        { name: "孤辰寡宿", pillars: ["日柱"] },
+        { name: "魁罡", pillars: ["日柱"] },
+      ],
+    },
   };
 }
 

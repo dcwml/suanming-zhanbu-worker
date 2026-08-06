@@ -47,6 +47,22 @@ export interface NowInfo {
   liuYue: LiuYueItem[];
 }
 
+/** 单颗神煞命中项 */
+export interface ShenShaItem {
+  /** 神煞名，如 "天乙贵人" */
+  name: string;
+  /** 命中柱位，如 ["日柱", "时柱"]（统一存中文标签） */
+  pillars: string[];
+}
+
+/** 命局神煞集合 */
+export interface ShenShaData {
+  /** 吉神 */
+  auspicious: ShenShaItem[];
+  /** 凶煞 */
+  inauspicious: ShenShaItem[];
+}
+
 export interface BaziChart {
   gender: "male" | "female";
   solar: string;
@@ -58,6 +74,8 @@ export interface BaziChart {
   qiYun: string;
   daYun: DaYunItem[];
   now: NowInfo;
+  /** 命局神煞（前端计算产物，可选——旧请求可能不含此字段） */
+  shenSha?: ShenShaData;
 }
 
 export interface InterpretRequest {
