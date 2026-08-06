@@ -23,76 +23,128 @@
     return CHANG_SHENG[((step % 12) + 12) % 12];
   }
 
-  /* ---------- 命局神煞查表 ---------- */
+  /* ---------- 命局神煞查表（对齐问真八字排盘） ---------- */
 
   var PILLAR_LABELS = ["年柱", "月柱", "日柱", "时柱"];
   var PILLAR_LABEL_EN = { 年柱: "Year", 月柱: "Month", 日柱: "Day", 时柱: "Hour" };
 
-  /* 吉神——日干基准（值=目标地支串，在四柱地支中查找） */
-  var SS_TIAN_YI = { 甲: "丑未", 戊: "丑未", 庚: "丑未", 乙: "子申", 己: "子申", 丙: "亥酉", 丁: "亥酉", 壬: "卯巳", 癸: "卯巳", 辛: "寅午" };
-  var SS_WEN_CHANG = { 甲: "巳", 乙: "午", 丙: "申", 戊: "申", 丁: "酉", 己: "酉", 庚: "亥", 辛: "子", 壬: "寅", 癸: "卯" };
+  /* 吉神——年干+日干基准（值=目标地支串，在四柱地支中查找） */
+  var SS_TIAN_YI = { 甲: "丑未", 乙: "子申", 丙: "亥酉", 丁: "亥酉", 戊: "丑未", 己: "子申", 庚: "丑未", 辛: "寅午", 壬: "卯巳", 癸: "卯巳" };
   var SS_TAI_JI = { 甲: "子午", 乙: "子午", 丙: "卯酉", 丁: "卯酉", 戊: "辰戌丑未", 己: "辰戌丑未", 庚: "寅亥", 辛: "寅亥", 壬: "巳申", 癸: "巳申" };
-  var SS_FU_XING = { 甲: "寅", 乙: "丑", 丙: "子", 丁: "亥", 戊: "丑", 己: "酉", 庚: "午", 辛: "巳", 壬: "辰", 癸: "卯" };
-  var SS_XUE_TANG = { 甲: "亥", 乙: "午", 丙: "寅", 戊: "寅", 丁: "酉", 己: "酉", 庚: "巳", 辛: "子", 壬: "申", 癸: "卯" };
-  var SS_JIN_YU = { 甲: "辰", 乙: "巳", 丙: "未", 戊: "未", 丁: "申", 己: "申", 庚: "戌", 辛: "亥", 壬: "丑", 癸: "寅" };
+  var SS_WEN_CHANG = { 甲: "巳", 乙: "午", 丙: "申", 丁: "酉", 戊: "申", 己: "酉", 庚: "亥", 辛: "子", 壬: "寅", 癸: "卯" };
+  var SS_GUO_YIN = { 甲: "戌", 乙: "亥", 丙: "丑", 丁: "寅", 戊: "丑", 己: "寅", 庚: "辰", 辛: "巳", 壬: "未", 癸: "申" };
+  var SS_JIN_YU = { 甲: "辰", 乙: "巳", 丙: "未", 丁: "申", 戊: "未", 己: "申", 庚: "戌", 辛: "亥", 壬: "丑", 癸: "寅" };
+  var SS_TIAN_CHU = { 甲: "巳", 乙: "午", 丙: "巳", 丁: "午", 戊: "申", 己: "酉", 庚: "亥", 辛: "子", 壬: "寅", 癸: "卯" };
+  var SS_FU_XING = { 甲: "寅子", 丙: "寅子", 乙: "卯丑", 癸: "卯丑", 戊: "申", 己: "未", 丁: "亥", 庚: "午", 辛: "巳", 壬: "辰" };
 
-  /* 吉神——年支/日支双查基准（值=目标地支串） */
-  var SS_HUA_GAI = { 寅: "戌", 午: "戌", 戌: "戌", 申: "辰", 子: "辰", 辰: "辰", 巳: "丑", 酉: "丑", 丑: "丑", 亥: "未", 卯: "未", 未: "未" };
-  var SS_JIANG_XING = { 寅: "午", 午: "午", 戌: "午", 申: "子", 子: "子", 辰: "子", 巳: "酉", 酉: "酉", 丑: "酉", 亥: "卯", 卯: "卯", 未: "卯" };
+  /* 日干基准（值=目标地支串，在四柱地支中查找） */
+  var SS_LU_SHEN = { 甲: "寅", 乙: "卯", 丙: "巳", 丁: "午", 戊: "巳", 己: "午", 庚: "申", 辛: "酉", 壬: "亥", 癸: "子" };
+  var SS_YANG_REN = { 甲: "卯", 乙: "寅", 丙: "午", 丁: "巳", 戊: "午", 己: "巳", 庚: "酉", 辛: "申", 壬: "子", 癸: "亥" };
+  var SS_FEI_REN = { 甲: "酉", 乙: "申", 丙: "子", 丁: "亥", 戊: "子", 己: "亥", 庚: "卯", 辛: "寅", 壬: "午", 癸: "巳" };
+  var SS_LIU_XIA = { 甲: "酉", 乙: "戌", 丙: "未", 丁: "申", 戊: "巳", 己: "午", 庚: "辰", 辛: "卯", 壬: "亥", 癸: "寅" };
+  var SS_HONG_YAN = { 甲: "午", 乙: "午", 丙: "寅", 丁: "未", 戊: "辰", 己: "辰", 庚: "戌", 辛: "酉", 壬: "子", 癸: "申" };
 
-  /* 吉神——月支→天干（值=天干，在四柱天干中查找） */
-  var SS_YUE_DE = { 寅: "丙", 午: "丙", 戌: "丙", 申: "壬", 子: "壬", 辰: "壬", 巳: "庚", 酉: "庚", 丑: "庚", 亥: "甲", 卯: "甲", 未: "甲" };
+  /* 年支+日支双查（年支查时目标为月/日/时支，日支查时目标为年/月/时支） */
+  var SS_YI_MA = { 子: "寅", 丑: "亥", 寅: "申", 卯: "巳", 辰: "寅", 巳: "亥", 午: "申", 未: "巳", 申: "寅", 酉: "亥", 戌: "申", 亥: "巳" };
+  var SS_JIANG_XING = { 子: "子", 丑: "酉", 寅: "午", 卯: "卯", 辰: "子", 巳: "酉", 午: "午", 未: "卯", 申: "子", 酉: "酉", 戌: "午", 亥: "卯" };
+  var SS_HUA_GAI = { 子: "辰", 丑: "丑", 寅: "戌", 卯: "未", 辰: "辰", 巳: "丑", 午: "戌", 未: "未", 申: "辰", 酉: "丑", 戌: "戌", 亥: "未" };
+  var SS_JIE_SHA = { 子: "巳", 丑: "寅", 寅: "亥", 卯: "申", 辰: "巳", 巳: "寅", 午: "亥", 未: "申", 申: "巳", 酉: "寅", 戌: "亥", 亥: "申" };
+  var SS_WANG_SHEN = { 子: "亥", 丑: "申", 寅: "巳", 卯: "寅", 辰: "亥", 巳: "申", 午: "巳", 未: "寅", 申: "亥", 酉: "申", 戌: "巳", 亥: "寅" };
+  var SS_TAO_HUA = { 子: "酉", 丑: "午", 寅: "卯", 卯: "子", 辰: "酉", 巳: "午", 午: "卯", 未: "子", 申: "酉", 酉: "午", 戌: "卯", 亥: "子" };
+  var SS_TIAN_LUO_DI_WANG = { 辰: "巳", 巳: "辰", 戌: "亥", 亥: "戌" };
 
-  /* 吉神——天德贵人：月支→值（天干或卦位地支）。
-     口诀"正丁二坤三壬四辛五乾六甲七癸八艮九丙十乙子巽丑庚"：
-     坤=申、乾=亥、艮=寅、巽=巳。值是天干时查四柱天干，是地支时查四柱地支。 */
-  var SS_TIAN_DE = { 寅: "丁", 卯: "申", 辰: "壬", 巳: "辛", 午: "亥", 未: "甲", 申: "癸", 酉: "寅", 戌: "丙", 亥: "乙", 子: "巳", 丑: "庚" };
-  var GANS = "甲乙丙丁戊己庚辛壬癸";
+  /* 年支单查（目标为月/日/时支） */
+  var SS_ZAI_SHA = { 子: "午", 丑: "卯", 寅: "子", 卯: "酉", 辰: "午", 巳: "卯", 午: "子", 未: "酉", 申: "午", 酉: "卯", 戌: "子", 亥: "酉" };
+  var SS_GU_CHEN = { 子: "寅", 丑: "寅", 寅: "巳", 卯: "巳", 辰: "巳", 巳: "申", 午: "申", 未: "申", 申: "亥", 酉: "亥", 戌: "亥", 亥: "寅" };
+  var SS_GUA_SU = { 子: "戌", 丑: "戌", 寅: "丑", 卯: "丑", 辰: "丑", 巳: "辰", 午: "辰", 未: "辰", 申: "未", 酉: "未", 戌: "未", 亥: "戌" };
+  var SS_GOU_JIAO = { 子: "卯", 丑: "辰", 寅: "巳", 卯: "午", 辰: "未", 巳: "申", 午: "酉", 未: "戌", 申: "亥", 酉: "子", 戌: "丑", 亥: "寅" };
+  var SS_TIAN_XI = { 子: "酉", 丑: "申", 寅: "未", 卯: "午", 辰: "巳", 巳: "辰", 午: "卯", 未: "寅", 申: "丑", 酉: "子", 戌: "亥", 亥: "戌" };
+  var SS_HONG_LUAN = { 子: "卯", 丑: "寅", 寅: "丑", 卯: "子", 辰: "亥", 巳: "戌", 午: "酉", 未: "申", 申: "未", 酉: "午", 戌: "巳", 亥: "辰" };
+  var SS_YUAN_CHEN_M = { 子: "未", 丑: "申", 寅: "酉", 卯: "戌", 辰: "亥", 巳: "子", 午: "丑", 未: "寅", 申: "卯", 酉: "辰", 戌: "巳", 亥: "午" };
+  var SS_YUAN_CHEN_F = { 子: "巳", 丑: "午", 寅: "未", 卯: "申", 辰: "酉", 巳: "戌", 午: "亥", 未: "子", 申: "丑", 酉: "寅", 戌: "卯", 亥: "辰" };
+  var SS_PI_MA = { 子: "酉", 丑: "戌", 寅: "亥", 卯: "子", 辰: "丑", 巳: "寅", 午: "卯", 未: "辰", 申: "巳", 酉: "午", 戌: "未", 亥: "申" };
+  var SS_DIAO_KE = { 子: "戌", 丑: "亥", 寅: "子", 卯: "丑", 辰: "寅", 巳: "卯", 午: "辰", 未: "巳", 申: "午", 酉: "未", 戌: "申", 亥: "酉" };
+  var SS_SANG_MEN = { 子: "寅", 丑: "卯", 寅: "辰", 卯: "巳", 辰: "午", 巳: "未", 午: "申", 未: "酉", 申: "戌", 酉: "亥", 戌: "子", 亥: "丑" };
 
-  /* 凶煞——日干基准（值=目标地支串） */
-  var SS_YANG_REN = { 甲: "卯", 乙: "辰", 丙: "午", 戊: "午", 丁: "未", 己: "未", 庚: "酉", 辛: "戌", 壬: "子", 癸: "丑" };
-  var SS_LIU_XIA = { 甲: "酉", 乙: "戌", 丙: "未", 戊: "巳", 丁: "申", 己: "酉", 庚: "子", 辛: "亥", 壬: "寅", 癸: "午" };
+  /* 月支→地支（目标为四柱地支） */
+  var SS_TIAN_YI_YI = { 子: "亥", 丑: "子", 寅: "丑", 卯: "寅", 辰: "卯", 巳: "辰", 午: "巳", 未: "午", 申: "未", 酉: "申", 戌: "酉", 亥: "戌" };
+  var SS_XUE_REN = { 子: "午", 丑: "子", 寅: "丑", 卯: "未", 辰: "寅", 巳: "申", 午: "卯", 未: "酉", 申: "辰", 酉: "戌", 戌: "巳", 亥: "亥" };
 
-  /* 凶煞——年支/日支双查基准（值=目标地支串） */
-  var SS_JIE_SHA = { 寅: "亥", 午: "亥", 戌: "亥", 申: "巳", 子: "巳", 辰: "巳", 巳: "寅", 酉: "寅", 丑: "寅", 亥: "申", 卯: "申", 未: "申" };
-  var SS_WANG_SHEN = { 寅: "巳", 午: "巳", 戌: "巳", 申: "亥", 子: "亥", 辰: "亥", 巳: "申", 酉: "申", 丑: "申", 亥: "寅", 卯: "寅", 未: "寅" };
-  var SS_ZAI_SHA = { 寅: "子", 午: "子", 戌: "子", 申: "午", 子: "午", 辰: "午", 巳: "卯", 酉: "卯", 丑: "卯", 亥: "酉", 卯: "酉", 未: "酉" };
-  var SS_TAO_HUA = { 寅: "卯", 午: "卯", 戌: "卯", 申: "酉", 子: "酉", 辰: "酉", 巳: "午", 酉: "午", 丑: "午", 亥: "子", 卯: "子", 未: "子" };
-  var SS_YI_MA = { 寅: "申", 午: "申", 戌: "申", 申: "寅", 子: "寅", 辰: "寅", 巳: "亥", 酉: "亥", 丑: "亥", 亥: "巳", 卯: "巳", 未: "巳" };
-  var SS_GU_GUA = { 亥: "寅戌", 子: "寅戌", 丑: "寅戌", 寅: "巳丑", 卯: "巳丑", 辰: "巳丑", 巳: "申辰", 午: "申辰", 未: "申辰", 申: "亥未", 酉: "亥未", 戌: "亥未" };
+  /* 月支→天干（目标为四柱天干） */
+  var SS_YUE_DE = { 子: "壬", 丑: "庚", 寅: "丙", 卯: "甲", 辰: "壬", 巳: "庚", 午: "丙", 未: "甲", 申: "壬", 酉: "庚", 戌: "丙", 亥: "甲" };
+  var SS_YUE_DE_HE = { 子: "丁", 丑: "乙", 寅: "辛", 卯: "己", 辰: "丁", 巳: "乙", 午: "辛", 未: "己", 申: "丁", 酉: "乙", 戌: "辛", 亥: "己" };
+  var SS_DE_XIU = { 寅: "丙丁戊癸", 午: "丙丁戊癸", 戌: "丙丁戊癸", 申: "壬癸戊己丙辛甲", 子: "壬癸戊己丙辛甲", 辰: "壬癸戊己丙辛甲", 巳: "乙庚辛", 酉: "乙庚辛", 丑: "乙庚辛", 亥: "甲乙丁壬", 卯: "甲乙丁壬", 未: "甲乙丁壬" };
 
-  /* 魁罡：日柱干支属于此集合即命中 */
-  var SS_KUI_GANG = ["庚辰", "壬辰", "庚戌", "戊戌"];
+  /* 天德贵人/天德合：月支→天干时查四柱天干，月支→地支时查四柱地支 */
+  var SS_TIAN_DE_GAN = { 丑: "庚", 寅: "丁", 辰: "壬", 巳: "辛", 未: "甲", 申: "癸", 戌: "丙", 亥: "乙" };
+  var SS_TIAN_DE_ZHI = { 子: "巳", 卯: "申", 午: "亥", 酉: "寅" };
+  var SS_TIAN_DE_HE_GAN = { 丑: "乙", 寅: "壬", 辰: "丁", 巳: "丙", 未: "己", 申: "戊", 戌: "辛", 亥: "庚" };
+  var SS_TIAN_DE_HE_ZHI = { 子: "申", 卯: "巳", 午: "寅", 酉: "亥" };
+
+  /* 童子煞：月支→地支（目标为日支、时支） */
+  var SS_TONG_ZI = { 子: "卯未辰", 丑: "卯未辰", 巳: "卯未辰", 午: "卯未辰", 未: "卯未辰", 亥: "卯未辰", 寅: "寅子", 卯: "寅子", 辰: "寅子", 申: "寅子", 酉: "寅子", 戌: "寅子" };
+  /* 童子煞（年纳音五行）：金/木→午卯，水/火→酉戌，土→辰巳 */
+  var SS_TONG_ZI_NY = { 金: "午卯", 木: "午卯", 水: "酉戌", 火: "酉戌", 土: "辰巳" };
+
+  /* 年纳音五行→地支（学堂/词馆目标为月/日/时支） */
+  var SS_XUE_TANG = { 金: "巳", 木: "亥", 水: "申", 土: "申", 火: "寅" };
+  var SS_CI_GUAN = { 金: "申", 木: "寅", 水: "亥", 土: "亥", 火: "巳" };
+  /* 年纳音五行→干支（正学堂/正词馆目标为月/日/时柱干支） */
+  var SS_ZHENG_XUE_TANG = { 金: "辛巳", 木: "己亥", 水: "甲申", 土: "戊申", 火: "丙寅" };
+  var SS_ZHENG_CI_GUAN = { 金: "壬申", 木: "庚寅", 水: "癸亥", 土: "丁亥", 火: "乙巳" };
+
+  /* 月支→日柱干支 */
+  var SS_TIAN_ZHUAN = { 寅: "乙卯", 卯: "乙卯", 辰: "乙卯", 巳: "丙午", 午: "丙午", 未: "丙午", 申: "辛酉", 酉: "辛酉", 戌: "辛酉", 亥: "壬子", 子: "壬子", 丑: "壬子" };
+  var SS_DI_ZHUAN = { 寅: "辛卯", 卯: "辛卯", 辰: "辛卯", 巳: "戊午", 午: "戊午", 未: "戊午", 申: "癸酉", 酉: "癸酉", 戌: "癸酉", 亥: "丙子", 子: "丙子", 丑: "丙子" };
+  var SS_TIAN_SHE = { 寅: "戊寅", 卯: "戊寅", 辰: "戊寅", 巳: "甲午", 午: "甲午", 未: "甲午", 申: "戊申", 酉: "戊申", 戌: "戊申", 亥: "甲子", 子: "甲子", 丑: "甲子" };
+  var SS_SI_FEI = [
+    { 寅: "庚申", 卯: "庚申", 辰: "庚申", 巳: "壬子", 午: "壬子", 未: "壬子", 申: "甲寅", 酉: "甲寅", 戌: "甲寅", 亥: "丙午", 子: "丙午", 丑: "丙午" },
+    { 寅: "辛酉", 卯: "辛酉", 辰: "辛酉", 巳: "癸亥", 午: "癸亥", 未: "癸亥", 申: "乙卯", 酉: "乙卯", 戌: "乙卯", 亥: "丁巳", 子: "丁巳", 丑: "丁巳" },
+  ];
+
+  /* 日柱干支集合（命中即落日柱） */
+  var SS_DAY_SETS_JI = {
+    十灵日: ["乙亥", "癸未", "庚寅", "丁酉", "壬寅", "甲辰", "庚戌", "辛亥", "丙辰", "戊午"],
+    六秀日: ["戊子", "己丑", "丙午", "丁未", "戊午", "己未"],
+  };
+  var SS_DAY_SETS_XIONG = {
+    十恶大败: ["壬申", "庚辰", "辛巳", "丁亥", "己丑", "丙申", "戊戌", "甲辰", "乙巳", "癸亥"],
+    阴差阳错: ["丙子", "丁丑", "戊寅", "辛卯", "壬辰", "丙午", "丁未", "戊申", "辛酉", "壬戌", "癸亥", "癸巳"],
+    九丑日: ["己卯", "壬午", "戊子", "辛卯", "丁酉", "己酉", "壬子", "戊午", "辛酉"],
+    魁罡日: ["庚辰", "壬辰", "戊戌", "庚戌"],
+    八专日: ["戊戌", "丁未", "癸丑", "甲寅", "乙卯", "己未", "庚申", "辛酉"],
+    孤鸾煞: ["丁巳", "乙巳", "丙午", "戊申", "辛亥", "壬子", "甲寅", "戊午"],
+  };
+  /* 金神：日柱或时柱干支属集合即命中 */
+  var SS_JIN_SHEN = ["乙丑", "癸酉", "己巳"];
+  /* 拱禄：时柱干支→日柱干支 */
+  var SS_GONG_LU = { 癸丑: "癸亥", 癸亥: "癸丑", 丁未: "丁巳", 己巳: "己未", 戊午: "戊辰" };
+  /* 三奇贵人：年/月/日或月/日/时天干顺排成局 */
+  var SS_SAN_QI = ["甲戊庚", "乙丙丁", "壬癸辛"];
 
   /**
-   * 计算命局神煞。px = { year, month, day, hour }，每项含 gan/zhi/ganZhi。
+   * 计算命局神煞（查表与问真八字排盘对齐）。
+   * px = { year, month, day, hour }，每项含 gan/zhi/ganZhi/naYin/xunKong。
+   * gender = "male" | "female"（元辰分男女）。
    * 返回 { auspicious: [{name, pillars}], inauspicious: [...] }
-   *
-   * 查法基准（与主流排盘软件对齐）：
-   *   - 日干类神煞（天乙/文昌/羊刃等）：以日干起查，在四柱地支中命中
-   *   - 年支类神煞（华盖/桃花/驿马/劫煞等）：年支+日支双查，任一命中即入列
-   *   - 月德贵人：月支→天干，在四柱天干中查找
-   *   - 天德贵人：月支→值（天干或卦位地支），干查干、支查支
    */
-  function computeShenSha(px) {
-    var dayGan = px.day.gan;
-    var monthZhi = px.month.zhi;
-    var dayGanZhi = px.day.ganZhi;
+  function computeShenSha(px, gender) {
     var gans = [px.year.gan, px.month.gan, px.day.gan, px.hour.gan];
     var zhis = [px.year.zhi, px.month.zhi, px.day.zhi, px.hour.zhi];
+    var ganZhis = [px.year.ganZhi, px.month.ganZhi, px.day.ganZhi, px.hour.ganZhi];
     var auspicious = [];
     var inauspicious = [];
 
-    /** 在四柱地支中查找目标地支串（如 "丑未"），返回命中的柱位标签数组 */
-    function matchZhis(targets) {
+    /** 在指定柱位的地支中查找目标地支串，返回命中的柱位标签数组 */
+    function matchZhis(targets, idxs) {
       var hits = [];
-      for (var i = 0; i < 4; i++) {
-        if (targets.indexOf(zhis[i]) >= 0) hits.push(PILLAR_LABELS[i]);
+      for (var n = 0; n < idxs.length; n++) {
+        if (targets.indexOf(zhis[idxs[n]]) >= 0) hits.push(PILLAR_LABELS[idxs[n]]);
       }
       return hits;
     }
 
-    /** 在四柱天干中查找目标天干，返回命中的柱位标签数组 */
+    /** 在四柱天干中查找目标天干串，返回命中的柱位标签数组 */
     function matchGans(targets) {
       var hits = [];
       for (var i = 0; i < 4; i++) {
@@ -101,63 +153,176 @@
       return hits;
     }
 
-    /** 日干基准：目标地支串在四柱地支中命中即入列 */
-    function pushZhi(name, targets, list) {
-      var hits = matchZhis(targets);
+    function push(name, hits, list) {
       if (hits.length) list.push({ name: name, pillars: hits });
     }
 
-    /** 年支+日支双查：分别用年支和日支查表，合并去重命中柱位 */
-    function pushDual(name, table, list) {
+    /** 年干+日干基准：目标地支串在四柱地支中命中即入列 */
+    function pushGanBase(table, name, list) {
       var seen = {};
       var merged = [];
-      [px.year.zhi, px.day.zhi].forEach(function (src) {
-        var targets = table[src];
+      [gans[0], gans[2]].forEach(function (g) {
+        var targets = table[g];
         if (!targets) return;
-        matchZhis(targets).forEach(function (p) {
+        matchZhis(targets, [0, 1, 2, 3]).forEach(function (p) {
           if (!seen[p]) { seen[p] = true; merged.push(p); }
         });
       });
-      if (merged.length) list.push({ name: name, pillars: merged });
+      push(name, merged, list);
     }
 
-    // 吉神——日干基准
-    pushZhi("天乙贵人", SS_TIAN_YI[dayGan], auspicious);
-    pushZhi("文昌贵人", SS_WEN_CHANG[dayGan], auspicious);
-    pushZhi("太极贵人", SS_TAI_JI[dayGan], auspicious);
-    pushZhi("福星贵人", SS_FU_XING[dayGan], auspicious);
-    pushZhi("学堂", SS_XUE_TANG[dayGan], auspicious);
-    pushZhi("金舆", SS_JIN_YU[dayGan], auspicious);
-    // 吉神——年支+日支双查
-    pushDual("华盖", SS_HUA_GAI, auspicious);
-    pushDual("将星", SS_JIANG_XING, auspicious);
-    // 吉神——月德贵人（月支→天干，查四柱天干）
-    (function () {
-      var hits = matchGans(SS_YUE_DE[monthZhi]);
-      if (hits.length) auspicious.push({ name: "月德贵人", pillars: hits });
-    })();
-    // 吉神——天德贵人（月支→值，干查四柱干、支查四柱支）
-    (function () {
-      var val = SS_TIAN_DE[monthZhi];
-      var hits = GANS.indexOf(val) >= 0 ? matchGans(val) : matchZhis(val);
-      if (hits.length) auspicious.push({ name: "天德贵人", pillars: hits });
-    })();
+    /** 年支+日支双查：年支查月/日/时支，日支查年/月/时支 */
+    function pushDual(table, name, list) {
+      var seen = {};
+      var merged = [];
+      [[zhis[0], [1, 2, 3]], [zhis[2], [0, 1, 3]]].forEach(function (pair) {
+        var targets = table[pair[0]];
+        if (!targets) return;
+        pair[1].forEach(function (i) {
+          if (targets.indexOf(zhis[i]) >= 0 && !seen[i]) { seen[i] = true; merged.push(PILLAR_LABELS[i]); }
+        });
+      });
+      push(name, merged, list);
+    }
 
-    // 凶煞——日干基准
-    pushZhi("羊刃", SS_YANG_REN[dayGan], inauspicious);
-    pushZhi("流霞", SS_LIU_XIA[dayGan], inauspicious);
-    // 凶煞——年支+日支双查
-    pushDual("劫煞", SS_JIE_SHA, inauspicious);
-    pushDual("亡神", SS_WANG_SHEN, inauspicious);
-    pushDual("灾煞", SS_ZAI_SHA, inauspicious);
-    pushDual("桃花", SS_TAO_HUA, inauspicious);
-    pushDual("驿马", SS_YI_MA, inauspicious);
-    pushDual("孤辰寡宿", SS_GU_GUA, inauspicious);
-    // 凶煞——魁罡（日柱干支集合）
-    if (SS_KUI_GANG.indexOf(dayGanZhi) >= 0) inauspicious.push({ name: "魁罡", pillars: ["日柱"] });
-    // 童子煞（民俗）：春秋月(寅卯辰申酉戌)日干甲戊庚；冬夏月(亥子丑巳午未)日干乙己辛
-    var tongZiStems = "寅卯辰申酉戌".indexOf(monthZhi) >= 0 ? "甲戊庚" : "乙己辛";
-    if (tongZiStems.indexOf(dayGan) >= 0) inauspicious.push({ name: "童子煞", pillars: ["日柱"], folk: true });
+    /** 年支单查：目标为月/日/时支 */
+    function pushYear(table, name, list) {
+      var targets = table[zhis[0]];
+      if (targets) push(name, matchZhis(targets, [1, 2, 3]), list);
+    }
+
+    /** 月支→地支表：目标为四柱地支 */
+    function pushMonthZhi(table, name, list) {
+      var targets = table[zhis[1]];
+      if (targets) push(name, matchZhis(targets, [0, 1, 2, 3]), list);
+    }
+
+    /** 月支→天干表：目标为四柱天干 */
+    function pushMonthGan(table, name, list) {
+      var targets = table[zhis[1]];
+      if (targets) push(name, matchGans(targets), list);
+    }
+
+    /** 月支→日柱干支：命中落日柱 */
+    function pushMonthDayPillar(table, name, list) {
+      var val = table[zhis[1]];
+      if (val && ganZhis[2] === val) push(name, ["日柱"], list);
+    }
+
+    var monthZhi = zhis[1];
+    var dayGanZhi = ganZhis[2];
+    var nyWx = px.year.naYin.charAt(px.year.naYin.length - 1); // 年纳音五行：路旁土→土
+
+    // ---- 吉神 ----
+    // 年干+日干基准
+    pushGanBase(SS_TIAN_YI, "天乙贵人", auspicious);
+    pushGanBase(SS_TAI_JI, "太极贵人", auspicious);
+    pushGanBase(SS_WEN_CHANG, "文昌贵人", auspicious);
+    pushGanBase(SS_GUO_YIN, "国印贵人", auspicious);
+    pushGanBase(SS_JIN_YU, "金舆", auspicious);
+    pushGanBase(SS_TIAN_CHU, "天厨贵人", auspicious);
+    pushGanBase(SS_FU_XING, "福星贵人", auspicious);
+    // 日干基准
+    push("禄神", matchZhis(SS_LU_SHEN[gans[2]], [0, 1, 2, 3]), auspicious);
+    // 年支+日支双查
+    pushDual(SS_YI_MA, "驿马", auspicious);
+    pushDual(SS_JIANG_XING, "将星", auspicious);
+    pushDual(SS_HUA_GAI, "华盖", auspicious);
+    // 月支基准
+    pushMonthGan(SS_YUE_DE, "月德贵人", auspicious);
+    pushMonthGan(SS_YUE_DE_HE, "月德合", auspicious);
+    pushMonthGan(SS_DE_XIU, "德秀贵人", auspicious);
+    pushMonthGan(SS_TIAN_DE_GAN, "天德贵人", auspicious);
+    push("天德贵人", matchZhis(SS_TIAN_DE_ZHI[monthZhi] || "", [0, 1, 2, 3]), auspicious);
+    pushMonthGan(SS_TIAN_DE_HE_GAN, "天德合", auspicious);
+    push("天德合", matchZhis(SS_TIAN_DE_HE_ZHI[monthZhi] || "", [0, 1, 2, 3]), auspicious);
+    pushMonthZhi(SS_TIAN_YI_YI, "天医", auspicious);
+    // 年支单查
+    pushYear(SS_TIAN_XI, "天喜", auspicious);
+    pushYear(SS_HONG_LUAN, "红鸾", auspicious);
+    // 年纳音五行
+    push("学堂", matchZhis(SS_XUE_TANG[nyWx] || "", [1, 2, 3]), auspicious);
+    push("词馆", matchZhis(SS_CI_GUAN[nyWx] || "", [1, 2, 3]), auspicious);
+    ["月柱", "日柱", "时柱"].forEach(function (label, n) {
+      if (ganZhis[n + 1] === SS_ZHENG_XUE_TANG[nyWx]) auspicious.push({ name: "正学堂", pillars: [label] });
+      if (ganZhis[n + 1] === SS_ZHENG_CI_GUAN[nyWx]) auspicious.push({ name: "正词馆", pillars: [label] });
+    });
+    // 日柱/时柱干支集合
+    var jinShenHits = [];
+    [2, 3].forEach(function (i) { if (SS_JIN_SHEN.indexOf(ganZhis[i]) >= 0) jinShenHits.push(PILLAR_LABELS[i]); });
+    push("金神", jinShenHits, auspicious);
+    pushMonthDayPillar(SS_TIAN_SHE, "天赦日", auspicious);
+    pushMonthDayPillar(SS_TIAN_ZHUAN, "天转日", auspicious);
+    pushMonthDayPillar(SS_DI_ZHUAN, "地转日", auspicious);
+    Object.keys(SS_DAY_SETS_JI).forEach(function (name) {
+      if (SS_DAY_SETS_JI[name].indexOf(dayGanZhi) >= 0) auspicious.push({ name: name, pillars: ["日柱"] });
+    });
+    // 三奇贵人：年月日或月日时天干顺排
+    (function () {
+      var ymd = gans[0] + gans[1] + gans[2];
+      var mdh = gans[1] + gans[2] + gans[3];
+      for (var q = 0; q < SS_SAN_QI.length; q++) {
+        if (ymd === SS_SAN_QI[q]) { auspicious.push({ name: "三奇贵人", pillars: ["年柱", "月柱", "日柱"] }); return; }
+        if (mdh === SS_SAN_QI[q]) { auspicious.push({ name: "三奇贵人", pillars: ["月柱", "日柱", "时柱"] }); return; }
+      }
+    })();
+    // 拱禄：时柱→日柱干支配对
+    if (SS_GONG_LU[ganZhis[3]] === dayGanZhi) auspicious.push({ name: "拱禄", pillars: ["日柱"] });
+
+    // ---- 凶煞 ----
+    // 日干基准
+    push("羊刃", matchZhis(SS_YANG_REN[gans[2]], [0, 1, 2, 3]), inauspicious);
+    push("飞刃", matchZhis(SS_FEI_REN[gans[2]], [0, 1, 2, 3]), inauspicious);
+    push("流霞", matchZhis(SS_LIU_XIA[gans[2]], [0, 1, 2, 3]), inauspicious);
+    push("红艳煞", matchZhis(SS_HONG_YAN[gans[2]], [0, 1, 2, 3]), inauspicious);
+    // 年支+日支双查
+    pushDual(SS_JIE_SHA, "劫煞", inauspicious);
+    pushDual(SS_WANG_SHEN, "亡神", inauspicious);
+    pushDual(SS_TAO_HUA, "桃花", inauspicious);
+    pushDual(SS_TIAN_LUO_DI_WANG, "天罗地网", inauspicious);
+    // 年支单查
+    pushYear(SS_ZAI_SHA, "灾煞", inauspicious);
+    pushYear(SS_GU_CHEN, "孤辰", inauspicious);
+    pushYear(SS_GUA_SU, "寡宿", inauspicious);
+    pushYear(SS_GOU_JIAO, "勾绞煞", inauspicious);
+    pushYear(gender === "female" ? SS_YUAN_CHEN_F : SS_YUAN_CHEN_M, "元辰", inauspicious);
+    pushYear(SS_PI_MA, "披麻", inauspicious);
+    pushYear(SS_DIAO_KE, "吊客", inauspicious);
+    pushYear(SS_SANG_MEN, "丧门", inauspicious);
+    // 月支基准
+    pushMonthZhi(SS_XUE_REN, "血刃", inauspicious);
+    // 童子煞：月支查法与年纳音查法合并（目标为日支、时支）
+    (function () {
+      var seen = {};
+      var merged = [];
+      [SS_TONG_ZI[monthZhi], SS_TONG_ZI_NY[nyWx]].forEach(function (targets) {
+        if (!targets) return;
+        [2, 3].forEach(function (i) {
+          if (targets.indexOf(zhis[i]) >= 0 && !seen[i]) { seen[i] = true; merged.push(PILLAR_LABELS[i]); }
+        });
+      });
+      push("童子煞", merged, inauspicious);
+    })();
+    // 天罗（年纳音火→戌亥，查日支）/地网（年纳音水土→辰巳，查日支）
+    if (nyWx === "火") push("天罗", matchZhis("戌亥", [2]), inauspicious);
+    if (nyWx === "水" || nyWx === "土") push("地网", matchZhis("辰巳", [2]), inauspicious);
+    // 空亡：年柱旬空查月/日/时支，日柱旬空查年/月/时支（合并去重）
+    (function () {
+      var seen = {};
+      var merged = [];
+      [[px.year.xunKong, [1, 2, 3]], [px.day.xunKong, [0, 1, 3]]].forEach(function (pair) {
+        pair[1].forEach(function (i) {
+          if (pair[0].indexOf(zhis[i]) >= 0 && !seen[i]) { seen[i] = true; merged.push(PILLAR_LABELS[i]); }
+        });
+      });
+      push("空亡", merged, inauspicious);
+    })();
+    // 月支→日柱干支
+    SS_SI_FEI.forEach(function (table) { pushMonthDayPillar(table, "四废日", inauspicious); });
+    // 日柱干支集合
+    Object.keys(SS_DAY_SETS_XIONG).forEach(function (name) {
+      if (SS_DAY_SETS_XIONG[name].indexOf(dayGanZhi) >= 0) inauspicious.push({ name: name, pillars: ["日柱"] });
+    });
 
     return { auspicious: auspicious, inauspicious: inauspicious };
   }
@@ -174,7 +339,6 @@
       libLoading: "排盘组件加载中，请稍候重试",
       mdLibLoading: "解读组件未完全加载，请稍后重试",
       shenShaTitle: "命局神煞", auspicious: "吉神", inauspicious: "凶煞", shenShaEmpty: "无",
-      folkTag: "（民俗）",
     },
     en: {
       rows: ["Main Star", "Stem", "Branch", "Hidden", "Sub Stars", "Stage", "Self-Sit", "Void", "NaYin", "Natal Stars"],
@@ -187,7 +351,6 @@
       libLoading: "Calculator library still loading, please retry",
       mdLibLoading: "Reading components not fully loaded, please retry later",
       shenShaTitle: "Natal Stars (ShenSha)", auspicious: "Auspicious", inauspicious: "Inauspicious", shenShaEmpty: "None",
-      folkTag: " (folklore)",
     },
   }[LANG];
 
@@ -303,7 +466,7 @@
         year: apiPillar(pillars.year), month: apiPillar(pillars.month),
         day: apiPillar(pillars.day), hour: apiPillar(pillars.hour),
       },
-      display: { pillars: pillars, taiYuan: ec.getTaiYuan(), mingGong: ec.getMingGong(), shenGong: ec.getShenGong(), shenSha: computeShenSha(pillars) },
+      display: { pillars: pillars, taiYuan: ec.getTaiYuan(), mingGong: ec.getMingGong(), shenGong: ec.getShenGong(), shenSha: computeShenSha(pillars, input.gender) },
       dayMaster: pillars.day.gan + GAN_WX[pillars.day.gan],
       wuxingCount: wx,
       qiYun: qiYun,
@@ -356,9 +519,9 @@
       var ina = ss.inauspicious.filter(function (i) { return i.pillars.indexOf(label) >= 0; });
       if (!aus.length && !ina.length) return "<td></td>";
       var parts = aus.map(function (i) {
-        return '<span class="ss-ji">' + esc(i.name) + (i.folk ? esc(T.folkTag) : "") + "</span>";
+        return '<span class="ss-ji">' + esc(i.name) + "</span>";
       }).concat(ina.map(function (i) {
-        return '<span class="ss-xiong">' + esc(i.name) + (i.folk ? esc(T.folkTag) : "") + "</span>";
+        return '<span class="ss-xiong">' + esc(i.name) + "</span>";
       }));
       return '<td class="bazi-shensha-cell">' + parts.join("") + "</td>";
     }
