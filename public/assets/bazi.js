@@ -32,27 +32,33 @@
   var SS_TIAN_YI = { 甲: "丑未", 戊: "丑未", 庚: "丑未", 乙: "子申", 己: "子申", 丙: "亥酉", 丁: "亥酉", 壬: "卯巳", 癸: "卯巳", 辛: "寅午" };
   var SS_WEN_CHANG = { 甲: "巳", 乙: "午", 丙: "申", 戊: "申", 丁: "酉", 己: "酉", 庚: "亥", 辛: "子", 壬: "寅", 癸: "卯" };
   var SS_TAI_JI = { 甲: "子午", 乙: "子午", 丙: "卯酉", 丁: "卯酉", 戊: "辰戌丑未", 己: "辰戌丑未", 庚: "寅亥", 辛: "寅亥", 壬: "巳申", 癸: "巳申" };
-  var SS_FU_XING = { 甲: "寅", 乙: "丑亥", 丙: "子", 丁: "亥", 戊: "丑", 己: "酉", 庚: "午", 辛: "巳", 壬: "辰", 癸: "卯" };
+  var SS_FU_XING = { 甲: "寅", 乙: "丑", 丙: "子", 丁: "亥", 戊: "丑", 己: "酉", 庚: "午", 辛: "巳", 壬: "辰", 癸: "卯" };
   var SS_XUE_TANG = { 甲: "亥", 乙: "午", 丙: "寅", 戊: "寅", 丁: "酉", 己: "酉", 庚: "巳", 辛: "子", 壬: "申", 癸: "卯" };
   var SS_JIN_YU = { 甲: "辰", 乙: "巳", 丙: "未", 戊: "未", 丁: "申", 己: "申", 庚: "戌", 辛: "亥", 壬: "丑", 癸: "寅" };
 
-  /* 吉神——年支基准（值=目标地支串） */
+  /* 吉神——年支/日支双查基准（值=目标地支串） */
   var SS_HUA_GAI = { 寅: "戌", 午: "戌", 戌: "戌", 申: "辰", 子: "辰", 辰: "辰", 巳: "丑", 酉: "丑", 丑: "丑", 亥: "未", 卯: "未", 未: "未" };
   var SS_JIANG_XING = { 寅: "午", 午: "午", 戌: "午", 申: "子", 子: "子", 辰: "子", 巳: "酉", 酉: "酉", 丑: "酉", 亥: "卯", 卯: "卯", 未: "卯" };
 
-  /* 吉神——月支→天干（值=天干，与日干比较） */
-  var SS_TIAN_DE = { 寅: "丁", 卯: "申", 辰: "壬", 巳: "辛", 午: "亥", 未: "甲", 申: "癸", 酉: "寅", 戌: "丙", 亥: "乙", 子: "申", 丑: "庚" };
+  /* 吉神——月支→天干（值=天干，在四柱天干中查找） */
   var SS_YUE_DE = { 寅: "丙", 午: "丙", 戌: "丙", 申: "壬", 子: "壬", 辰: "壬", 巳: "庚", 酉: "庚", 丑: "庚", 亥: "甲", 卯: "甲", 未: "甲" };
+
+  /* 吉神——天德贵人：月支→值（天干或卦位地支）。
+     口诀"正丁二坤三壬四辛五乾六甲七癸八艮九丙十乙子巽丑庚"：
+     坤=申、乾=亥、艮=寅、巽=巳。值是天干时查四柱天干，是地支时查四柱地支。 */
+  var SS_TIAN_DE = { 寅: "丁", 卯: "申", 辰: "壬", 巳: "辛", 午: "亥", 未: "甲", 申: "癸", 酉: "寅", 戌: "丙", 亥: "乙", 子: "巳", 丑: "庚" };
+  var GANS = "甲乙丙丁戊己庚辛壬癸";
 
   /* 凶煞——日干基准（值=目标地支串） */
   var SS_YANG_REN = { 甲: "卯", 乙: "辰", 丙: "午", 戊: "午", 丁: "未", 己: "未", 庚: "酉", 辛: "戌", 壬: "子", 癸: "丑" };
-  var SS_LIU_XIA = { 甲: "酉", 乙: "戌", 丙: "未", 戊: "巳", 丁: "申", 己: "酉", 庚: "亥", 辛: "子", 壬: "寅", 癸: "午" };
+  var SS_LIU_XIA = { 甲: "酉", 乙: "戌", 丙: "未", 戊: "巳", 丁: "申", 己: "酉", 庚: "子", 辛: "亥", 壬: "寅", 癸: "午" };
 
-  /* 凶煞——年支基准（值=目标地支串） */
+  /* 凶煞——年支/日支双查基准（值=目标地支串） */
   var SS_JIE_SHA = { 寅: "亥", 午: "亥", 戌: "亥", 申: "巳", 子: "巳", 辰: "巳", 巳: "寅", 酉: "寅", 丑: "寅", 亥: "申", 卯: "申", 未: "申" };
   var SS_WANG_SHEN = { 寅: "巳", 午: "巳", 戌: "巳", 申: "亥", 子: "亥", 辰: "亥", 巳: "申", 酉: "申", 丑: "申", 亥: "寅", 卯: "寅", 未: "寅" };
   var SS_ZAI_SHA = { 寅: "子", 午: "子", 戌: "子", 申: "午", 子: "午", 辰: "午", 巳: "卯", 酉: "卯", 丑: "卯", 亥: "酉", 卯: "酉", 未: "酉" };
   var SS_TAO_HUA = { 寅: "卯", 午: "卯", 戌: "卯", 申: "酉", 子: "酉", 辰: "酉", 巳: "午", 酉: "午", 丑: "午", 亥: "子", 卯: "子", 未: "子" };
+  var SS_YI_MA = { 寅: "申", 午: "申", 戌: "申", 申: "寅", 子: "寅", 辰: "寅", 巳: "亥", 酉: "亥", 丑: "亥", 亥: "巳", 卯: "巳", 未: "巳" };
   var SS_GU_GUA = { 亥: "寅戌", 子: "寅戌", 丑: "寅戌", 寅: "巳丑", 卯: "巳丑", 辰: "巳丑", 巳: "申辰", 午: "申辰", 未: "申辰", 申: "亥未", 酉: "亥未", 戌: "亥未" };
 
   /* 魁罡：日柱干支属于此集合即命中 */
@@ -61,12 +67,18 @@
   /**
    * 计算命局神煞。px = { year, month, day, hour }，每项含 gan/zhi/ganZhi。
    * 返回 { auspicious: [{name, pillars}], inauspicious: [...] }
+   *
+   * 查法基准（与主流排盘软件对齐）：
+   *   - 日干类神煞（天乙/文昌/羊刃等）：以日干起查，在四柱地支中命中
+   *   - 年支类神煞（华盖/桃花/驿马/劫煞等）：年支+日支双查，任一命中即入列
+   *   - 月德贵人：月支→天干，在四柱天干中查找
+   *   - 天德贵人：月支→值（天干或卦位地支），干查干、支查支
    */
   function computeShenSha(px) {
     var dayGan = px.day.gan;
-    var yearZhi = px.year.zhi;
     var monthZhi = px.month.zhi;
     var dayGanZhi = px.day.ganZhi;
+    var gans = [px.year.gan, px.month.gan, px.day.gan, px.hour.gan];
     var zhis = [px.year.zhi, px.month.zhi, px.day.zhi, px.hour.zhi];
     var auspicious = [];
     var inauspicious = [];
@@ -80,10 +92,33 @@
       return hits;
     }
 
-    /** 日干/年支基准：目标地支串在四柱地支中命中即入列 */
+    /** 在四柱天干中查找目标天干，返回命中的柱位标签数组 */
+    function matchGans(targets) {
+      var hits = [];
+      for (var i = 0; i < 4; i++) {
+        if (targets.indexOf(gans[i]) >= 0) hits.push(PILLAR_LABELS[i]);
+      }
+      return hits;
+    }
+
+    /** 日干基准：目标地支串在四柱地支中命中即入列 */
     function pushZhi(name, targets, list) {
       var hits = matchZhis(targets);
       if (hits.length) list.push({ name: name, pillars: hits });
+    }
+
+    /** 年支+日支双查：分别用年支和日支查表，合并去重命中柱位 */
+    function pushDual(name, table, list) {
+      var seen = {};
+      var merged = [];
+      [px.year.zhi, px.day.zhi].forEach(function (src) {
+        var targets = table[src];
+        if (!targets) return;
+        matchZhis(targets).forEach(function (p) {
+          if (!seen[p]) { seen[p] = true; merged.push(p); }
+        });
+      });
+      if (merged.length) list.push({ name: name, pillars: merged });
     }
 
     // 吉神——日干基准
@@ -93,22 +128,31 @@
     pushZhi("福星贵人", SS_FU_XING[dayGan], auspicious);
     pushZhi("学堂", SS_XUE_TANG[dayGan], auspicious);
     pushZhi("金舆", SS_JIN_YU[dayGan], auspicious);
-    // 吉神——年支基准
-    pushZhi("华盖", SS_HUA_GAI[yearZhi], auspicious);
-    pushZhi("将星", SS_JIANG_XING[yearZhi], auspicious);
-    // 吉神——月支→天干，命中日干
-    if (SS_TIAN_DE[monthZhi] === dayGan) auspicious.push({ name: "天德贵人", pillars: ["日柱"] });
-    if (SS_YUE_DE[monthZhi] === dayGan) auspicious.push({ name: "月德贵人", pillars: ["日柱"] });
+    // 吉神——年支+日支双查
+    pushDual("华盖", SS_HUA_GAI, auspicious);
+    pushDual("将星", SS_JIANG_XING, auspicious);
+    // 吉神——月德贵人（月支→天干，查四柱天干）
+    (function () {
+      var hits = matchGans(SS_YUE_DE[monthZhi]);
+      if (hits.length) auspicious.push({ name: "月德贵人", pillars: hits });
+    })();
+    // 吉神——天德贵人（月支→值，干查四柱干、支查四柱支）
+    (function () {
+      var val = SS_TIAN_DE[monthZhi];
+      var hits = GANS.indexOf(val) >= 0 ? matchGans(val) : matchZhis(val);
+      if (hits.length) auspicious.push({ name: "天德贵人", pillars: hits });
+    })();
 
     // 凶煞——日干基准
     pushZhi("羊刃", SS_YANG_REN[dayGan], inauspicious);
     pushZhi("流霞", SS_LIU_XIA[dayGan], inauspicious);
-    // 凶煞——年支基准
-    pushZhi("劫煞", SS_JIE_SHA[yearZhi], inauspicious);
-    pushZhi("亡神", SS_WANG_SHEN[yearZhi], inauspicious);
-    pushZhi("灾煞", SS_ZAI_SHA[yearZhi], inauspicious);
-    pushZhi("桃花", SS_TAO_HUA[yearZhi], inauspicious);
-    pushZhi("孤辰寡宿", SS_GU_GUA[yearZhi], inauspicious);
+    // 凶煞——年支+日支双查
+    pushDual("劫煞", SS_JIE_SHA, inauspicious);
+    pushDual("亡神", SS_WANG_SHEN, inauspicious);
+    pushDual("灾煞", SS_ZAI_SHA, inauspicious);
+    pushDual("桃花", SS_TAO_HUA, inauspicious);
+    pushDual("驿马", SS_YI_MA, inauspicious);
+    pushDual("孤辰寡宿", SS_GU_GUA, inauspicious);
     // 凶煞——魁罡（日柱干支集合）
     if (SS_KUI_GANG.indexOf(dayGanZhi) >= 0) inauspicious.push({ name: "魁罡", pillars: ["日柱"] });
     // 童子煞（民俗）：春秋月(寅卯辰申酉戌)日干甲戊庚；冬夏月(亥子丑巳午未)日干乙己辛
