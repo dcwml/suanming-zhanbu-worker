@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260806Zh from "../content/daily/2026-08-06.zh.html";
+import daily20260806En from "../content/daily/2026-08-06.en.html";
 import daily20260805Zh from "../content/daily/2026-08-05.zh.html";
 import daily20260805En from "../content/daily/2026-08-05.en.html";
 import daily20260804Zh from "../content/daily/2026-08-04.zh.html";
@@ -26,6 +28,14 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-08-06",
+    meta: {
+      zh: { title: "2026年8月6日宜忌·鼠", description: "2026年8月6日黄历宜忌：宜沐浴理发、入殓移柩破土安葬，忌嫁娶入宅作灶上梁动土，冲马煞南；生肖鼠今日运势与桑柘木纳音科普。" },
+      en: { title: "Daily Almanac — August 6, 2026 (Rat)", description: "August 6, 2026 Chinese almanac: favorable for bathing, haircutting, encoffining and burial; avoid marriage, moving in, installing stoves, raising beams and ground-breaking; Rat zodiac fortune and the Mulberry Wood Nayin." },
+    },
+    content: { zh: daily20260806Zh, en: daily20260806En },
+  },
   {
     date: "2026-08-05",
     meta: {
