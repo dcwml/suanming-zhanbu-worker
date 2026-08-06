@@ -1,11 +1,13 @@
 import { Hono } from "hono";
 import { LANGS, pagePath, type Lang } from "../config/site";
-import { renderDailyArchive, renderDailyPost, renderPage } from "../layout/render";
+import { renderDailyArchive, renderDailyPost, renderPage, renderPageWithStats } from "../layout/render";
 import { dailyArchive, findDailyPost } from "../pages/daily";
 import { findPage } from "../pages/registry";
 import { buildRobotsTxt, buildSitemapXml } from "../seo/sitemap";
+import { getRealIp, recordPageView, getStats } from "../stats";
+import type { StatsEnv } from "../stats";
 
-export const pages = new Hono();
+export const pages = new Hono<{ Bindings: StatsEnv }>();
 
 function isLang(v: string): v is Lang {
   return (LANGS as readonly string[]).includes(v);
@@ -70,19 +72,36 @@ pages.get("/:lang/:slug", (c) => {
   return c.redirect(pagePath(lang, slug), 301);
 });
 
-// 首页
-pages.get("/:lang/", (c) => {
+// 首页（记录 PV + 注入统计数据）
+pages.get("/:lang/", async (c) => {
   const lang = c.req.param("lang");
   if (!isLang(lang)) return c.notFound();
-  return c.html(renderPage(findPage("")!, lang));
+
+  // 记录首页访问（异步，不阻塞响应）
+  const db = c.env?.STATS_DB;
+  if (db) {
+    recordPageView(db, c.req.raw, "homepage").catch(() => {});
+  }
+
+  // 查询统计数据
+  const stats = db ? await getStats(db) : null;
+
+  return c.html(renderPageWithStats(findPage("")!, lang, stats));
 });
 
-// 内容页
-pages.get("/:lang/:slug/", (c) => {
+// 内容页（记录工具页面访问）
+pages.get("/:lang/:slug/", async (c) => {
   const lang = c.req.param("lang");
   const slug = c.req.param("slug");
   if (!isLang(lang)) return c.notFound();
   const page = findPage(slug);
   if (!page) return c.notFound();
+
+  // 记录工具页面访问
+  const db = c.env?.STATS_DB;
+  if (db && (slug === "bazi" || slug === "liuyao")) {
+    recordPageView(db, c.req.raw, slug as "bazi" | "liuyao").catch(() => {});
+  }
+
   return c.html(renderPage(page, lang));
 });

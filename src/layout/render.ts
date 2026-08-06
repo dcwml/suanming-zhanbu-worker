@@ -8,6 +8,7 @@ import { renderFooter } from "./footer";
 import { renderNav } from "./nav";
 import bodyStartSnippet from "./snippets/body-start.html";
 import headSnippet from "./snippets/head.html";
+import type { StatsData } from "../stats";
 
 /** 全站静态片段（验证 meta/GTM 等第三方代码），仅信任仓库内受控内容，不经转义直接注入 */
 const HEAD_SNIPPET = headSnippet.trim();
@@ -41,6 +42,67 @@ ${main}
 
 export function renderPage(page: PageEntry, lang: Lang): string {
   return layout(lang, buildHead(page, lang), renderNav(lang, page.slug), page.content[lang]);
+}
+
+/** 首页专用：渲染页面并注入统计数据 */
+export function renderPageWithStats(page: PageEntry, lang: Lang, stats: StatsData | null): string {
+  const main = page.content[lang];
+  const statsHtml = stats ? buildStatsHtml(stats, lang) : "";
+  return layout(lang, buildHead(page, lang), renderNav(lang, page.slug), main + statsHtml);
+}
+
+/** 构建统计数据的 HTML 片段（注入到首页底部） */
+function buildStatsHtml(stats: StatsData, lang: Lang): string {
+  const isZh = lang === "zh";
+
+  // 格式化数字（加千分位）
+  const fmt = (n: number) => n.toLocaleString("en-US");
+
+  const labels = isZh
+    ? { title: "访问统计", total: "总计", today: "今日", apiCalls: "API 调用", pv: "访问量", bazi: "八字使用", liuyao: "六爻使用" }
+    : { title: "Statistics", total: "Total", today: "Today", apiCalls: "API Calls", pv: "Visits", bazi: "BaZi Usage", liuyao: "I Ching Usage" };
+
+  const apiRows = stats.api_calls
+    .map(
+      (api) => `        <tr>
+          <td>${api.api_path}</td>
+          <td>${fmt(api.total_calls)}</td>
+          <td>${fmt(api.today_calls)}</td>
+        </tr>`,
+    )
+    .join("\n");
+
+  return `
+<section class="site-stats" aria-label="${labels.title}">
+  <h2>${labels.title}</h2>
+  <table class="stats-table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>${labels.total}</th>
+        <th>${labels.today}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>${labels.pv}</td>
+        <td>${fmt(stats.total.homepage_pv)}</td>
+        <td>${fmt(stats.today.homepage_pv)}</td>
+      </tr>
+      <tr>
+        <td>${labels.bazi}</td>
+        <td>${fmt(stats.total.bazi_usage)}</td>
+        <td>${fmt(stats.today.bazi_usage)}</td>
+      </tr>
+      <tr>
+        <td>${labels.liuyao}</td>
+        <td>${fmt(stats.total.liuyao_usage)}</td>
+        <td>${fmt(stats.today.liuyao_usage)}</td>
+      </tr>
+    </tbody>
+  </table>
+${apiRows ? `  <h3>${labels.apiCalls}</h3>\n  <table class="stats-table">\n    <thead>\n      <tr>\n        <th>API</th>\n        <th>${labels.total}</th>\n        <th>${labels.today}</th>\n      </tr>\n    </thead>\n    <tbody>\n${apiRows}\n    </tbody>\n  </table>` : ""}
+</section>`;
 }
 
 export function renderNotFound(lang: Lang): string {

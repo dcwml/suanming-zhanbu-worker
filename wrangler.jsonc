@@ -9,6 +9,13 @@
   "rules": [
     { "type": "Text", "globs": ["**/*.html"] }
   ],
+  "d1_databases": [
+    {
+      "binding": "STATS_DB",
+      "database_name": "suanming-zhanbu-stats",
+      "database_id": "f4d65b21-5ee4-4e71-96f1-9a8f8fbf2696"
+    }
+  ],
   "vars": {
     "LLM_BASE_URL": "https://apihub.agnes-ai.cn",
     "LLM_MODEL": "agnes-2.0-flash"
