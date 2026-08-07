@@ -160,7 +160,7 @@ export async function getStats(db: D1Database): Promise<StatsData> {
     }
   };
 
-  const safeAll = async <T>(stmt: D1.PreparedStatement): Promise<{ results: T[] }> => {
+  const safeAll = async <T>(stmt: D1PreparedStatement): Promise<{ results: T[] }> => {
     try {
       return await stmt.all<T>();
     } catch (e) {

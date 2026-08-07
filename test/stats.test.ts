@@ -13,10 +13,13 @@ import { getRealIp, recordPageView, recordApiCall, getStats } from "../src/stats
 
 // ── 简化的 Mock 类型 ──────────────────────────────────────
 
+/** 模拟 daily_stats 表的一行（date 为字符串，计数列可选） */
+type MockStatsRow = { date: string; homepage_pv?: number; bazi_usage?: number; liuyao_usage?: number };
+
 interface MockD1Database {
   _data: {
     uv: Array<{ date: string; ip_hash: string; page_type: string }>;
-    stats: Array<Record<string, number>>;
+    stats: MockStatsRow[];
     api: Array<{ date: string; api_path: string; call_count: number }>;
   };
   prepare(sql: string): {
@@ -64,12 +67,12 @@ function createMockDb(): MockD1Database {
           if (sql.includes("daily_stats") && !sql.includes("SUM")) {
             const date = boundParams[0] as string;
             const colMatch = sql.match(/INSERT INTO daily_stats \(date, (\w+)\)/);
-            const column = colMatch?.[1] ?? "homepage_pv";
+            const column = (colMatch?.[1] ?? "homepage_pv") as "homepage_pv" | "bazi_usage" | "liuyao_usage";
             const existing = data.stats.find((s) => s.date === date);
             if (existing) {
               existing[column] = (existing[column] ?? 0) + 1;
             } else {
-              data.stats.push({ date, [column]: 1 });
+              data.stats.push({ date, [column]: 1 } as MockStatsRow);
             }
             return { meta: { changes: 1 } };
           }
@@ -323,16 +326,20 @@ describe("stats module", () => {
     });
 
     it("正确聚合多天数据", async () => {
+      // 与 src/stats.ts 的 todayStr 保持一致：动态计算今天/昨天（UTC），避免测试依赖写死日期
+      const today = new Date().toISOString().slice(0, 10);
+      const yesterday = new Date(Date.now() - 86_400_000).toISOString().slice(0, 10);
+
       // 手动插入测试数据
       db._data.stats.push(
-        { date: "2026-08-04", homepage_pv: 100, bazi_usage: 20, liuyao_usage: 15 },
-        { date: "2026-08-05", homepage_pv: 50, bazi_usage: 10, liuyao_usage: 5 },
+        { date: yesterday, homepage_pv: 100, bazi_usage: 20, liuyao_usage: 15 },
+        { date: today, homepage_pv: 50, bazi_usage: 10, liuyao_usage: 5 },
       );
 
       db._data.api.push(
-        { date: "2026-08-04", api_path: "/api/bazi/interpret", call_count: 30 },
-        { date: "2026-08-05", api_path: "/api/bazi/interpret", call_count: 10 },
-        { date: "2026-08-05", api_path: "/api/liuyao/interpret", call_count: 8 },
+        { date: yesterday, api_path: "/api/bazi/interpret", call_count: 30 },
+        { date: today, api_path: "/api/bazi/interpret", call_count: 10 },
+        { date: today, api_path: "/api/liuyao/interpret", call_count: 8 },
       );
 
       const stats = await getStats(db as never);
