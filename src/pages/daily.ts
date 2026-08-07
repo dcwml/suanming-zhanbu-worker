@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260807Zh from "../content/daily/2026-08-07.zh.html";
+import daily20260807En from "../content/daily/2026-08-07.en.html";
 import daily20260806Zh from "../content/daily/2026-08-06.zh.html";
 import daily20260806En from "../content/daily/2026-08-06.en.html";
 import daily20260805Zh from "../content/daily/2026-08-05.zh.html";
@@ -28,6 +30,14 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-08-07",
+    meta: {
+      zh: { title: "2026年8月7日宜忌·牛", description: "2026年8月7日黄历宜忌：今日恰逢立秋，宜祭祀、入殓、破土、安葬、移柩等收敛之事，馀事勿取，冲羊煞东；生肖牛今日运势与立秋节气和黄历的关系科普。" },
+      en: { title: "Daily Almanac — August 7, 2026 (Ox)", description: "August 7, 2026 Chinese almanac: today is the Start of Autumn solar term — favorable for sacrifice, encoffining and burial, while all other matters are best avoided; clash Sheep, Sha East; Ox zodiac fortune and how solar terms shape the almanac." },
+    },
+    content: { zh: daily20260807Zh, en: daily20260807En },
+  },
   {
     date: "2026-08-06",
     meta: {
