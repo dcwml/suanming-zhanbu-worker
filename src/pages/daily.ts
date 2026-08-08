@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260808Zh from "../content/daily/2026-08-08.zh.html";
+import daily20260808En from "../content/daily/2026-08-08.en.html";
 import daily20260807Zh from "../content/daily/2026-08-07.zh.html";
 import daily20260807En from "../content/daily/2026-08-07.en.html";
 import daily20260806Zh from "../content/daily/2026-08-06.zh.html";
@@ -30,6 +32,14 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-08-08",
+    meta: {
+      zh: { title: "2026年8月8日宜忌·虎", description: "2026年8月8日黄历宜忌：月破日，宜破屋坏垣、馀事勿取，诸事不宜，冲猴煞北；生肖虎今日运势与月破日的由来科普。" },
+      en: { title: "Daily Almanac — August 8, 2026 (Tiger)", description: "August 8, 2026 Chinese almanac: a Month-Broken day — favorable only for demolition and tearing down walls, all other matters best avoided; clash Monkey, Sha North; Tiger zodiac fortune and what a Month-Broken day means." },
+    },
+    content: { zh: daily20260808Zh, en: daily20260808En },
+  },
   {
     date: "2026-08-07",
     meta: {
