@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260809Zh from "../content/daily/2026-08-09.zh.html";
+import daily20260809En from "../content/daily/2026-08-09.en.html";
 import daily20260808Zh from "../content/daily/2026-08-08.zh.html";
 import daily20260808En from "../content/daily/2026-08-08.en.html";
 import daily20260807Zh from "../content/daily/2026-08-07.zh.html";
@@ -32,6 +34,14 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-08-09",
+    meta: {
+      zh: { title: "2026年8月9日宜忌·兔", description: "2026年8月9日黄历宜忌：宜祭祀、入殓、移柩、启钻、安葬、除服成服等收敛之事，馀事勿取，冲鸡煞东；生肖兔今日运势与吉神五合的由来科普。" },
+      en: { title: "Daily Almanac — August 9, 2026 (Rabbit)", description: "August 9, 2026 Chinese almanac: favorable for sacrifice, encoffining and burial rites while all other matters are best avoided; clash Rooster, Sha East; Rabbit zodiac fortune and the story of the Wǔhé Five-Union auspicious spirit." },
+    },
+    content: { zh: daily20260809Zh, en: daily20260809En },
+  },
   {
     date: "2026-08-08",
     meta: {
