@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260810Zh from "../content/daily/2026-08-10.zh.html";
+import daily20260810En from "../content/daily/2026-08-10.en.html";
 import daily20260809Zh from "../content/daily/2026-08-09.zh.html";
 import daily20260809En from "../content/daily/2026-08-09.en.html";
 import daily20260808Zh from "../content/daily/2026-08-08.zh.html";
@@ -34,6 +36,14 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-08-10",
+    meta: {
+      zh: { title: "2026年8月10日宜忌·龙", description: "2026年8月10日黄历宜忌：宜嫁娶、入宅、移徙、开市交易立券、动土祈福，忌栽种、作灶、针灸、出行，冲狗煞南；生肖龙今日运势与黄道吉神金匮的科普。" },
+      en: { title: "Daily Almanac — August 10, 2026 (Dragon)", description: "August 10, 2026 Chinese almanac: favorable for weddings, moving into a new home, opening business and signing contracts; avoid planting, installing stoves, acupuncture and travel; clash Dog, Sha South; Dragon zodiac fortune and the Jīnkuì Gold Cabinet auspicious spirit." },
+    },
+    content: { zh: daily20260810Zh, en: daily20260810En },
+  },
   {
     date: "2026-08-09",
     meta: {
