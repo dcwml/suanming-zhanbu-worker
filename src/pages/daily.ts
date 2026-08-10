@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260811Zh from "../content/daily/2026-08-11.zh.html";
+import daily20260811En from "../content/daily/2026-08-11.en.html";
 import daily20260810Zh from "../content/daily/2026-08-10.zh.html";
 import daily20260810En from "../content/daily/2026-08-10.en.html";
 import daily20260809Zh from "../content/daily/2026-08-09.zh.html";
@@ -36,6 +38,14 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-08-11",
+    meta: {
+      zh: { title: "2026年8月11日宜忌·蛇", description: "2026年8月11日黄历宜忌：宜祭祀、开光、解除、交易立券、纳财，忌动土破土、嫁娶、入宅移徙、出行，冲猪煞东；生肖蛇今日运势与天德月德合德神科普。" },
+      en: { title: "Daily Almanac — August 11, 2026 (Snake)", description: "August 11, 2026 Chinese almanac: favorable for sacrifice, consecration, removal, trading, signing contracts and collecting wealth; avoid breaking ground, marriage, moving house and travel; clash Pig, Sha East; Snake zodiac fortune and the Tiāndé & Yuèdé Hé virtue spirits." },
+    },
+    content: { zh: daily20260811Zh, en: daily20260811En },
+  },
   {
     date: "2026-08-10",
     meta: {
