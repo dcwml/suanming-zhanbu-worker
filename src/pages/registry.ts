@@ -5,6 +5,8 @@ import baziZh from "../content/bazi.zh.html";
 import baziEn from "../content/bazi.en.html";
 import liuyaoZh from "../content/liuyao.zh.html";
 import liuyaoEn from "../content/liuyao.en.html";
+import zejiZh from "../content/zeji.zh.html";
+import zejiEn from "../content/zeji.en.html";
 import notfoundZh from "../content/notfound.zh.html";
 import notfoundEn from "../content/notfound.en.html";
 
@@ -53,6 +55,53 @@ export const PAGES: readonly PageEntry[] = [
       en: { title: "I Ching Casting", description: "Free online I Ching coin-toss hexagram casting with AI-powered readings." },
     },
     content: { zh: liuyaoZh, en: liuyaoEn },
+  },
+  {
+    slug: "zeji",
+    inNav: true,
+    meta: {
+      zh: { title: "择吉日", description: "在线择吉日：按黄历宜忌、黄黑道与避冲规则，为嫁娶、入宅、开市等事项挑选合适日子。" },
+      en: { title: "Auspicious Date Finder", description: "Pick an auspicious date for weddings, moving, business opening and more, based on almanac yi/ji, the Yellow Road and clash avoidance." },
+    },
+    content: { zh: zejiZh, en: zejiEn },
+    faq: {
+      zh: [
+        {
+          question: "择吉日为什么要避冲？",
+          answer: "冲指地支六冲（子午、丑未、寅申、卯酉、辰戌、巳亥）。日支冲本人年支的日子，传统上认为对当事人不利，办事宜避开。",
+        },
+        {
+          question: "杨公忌日是什么？",
+          answer: "相传为杨筠松所定的十三个不宜办事的日子，按农历固定月日循环，如正月十三、二月十一。本工具将其与月破日一并排除。",
+        },
+        {
+          question: "黄道吉日是怎么定的？",
+          answer: "以十二天神值日分黄道（吉）与黑道（凶），再参考建除十二神与二十八宿。排序靠前的日子在三项上整体更吉。",
+        },
+        {
+          question: "这个工具的结果权威吗？",
+          answer: "传统择吉流派众多、规则互有矛盾，本工具采用的是一套公开透明的规则集，结果仅供参考，重要事务请结合自身情况判断。",
+        },
+      ],
+      en: [
+        {
+          question: "Why avoid clashes when picking dates?",
+          answer: "A clash means one of the six earthly-branch oppositions (zi-wu, chou-wei, yin-shen, mao-you, chen-xu, si-hai). Days whose branch clashes with your own year branch are traditionally considered unfavorable.",
+        },
+        {
+          question: "What are Yang Gong taboo days?",
+          answer: "Thirteen fixed lunar dates, said to be set by Yang Junsong, regarded as unsuitable for important affairs — e.g. the 13th of the first lunar month. This tool excludes them together with Month-Broken days.",
+        },
+        {
+          question: "How are Yellow Road lucky days determined?",
+          answer: "Twelve celestial officers take turns presiding over days, split into the Yellow Road (auspicious) and Black Road (inauspicious), refined by the Twelve Day Officers and the 28 lunar mansions. Higher-ranked days score better across all three.",
+        },
+        {
+          question: "Are this tool's results authoritative?",
+          answer: "Traditional date-selection schools disagree with each other. This tool applies one transparent rule set; results are for reference only — use your own judgement for important matters.",
+        },
+      ],
+    },
   },
 ];
 

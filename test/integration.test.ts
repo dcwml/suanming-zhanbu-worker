@@ -221,3 +221,22 @@ describe("liuyao page", () => {
     expect(html).toContain('data-lang="en"');
   });
 });
+
+describe("zeji page", () => {
+  it("/zh/zeji/ returns zeji page with FAQPage JSON-LD", async () => {
+    const res = await SELF.fetch("http://localhost/zh/zeji/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain('"FAQPage"');
+    expect(html).toContain('id="zeji-matter"');
+  });
+
+  it("serves /en/zeji/ in English with tool skeleton", async () => {
+    const res = await SELF.fetch("http://localhost/en/zeji/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain('id="zeji-matter"');
+    expect(html).toContain('id="zeji-results"');
+    expect(html).toContain("/assets/zeji.js");
+  });
+});

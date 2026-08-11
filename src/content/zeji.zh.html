@@ -1,0 +1,80 @@
+<h1>择吉日</h1>
+<p>选一件要办的事，择吉工具会从未来日子的黄历宜忌中，为你筛出讲究的好日子。</p>
+
+<section class="zeji-tool">
+  <div class="zeji-form">
+    <label for="zeji-matter">要办的事</label>
+    <select id="zeji-matter"></select>
+    <label for="zeji-range">日期范围</label>
+    <select id="zeji-range">
+      <option value="30">未来 30 天</option>
+      <option value="60">未来 60 天</option>
+      <option value="90" selected>未来 90 天</option>
+      <option value="180">未来 180 天</option>
+    </select>
+    <fieldset>
+      <legend>相关人（选填，用于避冲）</legend>
+      <label for="zeji-zodiac-1">第 1 人 · 生肖</label>
+      <select id="zeji-zodiac-1"></select>
+      <details id="zeji-bazi-1">
+        <summary>进阶：输入八字</summary>
+        <select id="zeji-mode-1"><option value="pick">直接选四柱</option><option value="birth">输入生日转换</option></select>
+        <div class="zeji-pillar-row">
+          <select data-pillar-slot="p1-year"></select><select data-pillar-slot="p1-month"></select><select data-pillar-slot="p1-day"></select><select data-pillar-slot="p1-hour"></select>
+        </div>
+        <div class="zeji-birth-row" hidden>
+          <label><input type="radio" name="p1-calendar" value="solar" data-birth-field="p1-calendar" checked>公历</label>
+          <label><input type="radio" name="p1-calendar" value="lunar" data-birth-field="p1-calendar">农历</label>
+          <label hidden><input type="checkbox" data-birth-field="p1-leap">闰月</label>
+          <input type="number" data-birth-field="p1-year" min="1900" max="2100" placeholder="年">
+          <input type="number" data-birth-field="p1-month" min="1" max="12" placeholder="月">
+          <input type="number" data-birth-field="p1-day" min="1" max="31" placeholder="日">
+          <select data-birth-field="p1-hour"></select>
+        </div>
+      </details>
+      <div id="zeji-person2-wrap" hidden>
+        <label for="zeji-zodiac-2">第 2 人 · 生肖</label>
+        <select id="zeji-zodiac-2"></select>
+        <details id="zeji-bazi-2">
+          <summary>进阶：输入八字</summary>
+          <select id="zeji-mode-2"><option value="pick">直接选四柱</option><option value="birth">输入生日转换</option></select>
+          <div class="zeji-pillar-row">
+            <select data-pillar-slot="p2-year"></select><select data-pillar-slot="p2-month"></select><select data-pillar-slot="p2-day"></select><select data-pillar-slot="p2-hour"></select>
+          </div>
+          <div class="zeji-birth-row" hidden>
+            <label><input type="radio" name="p2-calendar" value="solar" data-birth-field="p2-calendar" checked>公历</label>
+            <label><input type="radio" name="p2-calendar" value="lunar" data-birth-field="p2-calendar">农历</label>
+            <label hidden><input type="checkbox" data-birth-field="p2-leap">闰月</label>
+            <input type="number" data-birth-field="p2-year" min="1900" max="2100" placeholder="年">
+            <input type="number" data-birth-field="p2-month" min="1" max="12" placeholder="月">
+            <input type="number" data-birth-field="p2-day" min="1" max="31" placeholder="日">
+            <select data-birth-field="p2-hour"></select>
+          </div>
+        </details>
+      </div>
+      <button type="button" id="zeji-add-person">再加一人</button>
+      <label><input type="checkbox" id="zeji-strict">严格模式：同时避开六害、三刑日（默认只避六冲）</label>
+    </fieldset>
+    <button type="button" id="zeji-run">择吉日</button>
+    <p id="zeji-lib-error" class="zeji-error" hidden>历书没能送达，请刷新页面或检查网络。</p>
+  </div>
+  <p id="zeji-empty" hidden>当前条件下暂无合适日子，可尝试放宽日期范围或关闭严格模式。</p>
+  <div id="zeji-results"></div>
+</section>
+
+<section class="zeji-faq">
+  <h2>常见问题</h2>
+  <h3>择吉日为什么要避冲？</h3>
+  <p>冲指地支六冲（子午、丑未、寅申、卯酉、辰戌、巳亥）。日支冲本人年支的日子，传统上认为对当事人不利，办事宜避开。</p>
+  <h3>杨公忌日是什么？</h3>
+  <p>相传为杨筠松所定的十三个不宜办事的日子，按农历固定月日循环，如正月十三、二月十一。本工具将其与月破日一并排除。</p>
+  <h3>黄道吉日是怎么定的？</h3>
+  <p>以十二天神值日分黄道（吉）与黑道（凶），再参考建除十二神与二十八宿。排序靠前的日子在三项上整体更吉。</p>
+  <h3>这个工具的结果权威吗？</h3>
+  <p>传统择吉流派众多、规则互有矛盾，本工具采用的是一套公开透明的规则集，结果仅供参考，重要事务请结合自身情况判断。</p>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lunar-javascript/1.7.7/lunar.min.js" defer onerror="var s=document.createElement('script');s.src='https://cdn.staticfile.org/lunar-javascript/1.7.7/lunar.min.js';document.head.appendChild(s)"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js" defer></script>
+<script src="/assets/zeji.js" defer></script>

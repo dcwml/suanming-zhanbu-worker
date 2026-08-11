@@ -39,4 +39,12 @@ describe("registry", () => {
     expect(NOT_FOUND_CONTENT.zh.trim().length).toBeGreaterThan(0);
     expect(NOT_FOUND_CONTENT.en.trim().length).toBeGreaterThan(0);
   });
+
+  it("zeji page exists with bilingual faq of equal length", () => {
+    const zeji = findPage("zeji");
+    expect(zeji).toBeDefined();
+    expect(zeji!.inNav).toBe(true);
+    expect(zeji!.faq!.zh.length).toBeGreaterThan(0);
+    expect(zeji!.faq!.zh.length).toBe(zeji!.faq!.en.length);
+  });
 });

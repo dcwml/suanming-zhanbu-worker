@@ -1,0 +1,80 @@
+<h1>Auspicious Date Finder</h1>
+<p>Pick the matter you're planning, and this tool scans upcoming days' almanac yi/ji to surface the best dates.</p>
+
+<section class="zeji-tool">
+  <div class="zeji-form">
+    <label for="zeji-matter">The matter</label>
+    <select id="zeji-matter"></select>
+    <label for="zeji-range">Date range</label>
+    <select id="zeji-range">
+      <option value="30">Future 30 days</option>
+      <option value="60">Future 60 days</option>
+      <option value="90" selected>Future 90 days</option>
+      <option value="180">Future 180 days</option>
+    </select>
+    <fieldset>
+      <legend>Related people (optional, for clash avoidance)</legend>
+      <label for="zeji-zodiac-1">Person 1 · Zodiac</label>
+      <select id="zeji-zodiac-1"></select>
+      <details id="zeji-bazi-1">
+        <summary>Advanced: enter BaZi</summary>
+        <select id="zeji-mode-1"><option value="pick">Pick pillars directly</option><option value="birth">Convert from birth date</option></select>
+        <div class="zeji-pillar-row">
+          <select data-pillar-slot="p1-year"></select><select data-pillar-slot="p1-month"></select><select data-pillar-slot="p1-day"></select><select data-pillar-slot="p1-hour"></select>
+        </div>
+        <div class="zeji-birth-row" hidden>
+          <label><input type="radio" name="p1-calendar" value="solar" data-birth-field="p1-calendar" checked>Solar</label>
+          <label><input type="radio" name="p1-calendar" value="lunar" data-birth-field="p1-calendar">Lunar</label>
+          <label hidden><input type="checkbox" data-birth-field="p1-leap">Leap month</label>
+          <input type="number" data-birth-field="p1-year" min="1900" max="2100" placeholder="Year">
+          <input type="number" data-birth-field="p1-month" min="1" max="12" placeholder="Month">
+          <input type="number" data-birth-field="p1-day" min="1" max="31" placeholder="Day">
+          <select data-birth-field="p1-hour"></select>
+        </div>
+      </details>
+      <div id="zeji-person2-wrap" hidden>
+        <label for="zeji-zodiac-2">Person 2 · Zodiac</label>
+        <select id="zeji-zodiac-2"></select>
+        <details id="zeji-bazi-2">
+          <summary>Advanced: enter BaZi</summary>
+          <select id="zeji-mode-2"><option value="pick">Pick pillars directly</option><option value="birth">Convert from birth date</option></select>
+          <div class="zeji-pillar-row">
+            <select data-pillar-slot="p2-year"></select><select data-pillar-slot="p2-month"></select><select data-pillar-slot="p2-day"></select><select data-pillar-slot="p2-hour"></select>
+          </div>
+          <div class="zeji-birth-row" hidden>
+            <label><input type="radio" name="p2-calendar" value="solar" data-birth-field="p2-calendar" checked>Solar</label>
+            <label><input type="radio" name="p2-calendar" value="lunar" data-birth-field="p2-calendar">Lunar</label>
+            <label hidden><input type="checkbox" data-birth-field="p2-leap">Leap month</label>
+            <input type="number" data-birth-field="p2-year" min="1900" max="2100" placeholder="Year">
+            <input type="number" data-birth-field="p2-month" min="1" max="12" placeholder="Month">
+            <input type="number" data-birth-field="p2-day" min="1" max="31" placeholder="Day">
+            <select data-birth-field="p2-hour"></select>
+          </div>
+        </details>
+      </div>
+      <button type="button" id="zeji-add-person">Add another person</button>
+      <label><input type="checkbox" id="zeji-strict">Strict mode: also avoid six-harm and three-punishment days (by default only six clashes are avoided)</label>
+    </fieldset>
+    <button type="button" id="zeji-run">Find dates</button>
+    <p id="zeji-lib-error" class="zeji-error" hidden>The almanac failed to load — please refresh or check your connection.</p>
+  </div>
+  <p id="zeji-empty" hidden>No suitable dates under current conditions — try widening the range or turning off strict mode.</p>
+  <div id="zeji-results"></div>
+</section>
+
+<section class="zeji-faq">
+  <h2>FAQ</h2>
+  <h3>Why avoid clashes when picking dates?</h3>
+  <p>A clash means one of the six earthly-branch oppositions (zi-wu, chou-wei, yin-shen, mao-you, chen-xu, si-hai). Days whose branch clashes with your own year branch are traditionally considered unfavorable.</p>
+  <h3>What are Yang Gong taboo days?</h3>
+  <p>Thirteen fixed lunar dates, said to be set by Yang Junsong, regarded as unsuitable for important affairs — e.g. the 13th of the first lunar month. This tool excludes them together with Month-Broken days.</p>
+  <h3>How are Yellow Road lucky days determined?</h3>
+  <p>Twelve celestial officers take turns presiding over days, split into the Yellow Road (auspicious) and Black Road (inauspicious), refined by the Twelve Day Officers and the 28 lunar mansions. Higher-ranked days score better across all three.</p>
+  <h3>Are this tool's results authoritative?</h3>
+  <p>Traditional date-selection schools disagree with each other. This tool applies one transparent rule set; results are for reference only — use your own judgement for important matters.</p>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lunar-javascript/1.7.7/lunar.min.js" defer onerror="var s=document.createElement('script');s.src='https://cdn.staticfile.org/lunar-javascript/1.7.7/lunar.min.js';document.head.appendChild(s)"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js" defer></script>
+<script src="/assets/zeji.js" defer></script>
