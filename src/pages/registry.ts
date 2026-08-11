@@ -22,6 +22,8 @@ export interface PageEntry {
   jsonldType?: "Article" | "FAQPage";
   meta: Record<Lang, PageMeta>;
   content: Record<Lang, string>;
+  /** 页内 FAQ 问答（存在时 head 自动注入 FAQPage JSON-LD） */
+  faq?: Record<Lang, { question: string; answer: string }[]>;
 }
 
 export const PAGES: readonly PageEntry[] = [

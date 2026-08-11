@@ -92,8 +92,26 @@ export function collectionPageJsonLd(lang: Lang): Record<string, unknown> {
   };
 }
 
+export function faqJsonLd(page: PageEntry, lang: Lang): Record<string, unknown> | null {
+  const items = page.faq?.[lang];
+  if (!items || items.length === 0) return null;
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((qa) => ({
+      "@type": "Question",
+      name: qa.question,
+      acceptedAnswer: { "@type": "Answer", text: qa.answer },
+    })),
+    url: absoluteUrl(pagePath(lang, page.slug)),
+    inLanguage: HREFLANG_CODE[lang],
+  };
+}
+
 export function buildJsonLdScripts(page: PageEntry, lang: Lang): string {
   const scripts: object[] = [pageJsonLd(page, lang), breadcrumbJsonLd(page, lang)];
+  const faq = faqJsonLd(page, lang);
+  if (faq) scripts.push(faq);
   if (page.slug === "") {
     scripts.unshift(websiteJsonLd());
   }

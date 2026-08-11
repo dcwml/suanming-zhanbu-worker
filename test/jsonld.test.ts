@@ -6,6 +6,7 @@ import {
   buildJsonLdScripts,
   breadcrumbJsonLd,
   collectionPageJsonLd,
+  faqJsonLd,
   pageJsonLd,
   toJsonLdScript,
   websiteJsonLd,
@@ -40,6 +41,20 @@ const article: PageEntry = {
     en: { title: "Sample", description: "Article description" },
   },
   content: { zh: "<p>zh</p>", en: "<p>en</p>" },
+};
+
+const faqPage: PageEntry = {
+  slug: "zeji",
+  inNav: true,
+  meta: {
+    zh: { title: "择吉日", description: "择吉描述" },
+    en: { title: "Auspicious Date Finder", description: "Zeji desc" },
+  },
+  content: { zh: "<p>zh</p>", en: "<p>en</p>" },
+  faq: {
+    zh: [{ question: "为什么要避冲？", answer: "冲日不宜办事。" }],
+    en: [{ question: "Why avoid clashes?", answer: "Clash days are unsuitable." }],
+  },
 };
 
 describe("toJsonLdScript", () => {
@@ -115,5 +130,28 @@ describe("collectionPageJsonLd", () => {
     expect(d["@type"]).toBe("CollectionPage");
     expect(d.url).toBe(`${SITE_ORIGIN}/zh/daily/`);
     expect(d.name).toBe("今日宜忌");
+  });
+});
+
+describe("faqJsonLd", () => {
+  it("emits FAQPage with mainEntity Question/Answer", () => {
+    const d = faqJsonLd(faqPage, "zh") as Record<string, unknown>;
+    expect(d["@type"]).toBe("FAQPage");
+    const me = d.mainEntity as { "@type": string; name: string; acceptedAnswer: { text: string } }[];
+    expect(me).toHaveLength(1);
+    expect(me[0]["@type"]).toBe("Question");
+    expect(me[0].name).toBe("为什么要避冲？");
+    expect(me[0].acceptedAnswer.text).toBe("冲日不宜办事。");
+  });
+  it("returns null when page has no faq", () => {
+    expect(faqJsonLd(home, "zh")).toBeNull();
+  });
+  it("buildJsonLdScripts includes FAQPage only when faq present", () => {
+    expect(buildJsonLdScripts(faqPage, "zh")).toContain('"FAQPage"');
+    expect(buildJsonLdScripts(article, "zh")).not.toContain('"FAQPage"');
+  });
+  it("escapes </script> in faq text", () => {
+    const evil: PageEntry = { ...faqPage, faq: { zh: [{ question: "</script>", answer: "x" }], en: [] } };
+    expect(buildJsonLdScripts(evil, "zh")).not.toContain("</script><script>");
   });
 });
