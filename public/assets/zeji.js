@@ -395,13 +395,14 @@
       els.birthRow.hidden = !birth;
     });
 
-    /* 公历/农历切换 → 闰月复选框显隐 */
+    /* 公历/农历切换 → 闰月复选框显隐，并按新历法重排四柱 */
     Array.prototype.forEach.call(els.radios, function (r) {
       r.addEventListener("change", function () {
         var lunar = false;
         Array.prototype.forEach.call(els.radios, function (r2) { if (r2.checked && r2.value === "lunar") lunar = true; });
         var leapLabel = els.birth("leap").closest("label");
         if (leapLabel) leapLabel.hidden = !lunar;
+        convertBirth(i, els);
       });
     });
 
