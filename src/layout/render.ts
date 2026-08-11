@@ -51,58 +51,28 @@ export function renderPageWithStats(page: PageEntry, lang: Lang, stats: StatsDat
   return layout(lang, buildHead(page, lang), renderNav(lang, page.slug), main + statsHtml);
 }
 
-/** 构建统计数据的 HTML 片段（注入到首页底部） */
+/** 构建统计数据的 HTML 片段（注入到首页底部，一行小字） */
 function buildStatsHtml(stats: StatsData, lang: Lang): string {
   const isZh = lang === "zh";
-
-  // 格式化数字（加千分位）
   const fmt = (n: number) => n.toLocaleString("en-US");
 
   const labels = isZh
-    ? { title: "访问统计", total: "总计", today: "今日", apiCalls: "API 调用", pv: "访问量", bazi: "八字使用", liuyao: "六爻使用" }
-    : { title: "Statistics", total: "Total", today: "Today", apiCalls: "API Calls", pv: "Visits", bazi: "BaZi Usage", liuyao: "I Ching Usage" };
+    ? { pv: "访问", bazi: "八字", liuyao: "六爻", today: "今日", api: "API" }
+    : { pv: "visits", bazi: "BaZi", liuyao: "I Ching", today: "today", api: "API" };
 
-  const apiRows = stats.api_calls
-    .map(
-      (api) => `        <tr>
-          <td>${api.api_path}</td>
-          <td>${fmt(api.total_calls)}</td>
-          <td>${fmt(api.today_calls)}</td>
-        </tr>`,
-    )
-    .join("\n");
+  const parts = [
+    `${labels.pv} ${fmt(stats.total.homepage_pv)}`,
+    `${labels.bazi} ${fmt(stats.total.bazi_usage)}`,
+    `${labels.liuyao} ${fmt(stats.total.liuyao_usage)}`,
+    `${labels.today} ${fmt(stats.today.homepage_pv)}`,
+  ];
 
-  return `
-<section class="site-stats" aria-label="${labels.title}">
-  <h2>${labels.title}</h2>
-  <table class="stats-table">
-    <thead>
-      <tr>
-        <th></th>
-        <th>${labels.total}</th>
-        <th>${labels.today}</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>${labels.pv}</td>
-        <td>${fmt(stats.total.homepage_pv)}</td>
-        <td>${fmt(stats.today.homepage_pv)}</td>
-      </tr>
-      <tr>
-        <td>${labels.bazi}</td>
-        <td>${fmt(stats.total.bazi_usage)}</td>
-        <td>${fmt(stats.today.bazi_usage)}</td>
-      </tr>
-      <tr>
-        <td>${labels.liuyao}</td>
-        <td>${fmt(stats.total.liuyao_usage)}</td>
-        <td>${fmt(stats.today.liuyao_usage)}</td>
-      </tr>
-    </tbody>
-  </table>
-${apiRows ? `  <h3>${labels.apiCalls}</h3>\n  <table class="stats-table">\n    <thead>\n      <tr>\n        <th>API</th>\n        <th>${labels.total}</th>\n        <th>${labels.today}</th>\n      </tr>\n    </thead>\n    <tbody>\n${apiRows}\n    </tbody>\n  </table>` : ""}
-</section>`;
+  // API 调用数据追加到后面
+  stats.api_calls.forEach((api) => {
+    parts.push(`${api.api_path} ${fmt(api.total_calls)}(${fmt(api.today_calls)})`);
+  });
+
+  return `\n<p class="site-stats" role="status" aria-label="${isZh ? '访问统计' : 'Statistics'}">${parts.join(" · ")}</p>`;
 }
 
 export function renderNotFound(lang: Lang): string {
