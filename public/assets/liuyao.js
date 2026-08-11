@@ -782,14 +782,15 @@
       return res.json().then(function (json) {
         if (!json.ok) {
           var code = json.error && json.error.code;
-          throw new Error((T.errMap && T.errMap[code]) || T.failed);
+          /* 抛出的已是完整用户文案（映射或兜底），catch 处直接展示、不再拼前缀 */
+          throw new Error((T.errMap && T.errMap[code]) || T.failed + "HTTP " + res.status);
         }
         return json.data.markdown;
       });
     }).then(function (md) {
       renderMarkdown(md);
     }).catch(function (e) {
-      setStatus(T.failed + e.message, true);
+      setStatus(e.message, true);
     });
   }
 
