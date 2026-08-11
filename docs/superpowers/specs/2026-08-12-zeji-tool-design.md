@@ -207,6 +207,7 @@ interface ZejiInterpretRequest {
 - `bazi.zh.html` / `bazi.en.html` CDN 主源 + 回退源改 1.7.7（已验证宜忌/干支/冲生肖一致，八字排盘不受影响）。
 - zeji 页同样 1.7.7 主源 + 回退源。
 - 回退源 staticfile.org 若无 1.7.7，实现期换 jsdelivr 兜底。
+- **marked / DOMPurify 沿用全站现有版本**：`marked@12.0.2`、`dompurify@3.1.6`（八字页、六爻页已使用的版本，zeji 页不引新版本）。
 
 ## 10. 全站报错文案：天师口吻
 
