@@ -33,7 +33,7 @@ src/
   content/*.html      正文片段（只有正文，无 html/head/body），命名 <slug>.<lang>.html
   content/daily/      每日宜忌正文片段：YYYY-MM-DD.zh.html / .en.html（三段式：almanac / zodiac / story）
   seo/meta.ts         buildHead（title/canonical/hreflang/og/twitter）、escapeHtml、buildDailyPostHead/buildDailyArchiveHead
-  seo/jsonld.ts       JSON-LD 构建与 </script> 注入转义；含 articleJsonLd/collectionPageJsonLd
+  seo/jsonld.ts       JSON-LD 构建与 </script> 注入转义；含 articleJsonLd/collectionPageJsonLd/faqJsonLd（按 faq 字段自动注入 FAQPage）
   seo/sitemap.ts      sitemap.xml（双语 alternates + daily 单篇+归档页）与 robots.txt
   layout/nav.ts       品牌块（logo.png + 站名）+ 导航 + 语言切换（含 daily 归档入口）
   layout/footer.ts    多栏页脚（品牌栏 + 工具/关于链接列 + 底栏版权免责；链接标题取 registry 单一来源 + daily 显式引用）
@@ -42,17 +42,20 @@ src/
   llm.ts              ★ 共享 LLM 客户端：callLlm（OpenAI 兼容）、LlmEnv、RateLimiter 接口
   bazi/               八字解读模块：validate 请求校验 / prompt 提示词 / llm 转出 / types 共享类型
   liuyao/             六爻解读模块：validate 请求校验 / prompt 提示词 / types 共享类型（零算法，不重算卦象）
+  zeji/               择吉解读模块：validate 请求校验 / prompt 提示词 / types 共享类型（零历法重算）
   routes/pages.ts     页面路由：/ 与无尾斜杠路径 301 → /:lang/:slug/；daily 四条路由（必须在固定页面路由之前）
   routes/api.ts       /api/* 子应用：JSON 响应壳、404/500 均返回 JSON
   routes/bazi.ts      POST /api/bazi/interpret：限流→校验→LLM→Markdown 返回
   routes/liuyao.ts     POST /api/liuyao/interpret：限流→校验→LLM→Markdown 返回
+  routes/zeji.ts      POST /api/zeji/interpret：限流→校验→LLM→Markdown 返回
   html.d.ts           *.html 模块的 ambient 声明（配合 wrangler Text rules）
 scripts/
   almanac.ts          生成期工具：用 lunar-javascript 输出指定日期历法数据（干支、宜忌、冲煞、纳音、喜/财/福神方位、节气、吉神凶煞等）
-public/assets/        静态资源（style.css、logo.png（印章 LOGO，兼作 favicon）、og-default.png、bazi.js、liuyao.js），由 Workers assets 直接服务
+public/assets/        静态资源（style.css、logo.png（印章 LOGO，兼作 favicon）、og-default.png、bazi.js、liuyao.js、zeji.js），由 Workers assets 直接服务；bazi/liuyao/zeji 页面经 CDN 统一加载 lunar-javascript 1.7.7（cdnjs 主源 + staticfile 回退）
   bazi.js             前端 lunar-javascript 排盘 + 三段串行解读渲染
   liuyao.js           前端 64 卦文本表 + King Wen 查表算法 + 三步投币起卦 + 单段解读渲染
-test/                 17 个测试文件、151 个测试（SELF.fetch 集成测试 + 单元测试）
+  zeji.js             前端 lunar-javascript 扫描 + 避冲排序 + 详解渲染
+test/                 21 个测试文件、199 个测试（SELF.fetch 集成测试 + 单元测试）
 ```
 
 ## 核心约定（改代码前必读）
@@ -62,7 +65,7 @@ test/                 17 个测试文件、151 个测试（SELF.fetch 集成测�
 3. **URL 只有一种拼法**：所有绝对 URL 必须经 `absoluteUrl(pagePath(lang, slug))` 生成；正式 URL 均带尾斜杠，无尾斜杠路径由路由层 301。禁止手拼 `https://...` 字符串。
 4. **域名单一来源**：`SITE_ORIGIN` 已设为正式域名 `https://suanming-zhanbu.com`，如需换域名只改这一处。写测试时断言必须基于 `SITE_ORIGIN` 常量而非硬编码域名。
 5. **转义纪律**：插入 HTML 属性/文本一律过 `escapeHtml`；JSON-LD 一律经 `toJsonLdScript`（内部把 `<` 转 `\u003c`）。正文片段是唯一被信任的原始 HTML（仓库内受控内容）。
-6. **API 形状**：`/api/*` 统一返回 `{ ok: true, data }` 或 `{ ok: false, error: { code, message } }`；错误响应不得回显未截断的用户输入（现有 404 用 `slice(0, 128)`）。未来 LLM 接口（如 `POST /api/divine`）沿用此模式加在 `routes/api.ts`。已落地实例：`POST /api/bazi/interpret`（见 `src/routes/bazi.ts`，错误码 invalid_request/rate_limited/not_configured/upstream_error/upstream_timeout）；`POST /api/liuyao/interpret`（见 `src/routes/liuyao.ts`，错误码同上 + payload_too_large/invalid_json）。
+6. **API 形状**：`/api/*` 统一返回 `{ ok: true, data }` 或 `{ ok: false, error: { code, message } }`；错误响应不得回显未截断的用户输入（现有 404 用 `slice(0, 128)`）。未来 LLM 接口（如 `POST /api/divine`）沿用此模式加在 `routes/api.ts`。已落地实例：`POST /api/bazi/interpret`（见 `src/routes/bazi.ts`，错误码 invalid_request/rate_limited/not_configured/upstream_error/upstream_timeout）；`POST /api/liuyao/interpret`（见 `src/routes/liuyao.ts`，错误码同上 + payload_too_large/invalid_json）；`POST /api/zeji/interpret`（见 `src/routes/zeji.ts`，错误码同 liuyao）。
 7. **双语对称**：任何页面/文案改动必须同时覆盖 zh 与 en；`Lang` 类型收紧为 `"zh" | "en"`，新增语言需从 `site.ts` 的语言表全套扩展。
 8. **wrangler 配置陷阱**：Text 模块规则字段是 `rules[].globs`（不是 `include`）；`assets.directory` 必须存在，否则 vitest pool 启动失败。
 9. **TDD**：本仓库按测试先行开发。改行为先改/加测试；`SELF.fetch` 集成测试放 `test/integration.test.ts`，纯函数单测按模块拆分。
@@ -111,24 +114,27 @@ test/                 17 个测试文件、151 个测试（SELF.fetch 集成测�
 - 无自动归档/过期机制，历史文章永久保留
 - `DAILY_ARCHIVE_META` 在 nav/footer 中显式引用（不经过 registry 的 `navPages()`），属合理破例
 
-## FAQ 页面（暂无示例，先记录用法）
+## FAQ 页面（择吉页为首个使用示例）
 
-仓库目前没有 FAQ 示例页。要新增一个 FAQ 页面，按普通页面两步走，注册时标注类型：
+给页面加 FAQ：在 `registry.ts` 的 `PageEntry` 上填可选字段 `faq?: Record<Lang, { question: string; answer: string }[]>`，head 即自动注入带 `mainEntity`（Question/Answer 数组）的 FAQPage JSON-LD（`faqJsonLd`，见 `src/seo/jsonld.ts`），无需手写 meta 或 JSON-LD：
 
 ```ts
-// registry.ts
+// registry.ts（参考 zeji 页）
 {
-  slug: "faq",
+  slug: "zeji",
   inNav: true,
-  jsonldType: "FAQPage",   // pageJsonLd 的 @type 会输出 FAQPage
   meta: { zh: {...}, en: {...} },
-  content: { zh: faqZh, en: faqEn },
+  content: { zh: zejiZh, en: zejiEn },
+  faq: {
+    zh: [{ question: "...", answer: "..." }],
+    en: [{ question: "...", answer: "..." }],
+  },
 }
 ```
 
-正文片段中问答建议用语义化结构（如 `<h2>问题</h2><p>答案</p>` 或 `<details><summary>`），中英两版问答需一一对应。
+正文片段中问答用语义化结构（如 `<h2>问题</h2><p>答案</p>` 或 `<details><summary>`），中英两版问答需一一对应，且 `faq` 字段内容与正文 FAQ 保持一致。
 
-**已知边界**：当前 `pageJsonLd`（`src/seo/jsonld.ts`）只切换 `@type`，**不生成 `mainEntity` 的 Question/Answer 数组**——而 Google 的 FAQ 富结果要求 `mainEntity`。因此首次真正落地 FAQ 页时需要扩展：在 `PageEntry` 上加可选的双语问答数据（如 `faq?: Record<Lang, { question: string; answer: string }[]>`），并在 `pageJsonLd` 中当 `jsonldType === "FAQPage"` 时输出 `mainEntity`（文本经 `escapeHtml`/`toJsonLdScript` 现有纪律处理），同时补对应单测。上线后用 Google Rich Results Test 验证。
+**已知边界**：`faqJsonLd` 的 FAQPage `mainEntity` 已实现并有单测覆盖（择吉页首个使用，上线后宜用 Google Rich Results Test 验证）。`jsonldType: "FAQPage"` 仅切换 `pageJsonLd` 的 `@type`、不含 `mainEntity`，与 `faq` 字段机制独立，暂无页面使用。
 
 ## 已知取舍（不要"顺手修复"）
 
