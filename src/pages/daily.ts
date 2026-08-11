@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260812Zh from "../content/daily/2026-08-12.zh.html";
+import daily20260812En from "../content/daily/2026-08-12.en.html";
 import daily20260811Zh from "../content/daily/2026-08-11.zh.html";
 import daily20260811En from "../content/daily/2026-08-11.en.html";
 import daily20260810Zh from "../content/daily/2026-08-10.zh.html";
@@ -38,6 +40,14 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-08-12",
+    meta: {
+      zh: { title: "2026年8月12日宜忌·马", description: "2026年8月12日黄历宜忌：宜嫁娶、祭祀、祈福、求嗣、出行、安床，忌盖屋、入殓、安葬、入宅、移徙、置产，冲鼠煞北；生肖马今日运势与纳音天上火科普。" },
+      en: { title: "Daily Almanac — August 12, 2026 (Horse)", description: "August 12, 2026 Chinese almanac: favorable for marriage, sacrifice, praying for blessings, traveling and setting beds; avoid roofing, encoffining, burial, moving house and purchasing property; clash Rat, Sha North; Horse zodiac fortune and the Heavenly Fire Nayin." },
+    },
+    content: { zh: daily20260812Zh, en: daily20260812En },
+  },
   {
     date: "2026-08-11",
     meta: {
