@@ -968,6 +968,392 @@ code {
   text-align: justify;
 }
 
+/* ========== 择吉工具页 ========== */
+
+.zeji-form {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+  box-shadow: 0 2px 8px rgba(43, 38, 34, 0.06);
+}
+
+.zeji-note {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin: 0 0 0.75rem;
+}
+
+.zeji-form > label,
+.zeji-form fieldset label {
+  display: block;
+  font-size: 0.92rem;
+  margin: 0.6rem 0 0.25rem;
+}
+
+.zeji-form select,
+.zeji-form input[type="number"] {
+  padding: 0.3rem 0.45rem;
+  border: 1px solid #d8cfc2;
+  border-radius: 4px;
+  font: inherit;
+  background: #fff;
+  max-width: 100%;
+}
+
+.zeji-form select:focus,
+.zeji-form input:focus {
+  outline: 2px solid var(--gold);
+  outline-offset: 1px;
+}
+
+#zeji-matter,
+#zeji-range {
+  min-width: 12rem;
+}
+
+.zeji-form fieldset {
+  border: 1px dashed var(--border);
+  border-radius: 6px;
+  margin: 1rem 0;
+  padding: 0.5rem 1rem 0.9rem;
+}
+
+.zeji-form fieldset > legend {
+  color: var(--muted);
+  font-size: 0.9rem;
+  padding: 0 0.4rem;
+}
+
+#zeji-person2-wrap {
+  margin-top: 0.9rem;
+  padding-top: 0.9rem;
+  border-top: 1px dashed var(--border);
+}
+
+.zeji-form details {
+  margin: 0.5rem 0 0.25rem;
+}
+
+.zeji-form details summary {
+  cursor: pointer;
+  color: var(--accent);
+  font-size: 0.92rem;
+}
+
+.zeji-form details[open] > summary {
+  margin-bottom: 0.5rem;
+}
+
+.zeji-pillar-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.4rem 0;
+}
+
+.zeji-pillar-row select {
+  flex: 0 1 auto;
+}
+
+.zeji-birth-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.8rem;
+  margin: 0.4rem 0;
+}
+
+.zeji-birth-row label {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 0.3rem;
+  margin: 0 !important;
+  font-size: 0.9rem;
+}
+
+.zeji-birth-row input[type="number"] {
+  width: 4.8rem;
+}
+
+#zeji-add-person {
+  background: none;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  border-radius: 6px;
+  padding: 0.3rem 1rem;
+  font: inherit;
+  cursor: pointer;
+  margin: 0.25rem 0 0.5rem;
+}
+
+#zeji-add-person:hover {
+  background: rgba(138, 51, 36, 0.08);
+}
+
+#zeji-strict:disabled + span,
+label:has(#zeji-strict:disabled) {
+  color: var(--muted);
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+#zeji-run {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1.8rem;
+  font: inherit;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+#zeji-run:hover {
+  background: var(--accent-dark);
+}
+
+#zeji-run:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.zeji-error {
+  color: #b3261e;
+  font-size: 0.9rem;
+  margin: 0.5rem 0 0;
+}
+
+.zeji-person-error {
+  margin: 0.25rem 0 0.5rem;
+}
+
+#zeji-empty {
+  color: var(--muted);
+  background: var(--bg);
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+/* 候选日卡片 */
+#zeji-results {
+  margin: 1.25rem 0 2rem;
+}
+
+.zeji-card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  padding: 0.9rem 1.15rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 1px 4px rgba(43, 38, 34, 0.05);
+}
+
+.zeji-card-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.8rem;
+}
+
+.zeji-date {
+  font-weight: 700;
+  font-size: 1.02rem;
+}
+
+.zeji-lunar {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.zeji-ganzhi {
+  color: var(--accent);
+  font-weight: 600;
+  border: 1px solid var(--gold);
+  border-radius: 4px;
+  padding: 0 0.35rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.zeji-badge {
+  font-size: 0.8rem;
+  border-radius: 4px;
+  padding: 0.05rem 0.5rem;
+  line-height: 1.6;
+}
+
+.zeji-badge.ji {
+  background: var(--accent);
+  color: #fff;
+}
+
+.zeji-badge.xiong {
+  background: #cfc8bd;
+  color: #55504a;
+}
+
+.zeji-zhixing {
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.zeji-card-mid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 1rem;
+  font-size: 0.88rem;
+  margin-top: 0.55rem;
+}
+
+.zeji-clash {
+  color: var(--fg);
+}
+
+.zeji-shen {
+  color: #2e7d32;
+}
+
+.zeji-sha {
+  color: #c62828;
+}
+
+.zeji-tongshu {
+  margin: 0.7rem 0 0.3rem;
+  padding-left: 0.65rem;
+  border-left: 3px solid var(--gold);
+  line-height: 1.7;
+}
+
+.zeji-colloquial {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 0.3rem 0 0.5rem;
+}
+
+.zeji-card details summary {
+  cursor: pointer;
+  color: var(--accent);
+  font-size: 0.9rem;
+}
+
+.zeji-positions {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  grid-template-rows: auto auto;
+  grid-auto-flow: column;
+  gap: 0.2rem 1.2rem;
+  margin: 0.6rem 0 0.4rem;
+  justify-content: start;
+}
+
+.zeji-positions dt {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.zeji-positions dd {
+  margin: 0;
+  font-size: 0.92rem;
+}
+
+.zeji-times-title {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin: 0.6rem 0 0.25rem;
+}
+
+.zeji-times {
+  margin: 0;
+  padding-left: 1.2rem;
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.zeji-detail-wrap {
+  margin-top: 0.75rem;
+  border-top: 1px dashed var(--border);
+  padding-top: 0.7rem;
+}
+
+.zeji-detail {
+  background: none;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  border-radius: 6px;
+  padding: 0.3rem 1.2rem;
+  font: inherit;
+  font-size: 0.92rem;
+  cursor: pointer;
+}
+
+.zeji-detail:hover {
+  background: rgba(138, 51, 36, 0.08);
+}
+
+.zeji-detail:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.zeji-detail-body {
+  font-size: 0.93rem;
+  line-height: 1.75;
+}
+
+.zeji-detail-body:not(:empty) {
+  margin-top: 0.7rem;
+  padding: 0.85rem 1rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+.zeji-detail-body h2,
+.zeji-detail-body h3 {
+  font-size: 1rem;
+  margin: 0.8rem 0 0.4rem;
+}
+
+.zeji-detail-body h2:first-child,
+.zeji-detail-body h3:first-child {
+  margin-top: 0;
+}
+
+.zeji-detail-body ul {
+  padding-left: 1.2rem;
+  margin: 0.4rem 0;
+}
+
+/* 页内 FAQ */
+.zeji-faq {
+  margin: 2rem 0;
+}
+
+.zeji-faq h2 {
+  font-size: 1.25rem;
+  margin: 0 0 0.85rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px dashed var(--border);
+}
+
+.zeji-faq h3 {
+  font-size: 1rem;
+  margin: 1.1rem 0 0.3rem;
+  color: var(--accent-dark);
+}
+
+.zeji-faq p {
+  margin: 0.3rem 0 0;
+  font-size: 0.93rem;
+  line-height: 1.8;
+  color: var(--fg);
+}
+
 /* ========== 响应式适配 ========== */
 
 @media (max-width: 640px) {
@@ -1002,6 +1388,15 @@ code {
 
   .daily-zodiac { padding: 1.1rem; margin: 1.5rem -0.5rem; }
   .daily-story { padding: 1rem 0; }
+
+  .zeji-form { padding: 0.85rem 0.9rem; }
+  #zeji-matter,
+  #zeji-range { min-width: 0; width: 100%; }
+  .zeji-pillar-row select { flex: 1 1 40%; }
+  .zeji-birth-row input[type="number"] { width: 4rem; }
+  .zeji-positions { grid-template-columns: 1fr; grid-auto-flow: row; gap: 0.1rem 0; }
+  .zeji-card { padding: 0.8rem 0.9rem; }
+  .zeji-card-mid { flex-direction: column; gap: 0.2rem; }
 }
 
 /* ========== 站点统计 ========== */
