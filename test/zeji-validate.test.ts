@@ -52,6 +52,16 @@ describe("validateZejiInterpretRequest", () => {
     b.persons = [{ yearBranch: "猫" }];
     expect(validateZejiInterpretRequest(b)).toMatchObject({ ok: false });
   });
+  it("rejects yearBranch mismatching pillars.year", () => {
+    const b = validRequest();
+    b.persons = [{ yearBranch: "午", pillars: { year: "甲子", month: "丙寅", day: "戊辰", hour: "庚午" } }];
+    expect(validateZejiInterpretRequest(b)).toMatchObject({ ok: false });
+  });
+  it("accepts yearBranch matching pillars.year", () => {
+    const b = validRequest();
+    b.persons = [{ yearBranch: "子", pillars: { year: "甲子", month: "丙寅", day: "戊辰", hour: "庚午" } }];
+    expect(validateZejiInterpretRequest(b).ok).toBe(true);
+  });
   it("rejects more than 2 persons", () => {
     const b = validRequest();
     b.persons = [{ yearBranch: "子" }, { yearBranch: "丑" }, { yearBranch: "寅" }];

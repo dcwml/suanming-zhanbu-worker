@@ -58,6 +58,8 @@ export function validateZejiInterpretRequest(body: unknown): Result {
         const gz = p.pillars[key];
         if (typeof gz !== "string" || !GANZHI_RE.test(gz) || !ganzhiMatched(gz)) return fail(`person.pillars.${key} is invalid`);
       }
+      if (typeof p.yearBranch === "string" && typeof p.pillars.year === "string" && p.pillars.year[1] !== p.yearBranch)
+        return fail("person.yearBranch must match pillars.year");
     }
     if (p.yearBranch === undefined && p.pillars === undefined) return fail("person must carry yearBranch or pillars");
   }
