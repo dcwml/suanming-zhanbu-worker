@@ -90,7 +90,6 @@
       pillarNone: "不选",
       invalidDate: "日期无效，请检查输入",
       converted: "已按生日排出四柱",
-      run: "择吉日",
       empty: "当前条件下暂无合适日子，可尝试放宽日期范围或关闭严格模式。",
       lunarPrefix: "农历",
       clashTpl: "冲{chong}煞{dir}",
@@ -105,7 +104,6 @@
       yiLabel: "宜",
       detail: "详解", loading: "天师推演中…", retry: "重试", failed: "详解失败：",
       mdLibLoading: "解读组件未完全加载，请稍后重试",
-      personLabel: ["第 1 人", "第 2 人"],
     },
     en: {
       note: "Terms follow the traditional almanac wording",
@@ -113,7 +111,6 @@
       pillarNone: "—",
       invalidDate: "Invalid date, please check input",
       converted: "Pillars derived from birth date",
-      run: "Find dates",
       empty: "No suitable dates under current conditions — try widening the range or turning off strict mode.",
       lunarPrefix: "Lunar ",
       clashTpl: "Clashes with {chong}, sha {dir}",
@@ -128,7 +125,6 @@
       yiLabel: "Good for",
       detail: "Full reading", loading: "The Master is consulting…", retry: "Retry", failed: "Reading failed: ",
       mdLibLoading: "Reading components not fully loaded, please retry later",
-      personLabel: ["Person 1", "Person 2"],
     },
   }[LANG];
 
@@ -146,8 +142,6 @@
     var z = zodiacOf(branch);
     return LANG === "zh" ? z : (ZODIAC_EN[z] || z);
   }
-  /* 干支阴阳：干序与支序同奇偶为相配（六十甲子天然满足，用于联动过滤） */
-  function ganzhiParity(gz) { return GANS.indexOf(gz.charAt(0)) % 2; }
 
   /* ---------- 扫描/过滤/排序主流程 ---------- */
 
@@ -255,8 +249,8 @@
     });
   }
 
-  /* 柱位下拉：填六十甲子；anchor 为锚定奇偶（null 表示不过滤） */
-  function fillPillarSelect(sel, anchor) {
+  /* 柱位下拉：填六十甲子 */
+  function fillPillarSelect(sel) {
     var prev = sel.value;
     sel.innerHTML = "";
     var op0 = document.createElement("option");
@@ -264,7 +258,6 @@
     op0.textContent = T.pillarNone;
     sel.appendChild(op0);
     JIAZI.forEach(function (gz) {
-      if (anchor !== null && ganzhiParity(gz) !== anchor) return;
       var op = document.createElement("option");
       op.value = gz;
       op.textContent = gz;
@@ -352,7 +345,11 @@
     var month = parseInt(els.birth("month").value, 10);
     var day = parseInt(els.birth("day").value, 10);
     var hour = parseInt(els.birth("hour").value, 10);
-    if (!year || !month || !day || isNaN(hour)) return;
+    if (!year || !month || !day || isNaN(hour)) {
+      /* 字段未填齐：不转换，但清除旧行内提示避免误导 */
+      showPersonError(els, "");
+      return;
+    }
     var calendar = "solar";
     Array.prototype.forEach.call(els.radios, function (r) { if (r.checked) calendar = r.value; });
     var leap = els.birth("leap").checked;
@@ -421,7 +418,7 @@
     var names = ["year", "month", "day", "hour"];
     names.forEach(function (n) {
       var sel = pillarSlot(els, n);
-      fillPillarSelect(sel, null);
+      fillPillarSelect(sel);
       sel.addEventListener("change", function () {
         syncPillarsFromSelects(i, els);
       });
