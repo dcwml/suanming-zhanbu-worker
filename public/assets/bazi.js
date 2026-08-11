@@ -336,9 +336,19 @@
       qiYunTpl: "出生后 {y} 年 {m} 个月 {d} 天起运，{year} 年起运",
       age: "岁", loading: "正在解读…", waiting: "正在解读…",
       retry: "重试", failed: "解读失败：", invalidDate: "日期无效，请检查输入",
-      libLoading: "排盘组件加载中，请稍候重试",
+      libLoading: "历书没能送达，请刷新页面或检查网络",
       mdLibLoading: "解读组件未完全加载，请稍后重试",
       shenShaTitle: "命局神煞", auspicious: "吉神", inauspicious: "凶煞", shenShaEmpty: "无",
+      errMap: {
+        rate_limited: "问卦的人有点多，天师正在逐一回复，请稍等片刻再来",
+        upstream_timeout: "天师凝神推演超时了，请再试一次",
+        upstream_error: "天师暂时没空，稍后再来问问吧",
+        not_configured: "天师暂时没空，稍后再来问问吧",
+        invalid_request: "卦帖写得不太对，请核对后再递上来",
+        payload_too_large: "卦帖太长了，请精简后再递上来",
+        invalid_json: "卦帖写得不太对，请核对后再递上来",
+        cdn_failed: "历书没能送达，请刷新页面或检查网络",
+      },
     },
     en: {
       rows: ["Main Star", "Stem", "Branch", "Hidden", "Sub Stars", "Stage", "Self-Sit", "Void", "NaYin", "Natal Stars"],
@@ -348,9 +358,19 @@
       qiYunTpl: "Luck starts {y}y {m}m {d}d after birth, from {year}",
       age: "age", loading: "Interpreting…", waiting: "Interpreting…",
       retry: "Retry", failed: "Reading failed: ", invalidDate: "Invalid date, please check input",
-      libLoading: "Calculator library still loading, please retry",
+      libLoading: "The almanac failed to load — please refresh or check your connection.",
       mdLibLoading: "Reading components not fully loaded, please retry later",
       shenShaTitle: "Natal Stars (ShenSha)", auspicious: "Auspicious", inauspicious: "Inauspicious", shenShaEmpty: "None",
+      errMap: {
+        rate_limited: "The Master is attending to many visitors — please return in a few moments.",
+        upstream_timeout: "The Master's reading ran long — please try again.",
+        upstream_error: "The Master is unavailable right now — please check back later.",
+        not_configured: "The Master is unavailable right now — please check back later.",
+        invalid_request: "Something in your request looks off — please double-check and try again.",
+        payload_too_large: "Your request is a bit too long — please trim it and try again.",
+        invalid_json: "Something in your request looks off — please double-check and try again.",
+        cdn_failed: "The almanac failed to load — please refresh or check your connection.",
+      },
     },
   }[LANG];
 
@@ -591,7 +611,10 @@
       body: JSON.stringify({ part: part, lang: LANG, chart: chartSnapshot }),
     }).then(function (res) {
       return res.json().then(function (json) {
-        if (!json.ok) throw new Error(json.error && json.error.message ? json.error.message : "HTTP " + res.status);
+        if (!json.ok) {
+          var code = json.error && json.error.code;
+          throw new Error((T.errMap && T.errMap[code]) || T.failed);
+        }
         return json.data.markdown;
       });
     });

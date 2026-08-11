@@ -17,6 +17,16 @@
       loading: "正在解读…", retry: "重试", failed: "解读失败：",
       noQuestion: "请先输入所求之事",
       mdLibLoading: "解读组件未完全加载，请稍后重试",
+      errMap: {
+        rate_limited: "问卦的人有点多，天师正在逐一回复，请稍等片刻再来",
+        upstream_timeout: "天师凝神推演超时了，请再试一次",
+        upstream_error: "天师暂时没空，稍后再来问问吧",
+        not_configured: "天师暂时没空，稍后再来问问吧",
+        invalid_request: "卦帖写得不太对，请核对后再递上来",
+        payload_too_large: "卦帖太长了，请精简后再递上来",
+        invalid_json: "卦帖写得不太对，请核对后再递上来",
+        cdn_failed: "历书没能送达，请刷新页面或检查网络",
+      },
     },
     en: {
       lineLabels: ["Line 1", "Line 2", "Line 3", "Line 4", "Line 5", "Line 6"],
@@ -27,6 +37,16 @@
       loading: "Interpreting…", retry: "Retry", failed: "Reading failed: ",
       noQuestion: "Please enter your question first",
       mdLibLoading: "Reading components not fully loaded, please retry later",
+      errMap: {
+        rate_limited: "The Master is attending to many visitors — please return in a few moments.",
+        upstream_timeout: "The Master's reading ran long — please try again.",
+        upstream_error: "The Master is unavailable right now — please check back later.",
+        not_configured: "The Master is unavailable right now — please check back later.",
+        invalid_request: "Something in your request looks off — please double-check and try again.",
+        payload_too_large: "Your request is a bit too long — please trim it and try again.",
+        invalid_json: "Something in your request looks off — please double-check and try again.",
+        cdn_failed: "The almanac failed to load — please refresh or check your connection.",
+      },
     },
   }[LANG];
 
@@ -760,7 +780,10 @@
       body: JSON.stringify(payload),
     }).then(function (res) {
       return res.json().then(function (json) {
-        if (!json.ok) throw new Error(json.error && json.error.message ? json.error.message : "HTTP " + res.status);
+        if (!json.ok) {
+          var code = json.error && json.error.code;
+          throw new Error((T.errMap && T.errMap[code]) || T.failed);
+        }
         return json.data.markdown;
       });
     }).then(function (md) {
