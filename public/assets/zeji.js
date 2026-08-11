@@ -28,6 +28,17 @@
   var BRANCHES = ["子","丑","寅","卯","辰","巳","午","未","申","酉","戌","亥"];
   var GANS = ["甲","乙","丙","丁","戊","己","庚","辛","壬","癸"];
   var DIR_EN = { 东: "East", 南: "South", 西: "West", 北: "North" };
+  /* 八卦方位 → 通俗方位（zh 与 almanac 的 Desc 用词一致；en 用罗盘八方） */
+  var GUA_DIR = {
+    坎: { zh: "正北", en: "North" },
+    艮: { zh: "东北", en: "Northeast" },
+    震: { zh: "正东", en: "East" },
+    巽: { zh: "东南", en: "Southeast" },
+    离: { zh: "正南", en: "South" },
+    坤: { zh: "西南", en: "Southwest" },
+    兑: { zh: "正西", en: "West" },
+    乾: { zh: "西北", en: "Northwest" },
+  };
   var WD_ZH = ["周日","周一","周二","周三","周四","周五","周六"];
   var WD_EN = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
   var MONTHS_EN = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
@@ -542,11 +553,18 @@
     return pool.slice(0, 3);
   }
 
+  /* 八卦方位 → 「艮·东北」式：保留八卦字符并补上通俗方位 */
+  function posText(gua) {
+    var d = GUA_DIR[gua];
+    if (!d) return gua;
+    return gua + "·" + (LANG === "zh" ? d.zh : d.en);
+  }
+
   function extraHtml(day, matter) {
     var html = '<dl class="zeji-positions">';
-    html += "<dt>" + esc(T.xiShen) + "</dt><dd>" + esc(day.lunar.getDayPositionXi()) + "</dd>";
-    html += "<dt>" + esc(T.caiShen) + "</dt><dd>" + esc(day.lunar.getDayPositionCai()) + "</dd>";
-    html += "<dt>" + esc(T.fuShen) + "</dt><dd>" + esc(day.lunar.getDayPositionFu()) + "</dd>";
+    html += "<dt>" + esc(T.xiShen) + "</dt><dd>" + esc(posText(day.lunar.getDayPositionXi())) + "</dd>";
+    html += "<dt>" + esc(T.caiShen) + "</dt><dd>" + esc(posText(day.lunar.getDayPositionCai())) + "</dd>";
+    html += "<dt>" + esc(T.fuShen) + "</dt><dd>" + esc(posText(day.lunar.getDayPositionFu())) + "</dd>";
     html += "</dl>";
     html += '<p class="zeji-times-title">' + esc(T.luckyTimes) + "</p>";
     var times = luckyTimes(day, matter);
