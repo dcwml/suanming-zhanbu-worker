@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260813Zh from "../content/daily/2026-08-13.zh.html";
+import daily20260813En from "../content/daily/2026-08-13.en.html";
 import daily20260812Zh from "../content/daily/2026-08-12.zh.html";
 import daily20260812En from "../content/daily/2026-08-12.en.html";
 import daily20260811Zh from "../content/daily/2026-08-11.zh.html";
@@ -40,6 +42,14 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-08-13",
+    meta: {
+      zh: { title: "2026年8月13日宜忌·羊", description: "2026年8月13日黄历宜忌：宜祭祀、动土、筑堤、开池、会亲友、入殓、破土、安葬，忌开光、出行、修造、上梁、入宅、安门、作灶、裁衣，冲牛煞西；生肖羊今日运势与农历七月初一「鬼门开」民俗科普。" },
+      en: { title: "Daily Almanac — August 13, 2026 (Goat)", description: "August 13, 2026 Chinese almanac: favorable for sacrifice, breaking ground, building dikes, digging ponds, meeting relatives and friends, encoffining and burial; avoid consecration, travel, construction, raising beams and moving into a house; clash Ox, Sha West; Goat zodiac fortune and the folklore of the Ghost Gate opening on the first day of the seventh lunar month." },
+    },
+    content: { zh: daily20260813Zh, en: daily20260813En },
+  },
   {
     date: "2026-08-12",
     meta: {
