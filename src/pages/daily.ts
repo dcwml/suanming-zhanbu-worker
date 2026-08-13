@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260814Zh from "../content/daily/2026-08-14.zh.html";
+import daily20260814En from "../content/daily/2026-08-14.en.html";
 import daily20260813Zh from "../content/daily/2026-08-13.zh.html";
 import daily20260813En from "../content/daily/2026-08-13.en.html";
 import daily20260812Zh from "../content/daily/2026-08-12.zh.html";
@@ -42,6 +44,14 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-08-14",
+    meta: {
+      zh: { title: "2026年8月14日宜忌·猴", description: "2026年8月14日黄历宜忌：宜祭祀、裁衣、安门、纳财、扫舍、出行、进人口、作灶、纳畜，忌安床、动土、安葬、开生坟、合寿木，冲虎煞南；生肖猴今日运势与吉神天仓科普。" },
+      en: { title: "Daily Almanac — August 14, 2026 (Monkey)", description: "August 14, 2026 Chinese almanac: favorable for sacrifice, cutting garments, installing doors, collecting wealth, sweeping the house, traveling, installing a stove and acquiring livestock; avoid setting beds, breaking ground and burial; clash Tiger, Sha South; Monkey zodiac fortune and the Tiāncāng Heavenly Granary auspicious spirit." },
+    },
+    content: { zh: daily20260814Zh, en: daily20260814En },
+  },
   {
     date: "2026-08-13",
     meta: {
