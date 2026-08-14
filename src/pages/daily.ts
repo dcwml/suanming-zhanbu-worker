@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260815Zh from "../content/daily/2026-08-15.zh.html";
+import daily20260815En from "../content/daily/2026-08-15.en.html";
 import daily20260814Zh from "../content/daily/2026-08-14.zh.html";
 import daily20260814En from "../content/daily/2026-08-14.en.html";
 import daily20260813Zh from "../content/daily/2026-08-13.zh.html";
@@ -44,6 +46,14 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-08-15",
+    meta: {
+      zh: { title: "2026年8月15日宜忌·鸡", description: "2026年8月15日黄历宜忌：宜祭祀、解除、拆卸、修造、动土起基、上梁、安床安门、开渠开池、入殓破土启钻，忌嫁娶、出行、赴任、入宅移徙、作灶栽种，冲兔煞东；生肖鸡今日运势与凶煞咸池桃花煞科普。" },
+      en: { title: "Daily Almanac — August 15, 2026 (Rooster)", description: "August 15, 2026 Chinese almanac: favorable for sacrifice, removal, dismantling, construction, breaking ground, laying foundations, raising beams, setting beds, installing doors, digging canals and ponds, encoffining, breaking ground and opening the tomb; avoid marriage, travel, taking up an official post, moving house, installing a stove and planting; clash Rabbit, Sha East; Rooster zodiac fortune and the Xiánchí Peach Blossom inauspicious spirit." },
+    },
+    content: { zh: daily20260815Zh, en: daily20260815En },
+  },
   {
     date: "2026-08-14",
     meta: {
