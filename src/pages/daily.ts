@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260816Zh from "../content/daily/2026-08-16.zh.html";
+import daily20260816En from "../content/daily/2026-08-16.en.html";
 import daily20260815Zh from "../content/daily/2026-08-15.zh.html";
 import daily20260815En from "../content/daily/2026-08-15.en.html";
 import daily20260814Zh from "../content/daily/2026-08-14.zh.html";
@@ -46,6 +48,14 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-08-16",
+    meta: {
+      zh: { title: "2026年8月16日宜忌·狗", description: "2026年8月16日黄历宜忌：司命黄道吉日，宜纳采订盟、入宅移徙、修造上梁、安床栽种纳畜、出行会亲友，忌作灶动土破土安葬、祭祀祈福伐木，冲龙煞北；生肖狗今日运势与黄道吉神司命科普。" },
+      en: { title: "Daily Almanac — August 16, 2026 (Dog)", description: "August 16, 2026 Chinese almanac: a Sīmìng Yellow Path day — favorable for betrothal, sealing covenants, moving into a house, relocating, construction, raising beams, setting beds, planting, acquiring livestock, travel and meeting relatives; avoid installing a stove, breaking ground, burial, sacrifice, praying for blessings and felling trees; clash Dragon, Sha North; Dog zodiac fortune and the Sīmìng Life-Master auspicious spirit of the Yellow Path." },
+    },
+    content: { zh: daily20260816Zh, en: daily20260816En },
+  },
   {
     date: "2026-08-15",
     meta: {
