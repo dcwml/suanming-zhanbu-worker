@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260817Zh from "../content/daily/2026-08-17.zh.html";
+import daily20260817En from "../content/daily/2026-08-17.en.html";
 import daily20260816Zh from "../content/daily/2026-08-16.zh.html";
 import daily20260816En from "../content/daily/2026-08-16.en.html";
 import daily20260815Zh from "../content/daily/2026-08-15.zh.html";
@@ -48,6 +50,14 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-08-17",
+    meta: {
+      zh: { title: "2026年8月17日宜忌·猪", description: "2026年8月17日黄历宜忌：勾陈黑道日，宜祭祀、沐浴、修饰垣墙、平治道涂、作灶，忌嫁娶、词讼、治病、置产、祈福、安葬、栽种、伐木、安门，冲蛇煞西；生肖猪今日运势与黑道凶神勾陈科普。" },
+      en: { title: "Daily Almanac — August 17, 2026 (Pig)", description: "August 17, 2026 Chinese almanac: a Gōuchén Black Path day — favorable for sacrifice, bathing, decorating walls, leveling roads and installing a stove; avoid marriage, litigation, treating illness, purchasing property, praying for blessings, burial, planting, felling trees and installing gates; clash Snake, Sha West; Pig zodiac fortune and the Gōuchén Hook Array inauspicious spirit of the Black Path." },
+    },
+    content: { zh: daily20260817Zh, en: daily20260817En },
+  },
   {
     date: "2026-08-16",
     meta: {
