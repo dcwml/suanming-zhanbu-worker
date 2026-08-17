@@ -20,6 +20,7 @@ export const DIVINATION_NAV_LABEL: Record<Lang, string> = { zh: "占卜", en: "D
 export const DIVINATION_NAV_ITEMS: readonly { slug: string; label: Record<Lang, string> }[] = [
   "liuyao",
   "meihua",
+  "xiaoliuren",
 ].map((slug) => ({ slug, label: { zh: findPage(slug)!.meta.zh.title, en: findPage(slug)!.meta.en.title } }));
 
 const FORTUNE_SLUGS = FORTUNE_NAV_ITEMS.map((item) => item.slug);

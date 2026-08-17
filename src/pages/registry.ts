@@ -7,6 +7,8 @@ import liuyaoZh from "../content/liuyao.zh.html";
 import liuyaoEn from "../content/liuyao.en.html";
 import meihuaZh from "../content/meihua.zh.html";
 import meihuaEn from "../content/meihua.en.html";
+import xiaoliurenZh from "../content/xiaoliuren.zh.html";
+import xiaoliurenEn from "../content/xiaoliuren.en.html";
 import zejiZh from "../content/zeji.zh.html";
 import zejiEn from "../content/zeji.en.html";
 import notfoundZh from "../content/notfound.zh.html";
@@ -67,6 +69,15 @@ export const PAGES: readonly PageEntry[] = [
       en: { title: "Plum Blossom Numerology", description: "Free Plum Blossom Numerology (Meihua Yishu) casting by the present time or two numbers — primary, mutual and changed hexagrams with body-application five-element AI readings." },
     },
     content: { zh: meihuaZh, en: meihuaEn },
+  },
+  {
+    slug: "xiaoliuren",
+    inNav: false,
+    meta: {
+      zh: { title: "小六壬", description: "在线小六壬起课：以农历月日时或三个数字掐指起课，大安、留连、速喜、赤口、小吉、空亡六宫定吉凶，AI 智能解读趋势。" },
+      en: { title: "Xiao Liu Ren Divination", description: "Free Xiao Liu Ren (Small Six Ren) casting by the current lunar month, day and hour or three numbers — six palaces of Da An, Liu Lian, Su Xi, Chi Kou, Xiao Ji and Kong Wang with AI readings." },
+    },
+    content: { zh: xiaoliurenZh, en: xiaoliurenEn },
   },
   {
     slug: "zeji",

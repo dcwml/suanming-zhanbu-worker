@@ -489,6 +489,54 @@ code {
   .meihua-tiyong dt { min-width: 0; }
 }
 
+/* ---------- 小六壬 ---------- */
+
+.xiaoliuren-app { max-width: 800px; margin: 0 auto; }
+.xiaoliuren-step { margin: 2rem 0; padding: 1.5rem; border: 1px solid var(--border, #e0e0e0); border-radius: 8px; }
+.xiaoliuren-step h2 { margin-top: 0; }
+.xiaoliuren-guide { color: var(--muted); line-height: 1.7; }
+.xiaoliuren-question-label { display: block; margin-top: 1rem; font-weight: 600; }
+.xiaoliuren-question-label input { display: block; width: 100%; margin-top: 0.5rem; padding: 0.5rem; font-size: 1rem; }
+.xiaoliuren-method { border: 1px dashed var(--border); border-radius: 6px; margin: 1rem 0 0.5rem; padding: 0.5rem 1rem 0.9rem; }
+.xiaoliuren-method legend { color: var(--muted); font-size: 0.9rem; padding: 0 0.4rem; }
+.xiaoliuren-method label { display: block; padding: 0.3rem 0; cursor: pointer; }
+.xiaoliuren-hint { color: var(--muted); font-size: 0.88rem; margin: 0.5rem 0; }
+.xiaoliuren-numbers { margin: 0.75rem 0 0.25rem; }
+.xiaoliuren-numbers label { display: inline-flex; flex-direction: column; gap: 0.3rem; margin-right: 1.5rem; font-size: 0.95rem; }
+.xiaoliuren-numbers input { width: 8rem; padding: 0.35rem 0.5rem; border: 1px solid #d8cfc2; border-radius: 4px; font: inherit; }
+#xiaoliuren-cast { display: block; margin: 1.5rem auto 0.5rem; padding: 0.6rem 2rem; font-size: 1.1rem; cursor: pointer; }
+#xiaoliuren-cast:disabled { opacity: 0.5; cursor: not-allowed; }
+.xiaoliuren-error { color: #c0392b; }
+.xiaoliuren-meta { text-align: center; color: var(--muted); font-size: 0.92rem; margin: 0.5rem 0; }
+.xiaoliuren-palace-display { display: flex; gap: 1.5rem; justify-content: center; margin: 1.5rem 0; flex-wrap: wrap; }
+.xiaoliuren-palace-card { text-align: center; padding: 1rem 1.4rem; border: 1px solid var(--border, #e0e0e0); border-radius: 8px; min-width: 10rem; }
+.xiaoliuren-palace-result { border: 2px solid var(--gold, #b8860b); }
+.xiaoliuren-palace-label { color: var(--muted); font-size: 0.85rem; }
+.xiaoliuren-palace-name { font-size: 2rem; font-weight: 700; margin: 0.3rem 0 0.2rem; }
+.xiaoliuren-palace-en { font-size: 0.82rem; color: var(--muted); }
+.xiaoliuren-palace-attrs { color: var(--muted); font-size: 0.88rem; margin-top: 0.2rem; }
+.xiaoliuren-grade { display: inline-block; margin-top: 0.5rem; padding: 0.1rem 0.7rem; border-radius: 999px; font-size: 0.85rem; border: 1px solid currentColor; }
+.xiaoliuren-grade[data-grade="大吉"], .xiaoliuren-grade[data-grade="吉"] { color: #1e7e34; }
+.xiaoliuren-grade[data-grade="平"] { color: var(--muted); }
+.xiaoliuren-grade[data-grade="凶"] { color: #c0392b; }
+.xiaoliuren-verse { max-width: 34rem; margin: 0 auto; text-align: center; }
+.xiaoliuren-verse h3 { margin: 1rem 0 0.4rem; font-size: 1.05rem; }
+.xiaoliuren-omen { font-weight: 600; margin: 0.3rem 0; }
+.xiaoliuren-poem { color: var(--muted); line-height: 1.9; font-size: 0.95rem; }
+.xiaoliuren-interpret { margin-top: 2rem; }
+.xiaoliuren-disclaimer { color: var(--muted); font-size: 0.9rem; }
+.xiaoliuren-card { padding: 1.5rem; border: 1px solid var(--border, #e0e0e0); border-radius: 8px; }
+.xiaoliuren-retry { margin-top: 1rem; }
+#xiaoliuren-interpret-btn { padding: 0.6rem 2rem; font-size: 1.1rem; cursor: pointer; }
+
+@media (max-width: 640px) {
+  .xiaoliuren-step { padding: 1.1rem; }
+  .xiaoliuren-numbers label { display: flex; margin: 0 0 0.6rem; }
+  .xiaoliuren-numbers input { width: 100%; }
+  .xiaoliuren-palace-display { flex-direction: column; align-items: center; }
+  .xiaoliuren-palace-card { width: 100%; max-width: 18rem; }
+}
+
 /* ---------- 首页 ---------- */
 
 .home-hero {

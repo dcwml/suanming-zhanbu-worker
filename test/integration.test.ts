@@ -281,21 +281,23 @@ describe("fortune nav dropdown", () => {
 describe("divination nav dropdown", () => {
   const count = (html: string, needle: string): number => html.split(needle).length - 1;
 
-  it("zh home renders the 占卜 dropdown with liuyao + meihua links", async () => {
+  it("zh home renders the 占卜 dropdown with liuyao, meihua and xiaoliuren links", async () => {
     const res = await fetchNoFollow("/zh/");
     expect(res.status).toBe(200);
     const html = await res.text();
     expect(html).toContain(">占卜<span");
     expect(html).toContain('href="/zh/liuyao/"');
     expect(html).toContain('href="/zh/meihua/"');
+    expect(html).toContain('href="/zh/xiaoliuren/"');
   });
 
-  it("liuyao and meihua appear only inside the dropdown within the nav region", async () => {
+  it("liuyao, meihua and xiaoliuren appear only inside the dropdown within the nav region", async () => {
     const res = await fetchNoFollow("/zh/");
     const html = await res.text();
     const navRegion = html.slice(html.indexOf('<div class="nav-links">'), html.indexOf('class="lang-switch"'));
     expect(count(navRegion, 'href="/zh/liuyao/"')).toBe(1);
     expect(count(navRegion, 'href="/zh/meihua/"')).toBe(1);
+    expect(count(navRegion, 'href="/zh/xiaoliuren/"')).toBe(1);
   });
 
   it("divination dropdown sits between bazi and zeji in nav order", async () => {
@@ -325,20 +327,30 @@ describe("divination nav dropdown", () => {
     expect(html).toContain('href="/zh/meihua/" class="active" aria-current="page"');
   });
 
-  it("en home renders the Divination dropdown with both tool links", async () => {
+  it("xiaoliuren page marks its dropdown link and toggle active", async () => {
+    const res = await fetchNoFollow("/zh/xiaoliuren/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain('nav-dropdown-toggle active');
+    expect(html).toContain('href="/zh/xiaoliuren/" class="active" aria-current="page"');
+  });
+
+  it("en home renders the Divination dropdown with all three tool links", async () => {
     const res = await fetchNoFollow("/en/");
     expect(res.status).toBe(200);
     const html = await res.text();
     expect(html).toContain(">Divination<span");
     expect(html).toContain('href="/en/liuyao/"');
     expect(html).toContain('href="/en/meihua/"');
+    expect(html).toContain('href="/en/xiaoliuren/"');
   });
 
-  it("footer tools column carries the meihua link", async () => {
+  it("footer tools column carries the meihua and xiaoliuren links", async () => {
     const res = await fetchNoFollow("/zh/");
     const html = await res.text();
     expect(html).toContain('aria-label="工具"');
     expect(html).toContain('href="/zh/meihua/"');
+    expect(html).toContain('href="/zh/xiaoliuren/"');
   });
 });
 
@@ -447,6 +459,35 @@ describe("meihua page", () => {
 
   it("full-stack: invalid interpret request gets JSON 400", async () => {
     const res = await SELF.fetch("http://localhost/api/meihua/interpret", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ part: "nope" }),
+    });
+    expect(res.status).toBe(400);
+    const json = (await res.json()) as { ok: boolean };
+    expect(json.ok).toBe(false);
+  });
+});
+
+describe("xiaoliuren page", () => {
+  it("serves /zh/xiaoliuren/ with form skeleton and scripts", async () => {
+    const res = await SELF.fetch("http://localhost/zh/xiaoliuren/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain('id="xiaoliuren-app"');
+    expect(html).toContain("/assets/xiaoliuren.js");
+    expect(html).toContain("lunar.min.js");
+  });
+
+  it("serves /en/xiaoliuren/ in English", async () => {
+    const res = await SELF.fetch("http://localhost/en/xiaoliuren/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain('data-lang="en"');
+  });
+
+  it("full-stack: invalid interpret request gets JSON 400", async () => {
+    const res = await SELF.fetch("http://localhost/api/xiaoliuren/interpret", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ part: "nope" }),

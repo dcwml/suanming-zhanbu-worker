@@ -1,0 +1,52 @@
+<div class="xiaoliuren-app" id="xiaoliuren-app" data-lang="zh">
+  <h1>小六壬</h1>
+  <p class="lead">掐指一算，即刻成课。依民间小六壬法，以农历月日时或三个数字，于大安、留连、速喜、赤口、小吉、空亡六宫起课，AI 解读吉凶趋势。</p>
+
+  <section class="xiaoliuren-step" id="xiaoliuren-step1">
+    <h2>第一步 · 凝神</h2>
+    <p class="xiaoliuren-guide">小六壬贵在念头发动之时。静心凝神，将意念集中于所问之事，写下你的问题。</p>
+    <label class="xiaoliuren-question-label">所求之事
+      <input type="text" id="xiaoliuren-question" maxlength="200" placeholder="例如：这次出差谈的客户能不能签下来" required>
+    </label>
+  </section>
+
+  <section class="xiaoliuren-step" id="xiaoliuren-step2">
+    <h2>第二步 · 起课</h2>
+    <fieldset class="xiaoliuren-method">
+      <legend>起课方式</legend>
+      <label><input type="radio" name="xiaoliuren-method" value="time" checked>时间起课 · 以当下农历月日时起课</label>
+      <label><input type="radio" name="xiaoliuren-method" value="number">数字起课 · 随心报三个数字</label>
+    </fieldset>
+    <p class="xiaoliuren-hint" id="xiaoliuren-time-hint">以你点击「起课」的时刻为准：月上起月、日上起日、时上起课，三数依次落于六宫。</p>
+    <div class="xiaoliuren-numbers" id="xiaoliuren-numbers" hidden>
+      <label for="xiaoliuren-num-1">第一个数
+        <input type="number" id="xiaoliuren-num-1" min="1" max="100000" step="1" placeholder="例如：3">
+      </label>
+      <label for="xiaoliuren-num-2">第二个数
+        <input type="number" id="xiaoliuren-num-2" min="1" max="100000" step="1" placeholder="例如：5">
+      </label>
+      <label for="xiaoliuren-num-3">第三个数
+        <input type="number" id="xiaoliuren-num-3" min="1" max="100000" step="1" placeholder="例如：7">
+      </label>
+      <p class="xiaoliuren-hint">三数依次代月、日、时：首数自大安起数，次数接前宫而数，末数定落宫。</p>
+    </div>
+    <button type="button" id="xiaoliuren-cast">起课</button>
+    <p class="xiaoliuren-error" id="xiaoliuren-lib-error" hidden></p>
+  </section>
+
+  <section class="xiaoliuren-step" id="xiaoliuren-step3">
+    <h2>第三步 · 课式与解读</h2>
+    <div id="xiaoliuren-result" hidden></div>
+    <button type="button" id="xiaoliuren-interpret-btn" hidden>开始解读</button>
+    <section id="xiaoliuren-interpret" class="xiaoliuren-interpret" hidden>
+      <p class="xiaoliuren-disclaimer">以下解读侧重传统术数推演，具体应用请结合自身情况。</p>
+      <article class="xiaoliuren-card"><div class="xiaoliuren-card-body"></div></article>
+    </section>
+    <p class="xiaoliuren-error" id="xiaoliuren-error" role="alert" hidden></p>
+  </section>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lunar-javascript/1.7.7/lunar.min.js" defer onerror="var s=document.createElement('script');s.src='https://cdn.staticfile.org/lunar-javascript/1.7.7/lunar.min.js';document.head.appendChild(s)"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js" defer></script>
+<script src="/assets/xiaoliuren.js" defer></script>

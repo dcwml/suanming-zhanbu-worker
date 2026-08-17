@@ -1,0 +1,52 @@
+<div class="xiaoliuren-app" id="xiaoliuren-app" data-lang="en">
+  <h1>Xiao Liu Ren Divination</h1>
+  <p class="lead">A reading at the snap of your fingers. Following the folk Xiao Liu Ren (Small Six Ren) method, cast a chart from the current lunar month, day and hour — or any three numbers — across the six palaces of Da An, Liu Lian, Su Xi, Chi Kou, Xiao Ji and Kong Wang, with AI interpretations.</p>
+
+  <section class="xiaoliuren-step" id="xiaoliuren-step1">
+    <h2>Step 1 · Focus</h2>
+    <p class="xiaoliuren-guide">Xiao Liu Ren treasures the exact moment the question forms. Calm your mind, hold your question in focus, and write it down.</p>
+    <label class="xiaoliuren-question-label">Your question
+      <input type="text" id="xiaoliuren-question" maxlength="200" placeholder="e.g. Will the client I am visiting sign the deal?" required>
+    </label>
+  </section>
+
+  <section class="xiaoliuren-step" id="xiaoliuren-step2">
+    <h2>Step 2 · Cast</h2>
+    <fieldset class="xiaoliuren-method">
+      <legend>Casting method</legend>
+      <label><input type="radio" name="xiaoliuren-method" value="time" checked>Time casting · the current lunar month, day and hour</label>
+      <label><input type="radio" name="xiaoliuren-method" value="number">Number casting · any three numbers that come to mind</label>
+    </fieldset>
+    <p class="xiaoliuren-hint" id="xiaoliuren-time-hint">The moment you press "Cast" is taken as the oracle: the month is counted over the six palaces, the day continues from the month palace, and the hour settles the final palace.</p>
+    <div class="xiaoliuren-numbers" id="xiaoliuren-numbers" hidden>
+      <label for="xiaoliuren-num-1">First number
+        <input type="number" id="xiaoliuren-num-1" min="1" max="100000" step="1" placeholder="e.g. 3">
+      </label>
+      <label for="xiaoliuren-num-2">Second number
+        <input type="number" id="xiaoliuren-num-2" min="1" max="100000" step="1" placeholder="e.g. 5">
+      </label>
+      <label for="xiaoliuren-num-3">Third number
+        <input type="number" id="xiaoliuren-num-3" min="1" max="100000" step="1" placeholder="e.g. 7">
+      </label>
+      <p class="xiaoliuren-hint">The three numbers stand for month, day and hour: count the first from Da An, the second from the palace it lands in, and the third settles the final palace.</p>
+    </div>
+    <button type="button" id="xiaoliuren-cast">Cast Chart</button>
+    <p class="xiaoliuren-error" id="xiaoliuren-lib-error" hidden></p>
+  </section>
+
+  <section class="xiaoliuren-step" id="xiaoliuren-step3">
+    <h2>Step 3 · Chart &amp; Reading</h2>
+    <div id="xiaoliuren-result" hidden></div>
+    <button type="button" id="xiaoliuren-interpret-btn" hidden>Start Reading</button>
+    <section id="xiaoliuren-interpret" class="xiaoliuren-interpret" hidden>
+      <p class="xiaoliuren-disclaimer">The reading below is grounded in traditional divination reasoning — please apply it in light of your own circumstances.</p>
+      <article class="xiaoliuren-card"><div class="xiaoliuren-card-body"></div></article>
+    </section>
+    <p class="xiaoliuren-error" id="xiaoliuren-error" role="alert" hidden></p>
+  </section>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lunar-javascript/1.7.7/lunar.min.js" defer onerror="var s=document.createElement('script');s.src='https://cdn.staticfile.org/lunar-javascript/1.7.7/lunar.min.js';document.head.appendChild(s)"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js" defer></script>
+<script src="/assets/xiaoliuren.js" defer></script>

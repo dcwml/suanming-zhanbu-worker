@@ -40,6 +40,11 @@
       "name": "MEIHUA_RATE_LIMITER",
       "namespace_id": "1004",
       "simple": { "limit": 10, "period": 60 }
+    },
+    {
+      "name": "XIAOLIUREN_RATE_LIMITER",
+      "namespace_id": "1005",
+      "simple": { "limit": 10, "period": 60 }
     }
   ],
   "observability": {
