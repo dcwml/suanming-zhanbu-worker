@@ -1,0 +1,49 @@
+<div class="meihua-app" id="meihua-app" data-lang="en">
+  <h1>Plum Blossom Numerology</h1>
+  <p class="lead">Divine at the very moment the question arises. Following Shao Yong's Plum Blossom method, cast a hexagram from the present time or two numbers; the primary, mutual and changed hexagrams with body-application five-element analysis are read by AI.</p>
+
+  <section class="meihua-step" id="meihua-step1">
+    <h2>Step 1 · Focus</h2>
+    <p class="meihua-guide">Plum Blossom divination treasures the exact moment the question forms. Calm your mind, hold your question in focus, then choose a casting method.</p>
+    <label class="meihua-question-label">Your question
+      <input type="text" id="meihua-question" maxlength="200" placeholder="e.g. Will the deal I am negotiating close?" required>
+    </label>
+  </section>
+
+  <section class="meihua-step" id="meihua-step2">
+    <h2>Step 2 · Cast</h2>
+    <fieldset class="meihua-method">
+      <legend>Casting method</legend>
+      <label><input type="radio" name="meihua-method" value="time" checked>Time casting · the current lunar year, month, day and hour</label>
+      <label><input type="radio" name="meihua-method" value="number">Number casting · any two numbers that come to mind</label>
+    </fieldset>
+    <p class="meihua-hint" id="meihua-time-hint">The moment you press "Cast" is taken as the oracle: the sum of lunar year, month and day yields the upper trigram; adding the hour yields the lower; the total marks the moving line.</p>
+    <div class="meihua-numbers" id="meihua-numbers" hidden>
+      <label for="meihua-num-1">First number
+        <input type="number" id="meihua-num-1" min="1" max="100000" step="1" placeholder="e.g. 5">
+      </label>
+      <label for="meihua-num-2">Second number
+        <input type="number" id="meihua-num-2" min="1" max="100000" step="1" placeholder="e.g. 10">
+      </label>
+      <p class="meihua-hint">The first number mod 8 gives the upper trigram, the second the lower, and their sum mod 6 the moving line.</p>
+    </div>
+    <button type="button" id="meihua-cast">Cast Hexagram</button>
+    <p class="meihua-error" id="meihua-lib-error" hidden></p>
+  </section>
+
+  <section class="meihua-step" id="meihua-step3">
+    <h2>Step 3 · Chart &amp; Reading</h2>
+    <div id="meihua-result" hidden></div>
+    <button type="button" id="meihua-interpret-btn" hidden>Start Reading</button>
+    <section id="meihua-interpret" class="meihua-interpret" hidden>
+      <p class="meihua-disclaimer">The reading below is grounded in traditional body-application five-element reasoning — please apply it in light of your own circumstances.</p>
+      <article class="meihua-card"><div class="meihua-card-body"></div></article>
+    </section>
+    <p class="meihua-error" id="meihua-error" role="alert" hidden></p>
+  </section>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lunar-javascript/1.7.7/lunar.min.js" defer onerror="var s=document.createElement('script');s.src='https://cdn.staticfile.org/lunar-javascript/1.7.7/lunar.min.js';document.head.appendChild(s)"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js" defer></script>
+<script src="/assets/meihua.js" defer></script>

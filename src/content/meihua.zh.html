@@ -1,0 +1,49 @@
+<div class="meihua-app" id="meihua-app" data-lang="zh">
+  <h1>梅花易数</h1>
+  <p class="lead">心动即占。依邵雍梅花易数，以当下时刻或两个数字起卦，排本卦、互卦、变卦与体用五行，AI 解读吉凶趋势。</p>
+
+  <section class="meihua-step" id="meihua-step1">
+    <h2>第一步 · 凝神</h2>
+    <p class="meihua-guide">梅花易数贵在念头发动之时。静心凝神，将意念集中于所问之事，然后选择起卦方式。</p>
+    <label class="meihua-question-label">所求之事
+      <input type="text" id="meihua-question" maxlength="200" placeholder="例如：这次洽谈的合作能否谈成" required>
+    </label>
+  </section>
+
+  <section class="meihua-step" id="meihua-step2">
+    <h2>第二步 · 起卦</h2>
+    <fieldset class="meihua-method">
+      <legend>起卦方式</legend>
+      <label><input type="radio" name="meihua-method" value="time" checked>时间起卦 · 以当下农历年月日时成卦</label>
+      <label><input type="radio" name="meihua-method" value="number">数字起卦 · 随心报两个数字</label>
+    </fieldset>
+    <p class="meihua-hint" id="meihua-time-hint">以你点击「起卦」的时刻为准：年月日之和除以八余数为上卦，加时辰之和为下卦，总数除以六余数为动爻。</p>
+    <div class="meihua-numbers" id="meihua-numbers" hidden>
+      <label for="meihua-num-1">第一个数
+        <input type="number" id="meihua-num-1" min="1" max="100000" step="1" placeholder="例如：5">
+      </label>
+      <label for="meihua-num-2">第二个数
+        <input type="number" id="meihua-num-2" min="1" max="100000" step="1" placeholder="例如：10">
+      </label>
+      <p class="meihua-hint">首数除以八余数为上卦，次数余数为下卦，两数之和除以六余数为动爻。</p>
+    </div>
+    <button type="button" id="meihua-cast">起卦</button>
+    <p class="meihua-error" id="meihua-lib-error" hidden></p>
+  </section>
+
+  <section class="meihua-step" id="meihua-step3">
+    <h2>第三步 · 排盘与解读</h2>
+    <div id="meihua-result" hidden></div>
+    <button type="button" id="meihua-interpret-btn" hidden>开始解读</button>
+    <section id="meihua-interpret" class="meihua-interpret" hidden>
+      <p class="meihua-disclaimer">以下解读侧重传统易学体用推演，具体应用请结合自身情况。</p>
+      <article class="meihua-card"><div class="meihua-card-body"></div></article>
+    </section>
+    <p class="meihua-error" id="meihua-error" role="alert" hidden></p>
+  </section>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lunar-javascript/1.7.7/lunar.min.js" defer onerror="var s=document.createElement('script');s.src='https://cdn.staticfile.org/lunar-javascript/1.7.7/lunar.min.js';document.head.appendChild(s)"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js" defer></script>
+<script src="/assets/meihua.js" defer></script>

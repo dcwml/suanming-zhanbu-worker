@@ -35,6 +35,11 @@
       "name": "ZEJI_RATE_LIMITER",
       "namespace_id": "1003",
       "simple": { "limit": 10, "period": 60 }
+    },
+    {
+      "name": "MEIHUA_RATE_LIMITER",
+      "namespace_id": "1004",
+      "simple": { "limit": 10, "period": 60 }
     }
   ],
   "observability": {

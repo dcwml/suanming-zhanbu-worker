@@ -1,5 +1,5 @@
 import { OTHER_LANG, SITE_NAME, SITE_NAME_EN, pagePath, type Lang } from "../config/site";
-import { navPages } from "../pages/registry";
+import { findPage, navPages } from "../pages/registry";
 import { DAILY_ARCHIVE_META } from "../pages/daily";
 import { WEEKLY_ARCHIVE_META } from "../pages/weekly";
 import { MONTHLY_ARCHIVE_META } from "../pages/monthly";
@@ -14,29 +14,51 @@ export const FORTUNE_NAV_ITEMS: readonly { slug: string; label: Record<Lang, str
   { slug: MONTHLY_ARCHIVE_META.slug, label: { zh: "每月运势", en: "Monthly Horoscope" } },
 ];
 
+/** 「占卜」下拉菜单：标签直接取 registry 页面标题（单一来源），不重复维护文案 */
+export const DIVINATION_NAV_LABEL: Record<Lang, string> = { zh: "占卜", en: "Divination" };
+
+export const DIVINATION_NAV_ITEMS: readonly { slug: string; label: Record<Lang, string> }[] = [
+  "liuyao",
+  "meihua",
+].map((slug) => ({ slug, label: { zh: findPage(slug)!.meta.zh.title, en: findPage(slug)!.meta.en.title } }));
+
 const FORTUNE_SLUGS = FORTUNE_NAV_ITEMS.map((item) => item.slug);
+const DIVINATION_SLUGS = DIVINATION_NAV_ITEMS.map((item) => item.slug);
+
+function renderDropdown(
+  lang: Lang,
+  currentSlug: string,
+  label: Record<Lang, string>,
+  items: readonly { slug: string; label: Record<Lang, string> }[],
+): string {
+  const inside = items.some((item) => item.slug === currentSlug);
+  const links = items
+    .map((item) => {
+      const active = item.slug === currentSlug ? ' class="active" aria-current="page"' : "";
+      return `<a href="${pagePath(lang, item.slug)}"${active}>${escapeHtml(item.label[lang])}</a>`;
+    })
+    .join("\n          ");
+  return `<div class="nav-dropdown">
+          <button type="button" class="nav-dropdown-toggle${inside ? " active" : ""}" aria-haspopup="true" aria-expanded="false">${escapeHtml(label[lang])}<span class="nav-caret" aria-hidden="true">▾</span></button>
+          <div class="nav-dropdown-menu">
+          ${links}
+          </div>
+        </div>`;
+}
 
 /** langSwitchSlug 缺省时语言切换指向当前页的另一语言版本；
  *  404/500 等无真实页面的场景应显式传 "" 指向对方语言首页。 */
 export function renderNav(lang: Lang, currentSlug: string, langSwitchSlug?: string): string {
-  const flatLinks = navPages()
-    .map((p) => {
-      const active = p.slug === currentSlug ? ' class="active" aria-current="page"' : "";
-      return `<a href="${pagePath(lang, p.slug)}"${active}>${escapeHtml(p.meta[lang].title)}</a>`;
-    })
-    .join("\n        ");
-
-  const inFortune = FORTUNE_SLUGS.includes(currentSlug);
-  const fortuneItems = FORTUNE_NAV_ITEMS.map((item) => {
-    const active = item.slug === currentSlug ? ' class="active" aria-current="page"' : "";
-    return `<a href="${pagePath(lang, item.slug)}"${active}>${escapeHtml(item.label[lang])}</a>`;
-  }).join("\n          ");
-  const dropdown = `<div class="nav-dropdown">
-          <button type="button" class="nav-dropdown-toggle${inFortune ? " active" : ""}" aria-haspopup="true" aria-expanded="false">${escapeHtml(FORTUNE_NAV_LABEL[lang])}<span class="nav-caret" aria-hidden="true">▾</span></button>
-          <div class="nav-dropdown-menu">
-          ${fortuneItems}
-          </div>
-        </div>`;
+  // 导航顺序（单一来源）：首页 · 八字排盘 · [占卜 ▾] · 择吉日 · [运势 ▾]
+  // 「占卜」下拉占六爻原平铺位置（八字之后）；六爻/梅花均 inNav: false，不在平铺链接中
+  const chunks: string[] = [];
+  for (const p of navPages()) {
+    const active = p.slug === currentSlug ? ' class="active" aria-current="page"' : "";
+    chunks.push(`<a href="${pagePath(lang, p.slug)}"${active}>${escapeHtml(p.meta[lang].title)}</a>`);
+    if (p.slug === "bazi") chunks.push(renderDropdown(lang, currentSlug, DIVINATION_NAV_LABEL, DIVINATION_NAV_ITEMS));
+  }
+  chunks.push(renderDropdown(lang, currentSlug, FORTUNE_NAV_LABEL, FORTUNE_NAV_ITEMS));
+  const links = chunks.join("\n        ");
 
   const other = OTHER_LANG[lang];
   const switchLabel = other === "en" ? "English" : "中文";
@@ -48,8 +70,7 @@ export function renderNav(lang: Lang, currentSlug: string, langSwitchSlug?: stri
         <span class="brand-name">${escapeHtml(siteName)}</span>
       </a>
       <div class="nav-links">
-        ${flatLinks}
-        ${dropdown}
+        ${links}
       </div>
       <a class="lang-switch" href="${pagePath(other, langSwitchSlug ?? currentSlug)}">${switchLabel}</a>
     </nav>`;

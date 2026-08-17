@@ -5,6 +5,8 @@ import baziZh from "../content/bazi.zh.html";
 import baziEn from "../content/bazi.en.html";
 import liuyaoZh from "../content/liuyao.zh.html";
 import liuyaoEn from "../content/liuyao.en.html";
+import meihuaZh from "../content/meihua.zh.html";
+import meihuaEn from "../content/meihua.en.html";
 import zejiZh from "../content/zeji.zh.html";
 import zejiEn from "../content/zeji.en.html";
 import notfoundZh from "../content/notfound.zh.html";
@@ -49,12 +51,22 @@ export const PAGES: readonly PageEntry[] = [
   },
   {
     slug: "liuyao",
-    inNav: true,
+    // 顶部导航改走「占卜」下拉（见 layout/nav.ts），不再出现在平铺链接里
+    inNav: false,
     meta: {
       zh: { title: "六爻起卦", description: "在线六爻起卦：铜钱摇卦、周易卦辞，AI 智能解读吉凶趋势。" },
       en: { title: "I Ching Casting", description: "Free online I Ching coin-toss hexagram casting with AI-powered readings." },
     },
     content: { zh: liuyaoZh, en: liuyaoEn },
+  },
+  {
+    slug: "meihua",
+    inNav: false,
+    meta: {
+      zh: { title: "梅花易数", description: "在线梅花易数：以当下时刻或两个数字起卦，排本卦、互卦、变卦与体用五行，AI 智能解读吉凶趋势。" },
+      en: { title: "Plum Blossom Numerology", description: "Free Plum Blossom Numerology (Meihua Yishu) casting by the present time or two numbers — primary, mutual and changed hexagrams with body-application five-element AI readings." },
+    },
+    content: { zh: meihuaZh, en: meihuaEn },
   },
   {
     slug: "zeji",
