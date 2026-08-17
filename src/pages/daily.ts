@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260818Zh from "../content/daily/2026-08-18.zh.html";
+import daily20260818En from "../content/daily/2026-08-18.en.html";
 import daily20260817Zh from "../content/daily/2026-08-17.zh.html";
 import daily20260817En from "../content/daily/2026-08-17.en.html";
 import daily20260816Zh from "../content/daily/2026-08-16.zh.html";
@@ -50,6 +52,14 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-08-18",
+    meta: {
+      zh: { title: "2026年8月18日宜忌·鼠", description: "2026年8月18日黄历宜忌：青龙黄道吉日，三合临日，宜嫁娶、祈福求嗣、出行、交易立券、入宅移徙、修造动土、安葬入殓，忌斋醮、开市、开仓、作灶、造船，冲马煞南；生肖鼠今日运势与吉神三合科普。" },
+      en: { title: "Daily Almanac — August 18, 2026 (Rat)", description: "August 18, 2026 Chinese almanac: a Qīnglóng Yellow Path day with the Three Harmony star present — favorable for marriage, praying for blessings and offspring, travel, trading and signing contracts, moving into a house, relocating, construction, breaking ground, burial and encoffining; avoid Daoist rites, opening for business, opening the granary, installing a stove and building ships; clash Horse, Sha South; Rat zodiac fortune and the Sānhé Three Harmony auspicious spirit." },
+    },
+    content: { zh: daily20260818Zh, en: daily20260818En },
+  },
   {
     date: "2026-08-17",
     meta: {
