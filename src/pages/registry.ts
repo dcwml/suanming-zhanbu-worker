@@ -80,7 +80,7 @@ export const PAGES: readonly PageEntry[] = [
         },
         {
           question: "这个工具的结果权威吗？",
-          answer: "传统择吉流派众多、规则互有矛盾，本工具采用的是一套公开透明的规则集，结果仅供参考，重要事务请结合自身情况判断。",
+          answer: "传统择吉流派众多、规则互有矛盾，本工具采用的是一套公开透明的规则集，解读侧重传统择吉推演，具体应用请结合自身情况。",
         },
       ],
       en: [
@@ -98,7 +98,7 @@ export const PAGES: readonly PageEntry[] = [
         },
         {
           question: "Are this tool's results authoritative?",
-          answer: "Traditional date-selection schools disagree with each other. This tool applies one transparent rule set; results are for reference only — use your own judgement for important matters.",
+          answer: "Traditional date-selection schools disagree with each other. This tool applies one transparent rule set; the results reflect traditional date-selection reasoning — please apply them in light of your own circumstances.",
         },
       ],
     },

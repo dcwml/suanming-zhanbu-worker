@@ -20,11 +20,11 @@ function baseReq(): ZejiInterpretRequest {
 describe("buildZejiSystemPrompt", () => {
   it("zh demands caveat wording and forbids AI mentions", () => {
     const s = buildZejiSystemPrompt("zh");
-    expect(s).toContain("仅供参考");
+    expect(s).toContain("结合自身情况");
     expect(s).not.toMatch(/AI|LLM/i);
   });
   it("en variant mentions caveat", () => {
-    expect(buildZejiSystemPrompt("en")).toContain("for reference only");
+    expect(buildZejiSystemPrompt("en")).toContain("in light of");
   });
 });
 

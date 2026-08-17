@@ -6,7 +6,10 @@ import { escapeHtml } from "../seo/meta";
 export function renderFooter(lang: Lang): string {
   const name = lang === "zh" ? SITE_NAME : SITE_NAME_EN;
   const slogan = lang === "zh" ? SITE_SLOGAN : SITE_SLOGAN_EN;
-  const note = lang === "zh" ? "内容仅供娱乐参考" : "For entertainment purposes only";
+  const note =
+    lang === "zh"
+      ? "内容侧重传统术数解读，具体应用请结合自身情况"
+      : "Content is grounded in traditional divination arts — please apply it in light of your own circumstances.";
   const desc =
     lang === "zh"
       ? "以传统术数与 AI 解读，在线提供八字排盘与六爻起卦。"

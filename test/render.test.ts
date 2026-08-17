@@ -37,10 +37,10 @@ describe("renderPage", () => {
     expect(html).toContain('class="footer-main"');
     expect(html).toContain('class="footer-bottom"');
     expect(html).toContain("命理 · 占卜 · 传统文化");
-    expect(html).toContain("内容仅供娱乐参考");
+    expect(html).toContain("内容侧重传统术数解读，具体应用请结合自身情况");
     expect(html).toContain('href="/zh/daily/"');
     expect(enHtml).toContain("Fortune · Divination · Tradition");
-    expect(enHtml).toContain("For entertainment purposes only");
+    expect(enHtml).toContain("in light of your own circumstances");
   });
 
   it("links favicon to the seal logo", () => {
