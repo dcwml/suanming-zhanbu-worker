@@ -9,9 +9,21 @@ npm install
 npm run dev        # http://localhost:8787
 npm test           # vitest（含 Workers 运行时集成测试）
 npm run typecheck
+npm run fortune:week -- 2026-08-17   # 周运数据骨架生成器（参数必须是周一）
+npm run fortune:month -- 2026-08     # 月运数据骨架生成器
 ```
 
 LLM 解读接口（八字、六爻、择吉）需要 LLM 密钥：本地在 `.dev.vars` 配置 `LLM_API_KEY`（不入库）；`LLM_BASE_URL`/`LLM_MODEL` 在 `wrangler.jsonc` 的 `vars` 中。
+
+## 运势栏目（每日 / 每周 / 每月）
+
+三个纯静态、零运行时 LLM 的内容栏目：正文烘焙进仓库内 HTML 片段，历法数据一律来自 lunar-javascript（生成期运行 `npm run almanac` / `fortune:week` / `fortune:month` 获取）。
+
+- **每日宜忌** `/:lang/daily/YYYY-MM-DD/`：黄历宜忌 + 当日生肖 + 玄学科普，生产流程见 [每日内容生产手册](docs/superpowers/daily-content-playbook.md)。
+- **每周运势** `/:lang/weekly/YYYY-MM-DD/`（周一为键）：特吉/次吉/忠告生肖 + 十二生肖六维 + 逐日速览，每周日发布，生产流程见 [周运内容生产手册](docs/superpowers/weekly-content-playbook.md)。
+- **每月运势** `/:lang/monthly/YYYY-MM/`：月柱节气总览 + 十二生肖六维 + 吉日速查，每月末发布，生产流程见 [月运内容生产手册](docs/superpowers/monthly-content-playbook.md)。
+
+新增周运/月运文章只需两步：`src/content/weekly|monthly/` 加中英两份片段 → `src/pages/weekly.ts|monthly.ts` 的 POSTS 数组加一条。SEO、sitemap、导航全部自动派生。设计决策见 [weekly/monthly 栏目设计文档](docs/superpowers/specs/2026-08-17-weekly-monthly-columns-design.md)。
 
 ## 新增一个页面（三步）
 

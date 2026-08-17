@@ -1,5 +1,7 @@
 import type { PageEntry } from "../pages/registry";
 import type { DailyPost } from "../pages/daily";
+import type { WeeklyPost } from "../pages/weekly";
+import type { MonthlyPost } from "../pages/monthly";
 import {
   HREFLANG_CODE,
   SITE_NAME,
@@ -19,6 +21,28 @@ interface BreadcrumbItem {
 /** 序列化为 JSON-LD script 标签；转义所有 "<" 防止 </script> 注入 */
 export function toJsonLdScript(data: object): string {
   return `<script type="application/ld+json">${JSON.stringify(data).replace(/</g, "\\u003c")}</script>`;
+}
+
+/** daily / weekly / monthly 共用的 Article JSON-LD 构建 */
+function articleJsonLdBase(opts: {
+  headline: string;
+  description: string;
+  date: string;
+  slug: string;
+  lang: Lang;
+}): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: opts.headline,
+    description: opts.description,
+    datePublished: opts.date,
+    dateModified: opts.date,
+    author: { "@type": "Organization", name: opts.lang === "zh" ? SITE_NAME : SITE_NAME_EN },
+    url: absoluteUrl(pagePath(opts.lang, opts.slug)),
+    mainEntityOfPage: { "@type": "WebPage", "@id": absoluteUrl(pagePath(opts.lang, opts.slug)) },
+    inLanguage: HREFLANG_CODE[opts.lang],
+  };
 }
 
 export function websiteJsonLd(): Record<string, unknown> {
@@ -68,26 +92,42 @@ export function breadcrumbJsonLd(page: PageEntry, lang: Lang): Record<string, un
 }
 
 export function articleJsonLd(post: DailyPost, lang: Lang): Record<string, unknown> {
-  return {
-    "@context": "https://schema.org",
-    "@type": "Article",
+  return articleJsonLdBase({
     headline: post.meta[lang].title,
     description: post.meta[lang].description,
-    datePublished: post.date,
-    dateModified: post.date,
-    author: { "@type": "Organization", name: lang === "zh" ? SITE_NAME : SITE_NAME_EN },
-    url: absoluteUrl(pagePath(lang, `daily/${post.date}`)),
-    mainEntityOfPage: { "@type": "WebPage", "@id": absoluteUrl(pagePath(lang, `daily/${post.date}`)) },
-    inLanguage: HREFLANG_CODE[lang],
-  };
+    date: post.date,
+    slug: `daily/${post.date}`,
+    lang,
+  });
 }
 
-export function collectionPageJsonLd(lang: Lang): Record<string, unknown> {
+export function weeklyArticleJsonLd(post: WeeklyPost, lang: Lang): Record<string, unknown> {
+  return articleJsonLdBase({
+    headline: post.meta[lang].title,
+    description: post.meta[lang].description,
+    date: post.monday,
+    slug: `weekly/${post.monday}`,
+    lang,
+  });
+}
+
+export function monthlyArticleJsonLd(post: MonthlyPost, lang: Lang): Record<string, unknown> {
+  return articleJsonLdBase({
+    headline: post.meta[lang].title,
+    description: post.meta[lang].description,
+    date: `${post.month}-01`,
+    slug: `monthly/${post.month}`,
+    lang,
+  });
+}
+
+/** 归档页 CollectionPage JSON-LD；name/slug 缺省时为 daily 归档（今日宜忌） */
+export function collectionPageJsonLd(lang: Lang, name?: string, slug = "daily"): Record<string, unknown> {
   return {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: lang === "zh" ? "今日宜忌" : "Daily Almanac",
-    url: absoluteUrl(pagePath(lang, "daily")),
+    name: name ?? (lang === "zh" ? "今日宜忌" : "Daily Almanac"),
+    url: absoluteUrl(pagePath(lang, slug)),
     inLanguage: HREFLANG_CODE[lang],
   };
 }

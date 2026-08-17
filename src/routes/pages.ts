@@ -1,7 +1,18 @@
 import { Hono } from "hono";
 import { LANGS, pagePath, type Lang } from "../config/site";
-import { renderDailyArchive, renderDailyPost, renderPage, renderPageWithStats } from "../layout/render";
+import {
+  renderDailyArchive,
+  renderDailyPost,
+  renderMonthlyArchive,
+  renderMonthlyPost,
+  renderPage,
+  renderPageWithStats,
+  renderWeeklyArchive,
+  renderWeeklyPost,
+} from "../layout/render";
 import { dailyArchive, findDailyPost } from "../pages/daily";
+import { findWeeklyPost, weeklyArchive } from "../pages/weekly";
+import { findMonthlyPost, monthlyArchive } from "../pages/monthly";
 import { findPage } from "../pages/registry";
 import { buildRobotsTxt, buildSitemapXml } from "../seo/sitemap";
 import { getRealIp, recordPageView, getStats } from "../stats";
@@ -62,6 +73,72 @@ pages.get("/:lang/daily/:date/", (c) => {
   const post = findDailyPost(date);
   if (!post) return c.notFound();
   return c.html(renderDailyPost(post, lang));
+});
+
+// /zh/weekly → 301 补尾斜杠（无尾斜杠归档页）
+pages.get("/:lang/weekly", (c) => {
+  const lang = c.req.param("lang");
+  if (!isLang(lang)) return c.notFound();
+  return c.redirect(pagePath(lang, "weekly"), 301);
+});
+
+// /zh/weekly/ → 归档页
+pages.get("/:lang/weekly/", (c) => {
+  const lang = c.req.param("lang");
+  if (!isLang(lang)) return c.notFound();
+  return c.html(renderWeeklyArchive(weeklyArchive(), lang));
+});
+
+// /zh/weekly/2026-08-17 → 301 补尾斜杠
+pages.get("/:lang/weekly/:monday", (c) => {
+  const lang = c.req.param("lang");
+  const monday = c.req.param("monday");
+  if (!isLang(lang)) return c.notFound();
+  return c.redirect(pagePath(lang, `weekly/${monday}`), 301);
+});
+
+// /zh/weekly/2026-08-17/ → 单篇（monday 必须是合法 YYYY-MM-DD）
+pages.get("/:lang/weekly/:monday/", (c) => {
+  const lang = c.req.param("lang");
+  const monday = c.req.param("monday");
+  if (!isLang(lang)) return c.notFound();
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(monday)) return c.notFound();
+  const post = findWeeklyPost(monday);
+  if (!post) return c.notFound();
+  return c.html(renderWeeklyPost(post, lang));
+});
+
+// /zh/monthly → 301 补尾斜杠（无尾斜杠归档页）
+pages.get("/:lang/monthly", (c) => {
+  const lang = c.req.param("lang");
+  if (!isLang(lang)) return c.notFound();
+  return c.redirect(pagePath(lang, "monthly"), 301);
+});
+
+// /zh/monthly/ → 归档页
+pages.get("/:lang/monthly/", (c) => {
+  const lang = c.req.param("lang");
+  if (!isLang(lang)) return c.notFound();
+  return c.html(renderMonthlyArchive(monthlyArchive(), lang));
+});
+
+// /zh/monthly/2026-08 → 301 补尾斜杠
+pages.get("/:lang/monthly/:month", (c) => {
+  const lang = c.req.param("lang");
+  const month = c.req.param("month");
+  if (!isLang(lang)) return c.notFound();
+  return c.redirect(pagePath(lang, `monthly/${month}`), 301);
+});
+
+// /zh/monthly/2026-08/ → 单篇（month 必须是合法 YYYY-MM）
+pages.get("/:lang/monthly/:month/", (c) => {
+  const lang = c.req.param("lang");
+  const month = c.req.param("month");
+  if (!isLang(lang)) return c.notFound();
+  if (!/^\d{4}-\d{2}$/.test(month)) return c.notFound();
+  const post = findMonthlyPost(month);
+  if (!post) return c.notFound();
+  return c.html(renderMonthlyPost(post, lang));
 });
 
 // /zh/bazi → 301 补尾斜杠

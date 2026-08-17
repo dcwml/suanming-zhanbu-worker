@@ -6,6 +6,8 @@ import {
 } from "../config/site";
 import { PAGES } from "../pages/registry";
 import { DAILY_POSTS } from "../pages/daily";
+import { WEEKLY_POSTS } from "../pages/weekly";
+import { MONTHLY_POSTS } from "../pages/monthly";
 
 export function buildSitemapXml(): string {
   const pageUrls = PAGES.flatMap((page) =>
@@ -18,7 +20,27 @@ export function buildSitemapXml(): string {
     LANGS.map((lang) => ({ lang, slug: `daily/${post.date}` })),
   );
 
-  const allUrls = [...pageUrls, ...dailyArchiveUrls, ...dailyPostUrls];
+  const weeklyArchiveUrls = LANGS.map((lang) => ({ lang, slug: "weekly" }));
+
+  const weeklyPostUrls = WEEKLY_POSTS.flatMap((post) =>
+    LANGS.map((lang) => ({ lang, slug: `weekly/${post.monday}` })),
+  );
+
+  const monthlyArchiveUrls = LANGS.map((lang) => ({ lang, slug: "monthly" }));
+
+  const monthlyPostUrls = MONTHLY_POSTS.flatMap((post) =>
+    LANGS.map((lang) => ({ lang, slug: `monthly/${post.month}` })),
+  );
+
+  const allUrls = [
+    ...pageUrls,
+    ...dailyArchiveUrls,
+    ...dailyPostUrls,
+    ...weeklyArchiveUrls,
+    ...weeklyPostUrls,
+    ...monthlyArchiveUrls,
+    ...monthlyPostUrls,
+  ];
 
   const urls = allUrls
     .map(({ lang, slug }) => {

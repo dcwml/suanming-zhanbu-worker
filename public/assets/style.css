@@ -85,6 +85,63 @@ body {
 
 .nav-links a.active { color: var(--accent); font-weight: 600; }
 
+/* 「运势」下拉菜单：纯 CSS，hover / 键盘 focus-within 展开（触屏点按按钮即聚焦展开） */
+.nav-dropdown { position: relative; display: inline-flex; align-items: center; }
+
+.nav-dropdown-toggle {
+  background: none;
+  border: none;
+  font: inherit;
+  letter-spacing: inherit;
+  color: var(--fg);
+  cursor: pointer;
+  padding: 0.15rem 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.nav-dropdown-toggle:hover { color: var(--accent); }
+.nav-dropdown-toggle.active { color: var(--accent); font-weight: 600; }
+
+.nav-caret { font-size: 0.7em; line-height: 1; }
+
+.nav-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 0.55rem;
+  min-width: 9.5rem;
+  padding: 0.45rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(43, 38, 34, 0.12);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s ease, visibility 0.15s ease;
+  z-index: 20;
+}
+
+.nav-dropdown:hover .nav-dropdown-menu,
+.nav-dropdown:focus-within .nav-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+}
+
+.nav-dropdown-menu a {
+  padding: 0.4rem 1.1rem;
+  white-space: nowrap;
+  font-size: 0.92rem;
+}
+
+.nav-dropdown-menu a::after { content: none; }
+.nav-dropdown-menu a:hover { color: var(--accent); background: rgba(176, 141, 87, 0.1); }
+
 .lang-switch {
   font-size: 0.85rem;
   color: var(--accent);
@@ -131,7 +188,7 @@ code {
   margin: 0 auto;
   padding: 2.5rem 1rem 1.5rem;
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
   gap: 2rem;
 }
 
@@ -1408,4 +1465,247 @@ label:has(#zeji-strict:disabled) {
   margin: 2.5rem 0 0.5rem;
   padding: 0 1rem;
   letter-spacing: 0.02em;
+}
+
+/* ========== 每周运势 / 每月运势 ========== */
+
+/* 总览框（周运 summary / 月运 summary）：老黄历式双线框 */
+.weekly-summary,
+.monthly-summary {
+  border: 3px double var(--gold);
+  border-radius: 4px;
+  background: var(--paper);
+  padding: 1.5rem 1.75rem;
+  margin: 2rem 0;
+  box-shadow:
+    0 0 0 1px rgba(176, 141, 87, 0.15),
+    0 4px 16px rgba(43, 38, 34, 0.06);
+}
+
+.weekly-summary > h2,
+.monthly-summary > h2 {
+  text-align: center;
+  font-size: 1.4rem;
+  color: var(--accent);
+  letter-spacing: 0.12em;
+  margin: 0 0 1.1rem;
+}
+
+/* 吉凶生肖榜（周运特吉/次吉/忠告，月运六合/三合/冲/害） */
+.fortune-ranks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  margin: 0 0 1.1rem;
+}
+
+.rank-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+
+.rank-label {
+  flex: none;
+  min-width: 4.5em;
+  text-align: center;
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  color: #fff;
+}
+
+.rank-te { background: var(--accent); }
+.rank-ci { background: var(--gold); }
+.rank-warn { background: var(--muted); }
+.rank-good { background: var(--accent); }
+.rank-neutral { background: var(--gold); }
+.rank-bad { background: var(--muted); }
+
+.rank-value { font-size: 1rem; letter-spacing: 0.05em; }
+
+/* 本周忠告 / 月运导语 */
+.weekly-advice,
+.monthly-intro {
+  margin: 0 0 1.1rem;
+  font-size: 0.95rem;
+  color: var(--fg);
+}
+
+/* 冲忌速查表 */
+.weekly-clash {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: linear-gradient(180deg, #fdfbf7, #f8f3eb);
+  padding: 0.9rem 1.1rem;
+}
+
+.clash-title {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+}
+
+.clash-list {
+  margin: 0;
+  padding-left: 1.2rem;
+  font-size: 0.9rem;
+  color: var(--fg);
+}
+
+.clash-list li { margin: 0.15rem 0; }
+
+.clash-note {
+  margin: 0.6rem 0 0;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+/* 十二生肖卡片网格（周运/月运共用） */
+.weekly-zodiacs > h2,
+.monthly-zodiacs > h2 {
+  font-size: 1.4rem;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  margin: 2.25rem 0 1rem;
+}
+
+.zodiac-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.zodiac-card {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem 1.15rem;
+  box-shadow: 0 2px 10px rgba(43, 38, 34, 0.04);
+}
+
+.zodiac-card h3 {
+  margin: 0 0 0.6rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 1.1rem;
+  color: var(--accent);
+  letter-spacing: 0.12em;
+}
+
+.zodiac-line { margin: 0.35rem 0; font-size: 0.92rem; }
+
+.zodiac-dim {
+  color: var(--gold);
+  font-weight: 600;
+  margin-right: 0.35rem;
+  letter-spacing: 0.05em;
+}
+
+/* 逐日速览（周运） */
+.weekly-days > h2 {
+  font-size: 1.4rem;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  margin: 2.25rem 0 1rem;
+}
+
+.day-row {
+  display: flex;
+  gap: 1rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px dashed var(--border);
+}
+
+.day-row:last-of-type { border-bottom: none; }
+
+.day-head {
+  flex: none;
+  width: 9.5rem;
+  font-weight: 600;
+  color: var(--accent);
+  font-size: 0.92rem;
+}
+
+.day-body { font-size: 0.92rem; color: var(--fg); }
+
+.weekly-daily-link {
+  margin-top: 1rem;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+.weekly-daily-link a { color: var(--accent); }
+
+/* 吉日速查（月运） */
+.monthly-lucky > h2 {
+  font-size: 1.4rem;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  margin: 2.25rem 0 1rem;
+}
+
+.lucky-cat {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.9rem 1.1rem;
+  margin-bottom: 0.8rem;
+}
+
+.lucky-cat h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  color: var(--fg);
+  letter-spacing: 0.06em;
+}
+
+.lucky-days {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.lucky-day {
+  font-size: 0.82rem;
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(176, 141, 87, 0.14);
+  border: 1px solid rgba(176, 141, 87, 0.35);
+  color: var(--fg);
+}
+
+/* 栏目尾注（免责） */
+.weekly-note,
+.monthly-note {
+  margin-top: 2rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+/* 归档列表条目 */
+.weekly-archive-item,
+.monthly-archive-item {
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 800px) {
+  .zodiac-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .weekly-summary,
+  .monthly-summary {
+    padding: 1.1rem 1rem;
+    margin: 1.5rem -0.5rem;
+    border-width: 2px;
+  }
+
+  .rank-row { flex-direction: column; gap: 0.25rem; }
+  .rank-label { min-width: 0; align-self: flex-start; }
+
+  .day-row { flex-direction: column; gap: 0.25rem; }
+  .day-head { width: auto; }
 }

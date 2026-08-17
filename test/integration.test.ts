@@ -136,6 +136,148 @@ describe("daily", () => {
   });
 });
 
+describe("weekly", () => {
+  it("renders zh weekly archive", async () => {
+    const res = await fetchNoFollow("/zh/weekly/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain("每周运势");
+    expect(html).toContain('href="/zh/weekly/2026-08-17/"');
+  });
+
+  it("renders en weekly archive", async () => {
+    const res = await fetchNoFollow("/en/weekly/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain("Weekly Horoscope");
+  });
+
+  it("renders existing zh weekly post", async () => {
+    const res = await fetchNoFollow("/zh/weekly/2026-08-17/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain("weekly-summary");
+    expect(html).toContain("weekly-zodiacs");
+    expect(html).toContain("weekly-days");
+    expect(html).toContain(`<link rel="canonical" href="${SITE_ORIGIN}/zh/weekly/2026-08-17/">`);
+  });
+
+  it("renders existing en weekly post", async () => {
+    const res = await fetchNoFollow("/en/weekly/2026-08-17/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain("weekly-summary");
+    expect(html).toContain('hreflang="zh-CN"');
+  });
+
+  it("redirects /zh/weekly/2026-08-17 to trailing-slash", async () => {
+    const res = await fetchNoFollow("/zh/weekly/2026-08-17");
+    expect(res.status).toBe(301);
+    expect(res.headers.get("location")).toBe("/zh/weekly/2026-08-17/");
+  });
+
+  it("redirects /zh/weekly to /zh/weekly/", async () => {
+    const res = await fetchNoFollow("/zh/weekly");
+    expect(res.status).toBe(301);
+    expect(res.headers.get("location")).toBe("/zh/weekly/");
+  });
+
+  it("returns 404 for non-existent week", async () => {
+    const res = await fetchNoFollow("/zh/weekly/2099-01-04/");
+    expect(res.status).toBe(404);
+  });
+
+  it("returns 404 for invalid monday format", async () => {
+    const res = await fetchNoFollow("/zh/weekly/not-a-date/");
+    expect(res.status).toBe(404);
+  });
+});
+
+describe("monthly", () => {
+  it("renders zh monthly archive", async () => {
+    const res = await fetchNoFollow("/zh/monthly/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain("每月运势");
+    expect(html).toContain('href="/zh/monthly/2026-08/"');
+  });
+
+  it("renders en monthly archive", async () => {
+    const res = await fetchNoFollow("/en/monthly/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain("Monthly Horoscope");
+  });
+
+  it("renders existing zh monthly post", async () => {
+    const res = await fetchNoFollow("/zh/monthly/2026-08/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain("monthly-summary");
+    expect(html).toContain("monthly-zodiacs");
+    expect(html).toContain("monthly-lucky");
+    expect(html).toContain(`<link rel="canonical" href="${SITE_ORIGIN}/zh/monthly/2026-08/">`);
+  });
+
+  it("renders existing en monthly post", async () => {
+    const res = await fetchNoFollow("/en/monthly/2026-08/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain("monthly-summary");
+    expect(html).toContain('hreflang="en"');
+  });
+
+  it("redirects /zh/monthly/2026-08 to trailing-slash", async () => {
+    const res = await fetchNoFollow("/zh/monthly/2026-08");
+    expect(res.status).toBe(301);
+    expect(res.headers.get("location")).toBe("/zh/monthly/2026-08/");
+  });
+
+  it("redirects /zh/monthly to /zh/monthly/", async () => {
+    const res = await fetchNoFollow("/zh/monthly");
+    expect(res.status).toBe(301);
+    expect(res.headers.get("location")).toBe("/zh/monthly/");
+  });
+
+  it("returns 404 for non-existent month", async () => {
+    const res = await fetchNoFollow("/zh/monthly/2099-01/");
+    expect(res.status).toBe(404);
+  });
+
+  it("returns 404 for invalid month format", async () => {
+    const res = await fetchNoFollow("/zh/monthly/not-a-month/");
+    expect(res.status).toBe(404);
+  });
+});
+
+describe("fortune nav dropdown", () => {
+  it("zh page renders the 运势 dropdown with three fortune links", async () => {
+    const res = await fetchNoFollow("/zh/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain('class="nav-dropdown"');
+    expect(html).toContain("nav-dropdown-toggle");
+    expect(html).toContain('href="/zh/daily/"');
+    expect(html).toContain('href="/zh/weekly/"');
+    expect(html).toContain('href="/zh/monthly/"');
+  });
+
+  it("weekly page marks its archive link active and toggle active", async () => {
+    const res = await fetchNoFollow("/zh/weekly/2026-08-17/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain('nav-dropdown-toggle active');
+    expect(html).toContain('href="/zh/weekly/" class="active" aria-current="page"');
+  });
+
+  it("footer carries a fortune column with three archives", async () => {
+    const res = await fetchNoFollow("/zh/");
+    const html = await res.text();
+    expect(html).toContain('aria-label="运势"');
+    expect(html).toContain('class="lang-switch" href="/en/"');
+  });
+});
+
 describe("404 handling", () => {
   it("unknown page returns HTML 404 with noindex", async () => {
     const res = await fetchNoFollow("/zh/nope/");

@@ -1,6 +1,6 @@
 import { SITE_NAME, SITE_NAME_EN, SITE_SLOGAN, SITE_SLOGAN_EN, pagePath, type Lang } from "../config/site";
 import { findPage } from "../pages/registry";
-import { DAILY_ARCHIVE_META } from "../pages/daily";
+import { FORTUNE_NAV_ITEMS, FORTUNE_NAV_LABEL } from "./nav";
 import { escapeHtml } from "../seo/meta";
 
 export function renderFooter(lang: Lang): string {
@@ -15,6 +15,7 @@ export function renderFooter(lang: Lang): string {
       ? "以传统术数与 AI 解读，在线提供八字排盘与六爻起卦。"
       : "Traditional Chinese divination with AI readings — BaZi charts and I Ching casting online.";
   const toolsLabel = lang === "zh" ? "工具" : "Tools";
+  const fortuneLabel = FORTUNE_NAV_LABEL[lang];
   const aboutLabel = lang === "zh" ? "关于" : "About";
 
   // 链接标题一律取 registry 单一来源，避免双语两处维护
@@ -22,9 +23,10 @@ export function renderFooter(lang: Lang): string {
   const toolLinks = ["bazi", "liuyao"]
     .map((slug) => `<a href="${pagePath(lang, slug)}">${title(slug)}</a>`)
     .join("\n          ");
+  const fortuneLinks = FORTUNE_NAV_ITEMS.map(
+    (item) => `<a href="${pagePath(lang, item.slug)}">${escapeHtml(item.label[lang])}</a>`,
+  ).join("\n          ");
   const homeLink = `<a href="${pagePath(lang, "")}">${title("")}</a>`;
-  const dailyLink = `<a href="${pagePath(lang, DAILY_ARCHIVE_META.slug)}">${escapeHtml(DAILY_ARCHIVE_META.title[lang])}</a>`;
-  const aboutLinks = [homeLink, dailyLink].join("\n          ");
 
   return `<footer class="site-footer">
       <div class="footer-main">
@@ -38,9 +40,13 @@ export function renderFooter(lang: Lang): string {
           <h2>${toolsLabel}</h2>
           ${toolLinks}
         </nav>
+        <nav class="footer-col" aria-label="${escapeHtml(fortuneLabel)}">
+          <h2>${escapeHtml(fortuneLabel)}</h2>
+          ${fortuneLinks}
+        </nav>
         <nav class="footer-col" aria-label="${aboutLabel}">
           <h2>${aboutLabel}</h2>
-          ${aboutLinks}
+          ${homeLink}
         </nav>
       </div>
       <div class="footer-bottom">

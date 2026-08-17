@@ -10,7 +10,9 @@
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
     "purge": "node purge-cache.js",
-    "almanac": "tsx scripts/almanac.ts"
+    "almanac": "tsx scripts/almanac.ts",
+    "fortune:week": "tsx scripts/fortune.ts week",
+    "fortune:month": "tsx scripts/fortune.ts month"
   },
   "dependencies": {
     "hono": "^4.6.0"

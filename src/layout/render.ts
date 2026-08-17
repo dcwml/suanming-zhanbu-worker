@@ -3,7 +3,20 @@ import type { PageEntry } from "../pages/registry";
 import { NOT_FOUND_CONTENT } from "../pages/registry";
 import type { DailyArchiveItem, DailyPost } from "../pages/daily";
 import { DAILY_ARCHIVE_META } from "../pages/daily";
-import { buildDailyArchiveHead, buildDailyPostHead, buildHead, buildPlainHead } from "../seo/meta";
+import type { WeeklyArchiveItem, WeeklyPost } from "../pages/weekly";
+import { WEEKLY_ARCHIVE_META } from "../pages/weekly";
+import type { MonthlyArchiveItem, MonthlyPost } from "../pages/monthly";
+import { MONTHLY_ARCHIVE_META } from "../pages/monthly";
+import {
+  buildDailyArchiveHead,
+  buildDailyPostHead,
+  buildHead,
+  buildMonthlyArchiveHead,
+  buildMonthlyPostHead,
+  buildPlainHead,
+  buildWeeklyArchiveHead,
+  buildWeeklyPostHead,
+} from "../seo/meta";
 import { renderFooter } from "./footer";
 import { renderNav } from "./nav";
 import bodyStartSnippet from "./snippets/body-start.html";
@@ -110,4 +123,50 @@ export function renderDailyArchive(items: DailyArchiveItem[], lang: Lang): strin
     .join("\n");
   const main = `      <h1>${title}</h1>\n${links}`;
   return layout(lang, buildDailyArchiveHead(lang), renderNav(lang, "daily", "daily"), main);
+}
+
+/** weekly 单篇：导航高亮归档页（slug="weekly"），语言切换指向同周一另一语言版 */
+export function renderWeeklyPost(post: WeeklyPost, lang: Lang): string {
+  return layout(
+    lang,
+    buildWeeklyPostHead(post, lang),
+    renderNav(lang, "weekly", `weekly/${post.monday}`),
+    post.content[lang],
+  );
+}
+
+/** weekly 归档页：按周一倒序列出文章链接 */
+export function renderWeeklyArchive(items: WeeklyArchiveItem[], lang: Lang): string {
+  const title = WEEKLY_ARCHIVE_META.title[lang];
+  const links = items
+    .map(
+      (item) =>
+        `      <article class="weekly-archive-item">\n        <h2><a href="${pagePath(lang, `weekly/${item.monday}`)}">${item.title[lang]}</a></h2>\n      </article>`,
+    )
+    .join("\n");
+  const main = `      <h1>${title}</h1>\n${links}`;
+  return layout(lang, buildWeeklyArchiveHead(lang), renderNav(lang, "weekly", "weekly"), main);
+}
+
+/** monthly 单篇：导航高亮归档页（slug="monthly"），语言切换指向同月份另一语言版 */
+export function renderMonthlyPost(post: MonthlyPost, lang: Lang): string {
+  return layout(
+    lang,
+    buildMonthlyPostHead(post, lang),
+    renderNav(lang, "monthly", `monthly/${post.month}`),
+    post.content[lang],
+  );
+}
+
+/** monthly 归档页：按月份倒序列出文章链接 */
+export function renderMonthlyArchive(items: MonthlyArchiveItem[], lang: Lang): string {
+  const title = MONTHLY_ARCHIVE_META.title[lang];
+  const links = items
+    .map(
+      (item) =>
+        `      <article class="monthly-archive-item">\n        <h2><a href="${pagePath(lang, `monthly/${item.month}`)}">${item.title[lang]}</a></h2>\n      </article>`,
+    )
+    .join("\n");
+  const main = `      <h1>${title}</h1>\n${links}`;
+  return layout(lang, buildMonthlyArchiveHead(lang), renderNav(lang, "monthly", "monthly"), main);
 }

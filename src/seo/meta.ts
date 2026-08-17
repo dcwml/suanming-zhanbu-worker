@@ -1,5 +1,7 @@
 import type { PageEntry } from "../pages/registry";
 import type { DailyPost } from "../pages/daily";
+import type { WeeklyPost } from "../pages/weekly";
+import type { MonthlyPost } from "../pages/monthly";
 import {
   DEFAULT_LANG,
   HREFLANG_CODE,
@@ -15,7 +17,14 @@ import {
   pagePath,
   type Lang,
 } from "../config/site";
-import { articleJsonLd, buildJsonLdScripts, collectionPageJsonLd, toJsonLdScript } from "./jsonld";
+import {
+  articleJsonLd,
+  buildJsonLdScripts,
+  collectionPageJsonLd,
+  monthlyArticleJsonLd,
+  toJsonLdScript,
+  weeklyArticleJsonLd,
+} from "./jsonld";
 
 export function escapeHtml(s: string): string {
   return s
@@ -89,20 +98,31 @@ export function buildPlainHead(lang: Lang, titleText: string): string {
   ].join("\n    ");
 }
 
-/** daily 单篇 head：三段路径 canonical + Article JSON-LD */
-export function buildDailyPostHead(post: DailyPost, lang: Lang): string {
-  const path = pagePath(lang, `daily/${post.date}`);
-  const canonical = absoluteUrl(path);
-  const title = escapeHtml(`${post.meta[lang].title} - ${siteName(lang)}`);
-  const description = escapeHtml(post.meta[lang].description);
+interface StandardHeadInput {
+  lang: Lang;
+  /** 规范路径段（不含语言前缀与尾斜杠），如 "daily/2026-08-03"、"weekly"、"monthly/2026-08" */
+  slug: string;
+  /** 完整标题（已含站名后缀） */
+  title: string;
+  description: string;
+  ogType: "website" | "article";
+  jsonLdHtml: string;
+}
+
+/** daily / weekly / monthly 单篇与归档页共用的完整 head 构建 */
+function buildStandardHead(input: StandardHeadInput): string {
+  const { lang, slug } = input;
+  const canonical = absoluteUrl(pagePath(lang, slug));
+  const title = escapeHtml(input.title);
+  const description = escapeHtml(input.description);
   const image = absoluteUrl(OG_IMAGE_PATH);
   const otherLang = OTHER_LANG[lang];
 
   const hreflangs = LANGS.map(
     (l) =>
-      `<link rel="alternate" hreflang="${HREFLANG_CODE[l]}" href="${absoluteUrl(pagePath(l, `daily/${post.date}`))}">`,
+      `<link rel="alternate" hreflang="${HREFLANG_CODE[l]}" href="${absoluteUrl(pagePath(l, slug))}">`,
   ).join("\n    ");
-  const xDefault = `<link rel="alternate" hreflang="x-default" href="${absoluteUrl(pagePath(DEFAULT_LANG, `daily/${post.date}`))}">`;
+  const xDefault = `<link rel="alternate" hreflang="x-default" href="${absoluteUrl(pagePath(DEFAULT_LANG, slug))}">`;
 
   return [
     `<meta charset="utf-8">`,
@@ -113,7 +133,7 @@ export function buildDailyPostHead(post: DailyPost, lang: Lang): string {
     `<link rel="canonical" href="${canonical}">`,
     hreflangs,
     xDefault,
-    `<meta property="og:type" content="article">`,
+    `<meta property="og:type" content="${input.ogType}">`,
     `<meta property="og:site_name" content="${escapeHtml(siteName(lang))}">`,
     `<meta property="og:title" content="${title}">`,
     `<meta property="og:description" content="${description}">`,
@@ -125,46 +145,88 @@ export function buildDailyPostHead(post: DailyPost, lang: Lang): string {
     `<meta name="twitter:title" content="${title}">`,
     `<meta name="twitter:description" content="${description}">`,
     `<meta name="twitter:image" content="${image}">`,
-    toJsonLdScript(articleJsonLd(post, lang)),
+    input.jsonLdHtml,
   ].join("\n    ");
+}
+
+/** daily 单篇 head：三段路径 canonical + Article JSON-LD */
+export function buildDailyPostHead(post: DailyPost, lang: Lang): string {
+  return buildStandardHead({
+    lang,
+    slug: `daily/${post.date}`,
+    title: `${post.meta[lang].title} - ${siteName(lang)}`,
+    description: post.meta[lang].description,
+    ogType: "article",
+    jsonLdHtml: toJsonLdScript(articleJsonLd(post, lang)),
+  });
+}
+
+/** weekly 单篇 head：canonical 指向 /:lang/weekly/:monday/ */
+export function buildWeeklyPostHead(post: WeeklyPost, lang: Lang): string {
+  return buildStandardHead({
+    lang,
+    slug: `weekly/${post.monday}`,
+    title: `${post.meta[lang].title} - ${siteName(lang)}`,
+    description: post.meta[lang].description,
+    ogType: "article",
+    jsonLdHtml: toJsonLdScript(weeklyArticleJsonLd(post, lang)),
+  });
+}
+
+/** monthly 单篇 head：canonical 指向 /:lang/monthly/:month/ */
+export function buildMonthlyPostHead(post: MonthlyPost, lang: Lang): string {
+  return buildStandardHead({
+    lang,
+    slug: `monthly/${post.month}`,
+    title: `${post.meta[lang].title} - ${siteName(lang)}`,
+    description: post.meta[lang].description,
+    ogType: "article",
+    jsonLdHtml: toJsonLdScript(monthlyArticleJsonLd(post, lang)),
+  });
 }
 
 /** daily 归档页 head */
 export function buildDailyArchiveHead(lang: Lang): string {
-  const path = pagePath(lang, "daily");
-  const canonical = absoluteUrl(path);
-  const title = escapeHtml(lang === "zh" ? `今日宜忌 - ${SITE_NAME}` : `Daily Almanac - ${SITE_NAME_EN}`);
-  const description = escapeHtml(lang === "zh" ? "每日黄历宜忌、生肖运势与玄学科普。" : "Daily Chinese almanac, zodiac fortune and folklore.");
-  const image = absoluteUrl(OG_IMAGE_PATH);
-  const otherLang = OTHER_LANG[lang];
+  return buildStandardHead({
+    lang,
+    slug: "daily",
+    title: lang === "zh" ? `今日宜忌 - ${SITE_NAME}` : `Daily Almanac - ${SITE_NAME_EN}`,
+    description: lang === "zh" ? "每日黄历宜忌、生肖运势与玄学科普。" : "Daily Chinese almanac, zodiac fortune and folklore.",
+    ogType: "website",
+    jsonLdHtml: toJsonLdScript(collectionPageJsonLd(lang)),
+  });
+}
 
-  const hreflangs = LANGS.map(
-    (l) =>
-      `<link rel="alternate" hreflang="${HREFLANG_CODE[l]}" href="${absoluteUrl(pagePath(l, "daily"))}">`,
-  ).join("\n    ");
-  const xDefault = `<link rel="alternate" hreflang="x-default" href="${absoluteUrl(pagePath(DEFAULT_LANG, "daily"))}">`;
+/** weekly 归档页 head */
+export function buildWeeklyArchiveHead(lang: Lang): string {
+  return buildStandardHead({
+    lang,
+    slug: "weekly",
+    title: lang === "zh" ? `每周运势 - ${SITE_NAME}` : `Weekly Horoscope - ${SITE_NAME_EN}`,
+    description:
+      lang === "zh"
+        ? "十二生肖每周运势：特吉与忠告生肖、本周冲忌与逐日干支速览，每周更新。"
+        : "Weekly horoscope for all twelve Chinese zodiac signs — luckiest signs, daily clash alerts and a day-by-day guide, updated weekly.",
+    ogType: "website",
+    jsonLdHtml: toJsonLdScript(
+      collectionPageJsonLd(lang, lang === "zh" ? "每周运势" : "Weekly Horoscope", "weekly"),
+    ),
+  });
+}
 
-  return [
-    `<meta charset="utf-8">`,
-    `<meta name="viewport" content="width=device-width, initial-scale=1">`,
-    `<link rel="icon" type="image/png" href="/assets/logo.png">`,
-    `<title>${title}</title>`,
-    `<meta name="description" content="${description}">`,
-    `<link rel="canonical" href="${canonical}">`,
-    hreflangs,
-    xDefault,
-    `<meta property="og:type" content="website">`,
-    `<meta property="og:site_name" content="${escapeHtml(siteName(lang))}">`,
-    `<meta property="og:title" content="${title}">`,
-    `<meta property="og:description" content="${description}">`,
-    `<meta property="og:url" content="${canonical}">`,
-    `<meta property="og:image" content="${image}">`,
-    `<meta property="og:locale" content="${OG_LOCALE[lang]}">`,
-    `<meta property="og:locale:alternate" content="${OG_LOCALE[otherLang]}">`,
-    `<meta name="twitter:card" content="summary_large_image">`,
-    `<meta name="twitter:title" content="${title}">`,
-    `<meta name="twitter:description" content="${description}">`,
-    `<meta name="twitter:image" content="${image}">`,
-    toJsonLdScript(collectionPageJsonLd(lang)),
-  ].join("\n    ");
+/** monthly 归档页 head */
+export function buildMonthlyArchiveHead(lang: Lang): string {
+  return buildStandardHead({
+    lang,
+    slug: "monthly",
+    title: lang === "zh" ? `每月运势 - ${SITE_NAME}` : `Monthly Horoscope - ${SITE_NAME_EN}`,
+    description:
+      lang === "zh"
+        ? "十二生肖每月运势：月柱节气总览、生肖月度推演与本月吉日速查，每月更新。"
+        : "Monthly horoscope for all twelve Chinese zodiac signs — month pillar and solar terms, per-sign readings and an auspicious-day quick reference, updated monthly.",
+    ogType: "website",
+    jsonLdHtml: toJsonLdScript(
+      collectionPageJsonLd(lang, lang === "zh" ? "每月运势" : "Monthly Horoscope", "monthly"),
+    ),
+  });
 }

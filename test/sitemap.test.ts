@@ -34,6 +34,22 @@ describe("buildSitemapXml", () => {
     expect(xml).toContain(`<xhtml:link rel="alternate" hreflang="zh-CN" href="${SITE_ORIGIN}/zh/daily/2026-08-03/"/>`);
     expect(xml).toContain(`<xhtml:link rel="alternate" hreflang="en" href="${SITE_ORIGIN}/en/daily/2026-08-03/"/>`);
   });
+
+  it("includes weekly archive and posts with bilingual alternates", () => {
+    expect(xml).toContain(`<loc>${SITE_ORIGIN}/zh/weekly/</loc>`);
+    expect(xml).toContain(`<loc>${SITE_ORIGIN}/en/weekly/</loc>`);
+    expect(xml).toContain(`<loc>${SITE_ORIGIN}/zh/weekly/2026-08-17/</loc>`);
+    expect(xml).toContain(`<xhtml:link rel="alternate" hreflang="zh-CN" href="${SITE_ORIGIN}/zh/weekly/2026-08-17/"/>`);
+    expect(xml).toContain(`<xhtml:link rel="alternate" hreflang="en" href="${SITE_ORIGIN}/en/weekly/2026-08-17/"/>`);
+  });
+
+  it("includes monthly archive and posts with bilingual alternates", () => {
+    expect(xml).toContain(`<loc>${SITE_ORIGIN}/zh/monthly/</loc>`);
+    expect(xml).toContain(`<loc>${SITE_ORIGIN}/en/monthly/</loc>`);
+    expect(xml).toContain(`<loc>${SITE_ORIGIN}/zh/monthly/2026-08/</loc>`);
+    expect(xml).toContain(`<xhtml:link rel="alternate" hreflang="zh-CN" href="${SITE_ORIGIN}/zh/monthly/2026-08/"/>`);
+    expect(xml).toContain(`<xhtml:link rel="alternate" hreflang="en" href="${SITE_ORIGIN}/en/monthly/2026-08/"/>`);
+  });
 });
 
 describe("buildRobotsTxt", () => {

@@ -2,6 +2,8 @@
 // 生成期工具：计算指定日期的黄历宜忌数据，输出结构化 JSON。
 // 仅在本地 Node 运行，不入 Worker 运行时。
 // 用法：npm run almanac -- 2026-08-03
+// compute() 同时导出供 scripts/fortune.ts 复用（周/月骨架生成器）。
+import { fileURLToPath } from "node:url";
 import { Solar } from "lunar-javascript";
 
 /** 天干 → 五行 */
@@ -10,7 +12,7 @@ const GAN_WUXING: Record<string, string> = {
   己: "土", 庚: "金", 辛: "金", 壬: "水", 癸: "水",
 };
 
-function compute(dateStr: string) {
+export function compute(dateStr: string) {
   const [y, m, d] = dateStr.split("-").map(Number);
   const solar = Solar.fromYmd(y, m, d);
   const lunar = solar.getLunar();
@@ -94,14 +96,25 @@ function computeHourGanZhi(dayGan: string, hourZhi: string): string {
   return `${gan}${hourZhi}`;
 }
 
-const arg = process.argv[2];
-const today = new Date();
-const dateStr = arg ?? `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
+/** 仅在直接执行本文件时运行 CLI（被 fortune.ts import 时不触发） */
+const isDirectRun = (() => {
+  try {
+    return process.argv[1] === fileURLToPath(import.meta.url);
+  } catch {
+    return false;
+  }
+})();
 
-if (!/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
-  console.error(`Invalid date: ${dateStr} (expected YYYY-MM-DD)`);
-  process.exit(1);
+if (isDirectRun) {
+  const arg = process.argv[2];
+  const today = new Date();
+  const dateStr = arg ?? `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
+
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
+    console.error(`Invalid date: ${dateStr} (expected YYYY-MM-DD)`);
+    process.exit(1);
+  }
+
+  const result = compute(dateStr);
+  console.log(JSON.stringify(result, null, 2));
 }
-
-const result = compute(dateStr);
-console.log(JSON.stringify(result, null, 2));
