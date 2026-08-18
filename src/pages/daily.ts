@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260819Zh from "../content/daily/2026-08-19.zh.html";
+import daily20260819En from "../content/daily/2026-08-19.en.html";
 import daily20260818Zh from "../content/daily/2026-08-18.zh.html";
 import daily20260818En from "../content/daily/2026-08-18.en.html";
 import daily20260817Zh from "../content/daily/2026-08-17.zh.html";
@@ -52,6 +54,14 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-08-19",
+    meta: {
+      zh: { title: "2026年8月19日宜忌·牛", description: "2026年8月19日黄历宜忌：明堂黄道吉日，宜破土、安葬、移柩、入殓、祭祀、捕捉、除服成服，馀事勿取，忌嫁娶、入宅、开市、交易，冲羊煞东；生肖牛今日运势与七夕乞巧民俗科普。" },
+      en: { title: "Daily Almanac — August 19, 2026 (Ox)", description: "August 19, 2026 Chinese almanac: a Míngtáng Yellow Path day — favorable for breaking ground for graves, burial, moving the coffin, encoffining, sacrifice, hunting and catching, removing and donning mourning dress, all other matters best avoided; avoid marriage, moving into a house, opening for business and trading; clash Goat, Sha East; Ox zodiac fortune and Qīxī Double Seventh festival folklore." },
+    },
+    content: { zh: daily20260819Zh, en: daily20260819En },
+  },
   {
     date: "2026-08-18",
     meta: {
