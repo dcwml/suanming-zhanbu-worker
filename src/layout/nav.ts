@@ -31,8 +31,17 @@ function renderDropdown(
   currentSlug: string,
   label: Record<Lang, string>,
   items: readonly { slug: string; label: Record<Lang, string> }[],
+  overviewSlug?: string,
 ): string {
   const inside = items.some((item) => item.slug === currentSlug);
+  // overviewSlug 存在时标题是可点击链接（指向总览页），否则为纯展开按钮（「运势」下拉）
+  const overviewActive = overviewSlug !== undefined && currentSlug === overviewSlug;
+  const toggleClass = `nav-dropdown-toggle${inside || overviewActive ? " active" : ""}`;
+  const toggleInner = `${escapeHtml(label[lang])}<span class="nav-caret" aria-hidden="true">▾</span>`;
+  const toggle =
+    overviewSlug !== undefined
+      ? `<a class="${toggleClass}" href="${pagePath(lang, overviewSlug)}"${overviewActive ? ' aria-current="page"' : ""}>${toggleInner}</a>`
+      : `<button type="button" class="${toggleClass}" aria-haspopup="true" aria-expanded="false">${toggleInner}</button>`;
   const links = items
     .map((item) => {
       const active = item.slug === currentSlug ? ' class="active" aria-current="page"' : "";
@@ -40,7 +49,7 @@ function renderDropdown(
     })
     .join("\n          ");
   return `<div class="nav-dropdown">
-          <button type="button" class="nav-dropdown-toggle${inside ? " active" : ""}" aria-haspopup="true" aria-expanded="false">${escapeHtml(label[lang])}<span class="nav-caret" aria-hidden="true">▾</span></button>
+          ${toggle}
           <div class="nav-dropdown-menu">
           ${links}
           </div>
@@ -51,12 +60,13 @@ function renderDropdown(
  *  404/500 等无真实页面的场景应显式传 "" 指向对方语言首页。 */
 export function renderNav(lang: Lang, currentSlug: string, langSwitchSlug?: string): string {
   // 导航顺序（单一来源）：首页 · 八字排盘 · [占卜 ▾] · 择吉日 · [运势 ▾]
-  // 「占卜」下拉占六爻原平铺位置（八字之后）；六爻/梅花均 inNav: false，不在平铺链接中
+  // 「占卜」下拉占六爻原平铺位置（八字之后）；标题链接 divination 总览页，
+  // 六爻/梅花/小六壬/总览页均 inNav: false，不在平铺链接中
   const chunks: string[] = [];
   for (const p of navPages()) {
     const active = p.slug === currentSlug ? ' class="active" aria-current="page"' : "";
     chunks.push(`<a href="${pagePath(lang, p.slug)}"${active}>${escapeHtml(p.meta[lang].title)}</a>`);
-    if (p.slug === "bazi") chunks.push(renderDropdown(lang, currentSlug, DIVINATION_NAV_LABEL, DIVINATION_NAV_ITEMS));
+    if (p.slug === "bazi") chunks.push(renderDropdown(lang, currentSlug, DIVINATION_NAV_LABEL, DIVINATION_NAV_ITEMS, "divination"));
   }
   chunks.push(renderDropdown(lang, currentSlug, FORTUNE_NAV_LABEL, FORTUNE_NAV_ITEMS));
   const links = chunks.join("\n        ");

@@ -42,7 +42,7 @@ src/
   seo/meta.ts         escapeHtml、buildHead（固定页面 title/canonical/hreflang/og/twitter）+ daily/weekly/monthly 的单篇与归档 head 构建器
   seo/jsonld.ts       JSON-LD 构建与 </script> 注入转义；含 articleJsonLd / weeklyArticleJsonLd / monthlyArticleJsonLd / collectionPageJsonLd / faqJsonLd（按 faq 字段自动注入 FAQPage）
   seo/sitemap.ts      sitemap.xml（双语 alternates + daily/weekly/monthly 单篇+归档页）与 robots.txt
-  layout/nav.ts       品牌块（logo.png + 站名）+ 导航（含「占卜」下拉：DIVINATION_NAV_LABEL/DIVINATION_NAV_ITEMS，六爻起卦/梅花易数/小六壬；「运势」下拉：FORTUNE_NAV_LABEL/FORTUNE_NAV_ITEMS，每日/每周/每月运势；两个下拉均纯 CSS）+ 语言切换
+  layout/nav.ts       品牌块（logo.png + 站名）+ 导航（含「占卜」下拉：DIVINATION_NAV_LABEL/DIVINATION_NAV_ITEMS，六爻起卦/梅花易数/小六壬，标题链接 divination 总览页；「运势」下拉：FORTUNE_NAV_LABEL/FORTUNE_NAV_ITEMS，每日/每周/每月运势；两个下拉均纯 CSS）+ 语言切换
   layout/footer.ts    多栏页脚（品牌栏 + 工具/运势/关于链接列 + 底栏版权免责；链接标题取 registry 单一来源 + daily/weekly/monthly 显式引用）
   layout/render.ts    renderPage / renderNotFound / renderError / renderDailyPost / renderDailyArchive / renderWeeklyPost / renderWeeklyArchive / renderMonthlyPost / renderMonthlyArchive
   layout/snippets/    全站静态片段：head.html（验证 meta/GTM 等 <head> 代码）、body-start.html（GTM noscript 等 <body> 开头代码），原样注入所有页面含 404/500，只放仓库内受控代码
@@ -69,7 +69,7 @@ public/assets/        静态资源（style.css、logo.png（印章 LOGO，兼作
   meihua.js           前端先天八卦数/体用五行算法 + 时间/数字起卦 + 本互变卦排盘 + 单段解读渲染
   xiaoliuren.js       前端六宫数据表 + 时间/数字起课（月上起月、日上起日、时上起课）+ 三宫落宫渲染 + 单段解读渲染
   zeji.js             前端 lunar-javascript 扫描 + 避冲排序 + 详解渲染
-test/                 30 个测试文件、335 个测试（SELF.fetch 集成测试 + 单元测试）
+test/                 30 个测试文件、343 个测试（SELF.fetch 集成测试 + 单元测试）
 ```
 
 ## 核心约定（改代码前必读）
@@ -182,7 +182,7 @@ test/                 30 个测试文件、335 个测试（SELF.fetch 集成测�
 
 正文片段中问答用语义化结构（如 `<h2>问题</h2><p>答案</p>` 或 `<details><summary>`），中英两版问答需一一对应，且 `faq` 字段内容与正文 FAQ 保持一致。
 
-**已知边界**：`faqJsonLd` 的 FAQPage `mainEntity` 已实现并有单测覆盖（择吉页首个使用，上线后宜用 Google Rich Results Test 验证）。`jsonldType: "FAQPage"` 仅切换 `pageJsonLd` 的 `@type`、不含 `mainEntity`，与 `faq` 字段机制独立，暂无页面使用。
+**已知边界**：`faqJsonLd` 的 FAQPage `mainEntity` 已实现并有单测覆盖（择吉页首个使用，占卜总览页为第二例，上线后宜用 Google Rich Results Test 验证）。`jsonldType: "FAQPage"` 仅切换 `pageJsonLd` 的 `@type`、不含 `mainEntity`，与 `faq` 字段机制独立，暂无页面使用。
 
 ## 已知取舍（不要"顺手修复"）
 

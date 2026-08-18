@@ -352,6 +352,60 @@ describe("divination nav dropdown", () => {
     expect(html).toContain('href="/zh/meihua/"');
     expect(html).toContain('href="/zh/xiaoliuren/"');
   });
+
+  it("zh home divination toggle is a link to the overview page", async () => {
+    const res = await fetchNoFollow("/zh/");
+    const html = await res.text();
+    expect(html).toContain('class="nav-dropdown-toggle" href="/zh/divination/"');
+  });
+
+  it("en home divination toggle links to the en overview page", async () => {
+    const res = await fetchNoFollow("/en/");
+    const html = await res.text();
+    expect(html).toContain('class="nav-dropdown-toggle" href="/en/divination/"');
+  });
+});
+
+describe("divination overview page", () => {
+  it("serves /zh/divination/ with intro and CTA links of all three tools", async () => {
+    const res = await fetchNoFollow("/zh/divination/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain("<h1>占卜工具</h1>");
+    expect(html).toContain('class="tool-cta" href="/zh/liuyao/"');
+    expect(html).toContain('class="tool-cta" href="/zh/meihua/"');
+    expect(html).toContain('class="tool-cta" href="/zh/xiaoliuren/"');
+  });
+
+  it("zh overview page injects FAQPage JSON-LD and canonical", async () => {
+    const res = await fetchNoFollow("/zh/divination/");
+    const html = await res.text();
+    expect(html).toContain('"FAQPage"');
+    expect(html).toContain(`<link rel="canonical" href="${SITE_ORIGIN}/zh/divination/">`);
+  });
+
+  it("serves /en/divination/ in English", async () => {
+    const res = await fetchNoFollow("/en/divination/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain("<h1>Divination Tools</h1>");
+    expect(html).toContain('class="tool-cta" href="/en/liuyao/"');
+    expect(html).toContain('class="tool-cta" href="/en/meihua/"');
+    expect(html).toContain('class="tool-cta" href="/en/xiaoliuren/"');
+  });
+
+  it("redirects /zh/divination to trailing-slash", async () => {
+    const res = await fetchNoFollow("/zh/divination");
+    expect(res.status).toBe(301);
+    expect(res.headers.get("location")).toBe("/zh/divination/");
+  });
+
+  it("overview page marks the nav toggle active and switches language", async () => {
+    const res = await fetchNoFollow("/zh/divination/");
+    const html = await res.text();
+    expect(html).toContain('class="nav-dropdown-toggle active" href="/zh/divination/" aria-current="page"');
+    expect(html).toContain('class="lang-switch" href="/en/divination/"');
+  });
 });
 
 describe("404 handling", () => {

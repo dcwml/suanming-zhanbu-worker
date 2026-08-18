@@ -47,4 +47,13 @@ describe("registry", () => {
     expect(zeji!.faq!.zh.length).toBeGreaterThan(0);
     expect(zeji!.faq!.zh.length).toBe(zeji!.faq!.en.length);
   });
+
+  it("divination page exists with bilingual faq of equal length", () => {
+    const divination = findPage("divination");
+    expect(divination).toBeDefined();
+    // 经「占卜」下拉标题进入，不在平铺导航里
+    expect(divination!.inNav).toBe(false);
+    expect(divination!.faq!.zh.length).toBeGreaterThan(0);
+    expect(divination!.faq!.zh.length).toBe(divination!.faq!.en.length);
+  });
 });
