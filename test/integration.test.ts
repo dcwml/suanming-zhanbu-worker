@@ -656,4 +656,9 @@ describe("ziwei page", () => {
     const json = (await res.json()) as { ok: boolean };
     expect(json.ok).toBe(false);
   });
+
+  it("serves the local iztro vendor fallback file", async () => {
+    const res = await SELF.fetch("http://localhost/assets/vendor/iztro.min.js");
+    expect(res.status).toBe(200);
+  });
 });
