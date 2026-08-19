@@ -56,4 +56,17 @@ describe("registry", () => {
     expect(divination!.faq!.zh.length).toBeGreaterThan(0);
     expect(divination!.faq!.zh.length).toBe(divination!.faq!.en.length);
   });
+
+  it("ziwei page exists with bilingual faq of equal length", () => {
+    const ziwei = findPage("ziwei");
+    expect(ziwei).toBeDefined();
+    // 经「命理」下拉进入，不在平铺导航里
+    expect(ziwei!.inNav).toBe(false);
+    expect(ziwei!.faq!.zh.length).toBeGreaterThan(0);
+    expect(ziwei!.faq!.zh.length).toBe(ziwei!.faq!.en.length);
+  });
+
+  it("bazi page no longer sits in the flat nav", () => {
+    expect(findPage("bazi")!.inNav).toBe(false);
+  });
 });
