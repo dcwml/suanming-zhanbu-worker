@@ -13,7 +13,7 @@ npm run fortune:week -- 2026-08-17   # 周运数据骨架生成器（参数必�
 npm run fortune:month -- 2026-08     # 月运数据骨架生成器
 ```
 
-LLM 解读接口（八字、六爻、梅花易数、小六壬、择吉）需要 LLM 密钥：本地在 `.dev.vars` 配置 `LLM_API_KEY`（不入库）；`LLM_BASE_URL`/`LLM_MODEL` 在 `wrangler.jsonc` 的 `vars` 中。
+LLM 解读接口（八字、六爻、梅花易数、小六壬、择吉、紫微斗数）需要 LLM 密钥：本地在 `.dev.vars` 配置 `LLM_API_KEY`（不入库）；`LLM_BASE_URL`/`LLM_MODEL` 在 `wrangler.jsonc` 的 `vars` 中。
 
 ## 运势栏目（每日 / 每周 / 每月）
 

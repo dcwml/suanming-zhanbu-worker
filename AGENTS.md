@@ -72,7 +72,7 @@ public/assets/        静态资源（style.css、logo.png（印章 LOGO，兼作
   xiaoliuren.js       前端六宫数据表 + 时间/数字起课（月上起月、日上起日、时上起课）+ 三宫落宫渲染 + 单段解读渲染
   zeji.js             前端 lunar-javascript 扫描 + 避冲排序 + 详解渲染
   ziwei.js            前端 iztro 排盘 + 4×4 盘格渲染 + 三段串行解读渲染
-test/                 30 个测试文件、343 个测试（SELF.fetch 集成测试 + 单元测试）
+test/                 33 个测试文件、390 个测试（SELF.fetch 集成测试 + 单元测试）
 ```
 
 ## 核心约定（改代码前必读）
