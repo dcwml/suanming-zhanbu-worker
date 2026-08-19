@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260820Zh from "../content/daily/2026-08-20.zh.html";
+import daily20260820En from "../content/daily/2026-08-20.en.html";
 import daily20260819Zh from "../content/daily/2026-08-19.zh.html";
 import daily20260819En from "../content/daily/2026-08-19.en.html";
 import daily20260818Zh from "../content/daily/2026-08-18.zh.html";
@@ -54,6 +56,14 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-08-20",
+    meta: {
+      zh: { title: "2026年8月20日宜忌·虎", description: "2026年8月20日黄历宜忌：月破日，天刑黑道，宜破屋、坏垣、治病，馀事勿取，忌祈福、纳采、订盟、嫁娶、入宅、安葬，冲猴煞北；生肖虎今日运势与驿马吉神科普。" },
+      en: { title: "Daily Almanac — August 20, 2026 (Tiger)", description: "August 20, 2026 Chinese almanac: a Month-Broken day presided over by Tiānxíng of the Black Path — favorable for breaking down houses, tearing down walls and treating illness, all other matters best avoided; avoid praying for blessings, accepting betrothal gifts, pledging betrothal, marriage, moving into a house and burial; clash Monkey, Sha North; Tiger zodiac fortune and the Yìmǎ Post Horse auspicious spirit." },
+    },
+    content: { zh: daily20260820Zh, en: daily20260820En },
+  },
   {
     date: "2026-08-19",
     meta: {
