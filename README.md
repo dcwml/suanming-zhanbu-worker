@@ -39,7 +39,7 @@ LLM 解读接口（八字、六爻、梅花易数、小六壬、择吉）需要 
 
 ## API
 
-接口挂在 `/api/*`，统一响应壳 `{ ok, data | error: { code, message } }`。示例：`POST /api/echo`。已接入 LLM 的实例：`POST /api/bazi/interpret`（八字解读，见 `src/routes/bazi.ts`，限流 10 req/60s）、`POST /api/liuyao/interpret`（六爻解读，见 `src/routes/liuyao.ts`，限流 10 req/60s）、`POST /api/meihua/interpret`（梅花易数解读，见 `src/routes/meihua.ts`，限流 10 req/60s）、`POST /api/xiaoliuren/interpret`（小六壬解读，见 `src/routes/xiaoliuren.ts`，限流 10 req/60s）、`POST /api/zeji/interpret`（择吉日解读，见 `src/routes/zeji.ts`，限流 10 req/60s），后续 LLM 接口按同模式新增。
+接口挂在 `/api/*`，统一响应壳 `{ ok, data | error: { code, message } }`。示例：`POST /api/echo`。已接入 LLM 的实例：`POST /api/bazi/interpret`（八字解读，见 `src/routes/bazi.ts`，限流 10 req/60s）、`POST /api/liuyao/interpret`（六爻解读，见 `src/routes/liuyao.ts`，限流 10 req/60s）、`POST /api/meihua/interpret`（梅花易数解读，见 `src/routes/meihua.ts`，限流 10 req/60s）、`POST /api/xiaoliuren/interpret`（小六壬解读，见 `src/routes/xiaoliuren.ts`，限流 10 req/60s）、`POST /api/zeji/interpret`（择吉日解读，见 `src/routes/zeji.ts`，限流 10 req/60s）、`POST /api/ziwei/interpret`（紫微斗数解读，见 `src/routes/ziwei.ts`，限流 10 req/60s），后续 LLM 接口按同模式新增。
 
 ## 上线前检查清单
 
