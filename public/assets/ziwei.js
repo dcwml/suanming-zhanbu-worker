@@ -38,6 +38,7 @@
       loading: "正在解读…", waiting: "正在解读…",
       retry: "重试", failed: "解读失败：",
       invalidDate: "日期无效，请检查输入",
+      renderFailed: "排盘渲染出了点问题，请刷新页面重试",
       libLoading: "星盘组件没能送达，请刷新页面或检查网络",
       mdLibLoading: "解读组件未完全加载，请稍后重试",
       errMap: {
@@ -58,6 +59,7 @@
       loading: "Interpreting…", waiting: "Interpreting…",
       retry: "Retry", failed: "Reading failed: ",
       invalidDate: "Invalid date, please check input",
+      renderFailed: "Something went wrong while rendering the chart — please refresh and try again.",
       libLoading: "The chart library failed to load — please refresh or check your connection.",
       mdLibLoading: "Reading components not fully loaded, please retry later",
       errMap: {
@@ -189,13 +191,13 @@
         html += '<div class="ziwei-major ziwei-empty">' + esc(T.noMajor) + "</div>";
       }
       p.majors.forEach(function (m, j) {
-        var name = dp.majors[j] ? dp.majors[j].name : m.name;
+        var name = dp.majorStars[j] ? dp.majorStars[j].name : m.name;
         html += '<div class="ziwei-major">' + esc(name) + starMeta(m) + "</div>";
       });
       if (p.minors.length) {
         html += '<div class="ziwei-minors">';
         p.minors.forEach(function (m, j) {
-          var name = dp.minors[j] ? dp.minors[j].name : m.name;
+          var name = dp.minorStars[j] ? dp.minorStars[j].name : m.name;
           var k = m.kind === "吉" ? "ji" : m.kind === "煞" ? "sha" : m.kind === "禄" ? "lu" : "ma";
           html += '<span class="ziwei-minor ziwei-minor-' + k + '">' + esc(name)
             + (m.mutagen ? '<span class="ziwei-hua">' + esc(m.mutagen) + "</span>" : "") + "</span>";
@@ -320,10 +322,17 @@
       errBox.hidden = false;
       return;
     }
-    renderResult(built);
-    document.getElementById("ziwei-interpret").hidden = false;
-    chainVersion++;
-    runChain(0, built.api, chainVersion);
-    document.getElementById("ziwei-result").scrollIntoView({ behavior: "smooth" });
+    try {
+      renderResult(built);
+      document.getElementById("ziwei-interpret").hidden = false;
+      chainVersion++;
+      runChain(0, built.api, chainVersion);
+      document.getElementById("ziwei-result").scrollIntoView({ behavior: "smooth" });
+    } catch (e) {
+      // 渲染层异常不得静默失败：显式提示，避免无声死点击
+      errBox.textContent = T.renderFailed;
+      errBox.hidden = false;
+      return;
+    }
   });
 })();
