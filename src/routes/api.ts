@@ -5,12 +5,14 @@ import { registerMeihuaRoutes } from "./meihua";
 import { registerXiaoliurenRoutes } from "./xiaoliuren";
 import { registerZejiRoutes } from "./zeji";
 import { registerZiweiRoutes } from "./ziwei";
+import { registerHehunRoutes } from "./hehun";
 import type { BaziEnv } from "../bazi/types";
 import type { LiuyaoEnv } from "../liuyao/types";
 import type { MeihuaEnv } from "../meihua/types";
 import type { XiaoliurenEnv } from "../xiaoliuren/types";
 import type { ZejiEnv } from "../zeji/types";
 import type { ZiweiEnv } from "../ziwei/types";
+import type { HehunEnv } from "../hehun/types";
 import type { StatsEnv } from "../stats";
 
 /**
@@ -18,7 +20,7 @@ import type { StatsEnv } from "../stats";
  * 统一响应壳：{ ok: true, data } / { ok: false, error: { code, message } }
  * 未来接入 LLM 时按同样模式新增接口，例如 POST /api/divine。
  */
-export const api = new Hono<{ Bindings: BaziEnv & LiuyaoEnv & MeihuaEnv & XiaoliurenEnv & ZejiEnv & ZiweiEnv & StatsEnv }>().basePath("/api");
+export const api = new Hono<{ Bindings: BaziEnv & LiuyaoEnv & MeihuaEnv & XiaoliurenEnv & ZejiEnv & ZiweiEnv & HehunEnv & StatsEnv }>().basePath("/api");
 
 api.post("/echo", async (c) => {
   let body: unknown;
@@ -39,6 +41,7 @@ registerMeihuaRoutes(api);
 registerXiaoliurenRoutes(api);
 registerZejiRoutes(api);
 registerZiweiRoutes(api);
+registerHehunRoutes(api);
 
 // 兜底：/api/* 未命中一律返回 JSON 404（而非 HTML 404 页）
 api.all("*", (c) =>
