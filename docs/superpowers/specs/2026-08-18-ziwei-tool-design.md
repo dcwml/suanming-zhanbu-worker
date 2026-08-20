@@ -166,3 +166,13 @@ payload 一律中文规范名（梅花先例）；英文场景由 prompt 内附�
 - 盘格固定最小宽度 + 横向滚动，不做手机版卡片列表双渲染（保留三方四正空间关系）。
 - iztro 三级加载链是本工具特有写法，不回头重构 lunar-javascript 现有回退。
 - 前端排盘算法不做单测（与 liuyao/meihua 现状一致）。
+
+## 10. 实施后记（2026-08-19 合入 main，merge e8087b6）
+
+七任务按 SDD 流程全部完成并通过终审（全分支审查 + VM 实测执行 vendor iztro）。终审抓出一处 Critical：计划原文与实现误用 iztro 不存在的 `dp.majors`/`dp.minors` 字段（正确为 `majorStars`/`minorStars`），会导致浏览器端盘面渲染必然崩溃——已修复（b250b3a）并把渲染语句纳入带双语报错的守卫块。合并后 main 全量验证：typecheck 0 错误，390/390 测试通过（33 文件）。
+
+终审遗留跟进项（均已记录在案、暂不排期，不要"顺手修复"）：
+
+- **en-US 盘面标签映射**：iztro 英文输出把「仆役」译作 "surface"、中宫面板渲染 "advocator/impulsive" 等词，与站点词汇表不协调，宜做一层宫名映射。属文案打磨，不影响功能。
+- **footer 断言收窄**：integration 测试对 footer 工具列的断言粒度较宽，后续若 footer 文案调整易误报。
+- **可选 iztro 属性路径守卫**：可考虑加一个 Node 侧 CI 脚本断言 `majorStars`/`minorStars` 属性路径存在，防 iztro 升级时同类静默炸裂。属前瞻性加固。
