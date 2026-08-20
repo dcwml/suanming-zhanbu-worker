@@ -571,6 +571,37 @@ describe("zeji page", () => {
   });
 });
 
+describe("hehun page", () => {
+  it("serves /zh/hehun/ with form skeleton, FAQPage JSON-LD and scripts", async () => {
+    const res = await SELF.fetch("http://localhost/zh/hehun/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain('id="hehun-app"');
+    expect(html).toContain('id="hehun-m-year"');
+    expect(html).toContain('id="hehun-f-year"');
+    expect(html).toContain("/assets/hehun.js");
+    expect(html).toContain('"FAQPage"');
+  });
+
+  it("serves /en/hehun/ in English", async () => {
+    const res = await SELF.fetch("http://localhost/en/hehun/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain('data-lang="en"');
+  });
+
+  it("full-stack: invalid interpret request gets JSON 400", async () => {
+    const res = await SELF.fetch("http://localhost/api/hehun/interpret", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ lang: "zh" }),
+    });
+    expect(res.status).toBe(400);
+    const json = (await res.json()) as { ok: boolean };
+    expect(json.ok).toBe(false);
+  });
+});
+
 describe("mingli nav dropdown", () => {
   const count = (html: string, needle: string): number => html.split(needle).length - 1;
 

@@ -18,6 +18,8 @@ describe("buildSitemapXml", () => {
     expect(xml).toContain(`<loc>${SITE_ORIGIN}/en/bazi/</loc>`);
     expect(xml).toContain(`<loc>${SITE_ORIGIN}/zh/divination/</loc>`);
     expect(xml).toContain(`<loc>${SITE_ORIGIN}/en/divination/</loc>`);
+    expect(xml).toContain(`<loc>${SITE_ORIGIN}/zh/hehun/</loc>`);
+    expect(xml).toContain(`<loc>${SITE_ORIGIN}/en/hehun/</loc>`);
     expect(xml).toContain(`<loc>${SITE_ORIGIN}/zh/daily/</loc>`);
     expect(xml).toContain(`<loc>${SITE_ORIGIN}/en/daily/</loc>`);
   });

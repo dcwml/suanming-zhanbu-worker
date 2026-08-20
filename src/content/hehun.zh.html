@@ -1,0 +1,98 @@
+<div class="hehun-app" id="hehun-app" data-lang="zh">
+  <h1>八字合婚</h1>
+  <p class="lead">输入男女双方出生时间，排出两人四柱，逐层对照年支生肖、日柱干支与五行互补，AI 智能解读婚配指数与相处建议。</p>
+
+  <form class="bazi-form hehun-form" id="hehun-form">
+    <div class="hehun-parties">
+      <fieldset class="hehun-party">
+        <legend>男方</legend>
+        <fieldset class="bazi-field">
+          <legend>历法</legend>
+          <label><input type="radio" name="m-calendar" value="solar" checked> 公历</label>
+          <label><input type="radio" name="m-calendar" value="lunar"> 农历</label>
+          <label id="hehun-m-leap-wrap" hidden><input type="checkbox" id="hehun-m-leap"> 闰月</label>
+        </fieldset>
+        <div class="bazi-field">
+          <label>年 <input type="number" id="hehun-m-year" min="1900" max="2100" value="1996" required></label>
+          <label>月 <input type="number" id="hehun-m-month" min="1" max="12" value="2" required></label>
+          <label>日 <input type="number" id="hehun-m-day" min="1" max="31" value="19" required></label>
+          <label>时
+            <select id="hehun-m-hour">
+              <option value="0">早子时 23:00-00:59（归当日）</option>
+              <option value="2">丑时 01:00-02:59</option>
+              <option value="4">寅时 03:00-04:59</option>
+              <option value="6">卯时 05:00-06:59</option>
+              <option value="8">辰时 07:00-08:59</option>
+              <option value="10">巳时 09:00-10:59</option>
+              <option value="12" selected>午时 11:00-12:59</option>
+              <option value="14">未时 13:00-14:59</option>
+              <option value="16">申时 15:00-16:59</option>
+              <option value="18">酉时 17:00-18:59</option>
+              <option value="20">戌时 19:00-20:59</option>
+              <option value="22">亥时 21:00-22:59</option>
+              <option value="23">晚子时 23:00-23:59（归次日）</option>
+            </select>
+          </label>
+        </div>
+      </fieldset>
+      <fieldset class="hehun-party">
+        <legend>女方</legend>
+        <fieldset class="bazi-field">
+          <legend>历法</legend>
+          <label><input type="radio" name="f-calendar" value="solar" checked> 公历</label>
+          <label><input type="radio" name="f-calendar" value="lunar"> 农历</label>
+          <label id="hehun-f-leap-wrap" hidden><input type="checkbox" id="hehun-f-leap"> 闰月</label>
+        </fieldset>
+        <div class="bazi-field">
+          <label>年 <input type="number" id="hehun-f-year" min="1900" max="2100" value="1997" required></label>
+          <label>月 <input type="number" id="hehun-f-month" min="1" max="12" value="7" required></label>
+          <label>日 <input type="number" id="hehun-f-day" min="1" max="31" value="7" required></label>
+          <label>时
+            <select id="hehun-f-hour">
+              <option value="0">早子时 23:00-00:59（归当日）</option>
+              <option value="2">丑时 01:00-02:59</option>
+              <option value="4">寅时 03:00-04:59</option>
+              <option value="6">卯时 05:00-06:59</option>
+              <option value="8">辰时 07:00-08:59</option>
+              <option value="10">巳时 09:00-10:59</option>
+              <option value="12">午时 11:00-12:59</option>
+              <option value="14" selected>未时 13:00-14:59</option>
+              <option value="16">申时 15:00-16:59</option>
+              <option value="18">酉时 17:00-18:59</option>
+              <option value="20">戌时 19:00-20:59</option>
+              <option value="22">亥时 21:00-22:59</option>
+              <option value="23">晚子时 23:00-23:59（归次日）</option>
+            </select>
+          </label>
+        </div>
+      </fieldset>
+    </div>
+    <button type="submit" class="bazi-submit">开始合婚</button>
+    <p class="bazi-form-error" id="hehun-form-error" role="alert" hidden></p>
+  </form>
+
+  <section id="hehun-result" class="hehun-result" hidden aria-live="polite"></section>
+
+  <section id="hehun-interpret" class="hehun-interpret" hidden>
+    <h2>合婚解读</h2>
+    <p class="bazi-disclaimer">以下解读基于传统八字合婚理论，仅供参考，请结合实际情况理性看待。</p>
+    <article class="bazi-card" id="card-hehun"><h3>合婚详解</h3><div class="bazi-card-body"></div></article>
+  </section>
+
+  <section class="hehun-faq">
+    <h2>常见问题</h2>
+    <h3>八字合婚主要看什么？</h3>
+    <p>传统合婚以年支（生肖）与日柱干支的配合为核心，再看两人五行是否互补：年支六合、三合为佳，相冲、相害需要更多磨合；日柱天干五合、地支相合情缘较深；一方所缺的五行恰是另一方的旺五行，相处起来更省力。本工具按这三层逐项对照。</p>
+    <h3>合婚结果「不合」还能结婚吗？</h3>
+    <p>合婚反映的是传统命理视角下的相处磨合点，不是判决书。年支相冲但日柱相合、五行互补的组合很常见，关键在于了解差异、用心经营。婚恋是重大人生决定，请结合现实情况综合判断。</p>
+    <h3>需要准备什么信息？</h3>
+    <p>男女双方的出生日期与时辰，公历、农历均可输入。时辰影响时柱与五行统计，越准确解读越贴切；时辰不确定时，可选最接近的时段。</p>
+    <h3>AI 解读权威吗？</h3>
+    <p>排盘遵循传统干支历法，解读由 AI 基于传统合婚文献整理生成，侧重文化推演，仅供参考，重要决策请结合自身情况。</p>
+  </section>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lunar-javascript/1.7.7/lunar.min.js" defer onerror="var s=document.createElement('script');s.src='https://cdn.staticfile.org/lunar-javascript/1.7.7/lunar.min.js';document.head.appendChild(s)"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js" defer></script>
+<script src="/assets/hehun.js" defer></script>

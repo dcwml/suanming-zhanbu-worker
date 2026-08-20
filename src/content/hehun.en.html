@@ -1,0 +1,98 @@
+<div class="hehun-app" id="hehun-app" data-lang="en">
+  <h1>BaZi Marriage Compatibility</h1>
+  <p class="lead">Enter both persons' birth times to cast two Four-Pillars charts, compare year branches, day pillars and five elements layer by layer, and get an AI reading of your compatibility and how to get along.</p>
+
+  <form class="bazi-form hehun-form" id="hehun-form">
+    <div class="hehun-parties">
+      <fieldset class="hehun-party">
+        <legend>The Man</legend>
+        <fieldset class="bazi-field">
+          <legend>Calendar</legend>
+          <label><input type="radio" name="m-calendar" value="solar" checked> Solar</label>
+          <label><input type="radio" name="m-calendar" value="lunar"> Lunar</label>
+          <label id="hehun-m-leap-wrap" hidden><input type="checkbox" id="hehun-m-leap"> Leap month</label>
+        </fieldset>
+        <div class="bazi-field">
+          <label>Year <input type="number" id="hehun-m-year" min="1900" max="2100" value="1996" required></label>
+          <label>Month <input type="number" id="hehun-m-month" min="1" max="12" value="2" required></label>
+          <label>Day <input type="number" id="hehun-m-day" min="1" max="31" value="19" required></label>
+          <label>Hour
+            <select id="hehun-m-hour">
+              <option value="0">早子 Early Zi 23:00-00:59 (same day)</option>
+              <option value="2">丑 Chou 01:00-02:59</option>
+              <option value="4">寅 Yin 03:00-04:59</option>
+              <option value="6">卯 Mao 05:00-06:59</option>
+              <option value="8">辰 Chen 07:00-08:59</option>
+              <option value="10">巳 Si 09:00-10:59</option>
+              <option value="12" selected>午 Wu 11:00-12:59</option>
+              <option value="14">未 Wei 13:00-14:59</option>
+              <option value="16">申 Shen 15:00-16:59</option>
+              <option value="18">酉 You 17:00-18:59</option>
+              <option value="20">戌 Xu 19:00-20:59</option>
+              <option value="22">亥 Hai 21:00-22:59</option>
+              <option value="23">晚子 Late Zi 23:00-23:59 (next day)</option>
+            </select>
+          </label>
+        </div>
+      </fieldset>
+      <fieldset class="hehun-party">
+        <legend>The Woman</legend>
+        <fieldset class="bazi-field">
+          <legend>Calendar</legend>
+          <label><input type="radio" name="f-calendar" value="solar" checked> Solar</label>
+          <label><input type="radio" name="f-calendar" value="lunar"> Lunar</label>
+          <label id="hehun-f-leap-wrap" hidden><input type="checkbox" id="hehun-f-leap"> Leap month</label>
+        </fieldset>
+        <div class="bazi-field">
+          <label>Year <input type="number" id="hehun-f-year" min="1900" max="2100" value="1997" required></label>
+          <label>Month <input type="number" id="hehun-f-month" min="1" max="12" value="7" required></label>
+          <label>Day <input type="number" id="hehun-f-day" min="1" max="31" value="7" required></label>
+          <label>Hour
+            <select id="hehun-f-hour">
+              <option value="0">早子 Early Zi 23:00-00:59 (same day)</option>
+              <option value="2">丑 Chou 01:00-02:59</option>
+              <option value="4">寅 Yin 03:00-04:59</option>
+              <option value="6">卯 Mao 05:00-06:59</option>
+              <option value="8">辰 Chen 07:00-08:59</option>
+              <option value="10">巳 Si 09:00-10:59</option>
+              <option value="12">午 Wu 11:00-12:59</option>
+              <option value="14" selected>未 Wei 13:00-14:59</option>
+              <option value="16">申 Shen 15:00-16:59</option>
+              <option value="18">酉 You 17:00-18:59</option>
+              <option value="20">戌 Xu 19:00-20:59</option>
+              <option value="22">亥 Hai 21:00-22:59</option>
+              <option value="23">晚子 Late Zi 23:00-23:59 (next day)</option>
+            </select>
+          </label>
+        </div>
+      </fieldset>
+    </div>
+    <button type="submit" class="bazi-submit">Match Charts</button>
+    <p class="bazi-form-error" id="hehun-form-error" role="alert" hidden></p>
+  </form>
+
+  <section id="hehun-result" class="hehun-result" hidden aria-live="polite"></section>
+
+  <section id="hehun-interpret" class="hehun-interpret" hidden>
+    <h2>Compatibility Reading</h2>
+    <p class="bazi-disclaimer">The reading below is grounded in traditional BaZi compatibility theory — please apply it in light of your own circumstances.</p>
+    <article class="bazi-card" id="card-hehun"><h3>Detailed Reading</h3><div class="bazi-card-body"></div></article>
+  </section>
+
+  <section class="hehun-faq">
+    <h2>Frequently Asked Questions</h2>
+    <h3>What does BaZi marriage compatibility look at?</h3>
+    <p>Traditional compatibility reading centres on the pairing of the year branches (zodiac signs) and the day pillars, then on whether the two charts' five elements complement each other: six-harmony and three-harmony year branches bode well, while clashes and harms call for more patient adjustment; a five-union of day stems or harmonious day branches suggests a deep bond; an element one chart lacks but the other has in strength makes daily life easier. This tool compares all three layers one by one.</p>
+    <h3>If the result says we are "not compatible", should we not marry?</h3>
+    <p>The reading shows where the relationship needs patient adjustment from the traditional BaZi viewpoint — it is not a verdict. Charts with clashing year branches yet harmonious day pillars and complementary elements are common; what matters is understanding the differences and working on them. Marriage is a major life decision — please weigh it in light of your real circumstances.</p>
+    <h3>What information do I need to prepare?</h3>
+    <p>Both persons' birth dates and hours; solar or lunar input both work. The hour decides the hour pillar and the element tally, so the more precise, the closer the reading; if unsure of the hour, pick the closest slot.</p>
+    <h3>Are the AI readings authoritative?</h3>
+    <p>The chart casting follows the traditional stem-branch calendar; the reading is generated by AI drawing on classical compatibility literature and is offered as cultural reasoning for reference only. Please weigh important decisions in light of your own circumstances.</p>
+  </section>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lunar-javascript/1.7.7/lunar.min.js" defer onerror="var s=document.createElement('script');s.src='https://cdn.staticfile.org/lunar-javascript/1.7.7/lunar.min.js';document.head.appendChild(s)"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js" defer></script>
+<script src="/assets/hehun.js" defer></script>

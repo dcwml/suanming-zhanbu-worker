@@ -66,6 +66,15 @@ describe("registry", () => {
     expect(ziwei!.faq!.zh.length).toBe(ziwei!.faq!.en.length);
   });
 
+  it("hehun page exists with bilingual faq of equal length", () => {
+    const hehun = findPage("hehun");
+    expect(hehun).toBeDefined();
+    // 经「命理」下拉进入，不在平铺导航里
+    expect(hehun!.inNav).toBe(false);
+    expect(hehun!.faq!.zh.length).toBeGreaterThan(0);
+    expect(hehun!.faq!.zh.length).toBe(hehun!.faq!.en.length);
+  });
+
   it("bazi page no longer sits in the flat nav", () => {
     expect(findPage("bazi")!.inNav).toBe(false);
   });
