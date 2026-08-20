@@ -102,7 +102,7 @@ SEO 全自动派生：两页走 registry 两步约定，title/canonical/hreflang
 - `pairing` 三字段枚举白名单；`wuxingCount` 键限金木水火土、值 0-8；各文本字段 ≤100 字
 - 错误消息只描述字段名，不回显用户输入值
 
-错误码沿用全套：`invalid_json`(400)、`payload_too_large`(413)、`invalid_request`(400)、`rate_limited`(429)、`not_configured`(503)、`upstream_error`(502)、`upstream_timeout`(504)。限流按 cf-connecting-ip，绑定缺失时跳过（本地 dev/测试可用）。
+错误码沿用全套：`invalid_json`(400)、`payload_too_large`(413)、`invalid_request`(400)、`rate_limited`(429)、`not_configured`(500)、`upstream_error`(502)、`upstream_timeout`(504)。限流按 cf-connecting-ip，绑定缺失时跳过（本地 dev/测试可用）。
 
 响应：`{ ok: true, data: { markdown } }`（无 part 字段）。API 调用埋点 `recordApiCall` 记 `/api/hehun/interpret`（对齐 bazi）。
 
@@ -141,7 +141,7 @@ SEO 全自动派生：两页走 registry 两步约定，title/canonical/hreflang
 
 - `test/hehun-validate.test.ts`：合法载荷通过；lang 非法、male/female 缺失或字段逐项非法（solar 格式、ganZhi 非六十甲子、hideGan/naYin 超长、wuxingCount 键值越界、pillars 缺柱）、pairing 枚举外值——逐一失败断言
 - `test/hehun-prompt.test.ts`：system prompt 中英分支要点；user prompt 含双方命盘数据、配对关系文本（六合/五合等具体样例）、六段任务指令与篇幅约束
-- `test/hehun-api.test.ts`（对齐 bazi-api 模式）：限流触发 429、体积 413、非法 JSON 400、校验失败 400、LLM 未配置 503、上游错误/超时透传 502/504、成功路径响应壳形状 `{ ok: true, data: { markdown } }`
+- `test/hehun-api.test.ts`（对齐 bazi-api 模式）：限流触发 429、体积 413、非法 JSON 400、校验失败 400、LLM 未配置 500、上游错误/超时透传 502/504、成功路径响应壳形状 `{ ok: true, data: { markdown } }`
 
 集成与既有测试更新：
 
