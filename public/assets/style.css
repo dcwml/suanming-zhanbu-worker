@@ -1888,3 +1888,95 @@ label:has(#zeji-strict:disabled) {
   .day-row { flex-direction: column; gap: 0.25rem; }
   .day-head { width: auto; }
 }
+
+/* ---------- 紫微斗数页 ---------- */
+
+.ziwei-app { max-width: 900px; margin: 0 auto; }
+
+.ziwei-board-wrap { overflow-x: auto; margin: 1rem 0; }
+
+.ziwei-board {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(150px, 1fr));
+  grid-template-rows: repeat(4, minmax(110px, auto));
+  min-width: 640px;
+  gap: 4px;
+}
+
+.ziwei-cell {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #fff;
+  padding: 0.4rem 0.5rem;
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.ziwei-cell.ming { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+.ziwei-cell.body { background: #fdf6ec; }
+
+.ziwei-cell-head {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.ziwei-branch { color: var(--muted); font-weight: 400; }
+
+.ziwei-major { font-weight: 600; }
+.ziwei-major.ziwei-empty { font-weight: 400; color: var(--muted); }
+
+.ziwei-star-meta { font-weight: 400; color: var(--muted); font-size: 0.75rem; margin-left: 0.25rem; }
+.ziwei-hua { color: #c62828; margin-left: 0.15rem; }
+
+.ziwei-minors { margin-top: 0.2rem; }
+.ziwei-minor { display: inline-block; margin-right: 0.3rem; font-size: 0.75rem; }
+.ziwei-minor-ji { color: #2e7d32; }
+.ziwei-minor-sha { color: #c62828; }
+.ziwei-minor-lu { color: #b8860b; }
+.ziwei-minor-ma { color: #1565c0; }
+
+.ziwei-center {
+  grid-area: 2 / 2 / 4 / 4;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 0.9rem;
+}
+.ziwei-center p { margin: 0.2rem 0; }
+
+.ziwei-decadal-bar { color: var(--muted); font-size: 0.9rem; }
+
+.ziwei-card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+}
+
+.ziwei-card h3 { margin-top: 0; }
+
+.ziwei-card .status { color: var(--muted); font-size: 0.9rem; }
+
+.ziwei-card .status.error { color: #b3261e; }
+
+.ziwei-retry {
+  background: none;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  border-radius: 6px;
+  padding: 0.25rem 1rem;
+  font: inherit;
+  cursor: pointer;
+}
+
+@keyframes ziwei-blink { 50% { opacity: 0.4; } }
+.ziwei-card .status.loading { animation: ziwei-blink 1.2s infinite; }
+
+.ziwei-faq h3 { margin-bottom: 0.25rem; }

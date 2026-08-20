@@ -20,7 +20,7 @@ export function renderFooter(lang: Lang): string {
 
   // 链接标题一律取 registry 单一来源，避免双语两处维护
   const title = (slug: string): string => escapeHtml(findPage(slug)!.meta[lang].title);
-  const toolLinks = ["bazi", "liuyao", "meihua", "xiaoliuren"]
+  const toolLinks = ["bazi", "ziwei", "liuyao", "meihua", "xiaoliuren"]
     .map((slug) => `<a href="${pagePath(lang, slug)}">${title(slug)}</a>`)
     .join("\n          ");
   const fortuneLinks = FORTUNE_NAV_ITEMS.map(

@@ -570,3 +570,95 @@ describe("zeji page", () => {
     expect(html).toContain("/assets/zeji.js");
   });
 });
+
+describe("mingli nav dropdown", () => {
+  const count = (html: string, needle: string): number => html.split(needle).length - 1;
+
+  it("zh home renders the 命理 dropdown as a button with bazi and ziwei links", async () => {
+    const res = await fetchNoFollow("/zh/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain('<button type="button" class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">命理<span');
+    expect(html).toContain('href="/zh/bazi/"');
+    expect(html).toContain('href="/zh/ziwei/"');
+  });
+
+  it("bazi appears only once in the nav region (inside the dropdown)", async () => {
+    const res = await fetchNoFollow("/zh/");
+    const html = await res.text();
+    const navRegion = html.slice(html.indexOf('<div class="nav-links">'), html.indexOf('class="lang-switch"'));
+    expect(count(navRegion, 'href="/zh/bazi/"')).toBe(1);
+  });
+
+  it("mingli dropdown sits between home and divination in nav order", async () => {
+    const res = await fetchNoFollow("/zh/");
+    const html = await res.text();
+    const mingli = html.indexOf(">命理<span");
+    const divination = html.indexOf(">占卜<span");
+    expect(mingli).toBeGreaterThan(-1);
+    expect(divination).toBeGreaterThan(mingli);
+  });
+
+  it("bazi page marks its dropdown link and toggle active", async () => {
+    const res = await fetchNoFollow("/zh/bazi/");
+    const html = await res.text();
+    expect(html).toContain('nav-dropdown-toggle active');
+    expect(html).toContain('href="/zh/bazi/" class="active" aria-current="page"');
+  });
+
+  it("ziwei page marks its dropdown link and toggle active", async () => {
+    const res = await fetchNoFollow("/zh/ziwei/");
+    const html = await res.text();
+    expect(html).toContain('nav-dropdown-toggle active');
+    expect(html).toContain('href="/zh/ziwei/" class="active" aria-current="page"');
+  });
+
+  it("en home renders the Destiny dropdown with bazi and ziwei links", async () => {
+    const res = await fetchNoFollow("/en/");
+    const html = await res.text();
+    expect(html).toContain(">Destiny<span");
+    expect(html).toContain('href="/en/bazi/"');
+    expect(html).toContain('href="/en/ziwei/"');
+  });
+
+  it("footer tools column carries the ziwei link", async () => {
+    const res = await fetchNoFollow("/zh/");
+    const html = await res.text();
+    expect(html).toContain('aria-label="工具"');
+    expect(html).toContain('href="/zh/ziwei/"');
+  });
+});
+
+describe("ziwei page", () => {
+  it("serves /zh/ziwei/ with form skeleton, FAQPage JSON-LD and scripts", async () => {
+    const res = await SELF.fetch("http://localhost/zh/ziwei/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain('id="ziwei-app"');
+    expect(html).toContain("/assets/ziwei.js");
+    expect(html).toContain('"FAQPage"');
+  });
+
+  it("serves /en/ziwei/ in English", async () => {
+    const res = await SELF.fetch("http://localhost/en/ziwei/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain('data-lang="en"');
+  });
+
+  it("full-stack: invalid interpret request gets JSON 400", async () => {
+    const res = await SELF.fetch("http://localhost/api/ziwei/interpret", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ part: "nope" }),
+    });
+    expect(res.status).toBe(400);
+    const json = (await res.json()) as { ok: boolean };
+    expect(json.ok).toBe(false);
+  });
+
+  it("serves the local iztro vendor fallback file", async () => {
+    const res = await SELF.fetch("http://localhost/assets/vendor/iztro.min.js");
+    expect(res.status).toBe(200);
+  });
+});
