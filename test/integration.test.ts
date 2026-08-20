@@ -638,13 +638,14 @@ describe("mingli overview page", () => {
 describe("mingli nav dropdown", () => {
   const count = (html: string, needle: string): number => html.split(needle).length - 1;
 
-  it("zh home renders the 命理 dropdown as a button with bazi and ziwei links", async () => {
+  it("zh home renders the 命理 dropdown as a link to the overview with bazi, ziwei and hehun links", async () => {
     const res = await fetchNoFollow("/zh/");
     expect(res.status).toBe(200);
     const html = await res.text();
-    expect(html).toContain('<button type="button" class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">命理<span');
+    expect(html).toContain('class="nav-dropdown-toggle" href="/zh/mingli/"');
     expect(html).toContain('href="/zh/bazi/"');
     expect(html).toContain('href="/zh/ziwei/"');
+    expect(html).toContain('href="/zh/hehun/"');
   });
 
   it("bazi appears only once in the nav region (inside the dropdown)", async () => {
@@ -666,30 +667,47 @@ describe("mingli nav dropdown", () => {
   it("bazi page marks its dropdown link and toggle active", async () => {
     const res = await fetchNoFollow("/zh/bazi/");
     const html = await res.text();
-    expect(html).toContain('nav-dropdown-toggle active');
+    expect(html).toContain("nav-dropdown-toggle active");
     expect(html).toContain('href="/zh/bazi/" class="active" aria-current="page"');
   });
 
   it("ziwei page marks its dropdown link and toggle active", async () => {
     const res = await fetchNoFollow("/zh/ziwei/");
     const html = await res.text();
-    expect(html).toContain('nav-dropdown-toggle active');
+    expect(html).toContain("nav-dropdown-toggle active");
     expect(html).toContain('href="/zh/ziwei/" class="active" aria-current="page"');
   });
 
-  it("en home renders the Destiny dropdown with bazi and ziwei links", async () => {
+  it("hehun page marks its dropdown link and toggle active", async () => {
+    const res = await fetchNoFollow("/zh/hehun/");
+    const html = await res.text();
+    expect(html).toContain("nav-dropdown-toggle active");
+    expect(html).toContain('href="/zh/hehun/" class="active" aria-current="page"');
+  });
+
+  it("mingli overview page marks the nav toggle active and switches language", async () => {
+    const res = await fetchNoFollow("/zh/mingli/");
+    const html = await res.text();
+    expect(html).toContain('class="nav-dropdown-toggle active" href="/zh/mingli/" aria-current="page"');
+    expect(html).toContain('class="lang-switch" href="/en/mingli/"');
+  });
+
+  it("en home renders the Destiny dropdown with all three tool links", async () => {
     const res = await fetchNoFollow("/en/");
     const html = await res.text();
     expect(html).toContain(">Destiny<span");
+    expect(html).toContain('class="nav-dropdown-toggle" href="/en/mingli/"');
     expect(html).toContain('href="/en/bazi/"');
     expect(html).toContain('href="/en/ziwei/"');
+    expect(html).toContain('href="/en/hehun/"');
   });
 
-  it("footer tools column carries the ziwei link", async () => {
+  it("footer tools column carries the ziwei and hehun links", async () => {
     const res = await fetchNoFollow("/zh/");
     const html = await res.text();
     expect(html).toContain('aria-label="工具"');
     expect(html).toContain('href="/zh/ziwei/"');
+    expect(html).toContain('href="/zh/hehun/"');
   });
 });
 

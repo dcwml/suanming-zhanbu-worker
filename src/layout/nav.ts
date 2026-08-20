@@ -14,12 +14,13 @@ export const FORTUNE_NAV_ITEMS: readonly { slug: string; label: Record<Lang, str
   { slug: MONTHLY_ARCHIVE_META.slug, label: { zh: "每月运势", en: "Monthly Horoscope" } },
 ];
 
-/** 「命理」下拉菜单：标签直接取 registry 页面标题（单一来源）；纯按钮展开、无链接（同「运势」下拉） */
+/** 「命理」下拉菜单：标签直接取 registry 页面标题（单一来源），不重复维护文案；标题链接命理总览页（同「占卜」下拉） */
 export const MINGLI_NAV_LABEL: Record<Lang, string> = { zh: "命理", en: "Destiny" };
 
 export const MINGLI_NAV_ITEMS: readonly { slug: string; label: Record<Lang, string> }[] = [
   "bazi",
   "ziwei",
+  "hehun",
 ].map((slug) => ({ slug, label: { zh: findPage(slug)!.meta.zh.title, en: findPage(slug)!.meta.en.title } }));
 
 /** 「占卜」下拉菜单：标签直接取 registry 页面标题（单一来源），不重复维护文案 */
@@ -68,13 +69,13 @@ function renderDropdown(
  *  404/500 等无真实页面的场景应显式传 "" 指向对方语言首页。 */
 export function renderNav(lang: Lang, currentSlug: string, langSwitchSlug?: string): string {
   // 导航顺序（单一来源）：首页 · [命理 ▾] · [占卜 ▾] · 择吉日 · [运势 ▾]
-  // 「命理」下拉占八字原平铺位置（首页之后），纯按钮无链接；八字/紫微均 inNav: false
+  // 「命理」下拉占八字原平铺位置（首页之后），标题链接 mingli 总览页；八字/紫微/合婚均 inNav: false
   const chunks: string[] = [];
   for (const p of navPages()) {
     const active = p.slug === currentSlug ? ' class="active" aria-current="page"' : "";
     chunks.push(`<a href="${pagePath(lang, p.slug)}"${active}>${escapeHtml(p.meta[lang].title)}</a>`);
     if (p.slug === "") {
-      chunks.push(renderDropdown(lang, currentSlug, MINGLI_NAV_LABEL, MINGLI_NAV_ITEMS));
+      chunks.push(renderDropdown(lang, currentSlug, MINGLI_NAV_LABEL, MINGLI_NAV_ITEMS, "mingli"));
       chunks.push(renderDropdown(lang, currentSlug, DIVINATION_NAV_LABEL, DIVINATION_NAV_ITEMS, "divination"));
     }
   }
