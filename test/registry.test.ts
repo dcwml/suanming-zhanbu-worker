@@ -75,6 +75,15 @@ describe("registry", () => {
     expect(hehun!.faq!.zh.length).toBe(hehun!.faq!.en.length);
   });
 
+  it("mingli page exists with bilingual faq of equal length", () => {
+    const mingli = findPage("mingli");
+    expect(mingli).toBeDefined();
+    // 经「命理」下拉标题进入，不在平铺导航里
+    expect(mingli!.inNav).toBe(false);
+    expect(mingli!.faq!.zh.length).toBeGreaterThan(0);
+    expect(mingli!.faq!.zh.length).toBe(mingli!.faq!.en.length);
+  });
+
   it("bazi page no longer sits in the flat nav", () => {
     expect(findPage("bazi")!.inNav).toBe(false);
   });

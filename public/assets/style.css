@@ -811,10 +811,11 @@ code {
   .features-grid { grid-template-columns: 1fr; }
 }
 
-/* ========== 占卜总览页 ========== */
+/* ========== 占卜总览页 · 命理总览页（共用布局类） ========== */
 
-/* 三工具卡片：复用首页 .tool-card */
-.divination-tools {
+/* 工具卡片网格：复用首页 .tool-card */
+.divination-tools,
+.mingli-tools {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
@@ -822,9 +823,11 @@ code {
 }
 
 /* 选择指南对比表 */
-.divination-choose { margin: 2.5rem 0; }
+.divination-choose,
+.mingli-choose { margin: 2.5rem 0; }
 
-.divination-compare {
+.divination-compare,
+.mingli-compare {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.92rem;
@@ -832,57 +835,74 @@ code {
 }
 
 .divination-compare th,
-.divination-compare td {
+.divination-compare td,
+.mingli-compare th,
+.mingli-compare td {
   border: 1px solid var(--border);
   padding: 0.5rem 0.6rem;
   text-align: left;
   vertical-align: top;
 }
 
-.divination-compare thead th {
+.divination-compare thead th,
+.mingli-compare thead th {
   background: #f0e9df;
   font-weight: 600;
   white-space: nowrap;
 }
 
-.divination-compare tbody th {
+.divination-compare tbody th,
+.mingli-compare tbody th {
   white-space: nowrap;
   color: var(--accent);
 }
 
-/* 页内 FAQ（样式同择吉页） */
-.divination-faq { margin: 2rem 0; }
+/* 页内 FAQ（样式同择吉页；hehun 页 FAQ 同组复用） */
+.divination-faq,
+.mingli-faq,
+.hehun-faq { margin: 2rem 0; }
 
-.divination-faq h2 {
+.divination-faq h2,
+.mingli-faq h2,
+.hehun-faq h2 {
   font-size: 1.25rem;
   margin: 0 0 0.85rem;
   padding-bottom: 0.5rem;
   border-bottom: 1px dashed var(--border);
 }
 
-.divination-faq h3 {
+.divination-faq h3,
+.mingli-faq h3,
+.hehun-faq h3 {
   font-size: 1rem;
   margin: 1.1rem 0 0.3rem;
   color: var(--accent-dark);
 }
 
-.divination-faq p {
+.divination-faq p,
+.mingli-faq p,
+.hehun-faq p {
   margin: 0.3rem 0 0;
   font-size: 0.93rem;
   line-height: 1.8;
   color: var(--fg);
 }
 
-.divination-note { color: var(--muted); font-size: 0.85rem; }
+.divination-note,
+.mingli-note { color: var(--muted); font-size: 0.85rem; }
 
 @media (max-width: 800px) {
-  .divination-tools { grid-template-columns: 1fr; }
+  .divination-tools,
+  .mingli-tools { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 640px) {
-  .divination-compare { font-size: 0.85rem; }
+  .divination-compare,
+  .mingli-compare { font-size: 0.85rem; }
   .divination-compare th,
-  .divination-compare td { padding: 0.4rem 0.45rem; }
+  .divination-compare td,
+  .mingli-compare th,
+  .mingli-compare td { padding: 0.4rem 0.45rem; }
 }
 
 /* ========== 每日宜忌 · 老黄历通胜式样式 ========== */

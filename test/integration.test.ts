@@ -602,6 +602,39 @@ describe("hehun page", () => {
   });
 });
 
+describe("mingli overview page", () => {
+  it("serves /zh/mingli/ with intro and CTA links of all three tools", async () => {
+    const res = await fetchNoFollow("/zh/mingli/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain("<h1>命理工具</h1>");
+    expect(html).toContain('class="tool-cta" href="/zh/bazi/"');
+    expect(html).toContain('class="tool-cta" href="/zh/ziwei/"');
+    expect(html).toContain('class="tool-cta" href="/zh/hehun/"');
+  });
+
+  it("zh overview page injects FAQPage JSON-LD and canonical", async () => {
+    const res = await fetchNoFollow("/zh/mingli/");
+    const html = await res.text();
+    expect(html).toContain('"FAQPage"');
+    expect(html).toContain(`<link rel="canonical" href="${SITE_ORIGIN}/zh/mingli/">`);
+  });
+
+  it("serves /en/mingli/ in English", async () => {
+    const res = await fetchNoFollow("/en/mingli/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain("<h1>Destiny Tools</h1>");
+    expect(html).toContain('class="tool-cta" href="/en/hehun/"');
+  });
+
+  it("redirects /zh/mingli to trailing-slash", async () => {
+    const res = await fetchNoFollow("/zh/mingli");
+    expect(res.status).toBe(301);
+    expect(res.headers.get("location")).toBe("/zh/mingli/");
+  });
+});
+
 describe("mingli nav dropdown", () => {
   const count = (html: string, needle: string): number => html.split(needle).length - 1;
 
