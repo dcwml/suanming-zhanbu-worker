@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260821Zh from "../content/daily/2026-08-21.zh.html";
+import daily20260821En from "../content/daily/2026-08-21.en.html";
 import daily20260820Zh from "../content/daily/2026-08-20.zh.html";
 import daily20260820En from "../content/daily/2026-08-20.en.html";
 import daily20260819Zh from "../content/daily/2026-08-19.zh.html";
@@ -56,6 +58,14 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-08-21",
+    meta: {
+      zh: { title: "2026年8月21日宜忌·兔", description: "2026年8月21日黄历宜忌：朱雀黑道值日，得月德合、天恩吉神化解，宜嫁娶、开光、祭祀、祈福、求嗣、入宅移徙、安床、开市、交易、立券、栽种、出行、安葬，忌掘井、理发、作灶、动土、破土、开池，冲鸡煞西；生肖兔今日运势与四象朱雀科普。" },
+      en: { title: "Daily Almanac — August 21, 2026 (Rabbit)", description: "August 21, 2026 Chinese almanac: a Zhūquè Vermilion Bird Black Path day outweighed by the Yuèdéhé Month-Virtue Blend and Tiān'ēn Heavenly Grace — favorable for marriage, consecration, sacrifice, praying for blessings and offspring, moving into a house, relocating, setting the bed, opening for business, trading, signing contracts, planting, travel and burial; avoid digging wells, haircutting, installing a stove, breaking ground, opening ground for graves and digging ponds; clash Rooster, Sha West; Rabbit zodiac fortune and the Vermilion Bird of the Four Symbols." },
+    },
+    content: { zh: daily20260821Zh, en: daily20260821En },
+  },
   {
     date: "2026-08-20",
     meta: {
