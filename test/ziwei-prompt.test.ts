@@ -16,6 +16,12 @@ describe("buildSystemPrompt", () => {
     expect(s).toContain("紫微 Zi Wei");
     expect(s).toContain("命宫");
   });
+
+  it("forbids self-identification as artificial intelligence in the output", () => {
+    expect(buildSystemPrompt("zh")).toContain("不要自称或提及人工智能");
+    expect(buildSystemPrompt("en")).toContain("artificial intelligence");
+    expect(buildSystemPrompt("zh")).not.toMatch(/AI|LLM/i);
+  });
 });
 
 describe("buildUserPrompt", () => {

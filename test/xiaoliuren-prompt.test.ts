@@ -18,6 +18,12 @@ describe("xiaoliuren buildSystemPrompt", () => {
     expect(s).toContain("Da An");
     expect(s).toContain("Wood");
   });
+
+  it("forbids self-identification as artificial intelligence in the output", () => {
+    expect(buildSystemPrompt("zh")).toContain("不要自称或提及人工智能");
+    expect(buildSystemPrompt("en")).toContain("artificial intelligence");
+    expect(buildSystemPrompt("zh")).not.toMatch(/AI|LLM/i);
+  });
 });
 
 describe("xiaoliuren buildUserPrompt", () => {

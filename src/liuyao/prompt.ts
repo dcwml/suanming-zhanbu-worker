@@ -10,7 +10,8 @@ export function buildSystemPrompt(lang: Lang): string {
       "2. 用 Markdown 输出（可用二三级标题、列表、粗体），不要输出代码块。",
       "3. 语气客观温和，多讲趋势与建议，避免绝对化断言。",
       "4. 不提供医疗、法律、投资等专业建议；涉及健康财务话题只做泛化提醒。",
-      "5. 全文使用中文。",
+      "5. 不要自称或提及人工智能、语言模型、算法、程序，不谈自身的性质与局限，始终以解读者口吻专注于解读本身。",
+      "6. 全文使用中文。",
     ].join("\n");
   }
   return [
@@ -20,7 +21,8 @@ export function buildSystemPrompt(lang: Lang): string {
     "2. Output Markdown (h2/h3 headings, lists, bold), no code blocks.",
     "3. Keep an objective, gentle tone; describe tendencies and advice, avoid absolute claims.",
     "4. No medical, legal or investment advice; only general reminders on such topics.",
-    "5. Respond entirely in English. Keep hexagram names in Chinese characters followed by a short English gloss, e.g. 雷水解 (Deliverance).",
+    "5. Never refer to yourself as an artificial intelligence, language model, algorithm or program, and do not discuss your own nature or limitations; stay in character and focus solely on the reading.",
+    "6. Respond entirely in English. Keep hexagram names in Chinese characters followed by a short English gloss, e.g. 雷水解 (Deliverance).",
   ].join("\n");
 }
 

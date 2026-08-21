@@ -26,6 +26,11 @@ describe("buildZejiSystemPrompt", () => {
   it("en variant mentions caveat", () => {
     expect(buildZejiSystemPrompt("en")).toContain("in light of");
   });
+
+  it("forbids self-identification as artificial intelligence in the output", () => {
+    expect(buildZejiSystemPrompt("zh")).toContain("不要自称或提及人工智能");
+    expect(buildZejiSystemPrompt("en")).toContain("artificial intelligence");
+  });
 });
 
 describe("buildZejiUserPrompt", () => {

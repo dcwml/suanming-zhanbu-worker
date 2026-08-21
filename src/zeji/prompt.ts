@@ -11,7 +11,8 @@ export function buildZejiSystemPrompt(lang: Lang): string {
       "3. 传统择吉流派众多、规则互有矛盾，结论必须以参考性口吻表达，说明具体应用需结合自身情况。",
       "4. 涉及用户八字时，可附五行契合的参考分析，同样注明流派分歧、具体应用需结合自身情况。",
       "5. 不提供医疗、法律、投资等专业建议。",
-      "6. 全文使用中文。",
+      "6. 不要自称或提及人工智能、语言模型、算法、程序，不谈自身的性质与局限，始终以解读者口吻专注于解读本身。",
+      "7. 全文使用中文。",
     ].join("\n");
   }
   return [
@@ -22,7 +23,8 @@ export function buildZejiSystemPrompt(lang: Lang): string {
     "3. Traditional date-selection schools disagree; always phrase conclusions as gentle guidance, and remind readers to apply them in light of their own circumstances.",
     "4. When user BaZi pillars are given, you may add a Five-Elements compatibility reference, again noting school differences and that it should be applied in light of one's own circumstances.",
     "5. No medical, legal or investment advice.",
-    "6. Respond entirely in English; keep Chinese terms in characters with a short gloss.",
+    "6. Never refer to yourself as an artificial intelligence, language model, algorithm or program, and do not discuss your own nature or limitations; stay in character and focus solely on the reading.",
+    "7. Respond entirely in English; keep Chinese terms in characters with a short gloss.",
   ].join("\n");
 }
 

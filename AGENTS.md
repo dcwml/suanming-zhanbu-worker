@@ -75,7 +75,7 @@ public/assets/        静态资源（style.css、logo.png（印章 LOGO，兼作
   zeji.js             前端 lunar-javascript 扫描 + 避冲排序 + 详解渲染
   ziwei.js            前端 iztro 排盘 + 4×4 盘格渲染 + 三段串行解读渲染
   hehun.js            前端 lunar-javascript 双人排盘 + 地支/天干关系查表（与 fortune/rules.ts 同值）+ 配对徽章 + 单段解读渲染
-test/                 36 个测试文件、428 个测试（SELF.fetch 集成测试 + 单元测试）
+test/                 36 个测试文件、435 个测试（SELF.fetch 集成测试 + 单元测试）
 ```
 
 ## 核心约定（改代码前必读）
@@ -89,6 +89,7 @@ test/                 36 个测试文件、428 个测试（SELF.fetch 集成测�
 7. **双语对称**：任何页面/文案改动必须同时覆盖 zh 与 en；`Lang` 类型收紧为 `"zh" | "en"`，新增语言需从 `site.ts` 的语言表全套扩展。
 8. **wrangler 配置陷阱**：Text 模块规则字段是 `rules[].globs`（不是 `include`）；`assets.directory` 必须存在，否则 vitest pool 启动失败。
 9. **TDD**：本仓库按测试先行开发。改行为先改/加测试；`SELF.fetch` 集成测试放 `test/integration.test.ts`，纯函数单测按模块拆分。
+10. **文案红线（2026-08-21 起全站生效）**：页面可见文本（导航/正文/FAQ/页脚/meta description）一律不出现「AI」字样——中文用传统口吻（为你详解/细解/细断/细说分明），英文用 in-depth readings 等措辞；FAQ 可隐去生成方式，但禁止改称人工撰写；七个解读 prompt 的规则均含「输出勿自称或提及人工智能」防线（各 `prompt.ts` 有测试断言）。新增页面/文案时照此执行。
 
 ## 每日宜忌栏目
 

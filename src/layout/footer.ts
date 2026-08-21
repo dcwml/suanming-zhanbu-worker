@@ -12,8 +12,8 @@ export function renderFooter(lang: Lang): string {
       : "Content is grounded in traditional divination arts — please apply it in light of your own circumstances.";
   const desc =
     lang === "zh"
-      ? "以传统术数与 AI 解读，在线提供八字排盘与六爻起卦。"
-      : "Traditional Chinese divination with AI readings — BaZi charts and I Ching casting online.";
+      ? "以传统术数为本，在线提供八字排盘、六爻起卦与命理详解。"
+      : "Traditional Chinese divination with in-depth readings — BaZi charts and I Ching casting online.";
   const toolsLabel = lang === "zh" ? "工具" : "Tools";
   const fortuneLabel = FORTUNE_NAV_LABEL[lang];
   const aboutLabel = lang === "zh" ? "关于" : "About";

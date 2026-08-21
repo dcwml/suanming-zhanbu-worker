@@ -17,6 +17,12 @@ describe("meihua buildSystemPrompt", () => {
     expect(s).toContain("乾 Qian");
     expect(s).toContain("Metal");
   });
+
+  it("forbids self-identification as artificial intelligence in the output", () => {
+    expect(buildSystemPrompt("zh")).toContain("不要自称或提及人工智能");
+    expect(buildSystemPrompt("en")).toContain("artificial intelligence");
+    expect(buildSystemPrompt("zh")).not.toMatch(/AI|LLM/i);
+  });
 });
 
 describe("meihua buildUserPrompt", () => {
