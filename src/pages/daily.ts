@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260822Zh from "../content/daily/2026-08-22.zh.html";
+import daily20260822En from "../content/daily/2026-08-22.en.html";
 import daily20260821Zh from "../content/daily/2026-08-21.zh.html";
 import daily20260821En from "../content/daily/2026-08-21.en.html";
 import daily20260820Zh from "../content/daily/2026-08-20.zh.html";
@@ -58,6 +60,14 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-08-22",
+    meta: {
+      zh: { title: "2026年8月22日宜忌·龙", description: "2026年8月22日黄历宜忌：金匮黄道吉日值日，天德合、三合、天喜等八颗吉神并集，宜开市、交易、立券、移徙、修造动土、上梁、栽种、破土、安葬等二十五事，忌入宅、嫁娶、掘井、牧养，冲狗煞南；生肖龙今日运势与纳音大林木科普。" },
+      en: { title: "Daily Almanac — August 22, 2026 (Dragon)", description: "August 22, 2026 Chinese almanac: a Jīnkuì Golden Coffer Yellow Path day with Tiāndéhé, Sānhé, Tiānxǐ and eight auspicious spirits assembled — favorable for opening for business, trading, signing contracts, relocating, building, raising beams, planting, burial and twenty-five matters in all; avoid moving into a house, marriage, digging wells and raising livestock; clash Dog, Sha South; Dragon zodiac fortune and the Great Forest Wood Nayin." },
+    },
+    content: { zh: daily20260822Zh, en: daily20260822En },
+  },
   {
     date: "2026-08-21",
     meta: {
