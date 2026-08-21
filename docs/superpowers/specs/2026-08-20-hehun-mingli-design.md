@@ -167,3 +167,11 @@ SEO 全自动派生：两页走 registry 两步约定，title/canonical/hreflang
 - 不做确定性总评分与「上等婚/下等婚」断言（决策 #7）
 - mingli 不进页脚工具列（与 divination 总览页先例一致）
 - marked 渲染紧邻中文引号的 `**加粗**` 不生效是五工具共用渲染器的已知瑕疵，非本次回归
+
+## 12. 实施后记（2026-08-21 上线，push 581cca3）
+
+八任务按计划全部完成（子代理驱动、逐任务 TDD、任务间独立审查），无一处偏离计划的设计；spec 中 not_configured 状态码笔误（503→500，实际 `src/llm.ts` 行为）已在计划阶段修正。全量门禁：typecheck 0 错误，36 测试文件 / 428 用例全绿（含 hehun-validate 13、hehun-prompt 6、hehun-api 8 及 registry/sitemap/integration 扩展）。
+
+本地浏览器验证：默认样例（男 1996-02-19 午时 / 女 1997-07-07 未时）双盘逐柱与计划 fixture 一致，三枚徽章（年支六合子丑 / 日支同支戌戌 / 日干无五合丙庚）逐字命中；中英 LLM 解读均六节完整渲染。生产验证（2026-08-21，https://suanming-zhanbu.com/）：四新页 200、导航「命理」标题链接 mingli 总览页且下拉含合婚项、页脚双语链接、sitemap 四新 URL 及 alternates、FAQPage JSON-LD 注入、生产表单提交中英解读各跑通一次。
+
+无遗留跟进项。
