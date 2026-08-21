@@ -84,6 +84,26 @@ describe("registry", () => {
     expect(mingli!.faq!.zh.length).toBe(mingli!.faq!.en.length);
   });
 
+  it("chouqian page exists with bilingual faq of equal length", () => {
+    const chouqian = findPage("chouqian");
+    expect(chouqian).toBeDefined();
+    // 经「抽签」下拉标题进入，不在平铺导航里
+    expect(chouqian!.inNav).toBe(false);
+    expect(chouqian!.faq!.zh.length).toBeGreaterThan(0);
+    expect(chouqian!.faq!.zh.length).toBe(chouqian!.faq!.en.length);
+  });
+
+  it("huangdaxian, guanyin and yuelao pages exist with bilingual faq of equal length", () => {
+    for (const slug of ["huangdaxian", "guanyin", "yuelao"] as const) {
+      const page = findPage(slug);
+      expect(page, slug).toBeDefined();
+      // 经「抽签」下拉进入，不在平铺导航里
+      expect(page!.inNav, slug).toBe(false);
+      expect(page!.faq!.zh.length, slug).toBeGreaterThan(0);
+      expect(page!.faq!.zh.length, slug).toBe(page!.faq!.en.length);
+    }
+  });
+
   it("bazi page no longer sits in the flat nav", () => {
     expect(findPage("bazi")!.inNav).toBe(false);
   });

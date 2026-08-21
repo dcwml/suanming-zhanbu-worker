@@ -12,7 +12,8 @@
     "purge": "node purge-cache.js",
     "almanac": "tsx scripts/almanac.ts",
     "fortune:week": "tsx scripts/fortune.ts week",
-    "fortune:month": "tsx scripts/fortune.ts month"
+    "fortune:month": "tsx scripts/fortune.ts month",
+    "qian:validate": "node scripts/validate-qian.mjs"
   },
   "dependencies": {
     "hono": "^4.6.0"

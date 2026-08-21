@@ -811,11 +811,12 @@ code {
   .features-grid { grid-template-columns: 1fr; }
 }
 
-/* ========== 占卜总览页 · 命理总览页（共用布局类） ========== */
+/* ========== 占卜总览页 · 命理总览页 · 抽签总览页（共用布局类） ========== */
 
 /* 工具卡片网格：复用首页 .tool-card */
 .divination-tools,
-.mingli-tools {
+.mingli-tools,
+.chouqian-tools {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
@@ -824,10 +825,12 @@ code {
 
 /* 选择指南对比表 */
 .divination-choose,
-.mingli-choose { margin: 2.5rem 0; }
+.mingli-choose,
+.chouqian-choose { margin: 2.5rem 0; }
 
 .divination-compare,
-.mingli-compare {
+.mingli-compare,
+.chouqian-compare {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.92rem;
@@ -837,7 +840,9 @@ code {
 .divination-compare th,
 .divination-compare td,
 .mingli-compare th,
-.mingli-compare td {
+.mingli-compare td,
+.chouqian-compare th,
+.chouqian-compare td {
   border: 1px solid var(--border);
   padding: 0.5rem 0.6rem;
   text-align: left;
@@ -845,14 +850,16 @@ code {
 }
 
 .divination-compare thead th,
-.mingli-compare thead th {
+.mingli-compare thead th,
+.chouqian-compare thead th {
   background: #f0e9df;
   font-weight: 600;
   white-space: nowrap;
 }
 
 .divination-compare tbody th,
-.mingli-compare tbody th {
+.mingli-compare tbody th,
+.chouqian-compare tbody th {
   white-space: nowrap;
   color: var(--accent);
 }
@@ -860,11 +867,13 @@ code {
 /* 页内 FAQ（样式同择吉页；hehun 页 FAQ 同组复用） */
 .divination-faq,
 .mingli-faq,
-.hehun-faq { margin: 2rem 0; }
+.hehun-faq,
+.chouqian-faq { margin: 2rem 0; }
 
 .divination-faq h2,
 .mingli-faq h2,
-.hehun-faq h2 {
+.hehun-faq h2,
+.chouqian-faq h2 {
   font-size: 1.25rem;
   margin: 0 0 0.85rem;
   padding-bottom: 0.5rem;
@@ -873,7 +882,8 @@ code {
 
 .divination-faq h3,
 .mingli-faq h3,
-.hehun-faq h3 {
+.hehun-faq h3,
+.chouqian-faq h3 {
   font-size: 1rem;
   margin: 1.1rem 0 0.3rem;
   color: var(--accent-dark);
@@ -881,7 +891,8 @@ code {
 
 .divination-faq p,
 .mingli-faq p,
-.hehun-faq p {
+.hehun-faq p,
+.chouqian-faq p {
   margin: 0.3rem 0 0;
   font-size: 0.93rem;
   line-height: 1.8;
@@ -889,20 +900,25 @@ code {
 }
 
 .divination-note,
-.mingli-note { color: var(--muted); font-size: 0.85rem; }
+.mingli-note,
+.chouqian-note { color: var(--muted); font-size: 0.85rem; }
 
 @media (max-width: 800px) {
   .divination-tools,
-  .mingli-tools { grid-template-columns: 1fr; }
+  .mingli-tools,
+  .chouqian-tools { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 640px) {
   .divination-compare,
-  .mingli-compare { font-size: 0.85rem; }
+  .mingli-compare,
+  .chouqian-compare { font-size: 0.85rem; }
   .divination-compare th,
   .divination-compare td,
   .mingli-compare th,
-  .mingli-compare td { padding: 0.4rem 0.45rem; }
+  .mingli-compare td,
+  .chouqian-compare th,
+  .chouqian-compare td { padding: 0.4rem 0.45rem; }
 }
 
 /* ========== 每日宜忌 · 老黄历通胜式样式 ========== */
@@ -2052,4 +2068,112 @@ label:has(#zeji-strict:disabled) {
 @media (max-width: 720px) {
   .hehun-parties,
   .hehun-charts { grid-template-columns: 1fr; }
+}
+
+/* ========== 灵签抽签页（黄大仙 / 观音 / 月老共用） ========== */
+
+.chouqian-app { max-width: 800px; margin: 0 auto; }
+.chouqian-step { margin: 2rem 0; padding: 1.5rem; border: 1px solid var(--border); border-radius: 8px; }
+.chouqian-step h2 { margin-top: 0; }
+.chouqian-guide { color: var(--muted); line-height: 1.7; }
+.chouqian-question-label { display: block; margin-top: 1rem; font-weight: 600; }
+.chouqian-question-label input { display: block; width: 100%; margin-top: 0.5rem; padding: 0.5rem; font-size: 1rem; }
+
+/* 签筒：纯 CSS 圆筒 + 数支签枝 */
+.chouqian-tube { position: relative; width: 130px; height: 158px; margin: 0 auto 0.8rem; transform-origin: 50% 92%; }
+.chouqian-tube-body {
+  position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 92px; height: 104px;
+  border: 2px solid var(--accent); border-radius: 10px 10px 18px 18px;
+  background: linear-gradient(to bottom, #f7efe3, #efe2ce);
+}
+.chouqian-tube-body::after {
+  content: ""; position: absolute; left: 6px; right: 6px; bottom: 14px; height: 6px;
+  border-top: 1px solid var(--gold); border-bottom: 1px solid var(--gold);
+}
+.chouqian-sticks { position: absolute; bottom: 94px; left: 50%; width: 96px; height: 60px; transform: translateX(-50%); }
+.chouqian-sticks span {
+  position: absolute; bottom: 0; width: 7px; border-radius: 3px;
+  background: linear-gradient(to bottom, #c9a06a, #a97f4e);
+}
+.chouqian-sticks span:nth-child(1) { left: 5px; height: 46px; transform: rotate(-9deg); }
+.chouqian-sticks span:nth-child(2) { left: 24px; height: 54px; transform: rotate(-3deg); }
+.chouqian-sticks span:nth-child(3) { left: 43px; height: 50px; transform: rotate(2deg); }
+.chouqian-sticks span:nth-child(4) { left: 61px; height: 58px; transform: rotate(7deg); }
+.chouqian-sticks span:nth-child(5) { left: 80px; height: 44px; transform: rotate(12deg); }
+
+@keyframes chouqian-shake {
+  0%, 100% { transform: rotate(0deg); }
+  20% { transform: rotate(-9deg); }
+  40% { transform: rotate(8deg); }
+  60% { transform: rotate(-7deg); }
+  80% { transform: rotate(6deg); }
+}
+.chouqian-tube.is-shaking { animation: chouqian-shake 0.16s linear infinite; }
+
+#chouqian-draw { display: block; margin: 0.5rem auto 0.8rem; padding: 0.6rem 2rem; font-size: 1.1rem; cursor: pointer; }
+#chouqian-draw:disabled { opacity: 0.6; cursor: wait; }
+
+/* 查签行：已有签号直接查阅 */
+.chouqian-lookup { display: flex; align-items: center; justify-content: center; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.2rem; }
+.chouqian-lookup label { color: var(--muted); font-size: 0.92rem; }
+.chouqian-lookup input { width: 6rem; padding: 0.4rem 0.5rem; border: 1px solid #d8cfc2; border-radius: 4px; font: inherit; }
+.chouqian-lookup button { padding: 0.4rem 1rem; cursor: pointer; }
+.chouqian-error { color: #c0392b; }
+
+/* 结果区：签号 + 等级徽章 + 签题 + 签诗 + 解签 + 断语网格 */
+.chouqian-sign { text-align: center; }
+.chouqian-sign-head { display: flex; align-items: center; justify-content: center; gap: 0.8rem; margin-bottom: 0.2rem; }
+.chouqian-no { font-size: 1.6rem; font-weight: 700; color: var(--accent-dark); }
+.chouqian-grade { display: inline-block; padding: 0.1rem 0.7rem; border-radius: 999px; font-size: 0.9rem; border: 1px solid currentColor; }
+.chouqian-source { color: var(--muted); font-size: 0.9rem; margin: 0.2rem 0 1rem; }
+.chouqian-title { font-size: 1.3rem; margin: 0.3rem 0; }
+.chouqian-title-zh { font-size: 1rem; color: var(--muted); font-weight: 400; margin-left: 0.5rem; }
+.chouqian-poem { white-space: pre-line; font-size: 1.02rem; line-height: 2; margin: 0.6rem auto; max-width: 30rem; }
+.chouqian-poem-zh { color: var(--muted); font-size: 0.98rem; }
+.chouqian-meaning, .chouqian-aspects { text-align: left; margin: 1.2rem auto 0; max-width: 36rem; }
+.chouqian-meaning h4, .chouqian-aspects h4 { margin: 0 0 0.4rem; font-size: 1.02rem; color: var(--accent-dark); }
+.chouqian-meaning p { margin: 0; line-height: 1.85; }
+.chouqian-aspects dl { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem 1.2rem; margin: 0; }
+.chouqian-aspects dl > div { display: flex; gap: 0.6rem; align-items: baseline; border: 1px solid var(--border); border-radius: 6px; padding: 0.45rem 0.7rem; }
+.chouqian-aspects dt { flex: none; color: var(--muted); font-size: 0.88rem; }
+.chouqian-aspects dd { margin: 0; font-weight: 600; }
+
+/* 等级徽章配色：吉系绿 / 平系灰 / 下签红（同小六壬 grade 模式） */
+.chouqian-grade[data-grade="上上大吉"],
+.chouqian-grade[data-grade="上上"],
+.chouqian-grade[data-grade="上吉"],
+.chouqian-grade[data-grade="上"],
+.chouqian-grade[data-grade="上签"],
+.chouqian-grade[data-grade="中上"] { color: #1e7e34; }
+.chouqian-grade[data-grade="上平"],
+.chouqian-grade[data-grade="中平"],
+.chouqian-grade[data-grade="中"],
+.chouqian-grade[data-grade="中签"] { color: var(--muted); }
+.chouqian-grade[data-grade="下"],
+.chouqian-grade[data-grade="下签"],
+.chouqian-grade[data-grade="下下"] { color: #c0392b; }
+
+#chouqian-redraw { margin-top: 1.5rem; padding: 0.5rem 1.6rem; font-size: 1rem; cursor: pointer; }
+.chouqian-redraw-note { color: var(--muted); font-size: 0.85rem; margin: 0.5rem 0 0; }
+
+/* 签制速览表（工具页）与求签仪轨卡（总览页） */
+.chouqian-grade-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; margin: 1rem 0; }
+.chouqian-grade-table th, .chouqian-grade-table td { border: 1px solid var(--border); padding: 0.5rem 0.6rem; text-align: left; }
+.chouqian-grade-table thead th { background: #f0e9df; font-weight: 600; white-space: nowrap; }
+.chouqian-grade-table td:first-child { white-space: nowrap; }
+.chouqian-rites { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1rem 0; }
+.chouqian-rites > div { border: 1px solid var(--border); border-radius: 8px; padding: 0.9rem 1rem; }
+.chouqian-rites h3 { margin: 0 0 0.3rem; font-size: 1rem; color: var(--accent-dark); }
+.chouqian-rites p { margin: 0; font-size: 0.9rem; }
+
+@media (max-width: 800px) {
+  .chouqian-rites { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .chouqian-step { padding: 1.1rem; }
+  .chouqian-aspects dl { grid-template-columns: 1fr; }
+  .chouqian-grade-table { font-size: 0.85rem; }
+  .chouqian-grade-table th, .chouqian-grade-table td { padding: 0.4rem 0.45rem; }
 }

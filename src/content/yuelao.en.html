@@ -1,0 +1,71 @@
+<div class="chouqian-app" id="chouqian-app" data-lang="en" data-qian="yuelao">
+  <h1>Yue Lao Oracle Sticks</h1>
+  <p class="lead">The Yue Lao oracle sticks are drawn before the Old Man Under the Moon, the deity who binds destined couples with his red thread — a legend recorded in the Tang dynasty and honored ever since, most famously at the Yue Lao shrine by West Lake in Hangzhou. The set numbers one hundred sticks in nine grades, and its lines often quote the classics, from the Book of Songs to the Zuo Commentary; it is made for matters of the heart.</p>
+
+  <section class="chouqian-step" id="chouqian-step1">
+    <h2>Step One · Center Your Mind</h2>
+    <p class="chouqian-guide">Yue Lao sticks are made for matters of the heart. Quiet your mind and hold your love question clearly in your heart; you may also write it down — it will be noted alongside the reading.</p>
+    <label class="chouqian-question-label">Your question (optional — silent reflection works too)
+      <input type="text" id="chouqian-question" maxlength="200" placeholder="e.g. Can this relationship still be saved?">
+    </label>
+  </section>
+
+  <section class="chouqian-step" id="chouqian-step2">
+    <h2>Step Two · Shake the Tube</h2>
+    <div class="chouqian-tube" id="chouqian-tube" aria-hidden="true">
+      <div class="chouqian-sticks"><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="chouqian-tube-body"></div>
+    </div>
+    <button type="button" id="chouqian-draw">Shake with Sincerity</button>
+    <div class="chouqian-lookup">
+      <label for="chouqian-lookup-no">Already have a stick number? Look it up</label>
+      <input type="number" id="chouqian-lookup-no" min="1" max="100" step="1" placeholder="1-100">
+      <button type="button" id="chouqian-lookup-btn">Look Up</button>
+    </div>
+    <p class="chouqian-error" id="chouqian-error" role="alert" hidden></p>
+  </section>
+
+  <section class="chouqian-step" id="chouqian-step3">
+    <h2>Step Three · Stick and Reading</h2>
+    <div id="chouqian-result" hidden aria-live="polite"></div>
+  </section>
+
+  <section class="chouqian-choose">
+    <h2>The Nine Grades at a Glance</h2>
+    <p>Yue Lao sticks read the depth of a bond through nine fine grades, and tell the story through lines drawn from the classics. The nine grades:</p>
+    <table class="chouqian-grade-table">
+      <thead>
+        <tr><th>Grade</th><th>Meaning</th><th>Sticks</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>上上大吉 · Most Auspicious</td><td>A match made in heaven — fullness to hope for</td><td>6</td></tr>
+        <tr><td>上上 · Supreme</td><td>A rare and beautiful bond — two hearts as one</td><td>12</td></tr>
+        <tr><td>上吉 · Excellent</td><td>The path of love runs smooth — joy is coming</td><td>5</td></tr>
+        <tr><td>上 · Favorable</td><td>Good — the matter of the heart can succeed</td><td>25</td></tr>
+        <tr><td>中上 · Above Average</td><td>Leaning good — succeed with genuine effort</td><td>3</td></tr>
+        <tr><td>上平 · Fairly Steady</td><td>Quietly good — a long, steady stream</td><td>8</td></tr>
+        <tr><td>中平 · Steady</td><td>Even — tend it and let it grow</td><td>5</td></tr>
+        <tr><td>中 · Neutral</td><td>Slow going — patience is the price</td><td>30</td></tr>
+        <tr><td>下 · Lower</td><td>Unfavorable — forcing it will not succeed</td><td>6</td></tr>
+      </tbody>
+    </table>
+    <p>Once drawn, the verdicts break the stick's message down by love, marriage and reconciliation.</p>
+  </section>
+
+  <section class="chouqian-faq">
+    <h2>Frequently Asked Questions</h2>
+    <h3>Where do the Yue Lao oracle sticks come from?</h3>
+    <p>The Old Man Under the Moon governs marriage in a tale from the Tang-dynasty Xu Xuan Guai Lu: one knot of the red thread in his bag, and a match across a thousand miles is sealed. The hundred-stick set of the Yue Lao shrine by West Lake in Hangzhou is the best known; its lines often quote the Book of Songs, the Zuo Commentary and other classics, and it is drawn for matters of the heart. This site follows that tradition's widely circulated text.</p>
+    <h3>How do I read the nine grades?</h3>
+    <p>From the top: Most Auspicious (上上大吉), Supreme (上上), Excellent (上吉) and Favorable (上) promise a bond that can be hoped for and won; Above Average (中上), Fairly Steady (上平) and Steady (中平) ask for tending and patience; Neutral (中) means slow going; Lower (下) means forcing it will not succeed. The verdicts then break matters down by love, marriage and reconciliation.</p>
+    <h3>Should love, marriage and reconciliation be asked separately?</h3>
+    <p>Yes. Yue Lao sticks ask for one matter per stick: for love, fix clearly where the relationship is heading; for marriage, whether the match will be made; for reconciliation, whether what broke can be mended. Draw separately for different matters — never mix them in one draw.</p>
+    <h3>Are the readings authoritative?</h3>
+    <p>The stick texts follow the widely circulated version of the traditional oracle; the readings draw on classical oracle-stick literature and are offered as cultural reasoning for reference only. Please weigh important decisions in light of your own circumstances.</p>
+  </section>
+
+  <p class="chouqian-note">Yue Lao readings are grounded in traditional cultural reasoning — for reference only; please apply them in light of your own circumstances.</p>
+</div>
+
+<script src="/assets/qian/yuelao.en.js" defer></script>
+<script src="/assets/qian/chouqian.js" defer></script>

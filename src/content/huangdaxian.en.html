@@ -1,0 +1,67 @@
+<div class="chouqian-app" id="chouqian-app" data-lang="en" data-qian="huangdaxian">
+  <h1>Wong Tai Sin Oracle Sticks</h1>
+  <p class="lead">The Wong Tai Sin oracle sticks come from the Wong Tai Sin Temple in Hong Kong. Wong Tai Sin — the Jin-dynasty Taoist Huang Chuping, famed for answering every sincere plea — has drawn worshippers for over a century. The set numbers one hundred sticks in five grades, each bearing a four-line poem and a classical tale that spells out fortune's ebb and flow.</p>
+
+  <section class="chouqian-step" id="chouqian-step1">
+    <h2>Step One · Center Your Mind</h2>
+    <p class="chouqian-guide">Drawing a stick begins with sincerity. Quiet your mind and hold your question clearly in your heart; you may also write it down — it will be noted alongside the reading.</p>
+    <label class="chouqian-question-label">Your question (optional — silent reflection works too)
+      <input type="text" id="chouqian-question" maxlength="200" placeholder="e.g. Is this job move worth taking?">
+    </label>
+  </section>
+
+  <section class="chouqian-step" id="chouqian-step2">
+    <h2>Step Two · Shake the Tube</h2>
+    <div class="chouqian-tube" id="chouqian-tube" aria-hidden="true">
+      <div class="chouqian-sticks"><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="chouqian-tube-body"></div>
+    </div>
+    <button type="button" id="chouqian-draw">Shake with Sincerity</button>
+    <div class="chouqian-lookup">
+      <label for="chouqian-lookup-no">Already have a stick number? Look it up</label>
+      <input type="number" id="chouqian-lookup-no" min="1" max="100" step="1" placeholder="1-100">
+      <button type="button" id="chouqian-lookup-btn">Look Up</button>
+    </div>
+    <p class="chouqian-error" id="chouqian-error" role="alert" hidden></p>
+  </section>
+
+  <section class="chouqian-step" id="chouqian-step3">
+    <h2>Step Three · Stick and Reading</h2>
+    <div id="chouqian-result" hidden aria-live="polite"></div>
+  </section>
+
+  <section class="chouqian-choose">
+    <h2>The Five Grades at a Glance</h2>
+    <p>Wong Tai Sin sticks set the overall fortune by grade, then tell the story through the poem. The five grades:</p>
+    <table class="chouqian-grade-table">
+      <thead>
+        <tr><th>Grade</th><th>Meaning</th><th>Sticks</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>上上 · Supremely Auspicious</td><td>Great fortune — most endeavors prosper</td><td>3</td></tr>
+        <tr><td>上吉 · Very Auspicious</td><td>More gain than setback — advance is favored</td><td>10</td></tr>
+        <tr><td>中吉 · Auspicious</td><td>Steady and promising — success builds</td><td>32</td></tr>
+        <tr><td>中平 · Neutral</td><td>Even and uneventful — keep steady, await timing</td><td>37</td></tr>
+        <tr><td>下下 · Very Inauspicious</td><td>Heavy going — guard rather than advance</td><td>18</td></tr>
+      </tbody>
+    </table>
+    <p>Once drawn, the verdicts break the stick's message down by marriage, career, wealth and health.</p>
+  </section>
+
+  <section class="chouqian-faq">
+    <h2>Frequently Asked Questions</h2>
+    <h3>Where do the Wong Tai Sin oracle sticks come from?</h3>
+    <p>Wong Tai Sin is the Jin-dynasty Taoist Huang Chuping, who attained the Way at Jinhua in Zhejiang and is honored in the Hong Kong temple that bears his name, famous for answering every sincere plea. The temple's hundred-stick set has been in use for over a century: each stick carries a four-line poem and a classical tale, making it one of the most widely circulated temple oracles.</p>
+    <h3>How do I read the grade on a stick?</h3>
+    <p>Sticks fall into five grades: Supremely Auspicious (上上) — fortune favors most endeavors; Very Auspicious (上吉) — more gain than setback; Auspicious (中吉) — steady and promising; Neutral (中平) — even, keep steady and await timing; Very Inauspicious (下下) — heavy going, guard rather than advance. The verdicts then break matters down by marriage, career, wealth and health.</p>
+    <h3>Can I look up a stick I drew at a temple?</h3>
+    <p>Yes. Enter its number (1–100) in the lookup box beside the tube, and the poem and reading shown will be exactly the same as one drawn here.</p>
+    <h3>Are the readings authoritative?</h3>
+    <p>The stick texts follow the widely circulated temple version; the readings draw on classical oracle-stick literature and are offered as cultural reasoning for reference only. Please weigh important decisions in light of your own circumstances.</p>
+  </section>
+
+  <p class="chouqian-note">Wong Tai Sin readings are grounded in traditional cultural reasoning — for reference only; please apply them in light of your own circumstances.</p>
+</div>
+
+<script src="/assets/qian/huangdaxian.en.js" defer></script>
+<script src="/assets/qian/chouqian.js" defer></script>

@@ -1,0 +1,67 @@
+<div class="chouqian-app" id="chouqian-app" data-lang="zh" data-qian="huangdaxian">
+  <h1>黄大仙灵签</h1>
+  <p class="lead">黄大仙灵签出自香港黄大仙祠。黄大仙即晋代道士黄初平，相传「有求必应」，百余年来香火鼎盛。全签共一百支，分上上、上吉、中吉、中平、下下五等，签诗七言四句，每签配一则古人典故，细说吉凶进退。</p>
+
+  <section class="chouqian-step" id="chouqian-step1">
+    <h2>第一步 · 虔心默祷</h2>
+    <p class="chouqian-guide">求签贵在心诚。静心凝神，将所问之事默念于心；亦可写下所问，解签时会一并注明。</p>
+    <label class="chouqian-question-label">所问之事（可不填，心中默念亦可）
+      <input type="text" id="chouqian-question" maxlength="200" placeholder="例如：这次跳槽值不值得">
+    </label>
+  </section>
+
+  <section class="chouqian-step" id="chouqian-step2">
+    <h2>第二步 · 摇筒求签</h2>
+    <div class="chouqian-tube" id="chouqian-tube" aria-hidden="true">
+      <div class="chouqian-sticks"><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="chouqian-tube-body"></div>
+    </div>
+    <button type="button" id="chouqian-draw">诚心摇签</button>
+    <div class="chouqian-lookup">
+      <label for="chouqian-lookup-no">已有签号，直接查阅</label>
+      <input type="number" id="chouqian-lookup-no" min="1" max="100" step="1" placeholder="1-100">
+      <button type="button" id="chouqian-lookup-btn">查签</button>
+    </div>
+    <p class="chouqian-error" id="chouqian-error" role="alert" hidden></p>
+  </section>
+
+  <section class="chouqian-step" id="chouqian-step3">
+    <h2>第三步 · 签文与解签</h2>
+    <div id="chouqian-result" hidden aria-live="polite"></div>
+  </section>
+
+  <section class="chouqian-choose">
+    <h2>签制速览</h2>
+    <p>黄大仙灵签以等级定吉凶大势，以签诗典故细说因由。五等含义如下：</p>
+    <table class="chouqian-grade-table">
+      <thead>
+        <tr><th>等级</th><th>含义</th><th>支数</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>上上</td><td>大吉大利，百事可为</td><td>3 支</td></tr>
+        <tr><td>上吉</td><td>吉多顺遂，可进而谋</td><td>10 支</td></tr>
+        <tr><td>中吉</td><td>平顺向好，稳中有成</td><td>32 支</td></tr>
+        <tr><td>中平</td><td>平平无奇，守常待时</td><td>37 支</td></tr>
+        <tr><td>下下</td><td>凶多阻滞，宜守不宜进</td><td>18 支</td></tr>
+      </tbody>
+    </table>
+    <p>抽得签后，断语按姻缘、事业、求财、健康四项分述该签的具体所指。</p>
+  </section>
+
+  <section class="chouqian-faq">
+    <h2>常见问题</h2>
+    <h3>黄大仙灵签是什么来历？</h3>
+    <p>黄大仙即晋代道士黄初平，得道于浙江金华，后在香港建祠奉祀，以「有求必应」闻名。黄大仙灵签是祠内沿用百余年的百签签谱，签诗七言四句，每签配一则古人典故，是流传最广的庙宇签谱之一。</p>
+    <h3>签上的等级怎么看？</h3>
+    <p>签分上上、上吉、中吉、中平、下下五等：上上最吉，百事可为；上吉吉多顺遂，可进而谋；中吉平顺向好，稳中有成；中平平平无奇，宜守常待时；下下凶多阻滞，宜守不宜进。断语部分再按姻缘、事业、求财、健康分述。</p>
+    <h3>在庙里求了签，能在这里查解吗？</h3>
+    <p>可以。在「摇筒求签」旁的签号框输入 1 到 100 的签号，即可查阅该签签文与解签，与现场摇签所得的展示完全一致。</p>
+    <h3>解签结果可信吗？</h3>
+    <p>签文为传统庙宇签谱的通行版本，解签基于传统签诗文献整理生成，侧重文化推演，仅供参考，重要决策请结合自身情况。</p>
+  </section>
+
+  <p class="chouqian-note">黄大仙灵签解读侧重传统文化推演，仅供参考，具体应用请结合自身情况。</p>
+</div>
+
+<script src="/assets/qian/huangdaxian.zh.js" defer></script>
+<script src="/assets/qian/chouqian.js" defer></script>

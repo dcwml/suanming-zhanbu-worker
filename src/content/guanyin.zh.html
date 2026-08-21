@@ -1,0 +1,65 @@
+<div class="chouqian-app" id="chouqian-app" data-lang="zh" data-qian="guanyin">
+  <h1>观音灵签</h1>
+  <p class="lead">观音灵签是流传最广的民间签谱之一，相传求于观音座前，以慈悲感应问事吉凶。全签共一百支，分上签、中签、下签三级，签诗七言四句，每签配一则古人典故，平实之中见指点。</p>
+
+  <section class="chouqian-step" id="chouqian-step1">
+    <h2>第一步 · 虔心默祷</h2>
+    <p class="chouqian-guide">求签贵在心诚。静心凝神，将所问之事默念于心；亦可写下所问，解签时会一并注明。</p>
+    <label class="chouqian-question-label">所问之事（可不填，心中默念亦可）
+      <input type="text" id="chouqian-question" maxlength="200" placeholder="例如：家中老人手术顺不顺利">
+    </label>
+  </section>
+
+  <section class="chouqian-step" id="chouqian-step2">
+    <h2>第二步 · 摇筒求签</h2>
+    <div class="chouqian-tube" id="chouqian-tube" aria-hidden="true">
+      <div class="chouqian-sticks"><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="chouqian-tube-body"></div>
+    </div>
+    <button type="button" id="chouqian-draw">诚心摇签</button>
+    <div class="chouqian-lookup">
+      <label for="chouqian-lookup-no">已有签号，直接查阅</label>
+      <input type="number" id="chouqian-lookup-no" min="1" max="100" step="1" placeholder="1-100">
+      <button type="button" id="chouqian-lookup-btn">查签</button>
+    </div>
+    <p class="chouqian-error" id="chouqian-error" role="alert" hidden></p>
+  </section>
+
+  <section class="chouqian-step" id="chouqian-step3">
+    <h2>第三步 · 签文与解签</h2>
+    <div id="chouqian-result" hidden aria-live="polite"></div>
+  </section>
+
+  <section class="chouqian-choose">
+    <h2>签制速览</h2>
+    <p>观音灵签以三级定吉凶大势，以签诗典故细说因由。三级含义如下：</p>
+    <table class="chouqian-grade-table">
+      <thead>
+        <tr><th>等级</th><th>含义</th><th>支数</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>上签</td><td>所求多能如愿</td><td>22 支</td></tr>
+        <tr><td>中签</td><td>得失参半，须待时机</td><td>60 支</td></tr>
+        <tr><td>下签</td><td>眼前阻滞，宜守不宜进</td><td>18 支</td></tr>
+      </tbody>
+    </table>
+    <p>抽得签后，断语按姻缘、事业、求财、健康四项分述该签的具体所指。</p>
+  </section>
+
+  <section class="chouqian-faq">
+    <h2>常见问题</h2>
+    <h3>观音灵签是什么来历？</h3>
+    <p>观音灵签是民间流传最广的百签签谱之一，常见于各地观音道场与寺庙。签诗七言四句，配古人典故，以三级定吉凶：上签主吉、中签主平、下签主滞。各处版本略有异文，本站以主流通行版本为准。</p>
+    <h3>上签、中签、下签怎么看？</h3>
+    <p>上签主吉，所求多能如愿；中签主平，得失参半、须待时机；下签主滞，眼前多有不顺，宜守不宜进。断语部分再按姻缘、事业、求财、健康分述。</p>
+    <h3>在庙里求了签，能在这里查解吗？</h3>
+    <p>可以。在「摇筒求签」旁的签号框输入 1 到 100 的签号，即可查阅该签签文与解签，与现场摇签所得的展示完全一致。</p>
+    <h3>解签结果可信吗？</h3>
+    <p>签文为传统签谱的通行版本，解签基于传统签诗文献整理生成，侧重文化推演，仅供参考，重要决策请结合自身情况。</p>
+  </section>
+
+  <p class="chouqian-note">观音灵签解读侧重传统文化推演，仅供参考，具体应用请结合自身情况。</p>
+</div>
+
+<script src="/assets/qian/guanyin.zh.js" defer></script>
+<script src="/assets/qian/chouqian.js" defer></script>

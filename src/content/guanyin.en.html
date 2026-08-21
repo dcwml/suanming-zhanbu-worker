@@ -1,0 +1,65 @@
+<div class="chouqian-app" id="chouqian-app" data-lang="en" data-qian="guanyin">
+  <h1>Guanyin Oracle Sticks</h1>
+  <p class="lead">The Guanyin oracle sticks are among the most widely circulated folk oracles in the Chinese world, traditionally drawn before a statue of Guanyin, the Bodhisattva of Compassion, to ask after the fortunes of everyday matters. The set numbers one hundred sticks in three grades, each bearing a plain-spoken four-line poem and a classical tale.</p>
+
+  <section class="chouqian-step" id="chouqian-step1">
+    <h2>Step One · Center Your Mind</h2>
+    <p class="chouqian-guide">Drawing a stick begins with sincerity. Quiet your mind and hold your question clearly in your heart; you may also write it down — it will be noted alongside the reading.</p>
+    <label class="chouqian-question-label">Your question (optional — silent reflection works too)
+      <input type="text" id="chouqian-question" maxlength="200" placeholder="e.g. Will the surgery go smoothly?">
+    </label>
+  </section>
+
+  <section class="chouqian-step" id="chouqian-step2">
+    <h2>Step Two · Shake the Tube</h2>
+    <div class="chouqian-tube" id="chouqian-tube" aria-hidden="true">
+      <div class="chouqian-sticks"><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="chouqian-tube-body"></div>
+    </div>
+    <button type="button" id="chouqian-draw">Shake with Sincerity</button>
+    <div class="chouqian-lookup">
+      <label for="chouqian-lookup-no">Already have a stick number? Look it up</label>
+      <input type="number" id="chouqian-lookup-no" min="1" max="100" step="1" placeholder="1-100">
+      <button type="button" id="chouqian-lookup-btn">Look Up</button>
+    </div>
+    <p class="chouqian-error" id="chouqian-error" role="alert" hidden></p>
+  </section>
+
+  <section class="chouqian-step" id="chouqian-step3">
+    <h2>Step Three · Stick and Reading</h2>
+    <div id="chouqian-result" hidden aria-live="polite"></div>
+  </section>
+
+  <section class="chouqian-choose">
+    <h2>The Three Grades at a Glance</h2>
+    <p>Guanyin sticks set the overall fortune by grade, then tell the story through the poem. The three grades:</p>
+    <table class="chouqian-grade-table">
+      <thead>
+        <tr><th>Grade</th><th>Meaning</th><th>Sticks</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>上签 · Favorable</td><td>What is sought will mostly come true</td><td>22</td></tr>
+        <tr><td>中签 · Neutral</td><td>Gain and loss in half — wait for timing</td><td>60</td></tr>
+        <tr><td>下签 · Lower</td><td>Blocked for now — guard rather than advance</td><td>18</td></tr>
+      </tbody>
+    </table>
+    <p>Once drawn, the verdicts break the stick's message down by marriage, career, wealth and health.</p>
+  </section>
+
+  <section class="chouqian-faq">
+    <h2>Frequently Asked Questions</h2>
+    <h3>Where do the Guanyin oracle sticks come from?</h3>
+    <p>The Guanyin oracle sticks are one of the most widely circulated hundred-stick folk oracles, found at Guanyin shrines and temples across the Chinese world. Each stick carries a four-line poem and a classical tale, with three grades reading fortune: Favorable (上签), Neutral (中签) and Lower (下签). Local versions differ slightly in wording; this site follows the widely circulated mainstream text.</p>
+    <h3>How do I read the three grades?</h3>
+    <p>Favorable (上签) — what is sought will mostly come true; Neutral (中签) — gain and loss in half, wait for the right moment; Lower (下签) — matters are blocked for now, so guard rather than advance. The verdicts then break matters down by marriage, career, wealth and health.</p>
+    <h3>Can I look up a stick I drew at a temple?</h3>
+    <p>Yes. Enter its number (1–100) in the lookup box beside the tube, and the poem and reading shown will be exactly the same as one drawn here.</p>
+    <h3>Are the readings authoritative?</h3>
+    <p>The stick texts follow the widely circulated version of the traditional oracle; the readings draw on classical oracle-stick literature and are offered as cultural reasoning for reference only. Please weigh important decisions in light of your own circumstances.</p>
+  </section>
+
+  <p class="chouqian-note">Guanyin readings are grounded in traditional cultural reasoning — for reference only; please apply them in light of your own circumstances.</p>
+</div>
+
+<script src="/assets/qian/guanyin.en.js" defer></script>
+<script src="/assets/qian/chouqian.js" defer></script>

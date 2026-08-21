@@ -1,0 +1,71 @@
+<div class="chouqian-app" id="chouqian-app" data-lang="zh" data-qian="yuelao">
+  <h1>月老灵签</h1>
+  <p class="lead">月老灵签求于月下老人座前。月下老人以红绳系足、定人间姻缘的传说自唐代流传至今，杭州西湖月老祠的百签签谱最为著名。全签共一百支，自上上大吉至下共九等，签文多引《诗经》《左传》等经典成句，专为情缘婚姻而设。</p>
+
+  <section class="chouqian-step" id="chouqian-step1">
+    <h2>第一步 · 虔心默祷</h2>
+    <p class="chouqian-guide">月老签专为情缘而设。静心凝神，将所问的感情之事默念于心；亦可写下所问，解签时会一并注明。</p>
+    <label class="chouqian-question-label">所问之事（可不填，心中默念亦可）
+      <input type="text" id="chouqian-question" maxlength="200" placeholder="例如：这段感情还能不能挽回">
+    </label>
+  </section>
+
+  <section class="chouqian-step" id="chouqian-step2">
+    <h2>第二步 · 摇筒求签</h2>
+    <div class="chouqian-tube" id="chouqian-tube" aria-hidden="true">
+      <div class="chouqian-sticks"><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="chouqian-tube-body"></div>
+    </div>
+    <button type="button" id="chouqian-draw">诚心摇签</button>
+    <div class="chouqian-lookup">
+      <label for="chouqian-lookup-no">已有签号，直接查阅</label>
+      <input type="number" id="chouqian-lookup-no" min="1" max="100" step="1" placeholder="1-100">
+      <button type="button" id="chouqian-lookup-btn">查签</button>
+    </div>
+    <p class="chouqian-error" id="chouqian-error" role="alert" hidden></p>
+  </section>
+
+  <section class="chouqian-step" id="chouqian-step3">
+    <h2>第三步 · 签文与解签</h2>
+    <div id="chouqian-result" hidden aria-live="polite"></div>
+  </section>
+
+  <section class="chouqian-choose">
+    <h2>签制速览</h2>
+    <p>月老灵签以九等细分情缘深浅，以签文经典成句细说因由。九等含义如下：</p>
+    <table class="chouqian-grade-table">
+      <thead>
+        <tr><th>等级</th><th>含义</th><th>支数</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>上上大吉</td><td>天作之合，圆满可期</td><td>6 支</td></tr>
+        <tr><td>上上</td><td>情缘极美，两心如一</td><td>12 支</td></tr>
+        <tr><td>上吉</td><td>情路顺遂，喜事可期</td><td>5 支</td></tr>
+        <tr><td>上</td><td>吉，情事可成</td><td>25 支</td></tr>
+        <tr><td>中上</td><td>偏吉，用心则成</td><td>3 支</td></tr>
+        <tr><td>上平</td><td>平稳小吉，细水长流</td><td>8 支</td></tr>
+        <tr><td>中平</td><td>平平，随缘经营</td><td>5 支</td></tr>
+        <tr><td>中</td><td>阻滞，须耐心等待</td><td>30 支</td></tr>
+        <tr><td>下</td><td>不利，强求难成</td><td>6 支</td></tr>
+      </tbody>
+    </table>
+    <p>抽得签后，断语按恋情、婚姻、复合三项分述该签的具体所指。</p>
+  </section>
+
+  <section class="chouqian-faq">
+    <h2>常见问题</h2>
+    <h3>月老灵签是什么来历？</h3>
+    <p>月下老人掌姻缘的传说出自唐代《续玄怪录》：老人袋中红绳一系，千里姻缘注定。杭州西湖月老祠据此设百签签谱，签文多引《诗经》《左传》等经典成句，专为问情缘婚姻者而设，本站签文取自该体系。</p>
+    <h3>九个等级怎么看？</h3>
+    <p>月老签自上而下分上上大吉、上上、上吉、上、中上、上平、中平、中、下九等：上系五等情缘向好、可期可成；中系三等平平、须随缘经营；下等不利、强求难成。断语部分再按恋情、婚姻、复合分述。</p>
+    <h3>问恋情、问婚姻、问复合要分开求吗？</h3>
+    <p>要。月老签讲究一事一签：问恋情就想清楚「这段感情走向如何」，问婚姻就想清楚「这门婚事成不成」，问复合就想清楚「还能不能挽回」。不同的事分别求签，不要一签混问。</p>
+    <h3>解签结果可信吗？</h3>
+    <p>签文为传统签谱的通行版本，解签基于传统签诗文献整理生成，侧重文化推演，仅供参考，重要决策请结合自身情况。</p>
+  </section>
+
+  <p class="chouqian-note">月老灵签解读侧重传统文化推演，仅供参考，具体应用请结合自身情况。</p>
+</div>
+
+<script src="/assets/qian/yuelao.zh.js" defer></script>
+<script src="/assets/qian/chouqian.js" defer></script>

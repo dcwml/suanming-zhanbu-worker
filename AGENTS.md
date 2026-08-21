@@ -18,6 +18,7 @@ npm run purge        # 清空 Cloudflare zone 缓存；附加 URL 参数可只�
 npm run almanac -- YYYY-MM-DD  # 生成期工具：输出指定日期的历法数据（干支、宜忌、冲煞、喜/财/福神方位、节气、吉神凶煞、生肖等）
 npm run fortune:week -- YYYY-MM-DD  # 生成期工具：周运骨架生成器（参数必须是周一），输出该周 7 天历法骨架 + 生肖关系评分 + 特吉/次吉/忠告排序
 npm run fortune:month -- YYYY-MM    # 生成期工具：月运骨架生成器，输出月柱分段、节气、生肖月关系（六合/三合/值月/相害/相冲）、吉日速查
+npm run qian:validate # 灵签数据校验：三签种各 100 签、编号连续、等级合法、双语对称；改 public/assets/qian/ 后必跑
 ```
 
 提交前必须通过：`npm test` + `npm run typecheck`。测试结束时 Windows 上可能出现 miniflare 临时目录 EBUSY 警告，属无害噪音，不代表失败。
@@ -42,7 +43,7 @@ src/
   seo/meta.ts         escapeHtml、buildHead（固定页面 title/canonical/hreflang/og/twitter）+ daily/weekly/monthly 的单篇与归档 head 构建器
   seo/jsonld.ts       JSON-LD 构建与 </script> 注入转义；含 articleJsonLd / weeklyArticleJsonLd / monthlyArticleJsonLd / collectionPageJsonLd / faqJsonLd（按 faq 字段自动注入 FAQPage）
   seo/sitemap.ts      sitemap.xml（双语 alternates + daily/weekly/monthly 单篇+归档页）与 robots.txt
-  layout/nav.ts       品牌块（logo.png + 站名）+ 导航（含「命理」下拉：MINGLI_NAV_LABEL/MINGLI_NAV_ITEMS，八字排盘/紫微斗数/八字合婚，标题链接 mingli 总览页；「占卜」下拉：DIVINATION_NAV_LABEL/DIVINATION_NAV_ITEMS，六爻起卦/梅花易数/小六壬，标题链接 divination 总览页；「运势」下拉：FORTUNE_NAV_LABEL/FORTUNE_NAV_ITEMS，每日/每周/每月运势；三个下拉均纯 CSS）+ 语言切换
+  layout/nav.ts       品牌块（logo.png + 站名）+ 导航（含「命理」下拉：MINGLI_NAV_LABEL/MINGLI_NAV_ITEMS，八字排盘/紫微斗数/八字合婚，标题链接 mingli 总览页；「占卜」下拉：DIVINATION_NAV_LABEL/DIVINATION_NAV_ITEMS，六爻起卦/梅花易数/小六壬，标题链接 divination 总览页；「抽签」下拉：CHOUQIAN_NAV_LABEL/CHOUQIAN_NAV_ITEMS，黄大仙/观音/月老灵签，标题链接 chouqian 总览页；「运势」下拉：FORTUNE_NAV_LABEL/FORTUNE_NAV_ITEMS，每日/每周/每月运势；四个下拉均纯 CSS）+ 语言切换
   layout/footer.ts    多栏页脚（品牌栏 + 工具/运势/关于链接列 + 底栏版权免责；链接标题取 registry 单一来源 + daily/weekly/monthly 显式引用）
   layout/render.ts    renderPage / renderNotFound / renderError / renderDailyPost / renderDailyArchive / renderWeeklyPost / renderWeeklyArchive / renderMonthlyPost / renderMonthlyArchive
   layout/snippets/    全站静态片段：head.html（验证 meta/GTM 等 <head> 代码）、body-start.html（GTM noscript 等 <body> 开头代码），原样注入所有页面含 404/500，只放仓库内受控代码
@@ -67,7 +68,8 @@ src/
 scripts/
   almanac.ts          生成期工具：用 lunar-javascript 输出指定日期历法数据（干支、宜忌、冲煞、纳音、喜/财/福神方位、节气、吉神凶煞等）
   fortune.ts          生成期工具：周运/月运数据骨架生成器（fortune:week 参数须为周一 / fortune:month 参数 YYYY-MM）；历法数据复用 almanac 的 compute()，地支关系与评分规则来自 src/fortune/rules.ts
-public/assets/        静态资源（style.css、logo.png（印章 LOGO，兼作 favicon）、og-default.png、bazi.js、liuyao.js、meihua.js、xiaoliuren.js、zeji.js、ziwei.js、vendor/iztro.min.js），由 Workers assets 直接服务；bazi/liuyao/meihua/xiaoliuren/zeji/hehun 页面经 CDN 统一加载 lunar-javascript 1.7.7（cdnjs 主源 + staticfile 回退）；ziwei 页面经 unpkg → jsdelivr → 本地 vendor 三级链加载 iztro 2.6.0
+  validate-qian.mjs   灵签数据校验（qian:validate）：三签种各 100 签、编号连续、等级在公布集合内、双语对称、签诗非空
+public/assets/        静态资源（style.css、logo.png（印章 LOGO，兼作 favicon）、og-default.png、bazi.js、liuyao.js、meihua.js、xiaoliuren.js、zeji.js、ziwei.js、chouqian.js、vendor/iztro.min.js、qian/ 灵签数据），由 Workers assets 直接服务；bazi/liuyao/meihua/xiaoliuren/zeji/hehun 页面经 CDN 统一加载 lunar-javascript 1.7.7（cdnjs 主源 + staticfile 回退）；ziwei 页面经 unpkg → jsdelivr → 本地 vendor 三级链加载 iztro 2.6.0；三个灵签页面加载 qian/{id}.{lang}.js 数据 + chouqian.js 共享脚本（零外部 CDN）
   bazi.js             前端 lunar-javascript 排盘 + 三段串行解读渲染
   liuyao.js           前端 64 卦文本表 + King Wen 查表算法 + 三步投币起卦 + 单段解读渲染
   meihua.js           前端先天八卦数/体用五行算法 + 时间/数字起卦 + 本互变卦排盘 + 单段解读渲染
@@ -75,7 +77,9 @@ public/assets/        静态资源（style.css、logo.png（印章 LOGO，兼作
   zeji.js             前端 lunar-javascript 扫描 + 避冲排序 + 详解渲染
   ziwei.js            前端 iztro 排盘 + 4×4 盘格渲染 + 三段串行解读渲染
   hehun.js            前端 lunar-javascript 双人排盘 + 地支/天干关系查表（与 fortune/rules.ts 同值）+ 配对徽章 + 单段解读渲染
-test/                 36 个测试文件、435 个测试（SELF.fetch 集成测试 + 单元测试）
+  chouqian.js         灵签共享交互脚本：三签种同一份（摇签动画 → crypto 随机抽签 → 渲染签文/断语 → 再摇一签；按号查签），文案经 T 表双语
+  qian/               灵签数据（非模块脚本，挂 window.QIAN_DATA）：{huangdaxian,guanyin,yuelao}.{zh,en}.js 各 100 签；en 版含 nameZh/gradeLabels/titleZh/poemZh 回显中文原文
+test/                 36 个测试文件、457 个测试（SELF.fetch 集成测试 + 单元测试）
 ```
 
 ## 核心约定（改代码前必读）
@@ -168,6 +172,34 @@ test/                 36 个测试文件、435 个测试（SELF.fetch 集成测�
 - 周运的每日要点自含关键信息，只链每日归档页，不前链尚未发布的每日单篇。
 - 导航「运势」下拉为纯 CSS 实现（hover / :focus-within 展开），无 JS、无动态 aria-expanded。
 - 评分规则按「逐日关系计数」回测复现黄大仙祠 2026-08-17 周排名；加权方案已否决，不要改回。
+
+## 灵签抽签栏目
+
+### 架构概览
+
+纯前端静态工具，零 LLM、零 API、零外部 CDN。页面走固定页面注册表（registry），交互与数据全在浏览器完成：
+
+- **总览页**：`/:lang/chouqian/`（签种卡片 + 对比表 + 求签仪轨 + FAQ）
+- **工具页**：`/:lang/{huangdaxian,guanyin,yuelao}/`，均 `inNav: false`，经「抽签」下拉进入
+- **签文数据**：`public/assets/qian/{id}.{lang}.js`（非模块脚本，挂 `window.QIAN_DATA`，按语言分文件）——`{ id, total, name, grades, aspects, signs: [{ no, grade, title, poem, meaning, aspects }] }`；en 版额外含 `nameZh/gradeLabels/titleZh/poemZh` 回显中文原文
+- **共享脚本**：`public/assets/chouqian.js` 三签种同一份；`data-qian` 属性选数据、`data-lang` 选文案表（T 表）
+- **交互**：三步式（默祷可填所问之事 → 摇签 1.4s 纯 CSS 动画 → 出签）+ 按号查签 + 再摇一签；随机数用 `crypto.getRandomValues` 拒绝采样；等级徽章按 data-grade 配色（吉绿/中灰/凶红）
+
+### 新增一个签种的流程
+
+1. **数据**：`public/assets/qian/` 加 `{id}.zh.js` + `{id}.en.js` 各 100 签（编号 1..100 连续、等级用该签种公布集合），跑 `npm run qian:validate`
+2. **页面**：`src/content/` 加 `{id}.zh.html` + `{id}.en.html`（骨架抄 guanyin：`chouqian-app` 容器 + `data-qian` + 三步 section + 签制速览表 + FAQ + 底部两行 script 引用）
+3. **注册**：`registry.ts` 加两条 PageEntry（`inNav: false`，含双语 faq，FAQ 与正文逐字一致）；等级分布表数字须与数据实际分布一致
+4. **接线**：`nav.ts` 的 `CHOUQIAN_NAV_ITEMS` 加 slug；`footer.ts` 的 toolLinks 加 slug
+5. **验证**：`npm run qian:validate && npm run typecheck && npm test`（registry/integration 各有签种用例可参照）
+
+### 已知边界（设计文档预定，勿"顺手修复"）
+
+- 签宫/宫位不入数据（各版本分歧大、SEO 价值低），只收等级/签题/签诗/解签/断语五要素。
+- 无逐签独立 URL（100×3×2 = 600 页静态化收益低），查签走页内按号查阅。
+- 无掷筊环节（先得圣筊才能抽的仪式），简化为「诚心默祷 → 摇签」。
+- 解签文本按主流通行本整理（如观音第 89 签「大看琼花」），不做版本考据；异文取舍记录见 `docs/qian-data-sources/`。
+- 设计与决策记录见 [灵签设计文档](./docs/superpowers/specs/2026-08-21-chouqian-qian-design.md)。
 
 ## FAQ 页面（择吉页为首个使用示例）
 

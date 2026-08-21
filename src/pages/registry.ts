@@ -19,6 +19,14 @@ import divinationZh from "../content/divination.zh.html";
 import divinationEn from "../content/divination.en.html";
 import zejiZh from "../content/zeji.zh.html";
 import zejiEn from "../content/zeji.en.html";
+import chouqianZh from "../content/chouqian.zh.html";
+import chouqianEn from "../content/chouqian.en.html";
+import huangdaxianZh from "../content/huangdaxian.zh.html";
+import huangdaxianEn from "../content/huangdaxian.en.html";
+import guanyinZh from "../content/guanyin.zh.html";
+import guanyinEn from "../content/guanyin.en.html";
+import yuelaoZh from "../content/yuelao.zh.html";
+import yuelaoEn from "../content/yuelao.en.html";
 import notfoundZh from "../content/notfound.zh.html";
 import notfoundEn from "../content/notfound.en.html";
 
@@ -323,6 +331,198 @@ export const PAGES: readonly PageEntry[] = [
         {
           question: "Are this tool's results authoritative?",
           answer: "Traditional date-selection schools disagree with each other. This tool applies one transparent rule set; the results reflect traditional date-selection reasoning — please apply them in light of your own circumstances.",
+        },
+      ],
+    },
+  },
+  {
+    slug: "chouqian",
+    // 抽签总览页：经「抽签」下拉标题进入（见 layout/nav.ts），不在平铺导航里
+    inNav: false,
+    meta: {
+      zh: { title: "灵签抽签", description: "在线灵签抽签：黄大仙、观音、月老三种百签签谱怎么选，摇筒抽签、按号查签，签诗典故与解签细说分明。" },
+      en: { title: "Fortune Sticks Guide", description: "How to choose among three online oracle-stick sets — Wong Tai Sin, Guanyin and Yue Lao — with stick drawing, number lookup and in-depth readings." },
+    },
+    content: { zh: chouqianZh, en: chouqianEn },
+    faq: {
+      zh: [
+        {
+          question: "三种灵签有什么区别？",
+          answer: "黄大仙灵签出自香港黄大仙祠，五等定吉凶，每签配古人典故，问事业财运等俗务尤宜；观音灵签流传最广，三级分明，日常百事皆可问；月老灵签出自杭州西湖月老祠，九等细分，专为情缘婚姻而设。",
+        },
+        {
+          question: "求签和占卜有什么区别？",
+          answer: "求签是「以签应问」：心中一事，摇筒落签，看签文如何回应；六爻、梅花等占卜是「以卦推事」：起卦之后逐层推演。想快速得一句指引用求签，想层层分析用占卜。",
+        },
+        {
+          question: "同一件事可以反复求签吗？",
+          answer: "传统讲究一事一签、不诚不占：同一件事在情况没有变化之前，不宜反复抽签；若事态已有新进展，可以再求。",
+        },
+        {
+          question: "解签结果可信吗？",
+          answer: "三种签文均取传统签谱的主流通行版本，解签基于传统签诗文献整理生成，侧重文化推演，仅供参考，重要决策请结合自身情况。",
+        },
+      ],
+      en: [
+        {
+          question: "How do the three oracles differ?",
+          answer: "Wong Tai Sin sticks come from Hong Kong's Wong Tai Sin Temple, read fortune in five grades and pair each stick with a classical tale — best for career and wealth; Guanyin sticks are the most widely circulated, reading three plain grades for everyday matters; Yue Lao sticks come from the shrine by West Lake in Hangzhou, dividing matters of the heart into nine fine grades.",
+        },
+        {
+          question: "How does drawing sticks differ from hexagram casting?",
+          answer: "Drawing a stick matches a question to a pre-written poem: one matter, one shake, one answer. Hexagram casting (I Ching, Plum Blossom) builds a hexagram and reasons through it line by line. For a quick pointer, draw a stick; for layered analysis, cast a hexagram.",
+        },
+        {
+          question: "Can I draw repeatedly about the same matter?",
+          answer: "Tradition asks one stick per matter, drawn in sincerity: while nothing about the situation has changed, repeated drawing is discouraged. Once the matter has genuinely moved on, a fresh draw is appropriate.",
+        },
+        {
+          question: "Are the readings authoritative?",
+          answer: "All three sets follow the widely circulated versions of the traditional oracles; the readings draw on classical oracle-stick literature and are offered as cultural reasoning for reference only. Please weigh important decisions in light of your own circumstances.",
+        },
+      ],
+    },
+  },
+  {
+    slug: "huangdaxian",
+    // 经「抽签」下拉进入（见 layout/nav.ts），不在平铺导航里
+    inNav: false,
+    meta: {
+      zh: { title: "黄大仙灵签", description: "在线黄大仙灵签：摇筒抽签百签签文，上上至下下五等定吉凶，签诗典故与姻缘事业求财健康断语，细解分明。" },
+      en: { title: "Wong Tai Sin Oracle Sticks", description: "Draw Wong Tai Sin oracle sticks online: one hundred sticks in five grades, each with a four-line poem, a classical tale and verdicts on marriage, career, wealth and health." },
+    },
+    content: { zh: huangdaxianZh, en: huangdaxianEn },
+    faq: {
+      zh: [
+        {
+          question: "黄大仙灵签是什么来历？",
+          answer: "黄大仙即晋代道士黄初平，得道于浙江金华，后在香港建祠奉祀，以「有求必应」闻名。黄大仙灵签是祠内沿用百余年的百签签谱，签诗七言四句，每签配一则古人典故，是流传最广的庙宇签谱之一。",
+        },
+        {
+          question: "签上的等级怎么看？",
+          answer: "签分上上、上吉、中吉、中平、下下五等：上上最吉，百事可为；上吉吉多顺遂，可进而谋；中吉平顺向好，稳中有成；中平平平无奇，宜守常待时；下下凶多阻滞，宜守不宜进。断语部分再按姻缘、事业、求财、健康分述。",
+        },
+        {
+          question: "在庙里求了签，能在这里查解吗？",
+          answer: "可以。在「摇筒求签」旁的签号框输入 1 到 100 的签号，即可查阅该签签文与解签，与现场摇签所得的展示完全一致。",
+        },
+        {
+          question: "解签结果可信吗？",
+          answer: "签文为传统庙宇签谱的通行版本，解签基于传统签诗文献整理生成，侧重文化推演，仅供参考，重要决策请结合自身情况。",
+        },
+      ],
+      en: [
+        {
+          question: "Where do the Wong Tai Sin oracle sticks come from?",
+          answer: "Wong Tai Sin is the Jin-dynasty Taoist Huang Chuping, who attained the Way at Jinhua in Zhejiang and is honored in the Hong Kong temple that bears his name, famous for answering every sincere plea. The temple's hundred-stick set has been in use for over a century: each stick carries a four-line poem and a classical tale, making it one of the most widely circulated temple oracles.",
+        },
+        {
+          question: "How do I read the grade on a stick?",
+          answer: "Sticks fall into five grades: Supremely Auspicious (上上) — fortune favors most endeavors; Very Auspicious (上吉) — more gain than setback; Auspicious (中吉) — steady and promising; Neutral (中平) — even, keep steady and await timing; Very Inauspicious (下下) — heavy going, guard rather than advance. The verdicts then break matters down by marriage, career, wealth and health.",
+        },
+        {
+          question: "Can I look up a stick I drew at a temple?",
+          answer: "Yes. Enter its number (1–100) in the lookup box beside the tube, and the poem and reading shown will be exactly the same as one drawn here.",
+        },
+        {
+          question: "Are the readings authoritative?",
+          answer: "The stick texts follow the widely circulated temple version; the readings draw on classical oracle-stick literature and are offered as cultural reasoning for reference only. Please weigh important decisions in light of your own circumstances.",
+        },
+      ],
+    },
+  },
+  {
+    slug: "guanyin",
+    // 经「抽签」下拉进入（见 layout/nav.ts），不在平铺导航里
+    inNav: false,
+    meta: {
+      zh: { title: "观音灵签", description: "在线观音灵签：摇筒抽签百签签文，上中下三级定吉凶，签诗典故与姻缘事业求财健康断语，细解分明。" },
+      en: { title: "Guanyin Oracle Sticks", description: "Draw Guanyin oracle sticks online: one hundred sticks in three grades, each with a four-line poem, a classical tale and verdicts on marriage, career, wealth and health." },
+    },
+    content: { zh: guanyinZh, en: guanyinEn },
+    faq: {
+      zh: [
+        {
+          question: "观音灵签是什么来历？",
+          answer: "观音灵签是民间流传最广的百签签谱之一，常见于各地观音道场与寺庙。签诗七言四句，配古人典故，以三级定吉凶：上签主吉、中签主平、下签主滞。各处版本略有异文，本站以主流通行版本为准。",
+        },
+        {
+          question: "上签、中签、下签怎么看？",
+          answer: "上签主吉，所求多能如愿；中签主平，得失参半、须待时机；下签主滞，眼前多有不顺，宜守不宜进。断语部分再按姻缘、事业、求财、健康分述。",
+        },
+        {
+          question: "在庙里求了签，能在这里查解吗？",
+          answer: "可以。在「摇筒求签」旁的签号框输入 1 到 100 的签号，即可查阅该签签文与解签，与现场摇签所得的展示完全一致。",
+        },
+        {
+          question: "解签结果可信吗？",
+          answer: "签文为传统签谱的通行版本，解签基于传统签诗文献整理生成，侧重文化推演，仅供参考，重要决策请结合自身情况。",
+        },
+      ],
+      en: [
+        {
+          question: "Where do the Guanyin oracle sticks come from?",
+          answer: "The Guanyin oracle sticks are one of the most widely circulated hundred-stick folk oracles, found at Guanyin shrines and temples across the Chinese world. Each stick carries a four-line poem and a classical tale, with three grades reading fortune: Favorable (上签), Neutral (中签) and Lower (下签). Local versions differ slightly in wording; this site follows the widely circulated mainstream text.",
+        },
+        {
+          question: "How do I read the three grades?",
+          answer: "Favorable (上签) — what is sought will mostly come true; Neutral (中签) — gain and loss in half, wait for the right moment; Lower (下签) — matters are blocked for now, so guard rather than advance. The verdicts then break matters down by marriage, career, wealth and health.",
+        },
+        {
+          question: "Can I look up a stick I drew at a temple?",
+          answer: "Yes. Enter its number (1–100) in the lookup box beside the tube, and the poem and reading shown will be exactly the same as one drawn here.",
+        },
+        {
+          question: "Are the readings authoritative?",
+          answer: "The stick texts follow the widely circulated version of the traditional oracle; the readings draw on classical oracle-stick literature and are offered as cultural reasoning for reference only. Please weigh important decisions in light of your own circumstances.",
+        },
+      ],
+    },
+  },
+  {
+    slug: "yuelao",
+    // 经「抽签」下拉进入（见 layout/nav.ts），不在平铺导航里
+    inNav: false,
+    meta: {
+      zh: { title: "月老灵签", description: "在线月老灵签：摇筒抽签百签签文，九等细分情缘深浅，签文经典成句与恋情婚姻复合断语，细解分明。" },
+      en: { title: "Yue Lao Oracle Sticks", description: "Draw Yue Lao oracle sticks online: one hundred sticks in nine grades for matters of the heart, with classical lines and verdicts on love, marriage and reconciliation." },
+    },
+    content: { zh: yuelaoZh, en: yuelaoEn },
+    faq: {
+      zh: [
+        {
+          question: "月老灵签是什么来历？",
+          answer: "月下老人掌姻缘的传说出自唐代《续玄怪录》：老人袋中红绳一系，千里姻缘注定。杭州西湖月老祠据此设百签签谱，签文多引《诗经》《左传》等经典成句，专为问情缘婚姻者而设，本站签文取自该体系。",
+        },
+        {
+          question: "九个等级怎么看？",
+          answer: "月老签自上而下分上上大吉、上上、上吉、上、中上、上平、中平、中、下九等：上系五等情缘向好、可期可成；中系三等平平、须随缘经营；下等不利、强求难成。断语部分再按恋情、婚姻、复合分述。",
+        },
+        {
+          question: "问恋情、问婚姻、问复合要分开求吗？",
+          answer: "要。月老签讲究一事一签：问恋情就想清楚「这段感情走向如何」，问婚姻就想清楚「这门婚事成不成」，问复合就想清楚「还能不能挽回」。不同的事分别求签，不要一签混问。",
+        },
+        {
+          question: "解签结果可信吗？",
+          answer: "签文为传统签谱的通行版本，解签基于传统签诗文献整理生成，侧重文化推演，仅供参考，重要决策请结合自身情况。",
+        },
+      ],
+      en: [
+        {
+          question: "Where do the Yue Lao oracle sticks come from?",
+          answer: "The Old Man Under the Moon governs marriage in a tale from the Tang-dynasty Xu Xuan Guai Lu: one knot of the red thread in his bag, and a match across a thousand miles is sealed. The hundred-stick set of the Yue Lao shrine by West Lake in Hangzhou is the best known; its lines often quote the Book of Songs, the Zuo Commentary and other classics, and it is drawn for matters of the heart. This site follows that tradition's widely circulated text.",
+        },
+        {
+          question: "How do I read the nine grades?",
+          answer: "From the top: Most Auspicious (上上大吉), Supreme (上上), Excellent (上吉) and Favorable (上) promise a bond that can be hoped for and won; Above Average (中上), Fairly Steady (上平) and Steady (中平) ask for tending and patience; Neutral (中) means slow going; Lower (下) means forcing it will not succeed. The verdicts then break matters down by love, marriage and reconciliation.",
+        },
+        {
+          question: "Should love, marriage and reconciliation be asked separately?",
+          answer: "Yes. Yue Lao sticks ask for one matter per stick: for love, fix clearly where the relationship is heading; for marriage, whether the match will be made; for reconciliation, whether what broke can be mended. Draw separately for different matters — never mix them in one draw.",
+        },
+        {
+          question: "Are the readings authoritative?",
+          answer: "The stick texts follow the widely circulated version of the traditional oracle; the readings draw on classical oracle-stick literature and are offered as cultural reasoning for reference only. Please weigh important decisions in light of your own circumstances.",
         },
       ],
     },

@@ -32,6 +32,15 @@ export const DIVINATION_NAV_ITEMS: readonly { slug: string; label: Record<Lang, 
   "xiaoliuren",
 ].map((slug) => ({ slug, label: { zh: findPage(slug)!.meta.zh.title, en: findPage(slug)!.meta.en.title } }));
 
+/** 「抽签」下拉菜单：标签直接取 registry 页面标题（单一来源），标题链接抽签总览页（同「命理」「占卜」下拉） */
+export const CHOUQIAN_NAV_LABEL: Record<Lang, string> = { zh: "抽签", en: "Fortune Sticks" };
+
+export const CHOUQIAN_NAV_ITEMS: readonly { slug: string; label: Record<Lang, string> }[] = [
+  "huangdaxian",
+  "guanyin",
+  "yuelao",
+].map((slug) => ({ slug, label: { zh: findPage(slug)!.meta.zh.title, en: findPage(slug)!.meta.en.title } }));
+
 const FORTUNE_SLUGS = FORTUNE_NAV_ITEMS.map((item) => item.slug);
 const DIVINATION_SLUGS = DIVINATION_NAV_ITEMS.map((item) => item.slug);
 
@@ -68,7 +77,7 @@ function renderDropdown(
 /** langSwitchSlug 缺省时语言切换指向当前页的另一语言版本；
  *  404/500 等无真实页面的场景应显式传 "" 指向对方语言首页。 */
 export function renderNav(lang: Lang, currentSlug: string, langSwitchSlug?: string): string {
-  // 导航顺序（单一来源）：首页 · [命理 ▾] · [占卜 ▾] · 择吉日 · [运势 ▾]
+  // 导航顺序（单一来源）：首页 · [命理 ▾] · [占卜 ▾] · 择吉日 · [抽签 ▾] · [运势 ▾]
   // 「命理」下拉占八字原平铺位置（首页之后），标题链接 mingli 总览页；八字/紫微/合婚均 inNav: false
   const chunks: string[] = [];
   for (const p of navPages()) {
@@ -79,6 +88,7 @@ export function renderNav(lang: Lang, currentSlug: string, langSwitchSlug?: stri
       chunks.push(renderDropdown(lang, currentSlug, DIVINATION_NAV_LABEL, DIVINATION_NAV_ITEMS, "divination"));
     }
   }
+  chunks.push(renderDropdown(lang, currentSlug, CHOUQIAN_NAV_LABEL, CHOUQIAN_NAV_ITEMS, "chouqian"));
   chunks.push(renderDropdown(lang, currentSlug, FORTUNE_NAV_LABEL, FORTUNE_NAV_ITEMS));
   const links = chunks.join("\n        ");
 
