@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260823Zh from "../content/daily/2026-08-23.zh.html";
+import daily20260823En from "../content/daily/2026-08-23.en.html";
 import daily20260822Zh from "../content/daily/2026-08-22.zh.html";
 import daily20260822En from "../content/daily/2026-08-22.en.html";
 import daily20260821Zh from "../content/daily/2026-08-21.zh.html";
@@ -60,6 +62,14 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-08-23",
+    meta: {
+      zh: { title: "2026年8月23日宜忌·蛇", description: "2026年8月23日黄历宜忌：天德黄道吉日值日，恰逢处暑节气，天愿、六合、五富、要安、宝光五颗吉神并集，宜嫁娶、祭祀祈福、求嗣、安床移徙、修造动土、竖柱上梁、交易立券、栽种、会亲友等十八事，忌行丧安葬、出行、作梁、纳畜、伐木、造桥，冲猪煞东；生肖蛇今日运势与处暑节气民俗科普。" },
+      en: { title: "Daily Almanac — August 23, 2026 (Snake)", description: "August 23, 2026 Chinese almanac: a Tiāndé Yellow Path day falling on End of Heat itself, with Tiānyuàn, Liùhé, Wǔfù, Yào'ān and Bǎoguāng — five auspicious spirits assembled — favorable for marriage, sacrifice and prayer, setting beds and relocating, building and breaking ground, erecting pillars and raising beams, trading and signing contracts, planting and meeting relatives, eighteen matters in all; avoid funerals and burial, travel, making beams, acquiring livestock, felling trees and building bridges; clash Pig, Sha East; Snake zodiac fortune and the lore of the End of Heat solar term." },
+    },
+    content: { zh: daily20260823Zh, en: daily20260823En },
+  },
   {
     date: "2026-08-22",
     meta: {
