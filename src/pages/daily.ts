@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260824Zh from "../content/daily/2026-08-24.zh.html";
+import daily20260824En from "../content/daily/2026-08-24.en.html";
 import daily20260823Zh from "../content/daily/2026-08-23.zh.html";
 import daily20260823En from "../content/daily/2026-08-23.en.html";
 import daily20260822Zh from "../content/daily/2026-08-22.zh.html";
@@ -62,6 +64,14 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-08-24",
+    meta: {
+      zh: { title: "2026年8月24日宜忌·马", description: "2026年8月24日黄历宜忌：白虎黑道值日，天马、时阳、生气、玉宇、鸣吠五颗吉神并辅化解厉气，宜嫁娶、纳采、订盟、开光、祭祀、出行、理发、动土、安床、放水、开渠、栽种、进人口十三事，忌入宅、上梁、入殓、盖屋、探病、作灶、安门、安葬、纳畜、伐木，冲鼠煞北；生肖马今日运势与白虎星科普。" },
+      en: { title: "Daily Almanac — August 24, 2026 (Horse)", description: "August 24, 2026 Chinese almanac: a White Tiger Black Path day tempered by five auspicious spirits — Tiānmǎ, Shíyáng, Shēngqì, Yùyǔ and Míngfèi — favorable for marriage, accepting betrothal gifts, pledging betrothal, consecration, sacrifice, travel, haircut, breaking ground, setting the bed, releasing water, digging channels, planting and welcoming people, thirteen matters in all; avoid moving into a house, raising beams, encoffining, roofing, visiting the sick, installing a stove, installing gates, burial, acquiring livestock and felling trees; clash Rat, Sha North; Horse zodiac fortune and the lore of the White Tiger." },
+    },
+    content: { zh: daily20260824Zh, en: daily20260824En },
+  },
   {
     date: "2026-08-23",
     meta: {
