@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260825Zh from "../content/daily/2026-08-25.zh.html";
+import daily20260825En from "../content/daily/2026-08-25.en.html";
 import daily20260824Zh from "../content/daily/2026-08-24.zh.html";
 import daily20260824En from "../content/daily/2026-08-24.en.html";
 import daily20260823Zh from "../content/daily/2026-08-23.zh.html";
@@ -64,6 +66,14 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-08-25",
+    meta: {
+      zh: { title: "2026年8月25日宜忌·羊", description: "2026年8月25日黄历宜忌：玉堂黄道吉日值日，母仓、金堂、玉堂三吉神并趋，宜祭祀、出行、作梁、拆卸、修造、动土、起基、安床、补垣、塞穴、入殓、破土、安葬、移柩等十六事，忌嫁娶、入宅、斋醮、开光、针灸、掘井，冲牛煞西；生肖羊今日运势与玉堂星「金马玉堂」典故科普。" },
+      en: { title: "Daily Almanac — August 25, 2026 (Sheep)", description: "August 25, 2026 Chinese almanac: a Jade Hall Yellow Path day with three auspicious spirits — Mǔcāng, Jīntáng and Yùtáng — favorable for sacrifice, travel, installing ridge beams, dismantling, construction, breaking ground, laying foundations, setting the bed, mending walls, sealing holes, encoffining, breaking earth, burial, moving coffins and increasing livestock, sixteen matters in all; avoid marriage, moving into a house, ritual offerings, consecration, acupuncture and digging wells; clash Ox, Sha West; Sheep zodiac fortune and the lore of the Jade Hall." },
+    },
+    content: { zh: daily20260825Zh, en: daily20260825En },
+  },
   {
     date: "2026-08-24",
     meta: {
