@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260826Zh from "../content/daily/2026-08-26.zh.html";
+import daily20260826En from "../content/daily/2026-08-26.en.html";
 import daily20260825Zh from "../content/daily/2026-08-25.zh.html";
 import daily20260825En from "../content/daily/2026-08-25.en.html";
 import daily20260824Zh from "../content/daily/2026-08-24.zh.html";
@@ -66,6 +68,14 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-08-26",
+    meta: {
+      zh: { title: "2026年8月26日宜忌·猴", description: "2026年8月26日黄历宜忌：天牢黑道凶日值日，月德、月恩、四相、王日四吉神并趋化解囚气，宜嫁娶、纳采、订盟、祭祀、祈福、求嗣、出行、解除、竖柱、入宅、移徙、纳财、上梁、纳畜、入殓、安葬、启钻十七事，忌栽种、掘井、动土、安床、破土、置产，冲虎煞南；生肖猴今日运势与黑道凶神天牢科普。" },
+      en: { title: "Daily Almanac — August 26, 2026 (Monkey)", description: "August 26, 2026 Chinese almanac: a Tiānláo Heavenly Prison Black Path day tempered by four auspicious spirits — Yuèdé, Yuè'ēn, Sìxiàng and Wángrì — favorable for marriage, betrothal, sacrifice, prayer, travel, erecting pillars, moving into a house, relocating, collecting wealth, raising beams, acquiring livestock, encoffining, burial and opening the tomb, seventeen matters in all; avoid planting, digging wells, breaking ground, setting the bed, breaking earth for graves and purchasing property; clash Tiger, Sha South; Monkey zodiac fortune and the lore of the Tiānláo Heavenly Prison." },
+    },
+    content: { zh: daily20260826Zh, en: daily20260826En },
+  },
   {
     date: "2026-08-25",
     meta: {
