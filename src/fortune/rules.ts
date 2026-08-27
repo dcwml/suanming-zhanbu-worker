@@ -1,6 +1,6 @@
-/* 生成期规则表：地支关系（六合/三合/相冲/相害）与生肖周运评分。
- * 仅供 scripts/fortune.ts 在生成期引用，不接入任何 Worker 运行时路由；
- * 放在 src/ 下是为了纳入 typecheck 与 vitest 单测（纯函数，零运行时依赖）。 */
+/* 生成期与线上 API 共用的规则表：地支关系（六合/三合/相冲/相害）与生肖周运评分。
+ * 引用方：src/fortune/skeleton.ts（→ scripts/fortune.ts CLI 与 /api/fortune/* 路由）；
+ * 纯函数、零运行时依赖，放 src/ 下纳入 typecheck 与 vitest 单测。 */
 
 export const BRANCHES = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"] as const;
 export type Branch = (typeof BRANCHES)[number];
