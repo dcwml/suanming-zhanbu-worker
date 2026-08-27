@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260828Zh from "../content/daily/2026-08-28.zh.html";
+import daily20260828En from "../content/daily/2026-08-28.en.html";
 import daily20260826Zh from "../content/daily/2026-08-26.zh.html";
 import daily20260826En from "../content/daily/2026-08-26.en.html";
 import daily20260825Zh from "../content/daily/2026-08-25.zh.html";
@@ -68,6 +70,14 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-08-28",
+    meta: {
+      zh: { title: "2026年8月28日宜忌·狗", description: "2026年8月28日黄历宜忌：司命黄道吉日值日，母仓、阳德、守日、天巫、福德、六仪、敬安八颗吉神并趋，宜沐浴、理发、会亲友、塑绘、开光、栽种、牧养、嫁娶、经络、补垣、塞穴十一事，忌开市、入宅、动土、破土、安葬、作灶、上梁、安床、开仓、祈福，冲龙煞北；生肖狗今日运势与黄道吉神司命科普。" },
+      en: { title: "Daily Almanac — August 28, 2026 (Dog)", description: "August 28, 2026 Chinese almanac: a Sīmìng Yellow Path day with eight auspicious spirits — Mǔcāng, Yángdé, Shǒurì, Tiānwū, Fúdé, Liùyī, Jìng'ān and Sīmìng — favorable for bathing, haircutting, meeting friends, sculpting, consecration, planting, herding, marriage, channel therapy, repairing walls and filling holes, eleven matters in all; avoid opening markets, moving in, breaking ground, burial, installing a stove, raising beams, setting the bed, opening granaries and praying for blessings; clash Dragon, Sha North; Dog zodiac fortune and the lore of Sīmìng the Life-Master." },
+    },
+    content: { zh: daily20260828Zh, en: daily20260828En },
+  },
   {
     date: "2026-08-26",
     meta: {
