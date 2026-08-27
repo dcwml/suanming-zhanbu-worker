@@ -80,7 +80,7 @@ describe("POST /api/llm/generate", () => {
 
   it("returns 413 payload_too_large over 64KB", async () => {
     // 体积检查在 JSON.parse 之前，body 无效也没关系
-    const big = '{"type":"daily-reading","data":"' + " ".repeat(66_000) + '"}';
+    const big = "{" + " ".repeat(66_000);
     const res = await api.fetch(req(big, "test-key"), baseEnv);
     expect(res.status).toBe(413);
     const json = (await res.json()) as ApiJson;

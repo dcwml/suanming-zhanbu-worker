@@ -49,4 +49,5 @@ LLM 解读接口（八字、六爻、梅花易数、小六壬、择吉、紫微�
 - [ ] 替换 `public/assets/og-default.png` 为正式 1200×630 分享图。
 - [ ] 确认 Cloudflare Git 集成已连接并完成首次部署。
 - [ ] 执行 `wrangler secret put LLM_API_KEY` 配置生产 LLM 密钥。
+- [ ] 执行 `wrangler secret put SITE_API_KEY` 配置自用 API 密钥（**必须在 push 本次改名代码之前**）。
 - [ ] 部署后用 Google Rich Results Test 抽查 JSON-LD。
