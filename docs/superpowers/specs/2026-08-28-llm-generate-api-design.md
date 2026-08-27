@@ -47,7 +47,7 @@
 | `upstream_error` | 502 | LLM 上游错误 |
 | `upstream_timeout` | 504 | LLM 上游超时（60s，callLlm 默认） |
 
-**校验深度**：type 查注册表、`lang` 合法、栏目必填字段（date/monday/month/almanac/week/skeleton）存在且为对象。**不做深递归校验**——数据来自自家 API，结构演化不用同步改这里（边界见「已知取舍」）。
+**校验深度**：type 查注册表、栏目必填字段类型与格式正确（`lang` 为 `"zh" | "en"`，`date`/`monday` 为 `YYYY-MM-DD` 字符串，`month` 为 `YYYY-MM` 字符串，`almanac`/`week`/`skeleton` 为对象）。**不做深递归校验**——数据来自自家 API，结构演化不用同步改这里（边界见「已知取舍」）。
 
 ## 首批 9 个 type
 
