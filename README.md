@@ -14,7 +14,7 @@ npm run fortune:month -- 2026-08     # 月运数据骨架生成器
 ```
 
 LLM 解读接口（八字、六爻、梅花易数、小六壬、择吉、紫微斗数）需要 LLM 密钥：本地在 `.dev.vars` 配置 `LLM_API_KEY`（不入库）；`LLM_BASE_URL`/`LLM_MODEL` 在 `wrangler.jsonc` 的 `vars` 中。
-历法数据 API（`/api/almanac` 等）使用 `x-api-key` 鉴权：本地 `.dev.vars` 配 `ALMANAC_API_KEY`，生产 `wrangler secret put ALMANAC_API_KEY`（未配置时返回 503）。
+自用 API（历法数据 `GET /api/almanac` 等 3 条与内容生成 `POST /api/llm/generate`）统一使用 `x-api-key` 鉴权：本地 `.dev.vars` 配 `SITE_API_KEY`，生产 `wrangler secret put SITE_API_KEY`（未配置时返回 503）。
 
 ## 运势栏目（每日 / 每周 / 每月）
 
@@ -41,6 +41,7 @@ LLM 解读接口（八字、六爻、梅花易数、小六壬、择吉、紫微�
 ## API
 
 接口挂在 `/api/*`，统一响应壳 `{ ok, data | error: { code, message } }`。示例：`POST /api/echo`。已接入 LLM 的实例：`POST /api/bazi/interpret`（八字解读，见 `src/routes/bazi.ts`，限流 10 req/60s）、`POST /api/liuyao/interpret`（六爻解读，见 `src/routes/liuyao.ts`，限流 10 req/60s）、`POST /api/meihua/interpret`（梅花易数解读，见 `src/routes/meihua.ts`，限流 10 req/60s）、`POST /api/xiaoliuren/interpret`（小六壬解读，见 `src/routes/xiaoliuren.ts`，限流 10 req/60s）、`POST /api/zeji/interpret`（择吉日解读，见 `src/routes/zeji.ts`，限流 10 req/60s）、`POST /api/ziwei/interpret`（紫微斗数解读，见 `src/routes/ziwei.ts`，限流 10 req/60s），后续 LLM 接口按同模式新增。
+自用生成端点：`POST /api/llm/generate`（`{ type, data }` 进、`{ type, lang, markdown }` 出；9 个类型：daily-reading / daily-zodiac / daily-story / weekly-summary / weekly-zodiac / weekly-days / monthly-summary / monthly-zodiac / monthly-lucky，见 `src/llmgen/registry.ts`；`x-api-key` 鉴权 + `SITE_API_KEY` secret，无限流；供未来 crontab 脚本生成运势内容）。
 
 ## 上线前检查清单
 

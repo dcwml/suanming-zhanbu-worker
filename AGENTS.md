@@ -24,7 +24,7 @@ npm run qian:validate # 灵签数据校验：三签种各 100 签、编号连续
 提交前必须通过：`npm test` + `npm run typecheck`。测试结束时 Windows 上可能出现 miniflare 临时目录 EBUSY 警告，属无害噪音，不代表失败。
 
 LLM 密钥：本地开发在 `.dev.vars` 配置 `LLM_API_KEY`（不入库）；生产部署前执行 `wrangler secret put LLM_API_KEY`。`LLM_BASE_URL`/`LLM_MODEL` 是普通 vars，在 `wrangler.jsonc` 里改。
-历法数据 API（/api/almanac 等）用 x-api-key 鉴权：本地 .dev.vars 配 ALMANAC_API_KEY，生产 wrangler secret put ALMANAC_API_KEY（未配置时端点 503）。
+自用 API（历法数据 GET /api/almanac、/api/fortune/week、/api/fortune/month 与内容生成 POST /api/llm/generate）统一用 x-api-key 鉴权：本地 .dev.vars 配 SITE_API_KEY，生产 wrangler secret put SITE_API_KEY（未配置时端点 503）。
 
 ## 目录结构与职责
 
@@ -50,6 +50,8 @@ src/
   layout/render.ts    renderPage / renderNotFound / renderError / renderDailyPost / renderDailyArchive / renderWeeklyPost / renderWeeklyArchive / renderMonthlyPost / renderMonthlyArchive
   layout/snippets/    全站静态片段：head.html（验证 meta/GTM 等 <head> 代码）、body-start.html（GTM noscript 等 <body> 开头代码），原样注入所有页面含 404/500，只放仓库内受控代码
   llm.ts              ★ 共享 LLM 客户端：callLlm（OpenAI 兼容）、LlmEnv、RateLimiter 接口
+  auth.ts             自用 API 共享鉴权：authProblem（SITE_API_KEY 未配置 503 / 不匹配 401）
+  llmgen/             自用内容生成模块：types（GenType/GeneratorDef/AnyGenerator/makeGenerator）、prompt-common（公共规则+文案红线防线句）、registry（GENERATORS 9 类型注册表）、daily/weekly/monthly（各 3 条目：validate + system(lang) + user(data)，零算法零重算）
   almanac/            历法计算核心：compute() 单日黄历（scripts/almanac.ts CLI 与 /api/almanac 共用；lunar-javascript 类型声明见 src/lunar-javascript.d.ts）
   bazi/               八字解读模块：validate 请求校验 / prompt 提示词 / llm 转出 / types 共享类型
   liuyao/             六爻解读模块：validate 请求校验 / prompt 提示词 / types 共享类型（零算法，不重算卦象）
@@ -67,7 +69,8 @@ src/
   routes/zeji.ts      POST /api/zeji/interpret：限流→校验→LLM→Markdown 返回
   routes/ziwei.ts     POST /api/ziwei/interpret：限流→校验→LLM→Markdown 返回
   routes/hehun.ts     POST /api/hehun/interpret：限流→校验→LLM→Markdown 返回
-  routes/almanac.ts   GET /api/almanac、/api/fortune/week、/api/fortune/month：鉴权（x-api-key + ALMANAC_API_KEY secret，未配置 503 not_configured）→ 校验 → 计算 → JSON；缺省参数按 Asia/Shanghai 取今天/本周一/本月
+  routes/almanac.ts   GET /api/almanac、/api/fortune/week、/api/fortune/month：鉴权（x-api-key + SITE_API_KEY secret，未配置 503 not_configured）→ 校验 → 计算 → JSON；缺省参数按 Asia/Shanghai 取今天/本周一/本月
+  routes/llmgen.ts   POST /api/llm/generate：鉴权（SITE_API_KEY）→ 64KB 上限 → type 查表（GENERATORS）→ 浅校验 → callLlm → Markdown 返回（自用，无限流；type 清单见 src/llmgen/registry.ts）
   html.d.ts           *.html 模块的 ambient 声明（配合 wrangler Text rules）
 scripts/
   almanac.ts          生成期 CLI 薄壳：参数解析 + 输出（计算核心在 src/almanac/compute.ts）
