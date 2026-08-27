@@ -83,7 +83,7 @@ public/assets/        静态资源（style.css、logo.png（印章 LOGO，兼作
   hehun.js            前端 lunar-javascript 双人排盘 + 地支/天干关系查表（与 fortune/rules.ts 同值）+ 配对徽章 + 单段解读渲染
   chouqian.js         灵签共享交互脚本：三签种同一份（摇签动画 → crypto 随机抽签 → 渲染签文/断语 → 再摇一签；按号查签），文案经 T 表双语
   qian/               灵签数据（非模块脚本，挂 window.QIAN_DATA）：{huangdaxian,guanyin,yuelao}.{zh,en}.js 各 100 签；en 版含 nameZh/gradeLabels/titleZh/poemZh 回显中文原文
-test/                 36 个测试文件、457 个测试（SELF.fetch 集成测试 + 单元测试）
+test/                 集成测试 + 单元测试（vitest 全量，SELF.fetch / api.fetch；实际计数以 npm test 输出为准）
 ```
 
 ## 核心约定（改代码前必读）
