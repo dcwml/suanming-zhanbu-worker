@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { api } from "../src/routes/api";
-import type { AlmanacEnv } from "../src/routes/almanac";
+import type { SiteAuthEnv } from "../src/auth";
 
-const baseEnv: AlmanacEnv = { ALMANAC_API_KEY: "test-key" };
+const baseEnv: SiteAuthEnv = { SITE_API_KEY: "test-key" };
 
 function req(path: string, key?: string): Request {
   const headers: Record<string, string> = {};
@@ -17,7 +17,7 @@ type ApiJson = {
 };
 
 describe("GET /api/almanac", () => {
-  it("returns 503 not_configured when ALMANAC_API_KEY is not set", async () => {
+  it("returns 503 not_configured when SITE_API_KEY is not set", async () => {
     const res = await api.fetch(req("/api/almanac", "any"), {});
     expect(res.status).toBe(503);
     const json = (await res.json()) as ApiJson;
@@ -72,7 +72,7 @@ describe("GET /api/almanac", () => {
 });
 
 describe("GET /api/fortune/week", () => {
-  it("returns 503 not_configured when ALMANAC_API_KEY is not set", async () => {
+  it("returns 503 not_configured when SITE_API_KEY is not set", async () => {
     const res = await api.fetch(req("/api/fortune/week", "any"), {});
     expect(res.status).toBe(503);
     const json = (await res.json()) as ApiJson;
@@ -125,7 +125,7 @@ describe("GET /api/fortune/week", () => {
 });
 
 describe("GET /api/fortune/month", () => {
-  it("returns 503 not_configured when ALMANAC_API_KEY is not set", async () => {
+  it("returns 503 not_configured when SITE_API_KEY is not set", async () => {
     const res = await api.fetch(req("/api/fortune/month", "any"), {});
     expect(res.status).toBe(503);
   });

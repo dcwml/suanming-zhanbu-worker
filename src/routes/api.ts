@@ -7,7 +7,7 @@ import { registerXiaoliurenRoutes } from "./xiaoliuren";
 import { registerZejiRoutes } from "./zeji";
 import { registerZiweiRoutes } from "./ziwei";
 import { registerHehunRoutes } from "./hehun";
-import type { AlmanacEnv } from "./almanac";
+import type { SiteAuthEnv } from "../auth";
 import type { BaziEnv } from "../bazi/types";
 import type { LiuyaoEnv } from "../liuyao/types";
 import type { MeihuaEnv } from "../meihua/types";
@@ -22,7 +22,7 @@ import type { StatsEnv } from "../stats";
  * 统一响应壳：{ ok: true, data } / { ok: false, error: { code, message } }
  * 未来接入 LLM 时按同样模式新增接口，例如 POST /api/divine。
  */
-export const api = new Hono<{ Bindings: BaziEnv & LiuyaoEnv & MeihuaEnv & XiaoliurenEnv & ZejiEnv & ZiweiEnv & HehunEnv & AlmanacEnv & StatsEnv }>().basePath("/api");
+export const api = new Hono<{ Bindings: BaziEnv & LiuyaoEnv & MeihuaEnv & XiaoliurenEnv & ZejiEnv & ZiweiEnv & HehunEnv & SiteAuthEnv & StatsEnv }>().basePath("/api");
 
 api.post("/echo", async (c) => {
   let body: unknown;
