@@ -14,10 +14,11 @@ npm run fortune:month -- 2026-08     # 月运数据骨架生成器
 ```
 
 LLM 解读接口（八字、六爻、梅花易数、小六壬、择吉、紫微斗数）需要 LLM 密钥：本地在 `.dev.vars` 配置 `LLM_API_KEY`（不入库）；`LLM_BASE_URL`/`LLM_MODEL` 在 `wrangler.jsonc` 的 `vars` 中。
+历法数据 API（`/api/almanac` 等）使用 `x-api-key` 鉴权：本地 `.dev.vars` 配 `ALMANAC_API_KEY`，生产 `wrangler secret put ALMANAC_API_KEY`（未配置时返回 503）。
 
 ## 运势栏目（每日 / 每周 / 每月）
 
-三个纯静态、零运行时 LLM 的内容栏目：正文烘焙进仓库内 HTML 片段，历法数据一律来自 lunar-javascript（生成期运行 `npm run almanac` / `fortune:week` / `fortune:month` 获取）。
+三个纯静态、零运行时 LLM 的内容栏目：正文烘焙进仓库内 HTML 片段，历法数据一律来自 lunar-javascript（生成期运行 `npm run almanac` / `fortune:week` / `fortune:month` 获取）。同一计算核心也提供线上 API：`GET /api/almanac`、`/api/fortune/week`、`/api/fortune/month`（`x-api-key` 鉴权）。
 
 - **每日宜忌** `/:lang/daily/YYYY-MM-DD/`：黄历宜忌 + 当日生肖 + 玄学科普，生产流程见 [每日内容生产手册](docs/superpowers/daily-content-playbook.md)。
 - **每周运势** `/:lang/weekly/YYYY-MM-DD/`（周一为键）：特吉/次吉/忠告生肖 + 十二生肖六维 + 逐日速览，每周日发布，生产流程见 [周运内容生产手册](docs/superpowers/weekly-content-playbook.md)。

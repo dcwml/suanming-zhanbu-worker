@@ -24,6 +24,7 @@ npm run qian:validate # 灵签数据校验：三签种各 100 签、编号连续
 提交前必须通过：`npm test` + `npm run typecheck`。测试结束时 Windows 上可能出现 miniflare 临时目录 EBUSY 警告，属无害噪音，不代表失败。
 
 LLM 密钥：本地开发在 `.dev.vars` 配置 `LLM_API_KEY`（不入库）；生产部署前执行 `wrangler secret put LLM_API_KEY`。`LLM_BASE_URL`/`LLM_MODEL` 是普通 vars，在 `wrangler.jsonc` 里改。
+历法数据 API（/api/almanac 等）用 x-api-key 鉴权：本地 .dev.vars 配 ALMANAC_API_KEY，生产 wrangler secret put ALMANAC_API_KEY（未配置时端点 503）。
 
 ## 目录结构与职责
 
@@ -36,6 +37,7 @@ src/
   pages/weekly.ts     ★ 每周运势聚合模块：WEEKLY_POSTS / WEEKLY_ARCHIVE_META / findWeeklyPost / weeklyArchive（不进 registry）
   pages/monthly.ts    ★ 每月运势聚合模块：MONTHLY_POSTS / MONTHLY_ARCHIVE_META / findMonthlyPost / monthlyArchive（不进 registry）
   fortune/rules.ts    地支关系查表（六合/三合/相冲/相害/值日）+ 周运评分与吉运排序规则（weekZodiacScores/pickFortuneRanks 等，有单测）
+  fortune/skeleton.ts 周/月骨架核心：buildWeek/buildMonth（scripts/fortune.ts CLI 与 /api/fortune/* 共用；非法参数 throw，CLI 壳转 exit(1)、API 层转 400）
   content/*.html      正文片段（只有正文，无 html/head/body），命名 <slug>.<lang>.html
   content/daily/      每日宜忌正文片段：YYYY-MM-DD.zh.html / .en.html（三段式：almanac / zodiac / story）
   content/weekly/     每周运势正文片段：YYYY-MM-DD.zh.html / .en.html（日期为该周周一；总览排名 + 12 生肖六行 + 每日要点）
@@ -48,6 +50,7 @@ src/
   layout/render.ts    renderPage / renderNotFound / renderError / renderDailyPost / renderDailyArchive / renderWeeklyPost / renderWeeklyArchive / renderMonthlyPost / renderMonthlyArchive
   layout/snippets/    全站静态片段：head.html（验证 meta/GTM 等 <head> 代码）、body-start.html（GTM noscript 等 <body> 开头代码），原样注入所有页面含 404/500，只放仓库内受控代码
   llm.ts              ★ 共享 LLM 客户端：callLlm（OpenAI 兼容）、LlmEnv、RateLimiter 接口
+  almanac/            历法计算核心：compute() 单日黄历（scripts/almanac.ts CLI 与 /api/almanac 共用；lunar-javascript 类型声明见 src/lunar-javascript.d.ts）
   bazi/               八字解读模块：validate 请求校验 / prompt 提示词 / llm 转出 / types 共享类型
   liuyao/             六爻解读模块：validate 请求校验 / prompt 提示词 / types 共享类型（零算法，不重算卦象）
   meihua/             梅花易数解读模块：validate 请求校验 / prompt 提示词 / types 共享类型（零算法，卦象由前端算好传入）
@@ -64,10 +67,11 @@ src/
   routes/zeji.ts      POST /api/zeji/interpret：限流→校验→LLM→Markdown 返回
   routes/ziwei.ts     POST /api/ziwei/interpret：限流→校验→LLM→Markdown 返回
   routes/hehun.ts     POST /api/hehun/interpret：限流→校验→LLM→Markdown 返回
+  routes/almanac.ts   GET /api/almanac、/api/fortune/week、/api/fortune/month：鉴权（x-api-key + ALMANAC_API_KEY secret，未配置 503 not_configured）→ 校验 → 计算 → JSON；缺省参数按 Asia/Shanghai 取今天/本周一/本月
   html.d.ts           *.html 模块的 ambient 声明（配合 wrangler Text rules）
 scripts/
-  almanac.ts          生成期工具：用 lunar-javascript 输出指定日期历法数据（干支、宜忌、冲煞、纳音、喜/财/福神方位、节气、吉神凶煞等）
-  fortune.ts          生成期工具：周运/月运数据骨架生成器（fortune:week 参数须为周一 / fortune:month 参数 YYYY-MM）；历法数据复用 almanac 的 compute()，地支关系与评分规则来自 src/fortune/rules.ts
+  almanac.ts          生成期 CLI 薄壳：参数解析 + 输出（计算核心在 src/almanac/compute.ts）
+  fortune.ts          生成期 CLI 薄壳：周/月骨架输出（计算核心在 src/fortune/skeleton.ts）
   validate-qian.mjs   灵签数据校验（qian:validate）：三签种各 100 签、编号连续、等级在公布集合内、双语对称、签诗非空
 public/assets/        静态资源（style.css、logo.png（印章 LOGO，兼作 favicon）、og-default.png、bazi.js、liuyao.js、meihua.js、xiaoliuren.js、zeji.js、ziwei.js、chouqian.js、vendor/iztro.min.js、qian/ 灵签数据），由 Workers assets 直接服务；bazi/liuyao/meihua/xiaoliuren/zeji/hehun 页面经 CDN 统一加载 lunar-javascript 1.7.7（cdnjs 主源 + staticfile 回退）；ziwei 页面经 unpkg → jsdelivr → 本地 vendor 三级链加载 iztro 2.6.0；三个灵签页面加载 qian/{id}.{lang}.js 数据 + chouqian.js 共享脚本（零外部 CDN）
   bazi.js             前端 lunar-javascript 排盘 + 三段串行解读渲染
@@ -89,7 +93,7 @@ test/                 36 个测试文件、457 个测试（SELF.fetch 集成测�
 3. **URL 只有一种拼法**：所有绝对 URL 必须经 `absoluteUrl(pagePath(lang, slug))` 生成；正式 URL 均带尾斜杠，无尾斜杠路径由路由层 301。禁止手拼 `https://...` 字符串。
 4. **域名单一来源**：`SITE_ORIGIN` 已设为正式域名 `https://suanming-zhanbu.com`，如需换域名只改这一处。写测试时断言必须基于 `SITE_ORIGIN` 常量而非硬编码域名。
 5. **转义纪律**：插入 HTML 属性/文本一律过 `escapeHtml`；JSON-LD 一律经 `toJsonLdScript`（内部把 `<` 转 `\u003c`）。正文片段是唯一被信任的原始 HTML（仓库内受控内容）。
-6. **API 形状**：`/api/*` 统一返回 `{ ok: true, data }` 或 `{ ok: false, error: { code, message } }`；错误响应不得回显未截断的用户输入（现有 404 用 `slice(0, 128)`）。未来 LLM 接口（如 `POST /api/divine`）沿用此模式加在 `routes/api.ts`。已落地实例：`POST /api/bazi/interpret`（见 `src/routes/bazi.ts`，错误码 invalid_request/rate_limited/not_configured/upstream_error/upstream_timeout）；`POST /api/liuyao/interpret`（见 `src/routes/liuyao.ts`，错误码同上 + payload_too_large/invalid_json）；`POST /api/meihua/interpret`（见 `src/routes/meihua.ts`，错误码同 liuyao）；`POST /api/xiaoliuren/interpret`（见 `src/routes/xiaoliuren.ts`，错误码同 liuyao）；`POST /api/zeji/interpret`（见 `src/routes/zeji.ts`，错误码同 liuyao）；`POST /api/ziwei/interpret`（见 `src/routes/ziwei.ts`，错误码同 liuyao）；`POST /api/hehun/interpret`（见 `src/routes/hehun.ts`，错误码同 liuyao）。
+6. **API 形状**：`/api/*` 统一返回 `{ ok: true, data }` 或 `{ ok: false, error: { code, message } }`；错误响应不得回显未截断的用户输入（现有 404 用 `slice(0, 128)`）。未来 LLM 接口（如 `POST /api/divine`）沿用此模式加在 `routes/api.ts`。已落地实例：`POST /api/bazi/interpret`（见 `src/routes/bazi.ts`，错误码 invalid_request/rate_limited/not_configured/upstream_error/upstream_timeout）；`POST /api/liuyao/interpret`（见 `src/routes/liuyao.ts`，错误码同上 + payload_too_large/invalid_json）；`POST /api/meihua/interpret`（见 `src/routes/meihua.ts`，错误码同 liuyao）；`POST /api/xiaoliuren/interpret`（见 `src/routes/xiaoliuren.ts`，错误码同 liuyao）；`POST /api/zeji/interpret`（见 `src/routes/zeji.ts`，错误码同 liuyao）；`POST /api/ziwei/interpret`（见 `src/routes/ziwei.ts`，错误码同 liuyao）；`POST /api/hehun/interpret`（见 `src/routes/hehun.ts`，错误码同 liuyao）；GET /api/almanac、/api/fortune/week、/api/fortune/month（见 src/routes/almanac.ts，x-api-key 鉴权，错误码 unauthorized/invalid_request/not_configured，零 LLM 纯计算）。
 7. **双语对称**：任何页面/文案改动必须同时覆盖 zh 与 en；`Lang` 类型收紧为 `"zh" | "en"`，新增语言需从 `site.ts` 的语言表全套扩展。
 8. **wrangler 配置陷阱**：Text 模块规则字段是 `rules[].globs`（不是 `include`）；`assets.directory` 必须存在，否则 vitest pool 启动失败。
 9. **TDD**：本仓库按测试先行开发。改行为先改/加测试；`SELF.fetch` 集成测试放 `test/integration.test.ts`，纯函数单测按模块拆分。
