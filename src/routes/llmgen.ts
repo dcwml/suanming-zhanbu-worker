@@ -37,7 +37,7 @@ export function registerLlmgenRoutes(api: Hono<{ Bindings: SiteAuthEnv & LlmEnv 
 
     // 3. type 查表（回显 type 一律截断）
     const b = (body ?? {}) as { type?: unknown; data?: unknown };
-    if (typeof b.type !== "string" || !(b.type in GENERATORS)) {
+    if (typeof b.type !== "string" || !Object.hasOwn(GENERATORS, b.type)) {
       return c.json(
         err(
           "invalid_request",

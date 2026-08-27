@@ -95,6 +95,15 @@ describe("POST /api/llm/generate", () => {
     expect(json.error?.message).toContain("Unknown type");
   });
 
+  it("returns 400 invalid_request on prototype-inherited key like toString", async () => {
+    // `in` 会沿原型链命中 Object.prototype.toString；必须只认 GENERATORS 自有键
+    const res = await api.fetch(req(jsonBody("toString", {}), "test-key"), baseEnv);
+    expect(res.status).toBe(400);
+    const json = (await res.json()) as ApiJson;
+    expect(json.error?.code).toBe("invalid_request");
+    expect(json.error?.message).toContain("Unknown type");
+  });
+
   it("returns 400 invalid_request when data fails validation", async () => {
     const res = await api.fetch(
       req(jsonBody("daily-reading", { lang: "zh", date: "2026-08-17" }), "test-key"),
