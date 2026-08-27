@@ -25,8 +25,17 @@ export interface MonthlyGenerateData {
   skeleton: MonthData;
 }
 
-/** 已注册的生成类型（Task 3 扩展 weekly/monthly 六个） */
-export type GenType = "daily-reading" | "daily-zodiac" | "daily-story";
+/** 已注册的生成类型 */
+export type GenType =
+  | "daily-reading"
+  | "daily-zodiac"
+  | "daily-story"
+  | "weekly-summary"
+  | "weekly-zodiac"
+  | "weekly-days"
+  | "monthly-summary"
+  | "monthly-zodiac"
+  | "monthly-lucky";
 
 export type ValidateResult<D> = { ok: true; value: D } | { ok: false; message: string };
 
