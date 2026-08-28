@@ -49,9 +49,9 @@ function zodiacTask(d: WeeklyGenerateData): string {
 
 function daysTask(d: WeeklyGenerateData): string {
   if (d.lang === "zh") {
-    return "请为本周 7 天各写要点点评：严格按数据 days 数组顺序，每天先一行加粗要点头（格式统一，如「**周一 2026-08-17 癸亥日 · 冲蛇 · 煞西**」——以数据实际值为准），随后 1-2 句点评：当日宜什么、忌什么、天神黄黑道如何、适合安排什么。简短实用，不要展开成段落。";
+    return "请为本周 7 天各写要点点评：严格按数据 days 数组顺序，每天先一行加粗要点头（格式统一，如「**周一 2026-08-17 癸亥日 · 冲蛇 · 煞西**」——以数据实际值为准），随后 1-2 句点评：当日宜什么、忌什么、天神黄黑道如何、适合安排什么。日期、干支、天神、冲煞必须逐字取自该日在 days 数组中的对应条目，禁止跨条目拼凑或自行推算。简短实用，不要展开成段落。";
   }
-  return "Write a short note for each of the 7 days: follow the exact order of the days array, one bolded headline per day (consistent format, e.g. \"**Mon 2026-08-17 Gui-Hai day · clash Snake · evil direction West**\" — use the actual values in the data), then 1-2 sentences on what the day favours, what to avoid, and the day god (yellow/black path). Brief and practical, no long paragraphs.";
+  return "Write a short note for each of the 7 days: follow the exact order of the days array, one bolded headline per day (consistent format, e.g. \"**Mon 2026-08-17 Gui-Hai day · clash Snake · evil direction West**\" — use the actual values in the data), then 1-2 sentences on what the day favours, what to avoid, and the day god (yellow/black path). Dates, GanZhi, day gods and clash details must come verbatim from each day's own entry in the days array — never mix entries or recalculate. Brief and practical, no long paragraphs.";
 }
 
 function def(task: (d: WeeklyGenerateData) => string): GeneratorDef<WeeklyGenerateData> {

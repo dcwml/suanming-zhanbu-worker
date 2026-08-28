@@ -86,6 +86,22 @@ describe("llmgen weekly/monthly user prompts", () => {
     const u = monthlyGenerators["monthly-lucky"].user(monthData);
     expect(u).toContain("luckyDays");
   });
+  it("monthly-lucky user pins per-entry citation (zh & en)", () => {
+    // 防线：生产冒烟发现 LLM 把邻条目的干支/天神安到另一天（4 September 配了 9-03 的庚辰/金匮）
+    const zh = monthlyGenerators["monthly-lucky"].user(monthData);
+    expect(zh).toContain("逐字取自");
+    expect(zh).toContain("相邻条目");
+    const en = monthlyGenerators["monthly-lucky"].user({ ...monthData, lang: "en" });
+    expect(en).toContain("verbatim");
+  });
+  it("weekly-days user pins per-entry citation (zh & en)", () => {
+    // 同源风险：days 多条目表逐日写干支/冲煞
+    const zh = weeklyGenerators["weekly-days"].user(weekData);
+    expect(zh).toContain("逐字取自");
+    expect(zh).toContain("跨条目");
+    const en = weeklyGenerators["weekly-days"].user({ ...weekData, lang: "en" });
+    expect(en).toContain("verbatim");
+  });
 });
 
 describe("llmgen weekly/monthly validate", () => {

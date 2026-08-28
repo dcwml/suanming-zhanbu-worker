@@ -51,9 +51,9 @@ function zodiacTask(d: MonthlyGenerateData): string {
 
 function luckyTask(d: MonthlyGenerateData): string {
   if (d.lang === "zh") {
-    return "请为吉日速查写解读：按数据 luckyDays 数组（每类含命中日期与当日冲煞）逐类点评，每类 1-2 句——点出该类最值得选的日期，并按各日 chongZodiac 给一句冲煞提醒；结尾一句本月择吉总则（优先天神吉日，避开冲自己生肖的日子）。";
+    return "请为吉日速查写解读：按数据 luckyDays 数组（每类含命中日期与当日冲煞）逐类点评，每类 1-2 句——点出该类最值得选的日期，并按各日 chongZodiac 给一句冲煞提醒；结尾一句本月择吉总则（优先天神吉日，避开冲自己生肖的日子）。引用某一天的日期、干支、天神、冲煞时，必须逐字取自 luckyDays 中该日所在的条目，禁止把相邻条目的信息安到另一天上，也不要补充数据中没有的干支或天神。";
   }
-  return "Write commentary for the auspicious-day quick reference: go through the luckyDays array in the data (each category lists matching dates with their clash details), 1-2 sentences per category — name the single best pick and add a clash reminder based on each day's chongZodiac; close with one general rule for choosing days this month (favour days with auspicious day gods, avoid days clashing your own sign).";
+  return "Write commentary for the auspicious-day quick reference: go through the luckyDays array in the data (each category lists matching dates with their clash details), 1-2 sentences per category — name the single best pick and add a clash reminder based on each day's chongZodiac; close with one general rule for choosing days this month (favour days with auspicious day gods, avoid days clashing your own sign). When citing a day's date, GanZhi, day god or clash details, take them verbatim from that day's own entry in luckyDays — never attach a neighbouring entry's details to a different date, and never add GanZhi or day gods the data does not contain.";
 }
 
 function def(task: (d: MonthlyGenerateData) => string): GeneratorDef<MonthlyGenerateData> {
