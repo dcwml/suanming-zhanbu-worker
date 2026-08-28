@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260829Zh from "../content/daily/2026-08-29.zh.html";
+import daily20260829En from "../content/daily/2026-08-29.en.html";
 import daily20260828Zh from "../content/daily/2026-08-28.zh.html";
 import daily20260828En from "../content/daily/2026-08-28.en.html";
 import daily20260827Zh from "../content/daily/2026-08-27.zh.html";
@@ -72,6 +74,14 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-08-29",
+    meta: {
+      zh: { title: "2026年8月29日宜忌·猪", description: "2026年8月29日黄历宜忌：勾陈黑道凶日值日，相日、普护二吉神并趋化解滞气，宜祭祀、理发、作灶、沐浴、修饰垣墙、平治道涂六事，忌嫁娶、栽种、祈福、造桥、安葬、安门、伐木、作梁八事，冲蛇煞西；生肖猪今日运势与乙亥日柱干支意涵科普。" },
+      en: { title: "Daily Almanac — August 29, 2026 (Pig)", description: "August 29, 2026 Chinese almanac: a Gōuchén Black Path day tempered by Xiāngrì and Pǔhù — two auspicious spirits — favorable for sacrifice, haircutting, installing a stove, bathing, decorating walls and leveling roads, six matters in all; avoid marriage, planting, praying for blessings, building bridges, burial, installing gates, felling trees and making ridge beams, eight matters in all; clash Snake, Sha West; Pig zodiac fortune and the meaning of the Yǐ-Hài day pillar." },
+    },
+    content: { zh: daily20260829Zh, en: daily20260829En },
+  },
   {
     date: "2026-08-28",
     meta: {
