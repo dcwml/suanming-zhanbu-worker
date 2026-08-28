@@ -2,6 +2,8 @@ import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
 import daily20260828Zh from "../content/daily/2026-08-28.zh.html";
 import daily20260828En from "../content/daily/2026-08-28.en.html";
+import daily20260827Zh from "../content/daily/2026-08-27.zh.html";
+import daily20260827En from "../content/daily/2026-08-27.en.html";
 import daily20260826Zh from "../content/daily/2026-08-26.zh.html";
 import daily20260826En from "../content/daily/2026-08-26.en.html";
 import daily20260825Zh from "../content/daily/2026-08-25.zh.html";
@@ -77,6 +79,14 @@ export const DAILY_POSTS: readonly DailyPost[] = [
       en: { title: "Daily Almanac — August 28, 2026 (Dog)", description: "August 28, 2026 Chinese almanac: a Sīmìng Yellow Path day with eight auspicious spirits — Mǔcāng, Yángdé, Shǒurì, Tiānwū, Fúdé, Liùyī, Jìng'ān and Sīmìng — favorable for bathing, haircutting, meeting friends, sculpting, consecration, planting, herding, marriage, channel therapy, repairing walls and filling holes, eleven matters in all; avoid opening markets, moving in, breaking ground, burial, installing a stove, raising beams, setting the bed, opening granaries and praying for blessings; clash Dragon, Sha North; Dog zodiac fortune and the lore of Sīmìng the Life-Master." },
     },
     content: { zh: daily20260828Zh, en: daily20260828En },
+  },
+  {
+    date: "2026-08-27",
+    meta: {
+      zh: { title: "2026年8月27日宜忌·鸡", description: "2026年8月27日黄历宜忌：玄武黑道凶日值日，逢农历七月十五中元节，天德、四相、阴德、官日、吉期、不将、除神、鸣吠八吉神并趋化解戾气，宜解除、祭祀、祈福、求嗣、修造、动土、竖柱、上梁、安床、纳畜、盖屋、合脊、起基、入殓、破土、安葬十六事，忌出火、嫁娶、开光、进人口、出行、词讼、开市、入宅、移徙、赴任，冲兔煞东；生肖鸡今日运势与中元节地官赦罪科普。" },
+      en: { title: "Daily Almanac — August 27, 2026 (Rooster)", description: "August 27, 2026 Chinese almanac: a Xuánwǔ Black Path day coinciding with the Zhongyuan Festival, tempered by eight auspicious spirits — Tiāndé, Sìxiàng, Yīndé, Guānrì, Jíqī, Bùjiāng, Chúshén and Míngfèi — favorable for dispelling evil, sacrifice, prayer, offspring blessing, construction, ground breaking, erecting pillars, raising beams, setting beds, roofing, laying foundations and burial, sixteen matters in all; avoid moving icons, marriage, consecration, welcoming people, travel, litigation, opening business, moving into a house, relocating and taking up posts; clash Rabbit, Sha East; Rooster zodiac fortune and Zhongyuan folklore." },
+    },
+    content: { zh: daily20260827Zh, en: daily20260827En },
   },
   {
     date: "2026-08-26",
