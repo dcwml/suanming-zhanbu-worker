@@ -13,6 +13,7 @@
     "almanac": "tsx scripts/almanac.ts",
     "fortune:week": "tsx scripts/fortune.ts week",
     "fortune:month": "tsx scripts/fortune.ts month",
+    "tuiyan": "tsx scripts/tuiyan.ts",
     "qian:validate": "node scripts/validate-qian.mjs"
   },
   "dependencies": {
