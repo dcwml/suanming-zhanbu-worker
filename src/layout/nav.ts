@@ -3,6 +3,7 @@ import { findPage, navPages } from "../pages/registry";
 import { DAILY_ARCHIVE_META } from "../pages/daily";
 import { WEEKLY_ARCHIVE_META } from "../pages/weekly";
 import { MONTHLY_ARCHIVE_META } from "../pages/monthly";
+import { TUIYAN_ARCHIVE_META } from "../pages/tuiyan";
 import { escapeHtml } from "../seo/meta";
 
 /** 「运势」下拉菜单：导航用标签与各归档页标题解耦（daily 页标题仍为「今日宜忌」） */
@@ -12,6 +13,7 @@ export const FORTUNE_NAV_ITEMS: readonly { slug: string; label: Record<Lang, str
   { slug: DAILY_ARCHIVE_META.slug, label: { zh: "每日运势", en: "Daily Almanac" } },
   { slug: WEEKLY_ARCHIVE_META.slug, label: { zh: "每周运势", en: "Weekly Horoscope" } },
   { slug: MONTHLY_ARCHIVE_META.slug, label: { zh: "每月运势", en: "Monthly Horoscope" } },
+  { slug: TUIYAN_ARCHIVE_META.slug, label: TUIYAN_ARCHIVE_META.title },
 ];
 
 /** 「命理」下拉菜单：标签直接取 registry 页面标题（单一来源），不重复维护文案；标题链接命理总览页（同「占卜」下拉） */

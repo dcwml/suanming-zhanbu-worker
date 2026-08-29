@@ -250,6 +250,71 @@ describe("monthly", () => {
   });
 });
 
+describe("tuiyan", () => {
+  it("renders zh tuiyan archive", async () => {
+    const res = await fetchNoFollow("/zh/tuiyan/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain("时辰推演");
+    expect(html).toContain('href="/zh/tuiyan/2026-08-13/"');
+  });
+
+  it("renders en tuiyan archive", async () => {
+    const res = await fetchNoFollow("/en/tuiyan/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain("Hour Omens");
+  });
+
+  it("renders existing zh tuiyan post with sections, canonical and article jsonld", async () => {
+    const res = await fetchNoFollow("/zh/tuiyan/2026-08-13/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain("tuiyan-summary");
+    expect(html).toContain("tuiyan-grand");
+    expect(html).toContain("tuiyan-kuigang");
+    expect(html).toContain("tuiyan-daily");
+    expect(html).toContain(`<link rel="canonical" href="${SITE_ORIGIN}/zh/tuiyan/2026-08-13/">`);
+    expect(html).toContain('"@type":"Article"');
+  });
+
+  it("renders existing en tuiyan post", async () => {
+    const res = await fetchNoFollow("/en/tuiyan/2026-08-13/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain("tuiyan-grand");
+    expect(html).toContain('hreflang="en"');
+  });
+
+  it("redirects /zh/tuiyan/2026-08-13 to trailing-slash", async () => {
+    const res = await fetchNoFollow("/zh/tuiyan/2026-08-13");
+    expect(res.status).toBe(301);
+    expect(res.headers.get("location")).toBe("/zh/tuiyan/2026-08-13/");
+  });
+
+  it("redirects /zh/tuiyan to /zh/tuiyan/", async () => {
+    const res = await fetchNoFollow("/zh/tuiyan");
+    expect(res.status).toBe(301);
+    expect(res.headers.get("location")).toBe("/zh/tuiyan/");
+  });
+
+  it("404s unknown tuiyan post and malformed date", async () => {
+    const missing = await fetchNoFollow("/zh/tuiyan/2027-01-01/");
+    expect(missing.status).toBe(404);
+    const malformed = await fetchNoFollow("/zh/tuiyan/not-a-date/");
+    expect(malformed.status).toBe(404);
+  });
+
+  it("shows tuiyan in fortune nav dropdown on both languages", async () => {
+    const zh = await (await fetchNoFollow("/zh/")).text();
+    expect(zh).toContain('href="/zh/tuiyan/"');
+    expect(zh).toContain("时辰推演");
+    const en = await (await fetchNoFollow("/en/")).text();
+    expect(en).toContain('href="/en/tuiyan/"');
+    expect(en).toContain("Hour Omens");
+  });
+});
+
 describe("fortune nav dropdown", () => {
   it("zh page renders the 运势 dropdown with three fortune links", async () => {
     const res = await fetchNoFollow("/zh/");

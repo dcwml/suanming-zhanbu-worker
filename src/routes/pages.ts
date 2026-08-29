@@ -7,12 +7,15 @@ import {
   renderMonthlyPost,
   renderPage,
   renderPageWithStats,
+  renderTuiyanArchive,
+  renderTuiyanPost,
   renderWeeklyArchive,
   renderWeeklyPost,
 } from "../layout/render";
 import { dailyArchive, findDailyPost } from "../pages/daily";
 import { findWeeklyPost, weeklyArchive } from "../pages/weekly";
 import { findMonthlyPost, monthlyArchive } from "../pages/monthly";
+import { findTuiyanPost, tuiyanArchive } from "../pages/tuiyan";
 import { findPage } from "../pages/registry";
 import { buildRobotsTxt, buildSitemapXml } from "../seo/sitemap";
 import { getRealIp, recordPageView, getStats } from "../stats";
@@ -139,6 +142,39 @@ pages.get("/:lang/monthly/:month/", (c) => {
   const post = findMonthlyPost(month);
   if (!post) return c.notFound();
   return c.html(renderMonthlyPost(post, lang));
+});
+
+// /zh/tuiyan → 301 补尾斜杠
+pages.get("/:lang/tuiyan", (c) => {
+  const lang = c.req.param("lang");
+  if (!isLang(lang)) return c.notFound();
+  return c.redirect(pagePath(lang, "tuiyan"), 301);
+});
+
+// /zh/tuiyan/ → 归档页
+pages.get("/:lang/tuiyan/", (c) => {
+  const lang = c.req.param("lang");
+  if (!isLang(lang)) return c.notFound();
+  return c.html(renderTuiyanArchive(tuiyanArchive(), lang));
+});
+
+// /zh/tuiyan/2026-08-13 → 301 补尾斜杠
+pages.get("/:lang/tuiyan/:firstDay", (c) => {
+  const lang = c.req.param("lang");
+  const firstDay = c.req.param("firstDay");
+  if (!isLang(lang)) return c.notFound();
+  return c.redirect(pagePath(lang, `tuiyan/${firstDay}`), 301);
+});
+
+// /zh/tuiyan/2026-08-13/ → 单篇（firstDay 必须是合法 YYYY-MM-DD）
+pages.get("/:lang/tuiyan/:firstDay/", (c) => {
+  const lang = c.req.param("lang");
+  const firstDay = c.req.param("firstDay");
+  if (!isLang(lang)) return c.notFound();
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(firstDay)) return c.notFound();
+  const post = findTuiyanPost(firstDay);
+  if (!post) return c.notFound();
+  return c.html(renderTuiyanPost(post, lang));
 });
 
 // /zh/bazi → 301 补尾斜杠

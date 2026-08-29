@@ -7,6 +7,8 @@ import type { WeeklyArchiveItem, WeeklyPost } from "../pages/weekly";
 import { WEEKLY_ARCHIVE_META } from "../pages/weekly";
 import type { MonthlyArchiveItem, MonthlyPost } from "../pages/monthly";
 import { MONTHLY_ARCHIVE_META } from "../pages/monthly";
+import type { TuiyanArchiveItem, TuiyanPost } from "../pages/tuiyan";
+import { TUIYAN_ARCHIVE_META } from "../pages/tuiyan";
 import {
   buildDailyArchiveHead,
   buildDailyPostHead,
@@ -14,6 +16,8 @@ import {
   buildMonthlyArchiveHead,
   buildMonthlyPostHead,
   buildPlainHead,
+  buildTuiyanArchiveHead,
+  buildTuiyanPostHead,
   buildWeeklyArchiveHead,
   buildWeeklyPostHead,
 } from "../seo/meta";
@@ -169,4 +173,27 @@ export function renderMonthlyArchive(items: MonthlyArchiveItem[], lang: Lang): s
     .join("\n");
   const main = `      <h1>${title}</h1>\n${links}`;
   return layout(lang, buildMonthlyArchiveHead(lang), renderNav(lang, "monthly", "monthly"), main);
+}
+
+/** tuiyan 单篇：导航高亮归档页（slug="tuiyan"），语言切换指向同篇另一语言版 */
+export function renderTuiyanPost(post: TuiyanPost, lang: Lang): string {
+  return layout(
+    lang,
+    buildTuiyanPostHead(post, lang),
+    renderNav(lang, "tuiyan", `tuiyan/${post.firstDay}`),
+    post.content[lang],
+  );
+}
+
+/** tuiyan 归档页：按农历月首日倒序列出文章链接 */
+export function renderTuiyanArchive(items: TuiyanArchiveItem[], lang: Lang): string {
+  const title = TUIYAN_ARCHIVE_META.title[lang];
+  const links = items
+    .map(
+      (item) =>
+        `      <article class="tuiyan-archive-item">\n        <h2><a href="${pagePath(lang, `tuiyan/${item.firstDay}`)}">${item.title[lang]}</a></h2>\n      </article>`,
+    )
+    .join("\n");
+  const main = `      <h1>${title}</h1>\n${links}`;
+  return layout(lang, buildTuiyanArchiveHead(lang), renderNav(lang, "tuiyan", "tuiyan"), main);
 }
