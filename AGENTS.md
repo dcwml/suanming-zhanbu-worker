@@ -18,6 +18,7 @@ npm run purge        # 清空 Cloudflare zone 缓存；附加 URL 参数可只�
 npm run almanac -- YYYY-MM-DD  # 生成期工具：输出指定日期的历法数据（干支、宜忌、冲煞、喜/财/福神方位、节气、吉神凶煞、生肖等）
 npm run fortune:week -- YYYY-MM-DD  # 生成期工具：周运骨架生成器（参数必须是周一），输出该周 7 天历法骨架 + 生肖关系评分 + 特吉/次吉/忠告排序
 npm run fortune:month -- YYYY-MM    # 生成期工具：月运骨架生成器，输出月柱分段、节气、生肖月关系（六合/三合/值月/相害/相冲）、吉日速查
+npm run tuiyan -- YYYY-MM-DD  # 生成期工具：时辰推演骨架生成器（参数 = 农历月内任意一天，输出该农历月每天×12时辰的特殊格局：纯阳/纯阴、天乙、羊刃、桃花、驿马、将星、华盖、三合局、方会、魁罡、干支合，按一级大格/魁罡日/每日亮点分级）
 npm run qian:validate # 灵签数据校验：三签种各 100 签、编号连续、等级合法、双语对称；改 public/assets/qian/ 后必跑
 ```
 
@@ -36,18 +37,21 @@ src/
   pages/daily.ts      ★ 每日宜忌聚合模块：DAILY_POSTS / DAILY_ARCHIVE_META / findDailyPost / dailyArchive（不进 registry）
   pages/weekly.ts     ★ 每周运势聚合模块：WEEKLY_POSTS / WEEKLY_ARCHIVE_META / findWeeklyPost / weeklyArchive（不进 registry）
   pages/monthly.ts    ★ 每月运势聚合模块：MONTHLY_POSTS / MONTHLY_ARCHIVE_META / findMonthlyPost / monthlyArchive（不进 registry）
+  pages/tuiyan.ts      ★ 时辰推演聚合模块：TUIYAN_POSTS / TUIYAN_ARCHIVE_META / findTuiyanPost / tuiyanArchive（不进 registry）
   fortune/rules.ts    地支关系查表（六合/三合/相冲/相害/值日）+ 周运评分与吉运排序规则（weekZodiacScores/pickFortuneRanks 等，有单测）
   fortune/skeleton.ts 周/月骨架核心：buildWeek/buildMonth（scripts/fortune.ts CLI 与 /api/fortune/* 共用；非法参数 throw，CLI 壳转 exit(1)、API 层转 400）
+  tuiyan/               时辰推演模块：scan（格局规则表 + scanLunarMonth；scripts/tuiyan.ts CLI 与单测共用，非法参数 throw）
   content/*.html      正文片段（只有正文，无 html/head/body），命名 <slug>.<lang>.html
   content/daily/      每日宜忌正文片段：YYYY-MM-DD.zh.html / .en.html（三段式：almanac / zodiac / story）
   content/weekly/     每周运势正文片段：YYYY-MM-DD.zh.html / .en.html（日期为该周周一；总览排名 + 12 生肖六行 + 每日要点）
   content/monthly/    每月运势正文片段：YYYY-MM.zh.html / .en.html（月柱总览 + 12 生肖六维深化 + 吉日速查）
-  seo/meta.ts         escapeHtml、buildHead（固定页面 title/canonical/hreflang/og/twitter）+ daily/weekly/monthly 的单篇与归档 head 构建器
-  seo/jsonld.ts       JSON-LD 构建与 </script> 注入转义；含 articleJsonLd / weeklyArticleJsonLd / monthlyArticleJsonLd / collectionPageJsonLd / faqJsonLd（按 faq 字段自动注入 FAQPage）
-  seo/sitemap.ts      sitemap.xml（双语 alternates + daily/weekly/monthly 单篇+归档页）与 robots.txt
-  layout/nav.ts       品牌块（logo.png + 站名）+ 导航（含「命理」下拉：MINGLI_NAV_LABEL/MINGLI_NAV_ITEMS，八字排盘/紫微斗数/八字合婚，标题链接 mingli 总览页；「占卜」下拉：DIVINATION_NAV_LABEL/DIVINATION_NAV_ITEMS，六爻起卦/梅花易数/小六壬，标题链接 divination 总览页；「抽签」下拉：CHOUQIAN_NAV_LABEL/CHOUQIAN_NAV_ITEMS，黄大仙/观音/月老灵签，标题链接 chouqian 总览页；「运势」下拉：FORTUNE_NAV_LABEL/FORTUNE_NAV_ITEMS，每日/每周/每月运势；四个下拉均纯 CSS）+ 语言切换
+  content/tuiyan/      时辰推演正文片段：YYYY-MM-DD.zh.html / .en.html（日期为农历月首日公历日期；总览 + 一级大格 + 魁罡专节 + 每日速查 + 免责）
+  seo/meta.ts         escapeHtml、buildHead（固定页面 title/canonical/hreflang/og/twitter）+ daily/weekly/monthly/tuiyan 的单篇与归档 head 构建器
+  seo/jsonld.ts       JSON-LD 构建与 </script> 注入转义；含 articleJsonLd / weeklyArticleJsonLd / monthlyArticleJsonLd / tuiyanArticleJsonLd / collectionPageJsonLd / faqJsonLd（按 faq 字段自动注入 FAQPage）
+  seo/sitemap.ts      sitemap.xml（双语 alternates + daily/weekly/monthly/tuiyan 单篇+归档页）与 robots.txt
+  layout/nav.ts       品牌块（logo.png + 站名）+ 导航（含「命理」下拉：MINGLI_NAV_LABEL/MINGLI_NAV_ITEMS，八字排盘/紫微斗数/八字合婚，标题链接 mingli 总览页；「占卜」下拉：DIVINATION_NAV_LABEL/DIVINATION_NAV_ITEMS，六爻起卦/梅花易数/小六壬，标题链接 divination 总览页；「抽签」下拉：CHOUQIAN_NAV_LABEL/CHOUQIAN_NAV_ITEMS，黄大仙/观音/月老灵签，标题链接 chouqian 总览页；「运势」下拉：FORTUNE_NAV_LABEL/FORTUNE_NAV_ITEMS，每日/每周/每月运势 + 时辰推演；四个下拉均纯 CSS）+ 语言切换
   layout/footer.ts    多栏页脚（品牌栏 + 工具/运势/关于链接列 + 底栏版权免责；链接标题取 registry 单一来源 + daily/weekly/monthly 显式引用）
-  layout/render.ts    renderPage / renderNotFound / renderError / renderDailyPost / renderDailyArchive / renderWeeklyPost / renderWeeklyArchive / renderMonthlyPost / renderMonthlyArchive
+  layout/render.ts    renderPage / renderNotFound / renderError / renderDailyPost / renderDailyArchive / renderWeeklyPost / renderWeeklyArchive / renderMonthlyPost / renderMonthlyArchive / renderTuiyanPost / renderTuiyanArchive
   layout/snippets/    全站静态片段：head.html（验证 meta/GTM 等 <head> 代码）、body-start.html（GTM noscript 等 <body> 开头代码），原样注入所有页面含 404/500，只放仓库内受控代码
   llm.ts              ★ 共享 LLM 客户端：callLlm（OpenAI 兼容）、LlmEnv、RateLimiter 接口
   auth.ts             自用 API 共享鉴权：authProblem（SITE_API_KEY 未配置 503 / 不匹配 401）
@@ -60,7 +64,7 @@ src/
   zeji/               择吉解读模块：validate 请求校验 / prompt 提示词 / types 共享类型（零历法重算）
   ziwei/              紫微斗数解读模块：validate 请求校验 / prompt 提示词 / types 共享类型（零安星重算，命盘由前端 iztro 算好传入）
   hehun/              八字合婚解读模块：validate 请求校验 / prompt 提示词 / types 共享类型（零重算，双人命盘与配对关系由前端算好传入）
-  routes/pages.ts     页面路由：/ 与无尾斜杠路径 301 → /:lang/:slug/；daily / weekly / monthly 各四条路由（必须在固定页面路由之前）
+  routes/pages.ts     页面路由：/ 与无尾斜杠路径 301 → /:lang/:slug/；daily / weekly / monthly / tuiyan 各四条路由（必须在固定页面路由之前）
   routes/api.ts       /api/* 子应用：JSON 响应壳、404/500 均返回 JSON
   routes/bazi.ts      POST /api/bazi/interpret：限流→校验→LLM→Markdown 返回
   routes/liuyao.ts     POST /api/liuyao/interpret：限流→校验→LLM→Markdown 返回
@@ -75,6 +79,7 @@ src/
 scripts/
   almanac.ts          生成期 CLI 薄壳：参数解析 + 输出（计算核心在 src/almanac/compute.ts）
   fortune.ts          生成期 CLI 薄壳：周/月骨架输出（计算核心在 src/fortune/skeleton.ts）
+  tuiyan.ts            生成期 CLI 薄壳：时辰推演骨架输出（计算核心在 src/tuiyan/scan.ts）
   validate-qian.mjs   灵签数据校验（qian:validate）：三签种各 100 签、编号连续、等级在公布集合内、双语对称、签诗非空
 public/assets/        静态资源（style.css、logo.png（印章 LOGO，兼作 favicon）、og-default.png、bazi.js、liuyao.js、meihua.js、xiaoliuren.js、zeji.js、ziwei.js、chouqian.js、vendor/iztro.min.js、qian/ 灵签数据），由 Workers assets 直接服务；bazi/liuyao/meihua/xiaoliuren/zeji/hehun 页面经 CDN 统一加载 lunar-javascript 1.7.7（cdnjs 主源 + staticfile 回退）；ziwei 页面经 unpkg → jsdelivr → 本地 vendor 三级链加载 iztro 2.6.0；三个灵签页面加载 qian/{id}.{lang}.js 数据 + chouqian.js 共享脚本（零外部 CDN）
   bazi.js             前端 lunar-javascript 排盘 + 三段串行解读渲染
@@ -92,7 +97,7 @@ test/                 集成测试 + 单元测试（vitest 全量，SELF.fetch /
 ## 核心约定（改代码前必读）
 
 1. **新增固定页面 = 两步，别写第三步**：`src/content/` 加 `<slug>.zh.html` + `<slug>.en.html` → `registry.ts` 的 `PAGES` 加一条 `PageEntry`。SEO、sitemap、导航、语言切换全部自动派生，不要手写任何 meta 标签或 sitemap 条目。
-2. **新增运势内容（每日/每周/每月）= 两步，不碰 registry**：内容片段 + 对应聚合模块的 POSTS 数组加一条，SEO、sitemap、导航全部自动派生。① 每日：`src/content/daily/` 加 `YYYY-MM-DD.zh.html` + `.en.html` → `src/pages/daily.ts` 的 `DAILY_POSTS` 加一条 `DailyPost`。② 周运：`src/content/weekly/` 加 `YYYY-MM-DD.zh.html` + `.en.html`（日期为该周周一）→ `src/pages/weekly.ts` 的 `WEEKLY_POSTS` 加一条 `WeeklyPost`。③ 月运：`src/content/monthly/` 加 `YYYY-MM.zh.html` + `.en.html` → `src/pages/monthly.ts` 的 `MONTHLY_POSTS` 加一条 `MonthlyPost`。详细流程分别见 [每日内容生产手册](./docs/superpowers/daily-content-playbook.md)、[周运生产手册](./docs/superpowers/weekly-content-playbook.md)、[月运生产手册](./docs/superpowers/monthly-content-playbook.md)。
+2. **新增运势内容（每日/每周/每月）= 两步，不碰 registry**：内容片段 + 对应聚合模块的 POSTS 数组加一条，SEO、sitemap、导航全部自动派生。① 每日：`src/content/daily/` 加 `YYYY-MM-DD.zh.html` + `.en.html` → `src/pages/daily.ts` 的 `DAILY_POSTS` 加一条 `DailyPost`。② 周运：`src/content/weekly/` 加 `YYYY-MM-DD.zh.html` + `.en.html`（日期为该周周一）→ `src/pages/weekly.ts` 的 `WEEKLY_POSTS` 加一条 `WeeklyPost`。③ 月运：`src/content/monthly/` 加 `YYYY-MM.zh.html` + `.en.html` → `src/pages/monthly.ts` 的 `MONTHLY_POSTS` 加一条 `MonthlyPost`。④ 时辰推演：src/content/tuiyan/ 加 YYYY-MM-DD.zh.html + .en.html（日期为农历月首日公历日期）→ src/pages/tuiyan.ts 的 TUIYAN_POSTS 加一条 TuiyanPost。详细流程分别见 [每日内容生产手册](./docs/superpowers/daily-content-playbook.md)、[周运生产手册](./docs/superpowers/weekly-content-playbook.md)、[月运生产手册](./docs/superpowers/monthly-content-playbook.md)。
 3. **URL 只有一种拼法**：所有绝对 URL 必须经 `absoluteUrl(pagePath(lang, slug))` 生成；正式 URL 均带尾斜杠，无尾斜杠路径由路由层 301。禁止手拼 `https://...` 字符串。
 4. **域名单一来源**：`SITE_ORIGIN` 已设为正式域名 `https://suanming-zhanbu.com`，如需换域名只改这一处。写测试时断言必须基于 `SITE_ORIGIN` 常量而非硬编码域名。
 5. **转义纪律**：插入 HTML 属性/文本一律过 `escapeHtml`；JSON-LD 一律经 `toJsonLdScript`（内部把 `<` 转 `\u003c`）。正文片段是唯一被信任的原始 HTML（仓库内受控内容）。
@@ -179,6 +184,37 @@ test/                 集成测试 + 单元测试（vitest 全量，SELF.fetch /
 - 周运的每日要点自含关键信息，只链每日归档页，不前链尚未发布的每日单篇。
 - 导航「运势」下拉为纯 CSS 实现（hover / :focus-within 展开），无 JS、无动态 aria-expanded。
 - 评分规则按「逐日关系计数」回测复现黄大仙祠 2026-08-17 周排名；加权方案已否决，不要改回。
+
+## 时辰推演栏目
+
+### 架构概览
+
+与运势三栏目同源架构：纯静态、零运行时 LLM/历法计算。骨架由 `npm run tuiyan -- 日期`（农历月内任意一天）自动推出（lunar-javascript 排四柱 + `src/tuiyan/scan.ts` 规则表打标记），文案基于骨架撰写烘焙进 git。每个农历月一篇。
+
+- **归档页**：`/:lang/tuiyan/`（倒序）
+- **单篇页**：`/:lang/tuiyan/YYYY-MM-DD/`（日期 = 农历月首日公历日期，闰月天然无歧义）
+- **聚合模块**：`src/pages/tuiyan.ts`
+
+### 内容结构（section class）
+
+| 段 | class | 内容 | 数据来源 |
+|---|---|---|---|
+| 总览 | `tuiyan-summary` | 月柱分段/节气/纯阴纯阳统计/大格计数 | `npm run tuiyan` |
+| 一级大格 | `tuiyan-grand` | 三合成局 ∨ 方会 ∨ 标记总数≥4 的时辰逐条批断（仿古批语+白话） | 同上 + 手写 |
+| 魁罡专节 | `tuiyan-kuigang` | 魁罡日全天 12 时辰简表（已入一级者交叉引用不重复） | 同上 |
+| 每日速查 | `tuiyan-daily` | 29/30 行表：日柱/纯阳日/天乙/桃花/驿马/将星/羊刃/华盖所在时辰 | 同上（CLI daily 数组） |
+| 免责 | `tuiyan-disclaimer` | 文化框架声明 | 手写 |
+
+### 生产流程
+
+用户说“写时辰推演”：确定农历月 → `npm run tuiyan -- 月内任一天` → 写中文（总览+20条批语+魁罡节+速查表）→ 写英文（术语表见 spec）→ 注册 tuiyan.ts → 测试提交。
+
+### 已知边界
+
+- 时辰口径：取时辰中点排盘（子时取 0 点早子时）；月柱分段以每日午时月柱为代表。
+- 纯阴 0 个/纯阳 78 个（2026 七月）只进统计与速查表标注，不单独成批。
+- 白露后月柱转阴，纯阳日不再成纯阳四柱（正文文案已说明）。
+- 设计与决策记录见 [时辰推演设计文档](./docs/superpowers/specs/2026-08-29-tuiyan-column-design.md)。
 
 ## 灵签抽签栏目
 

@@ -1902,7 +1902,8 @@ label:has(#zeji-strict:disabled) {
 
 /* 归档列表条目 */
 .weekly-archive-item,
-.monthly-archive-item {
+.monthly-archive-item,
+.tuiyan-archive-item {
   margin-bottom: 1rem;
 }
 
@@ -2176,4 +2177,80 @@ label:has(#zeji-strict:disabled) {
   .chouqian-aspects dl { grid-template-columns: 1fr; }
   .chouqian-grade-table { font-size: 0.85rem; }
   .chouqian-grade-table th, .chouqian-grade-table td { padding: 0.4rem 0.45rem; }
+}
+
+/* ========== 时辰推演栏目 ========== */
+
+.tuiyan-lead {
+  font-size: 1.02rem;
+  line-height: 1.9;
+  color: var(--fg);
+  text-align: justify;
+}
+
+.tuiyan-item {
+  margin: 1.5rem 0;
+  padding: 1.1rem 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--paper);
+}
+
+.tuiyan-item h3 {
+  font-size: 1.08rem;
+  color: var(--fg);
+  margin: 0 0 0.6rem;
+}
+
+.tuiyan-pillars {
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  margin: 0.4rem 0;
+}
+
+.tuiyan-tags {
+  font-size: 0.92rem;
+  opacity: 0.85;
+  margin: 0.4rem 0;
+}
+
+.tuiyan-verdict {
+  margin: 0.75rem 0;
+  padding: 0.55rem 1rem;
+  border-left: 3px solid var(--border);
+  background: var(--paper);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.tuiyan-note {
+  font-size: 0.95rem;
+  line-height: 1.85;
+  color: var(--fg);
+  text-align: justify;
+}
+
+.tuiyan-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+  margin: 1rem 0;
+}
+
+.tuiyan-table th,
+.tuiyan-table td {
+  border: 1px solid var(--border);
+  padding: 0.4rem 0.55rem;
+  text-align: center;
+}
+
+.tuiyan-table thead th {
+  background: #f0e9df;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+@media (max-width: 800px) {
+  .tuiyan-item { padding: 0.9rem 1rem; }
+  .tuiyan-table { font-size: 0.82rem; display: block; overflow-x: auto; }
 }
