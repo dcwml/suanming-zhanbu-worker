@@ -8,6 +8,7 @@ import { PAGES } from "../pages/registry";
 import { DAILY_POSTS } from "../pages/daily";
 import { WEEKLY_POSTS } from "../pages/weekly";
 import { MONTHLY_POSTS } from "../pages/monthly";
+import { TUIYAN_POSTS } from "../pages/tuiyan";
 
 export function buildSitemapXml(): string {
   const pageUrls = PAGES.flatMap((page) =>
@@ -32,6 +33,12 @@ export function buildSitemapXml(): string {
     LANGS.map((lang) => ({ lang, slug: `monthly/${post.month}` })),
   );
 
+  const tuiyanArchiveUrls = LANGS.map((lang) => ({ lang, slug: "tuiyan" }));
+
+  const tuiyanPostUrls = TUIYAN_POSTS.flatMap((post) =>
+    LANGS.map((lang) => ({ lang, slug: `tuiyan/${post.firstDay}` })),
+  );
+
   const allUrls = [
     ...pageUrls,
     ...dailyArchiveUrls,
@@ -40,6 +47,8 @@ export function buildSitemapXml(): string {
     ...weeklyPostUrls,
     ...monthlyArchiveUrls,
     ...monthlyPostUrls,
+    ...tuiyanArchiveUrls,
+    ...tuiyanPostUrls,
   ];
 
   const urls = allUrls

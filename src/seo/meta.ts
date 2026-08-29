@@ -2,6 +2,7 @@ import type { PageEntry } from "../pages/registry";
 import type { DailyPost } from "../pages/daily";
 import type { WeeklyPost } from "../pages/weekly";
 import type { MonthlyPost } from "../pages/monthly";
+import type { TuiyanPost } from "../pages/tuiyan";
 import {
   DEFAULT_LANG,
   HREFLANG_CODE,
@@ -23,6 +24,7 @@ import {
   collectionPageJsonLd,
   monthlyArticleJsonLd,
   toJsonLdScript,
+  tuiyanArticleJsonLd,
   weeklyArticleJsonLd,
 } from "./jsonld";
 
@@ -227,6 +229,35 @@ export function buildMonthlyArchiveHead(lang: Lang): string {
     ogType: "website",
     jsonLdHtml: toJsonLdScript(
       collectionPageJsonLd(lang, lang === "zh" ? "每月运势" : "Monthly Horoscope", "monthly"),
+    ),
+  });
+}
+
+/** tuiyan 单篇 head */
+export function buildTuiyanPostHead(post: TuiyanPost, lang: Lang): string {
+  return buildStandardHead({
+    lang,
+    slug: `tuiyan/${post.firstDay}`,
+    title: `${post.meta[lang].title} - ${siteName(lang)}`,
+    description: post.meta[lang].description,
+    ogType: "article",
+    jsonLdHtml: toJsonLdScript(tuiyanArticleJsonLd(post, lang)),
+  });
+}
+
+/** tuiyan 归档页 head */
+export function buildTuiyanArchiveHead(lang: Lang): string {
+  return buildStandardHead({
+    lang,
+    slug: "tuiyan",
+    title: lang === "zh" ? `时辰推演 - ${SITE_NAME}` : `Hour Omens - ${SITE_NAME_EN}`,
+    description:
+      lang === "zh"
+        ? "每个农历月一篇的特殊时辰榜单：纯阳之体、三合成局、方会连珠与魁罡日逐时推演，仿古批语附白话细解。"
+        : "A monthly chart of extraordinary birth hours — all-yang pillars, trines, directional unions and Kui Gang days, each with an imperial astrologer's verdict explained in plain words.",
+    ogType: "website",
+    jsonLdHtml: toJsonLdScript(
+      collectionPageJsonLd(lang, lang === "zh" ? "时辰推演" : "Hour Omens", "tuiyan"),
     ),
   });
 }

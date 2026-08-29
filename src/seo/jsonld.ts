@@ -2,6 +2,7 @@ import type { PageEntry } from "../pages/registry";
 import type { DailyPost } from "../pages/daily";
 import type { WeeklyPost } from "../pages/weekly";
 import type { MonthlyPost } from "../pages/monthly";
+import type { TuiyanPost } from "../pages/tuiyan";
 import {
   HREFLANG_CODE,
   SITE_NAME,
@@ -117,6 +118,16 @@ export function monthlyArticleJsonLd(post: MonthlyPost, lang: Lang): Record<stri
     description: post.meta[lang].description,
     date: `${post.month}-01`,
     slug: `monthly/${post.month}`,
+    lang,
+  });
+}
+
+export function tuiyanArticleJsonLd(post: TuiyanPost, lang: Lang): Record<string, unknown> {
+  return articleJsonLdBase({
+    headline: post.meta[lang].title,
+    description: post.meta[lang].description,
+    date: post.firstDay,
+    slug: `tuiyan/${post.firstDay}`,
     lang,
   });
 }

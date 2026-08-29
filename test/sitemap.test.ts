@@ -56,6 +56,18 @@ describe("buildSitemapXml", () => {
     expect(xml).toContain(`<xhtml:link rel="alternate" hreflang="zh-CN" href="${SITE_ORIGIN}/zh/monthly/2026-08/"/>`);
     expect(xml).toContain(`<xhtml:link rel="alternate" hreflang="en" href="${SITE_ORIGIN}/en/monthly/2026-08/"/>`);
   });
+
+  it("includes tuiyan archive and posts with bilingual alternates", () => {
+    expect(xml).toContain(`<loc>${SITE_ORIGIN}/zh/tuiyan/</loc>`);
+    expect(xml).toContain(`<loc>${SITE_ORIGIN}/en/tuiyan/</loc>`);
+    expect(xml).toContain(`<loc>${SITE_ORIGIN}/zh/tuiyan/2026-08-13/</loc>`);
+    expect(xml).toContain(
+      `<xhtml:link rel="alternate" hreflang="zh-CN" href="${SITE_ORIGIN}/zh/tuiyan/2026-08-13/"/>`,
+    );
+    expect(xml).toContain(
+      `<xhtml:link rel="alternate" hreflang="en" href="${SITE_ORIGIN}/en/tuiyan/2026-08-13/"/>`,
+    );
+  });
 });
 
 describe("buildRobotsTxt", () => {
