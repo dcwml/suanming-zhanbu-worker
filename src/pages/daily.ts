@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260830Zh from "../content/daily/2026-08-30.zh.html";
+import daily20260830En from "../content/daily/2026-08-30.en.html";
 import daily20260829Zh from "../content/daily/2026-08-29.zh.html";
 import daily20260829En from "../content/daily/2026-08-29.en.html";
 import daily20260828Zh from "../content/daily/2026-08-28.zh.html";
@@ -74,6 +76,14 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-08-30",
+    meta: {
+      zh: { title: "2026年8月30日宜忌·鼠", description: "2026年8月30日黄历宜忌：青龙黄道吉日值日，月空、时德、民日、三合、临日、时阴、福生、青龙、鸣吠对九颗吉神并趋，宜嫁娶、纳采、订盟、祭祀、祈福、斋醮、普渡、移徙、入宅、出行、安机械、开光、修造、动土、竖柱、上梁、盖屋、起基、定磉、安门、安葬、破土二十二事，忌开市、立券、置产、作灶、造桥五事，冲马煞南；生肖鼠今日运势与青龙天神典故科普。" },
+      en: { title: "Daily Almanac — August 30, 2026 (Rat)", description: "August 30, 2026 Chinese almanac: a Qīnglóng Yellow Path day with nine auspicious spirits — Yuèkōng, Shídé, Mínrì, Sānhé, Línrì, Shíyīn, Fúshēng, Qīnglóng and Míngfèiduì — favorable for marriage, betrothal, engagement covenant, sacrifice, praying for blessings, vegetarian rites, universal salvation, moving, entering a home, travel, installing machinery, consecration, renovation, groundbreaking, raising columns, raising ridge beams, roofing, laying foundations, setting cornerstone, installing gates, burial and breaking ground, twenty-two matters in all; avoid opening a market, signing contracts, acquiring property, installing a stove and building bridges, five matters in all; clash Horse, Sha South; Rat zodiac fortune and the lore of Qīnglóng the Azure Dragon." },
+    },
+    content: { zh: daily20260830Zh, en: daily20260830En },
+  },
   {
     date: "2026-08-29",
     meta: {
