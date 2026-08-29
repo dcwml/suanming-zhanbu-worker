@@ -316,7 +316,7 @@ describe("tuiyan", () => {
 });
 
 describe("fortune nav dropdown", () => {
-  it("zh page renders the 运势 dropdown with three fortune links", async () => {
+  it("zh page renders the 运势 dropdown with four fortune links", async () => {
     const res = await fetchNoFollow("/zh/");
     expect(res.status).toBe(200);
     const html = await res.text();
@@ -335,7 +335,7 @@ describe("fortune nav dropdown", () => {
     expect(html).toContain('href="/zh/weekly/" class="active" aria-current="page"');
   });
 
-  it("footer carries a fortune column with three archives", async () => {
+  it("footer carries a fortune column with four archives", async () => {
     const res = await fetchNoFollow("/zh/");
     const html = await res.text();
     expect(html).toContain('aria-label="运势"');
