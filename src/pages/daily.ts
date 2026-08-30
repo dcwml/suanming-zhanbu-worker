@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260831Zh from "../content/daily/2026-08-31.zh.html";
+import daily20260831En from "../content/daily/2026-08-31.en.html";
 import daily20260830Zh from "../content/daily/2026-08-30.zh.html";
 import daily20260830En from "../content/daily/2026-08-30.en.html";
 import daily20260829Zh from "../content/daily/2026-08-29.zh.html";
@@ -76,6 +78,14 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-08-31",
+    meta: {
+      zh: { title: "2026年8月31日宜忌·牛", description: "2026年8月31日黄历宜忌：明堂黄道吉日值日，月德合、母仓、明堂三颗吉神并趋，宜祭祀、普渡、捕捉、解除、结网、畋猎、入殓、破土、安葬九事，忌开市、交易、入宅、嫁娶四事，冲羊煞东；生肖牛今日运势与明堂天神典故科普。" },
+      en: { title: "Daily Almanac — August 31, 2026 (Ox)", description: "August 31, 2026 Chinese almanac: a Míngtáng Yellow Path day with three auspicious spirits — Yuèdéhé, Mǔcāng and Míngtáng — favorable for sacrifice, universal salvation, catching and capturing, removal, netting, hunting, encoffining, breaking ground and burial, nine matters in all; avoid opening a market, trading, moving into a house and marriage, four matters in all; clash Goat, Sha East; Ox zodiac fortune and the lore of Míngtáng the Bright Hall." },
+    },
+    content: { zh: daily20260831Zh, en: daily20260831En },
+  },
   {
     date: "2026-08-30",
     meta: {
