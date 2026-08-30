@@ -2,6 +2,8 @@ import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
 import weekly20260817Zh from "../content/weekly/2026-08-17.zh.html";
 import weekly20260817En from "../content/weekly/2026-08-17.en.html";
+import weekly20260831Zh from "../content/weekly/2026-08-31.zh.html";
+import weekly20260831En from "../content/weekly/2026-08-31.en.html";
 import weekly20260824Zh from "../content/weekly/2026-08-24.zh.html";
 import weekly20260824En from "../content/weekly/2026-08-24.en.html";
 
@@ -24,6 +26,20 @@ export const WEEKLY_ARCHIVE_META = {
 } as const;
 
 export const WEEKLY_POSTS: readonly WeeklyPost[] = [
+  {
+    monday: "2026-08-31",
+    meta: {
+      zh: {
+        title: "十二生肖一周运势（2026年8月31日–9月6日）",
+        description: "2026年8月31日至9月6日十二生肖每周运势：特吉生肖鸡、狗、猪，次吉生肖马、羊、猴，属牛者本周宜守；周四金匮吉日诸事顺遂，周六白虎凶日宜慎，周日玉堂吉日收官；逐日干支速览与每日冲忌提醒。",
+      },
+      en: {
+        title: "Weekly Horoscope for All 12 Zodiacs — Aug 31 – Sep 6, 2026",
+        description: "Weekly fortune for all twelve Chinese zodiac signs, August 31 – September 6, 2026: Rooster, Dog and Pig top the luckiest signs with Horse, Goat and Monkey following, while Ox is advised to play it safe; Thursday's Golden Chest day brings all-around good fortune, Saturday's White Tiger day calls for caution, and Sunday's Jade Hall day closes the week well; plus a day-by-day stems-and-branches overview with daily clash alerts.",
+      },
+    },
+    content: { zh: weekly20260831Zh, en: weekly20260831En },
+  },
   {
     monday: "2026-08-24",
     meta: {
