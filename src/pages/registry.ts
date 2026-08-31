@@ -29,6 +29,8 @@ import yuelaoZh from "../content/yuelao.zh.html";
 import yuelaoEn from "../content/yuelao.en.html";
 import notfoundZh from "../content/notfound.zh.html";
 import notfoundEn from "../content/notfound.en.html";
+import aboutZh from "../content/about.zh.html";
+import aboutEn from "../content/about.en.html";
 
 export interface PageMeta {
   title: string;
@@ -526,6 +528,16 @@ export const PAGES: readonly PageEntry[] = [
         },
       ],
     },
+  },
+  {
+    slug: "about",
+    // 经 footer「关于」栏进入（见 layout/footer.ts），不在顶部导航
+    inNav: false,
+    meta: {
+      zh: { title: "关于玄命阁", description: "玄命阁是什么：站点定位、内容生产方式、更新节奏与文化边界，细说分明。" },
+      en: { title: "About Us", description: "What Xuanming Pavilion is — our mission, how content is produced and updated, and the cultural framing behind every reading." },
+    },
+    content: { zh: aboutZh, en: aboutEn },
   },
 ];
 

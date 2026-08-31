@@ -1010,3 +1010,33 @@ describe("ziwei page", () => {
     expect(res.status).toBe(200);
   });
 });
+
+describe("about page", () => {
+  it("renders zh about with canonical head and key sections", async () => {
+    const res = await fetchNoFollow("/zh/about/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain(`<link rel="canonical" href="${SITE_ORIGIN}/zh/about/">`);
+    expect(html).toContain("关于玄命阁");
+    expect(html).toContain("玄命阁是什么");
+    expect(html).toContain("内容怎么来");
+    expect(html).toContain("文化定位");
+    expect(html).toContain("如何核实");
+  });
+
+  it("renders en about with canonical head and key sections", async () => {
+    const res = await fetchNoFollow("/en/about/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain(`<link rel="canonical" href="${SITE_ORIGIN}/en/about/">`);
+    expect(html).toContain("About Xuanming Pavilion");
+    expect(html).toContain("How content is produced");
+    expect(html).toContain("Cultural framing");
+  });
+
+  it("redirects /zh/about to trailing slash", async () => {
+    const res = await fetchNoFollow("/zh/about");
+    expect(res.status).toBe(301);
+    expect(res.headers.get("location")).toBe("/zh/about/");
+  });
+});
