@@ -115,11 +115,20 @@ describe("registry", () => {
     expect(about!.inNav).toBe(false);
   });
 
-  it("about copy never mentions AI", () => {
-    const about = findPage("about");
-    expect(about).toBeDefined();
-    for (const lang of ["zh", "en"] as const) {
-      expect(about!.content[lang], `about/${lang}`).not.toMatch(/\bAI\b/);
+  it("about and methodology copy never mention AI", () => {
+    for (const slug of ["about", "methodology"] as const) {
+      const page = findPage(slug);
+      expect(page, slug).toBeDefined();
+      for (const lang of ["zh", "en"] as const) {
+        expect(page!.content[lang], `${slug}/${lang}`).not.toMatch(/\bAI\b/);
+      }
     }
+  });
+
+  it("methodology page exists, out of flat nav", () => {
+    const methodology = findPage("methodology");
+    expect(methodology).toBeDefined();
+    // 经 footer「关于」栏进入（见 layout/footer.ts），不在顶部导航
+    expect(methodology!.inNav).toBe(false);
   });
 });

@@ -1040,3 +1040,34 @@ describe("about page", () => {
     expect(res.headers.get("location")).toBe("/zh/about/");
   });
 });
+
+describe("methodology page", () => {
+  it("renders zh methodology with canonical head and key sections", async () => {
+    const res = await fetchNoFollow("/zh/methodology/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain(`<link rel="canonical" href="${SITE_ORIGIN}/zh/methodology/">`);
+    expect(html).toContain("数据与方法");
+    expect(html).toContain("历法与排盘引擎");
+    expect(html).toContain("运势评分规则");
+    expect(html).toContain("择吉规则集");
+    expect(html).toContain("签文版本考据");
+    expect(html).toContain("参考文献");
+  });
+
+  it("renders en methodology with canonical head and key sections", async () => {
+    const res = await fetchNoFollow("/en/methodology/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain(`<link rel="canonical" href="${SITE_ORIGIN}/en/methodology/">`);
+    expect(html).toContain("Methods");
+    expect(html).toContain("Calendar and chart engines");
+    expect(html).toContain("Fortune scoring rules");
+  });
+
+  it("redirects /en/methodology to trailing slash", async () => {
+    const res = await fetchNoFollow("/en/methodology");
+    expect(res.status).toBe(301);
+    expect(res.headers.get("location")).toBe("/en/methodology/");
+  });
+});

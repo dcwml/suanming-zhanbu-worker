@@ -31,6 +31,8 @@ import notfoundZh from "../content/notfound.zh.html";
 import notfoundEn from "../content/notfound.en.html";
 import aboutZh from "../content/about.zh.html";
 import aboutEn from "../content/about.en.html";
+import methodologyZh from "../content/methodology.zh.html";
+import methodologyEn from "../content/methodology.en.html";
 
 export interface PageMeta {
   title: string;
@@ -538,6 +540,16 @@ export const PAGES: readonly PageEntry[] = [
       en: { title: "About Us", description: "What Xuanming Pavilion is — our mission, how content is produced and updated, and the cultural framing behind every reading." },
     },
     content: { zh: aboutZh, en: aboutEn },
+  },
+  {
+    slug: "methodology",
+    // 经 footer「关于」栏进入（见 layout/footer.ts），不在顶部导航
+    inNav: false,
+    meta: {
+      zh: { title: "数据与方法", description: "本站各工具的计算依据与文献来源：历法引擎、运势评分规则、择吉规则集、签文版本考据，公开透明。" },
+      en: { title: "Methods & Sources", description: "How this site computes — calendar engine, fortune scoring, date-selection rules and oracle text collation, with source references." },
+    },
+    content: { zh: methodologyZh, en: methodologyEn },
   },
 ];
 
