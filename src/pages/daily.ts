@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260901Zh from "../content/daily/2026-09-01.zh.html";
+import daily20260901En from "../content/daily/2026-09-01.en.html";
 import daily20260831Zh from "../content/daily/2026-08-31.zh.html";
 import daily20260831En from "../content/daily/2026-08-31.en.html";
 import daily20260830Zh from "../content/daily/2026-08-30.zh.html";
@@ -78,6 +80,14 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-09-01",
+    meta: {
+      zh: { title: "2026年9月1日宜忌·虎", description: "2026年9月1日黄历宜忌：天刑黑道凶日值日，月破、大耗、月刑三凶煞并临，天德合、驿马、天后、圣心、解神、五合六吉神化解，宜沐浴、破屋、坏垣，馀事勿取，忌斋醮、开市，冲猴煞北；生肖虎今日运势与天刑黑道凶神典故科普。" },
+      en: { title: "Daily Almanac — September 1, 2026 (Tiger)", description: "September 1, 2026 Chinese almanac: a Tiānxíng Black Path day with three inauspicious spirits — Yuèpò (Month Broken), Dàhào and Yuèxíng — tempered by six auspicious spirits: Tiāndéhé, Yìmǎ, Tiānhòu, Shèngxīn, Jiěshén and Wǔhé; favorable only for bathing, demolishing a house and tearing down walls, all else best avoided; avoid vegetarian rites and opening a market; clash Monkey, Sha North; Tiger zodiac fortune and the lore of Tiānxíng the Celestial Punishment." },
+    },
+    content: { zh: daily20260901Zh, en: daily20260901En },
+  },
   {
     date: "2026-08-31",
     meta: {
