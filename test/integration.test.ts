@@ -1060,9 +1060,12 @@ describe("methodology page", () => {
     expect(res.status).toBe(200);
     const html = await res.text();
     expect(html).toContain(`<link rel="canonical" href="${SITE_ORIGIN}/en/methodology/">`);
-    expect(html).toContain("Methods");
+    expect(html).toContain("Methods &amp; Sources");
     expect(html).toContain("Calendar and chart engines");
     expect(html).toContain("Fortune scoring rules");
+    expect(html).toContain("Date-selection rule set");
+    expect(html).toContain("Oracle text collation");
+    expect(html).toContain("References");
   });
 
   it("redirects /en/methodology to trailing slash", async () => {
