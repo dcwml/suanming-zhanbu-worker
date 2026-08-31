@@ -26,7 +26,9 @@ export function renderFooter(lang: Lang): string {
   const fortuneLinks = FORTUNE_NAV_ITEMS.map(
     (item) => `<a href="${pagePath(lang, item.slug)}">${escapeHtml(item.label[lang])}</a>`,
   ).join("\n          ");
-  const homeLink = `<a href="${pagePath(lang, "")}">${title("")}</a>`;
+  const aboutLinks = ["", "about", "methodology"]
+    .map((slug) => `<a href="${pagePath(lang, slug)}">${title(slug)}</a>`)
+    .join("\n          ");
 
   return `<footer class="site-footer">
       <div class="footer-main">
@@ -46,7 +48,7 @@ export function renderFooter(lang: Lang): string {
         </nav>
         <nav class="footer-col" aria-label="${aboutLabel}">
           <h2>${aboutLabel}</h2>
-          ${homeLink}
+          ${aboutLinks}
         </nav>
       </div>
       <div class="footer-bottom">

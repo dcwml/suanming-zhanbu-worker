@@ -1071,3 +1071,21 @@ describe("methodology page", () => {
     expect(res.headers.get("location")).toBe("/en/methodology/");
   });
 });
+
+describe("footer about column", () => {
+  it("zh footer carries home, about and methodology links", async () => {
+    const res = await fetchNoFollow("/zh/");
+    const html = await res.text();
+    expect(html).toContain('aria-label="关于"');
+    expect(html).toContain('href="/zh/about/"');
+    expect(html).toContain('href="/zh/methodology/"');
+  });
+
+  it("en footer carries home, about and methodology links", async () => {
+    const res = await fetchNoFollow("/en/");
+    const html = await res.text();
+    expect(html).toContain('aria-label="About"');
+    expect(html).toContain('href="/en/about/"');
+    expect(html).toContain('href="/en/methodology/"');
+  });
+});
