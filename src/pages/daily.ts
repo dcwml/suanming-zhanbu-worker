@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260902Zh from "../content/daily/2026-09-02.zh.html";
+import daily20260902En from "../content/daily/2026-09-02.en.html";
 import daily20260901Zh from "../content/daily/2026-09-01.zh.html";
 import daily20260901En from "../content/daily/2026-09-01.en.html";
 import daily20260831Zh from "../content/daily/2026-08-31.zh.html";
@@ -80,6 +82,14 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-09-02",
+    meta: {
+      zh: { title: "2026年9月2日宜忌·兔", description: "2026年9月2日黄历宜忌：朱雀黑道凶日值日，天吏、致死、五虚、土符、朱雀五凶煞环伺，天恩、益后、五合三吉神并临化解，宜订盟、纳采、祭祀、祈福、安香、出火、开市、立券、入宅、挂匾、造桥、启钻、安葬十三事，忌动土、破土、嫁娶、掘井、安床五事，冲鸡煞西；生肖兔今日运势与朱雀天神典故科普。" },
+      en: { title: "Daily Almanac — September 2, 2026 (Rabbit)", description: "September 2, 2026 Chinese almanac: a Zhūquè Black Path day with five inauspicious spirits — Tiānlì, Zhìsǐ, Wǔxū, Tǔfú and Zhūquè — tempered by three auspicious spirits: Tiān'ēn, Yìhòu and Wǔhé; favorable for pledging alliance, accepting betrothal, sacrifice, prayer, incense installation, moving fire, opening a market, signing contracts, moving into a house, hanging plaques, building bridges, opening the tomb and burial; avoid breaking ground, digging earth, marriage, digging wells and setting the bed; clash Rooster, Sha West; Rabbit zodiac fortune and the lore of Zhūquè the Vermilion Bird." },
+    },
+    content: { zh: daily20260902Zh, en: daily20260902En },
+  },
   {
     date: "2026-09-01",
     meta: {
