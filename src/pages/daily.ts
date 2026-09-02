@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260903Zh from "../content/daily/2026-09-03.zh.html";
+import daily20260903En from "../content/daily/2026-09-03.en.html";
 import daily20260902Zh from "../content/daily/2026-09-02.zh.html";
 import daily20260902En from "../content/daily/2026-09-02.en.html";
 import daily20260901Zh from "../content/daily/2026-09-01.zh.html";
@@ -82,6 +84,14 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-09-03",
+    meta: {
+      zh: { title: "2026年9月3日宜忌·龙", description: "2026年9月3日黄历宜忌：金匮黄道吉日值日，天恩、母仓、三合、天喜、天医、续世七颗吉神并趋，宜嫁娶、祭祀、祈福、斋醮、普渡、移徙、入宅、动土、治病、开市、交易、立券、开光、修造、造车器、安香、安床、捕捉、畋猎、结网二十事，忌纳采、订盟、经络、行丧、安葬、探病六事，冲狗煞南；生肖龙今日运势与金匮天神典故科普。" },
+      en: { title: "Daily Almanac — September 3, 2026 (Dragon)", description: "September 3, 2026 Chinese almanac: a Jīnkuì Golden Coffer Yellow Path day with seven auspicious spirits — Tiān'ēn, Mǔcāng, Sānhé, Tiānxǐ, Tiānyī, Xùshì and Jīnkuì — favorable for marriage, sacrifice, prayer, vegetarian rites, universal salvation, moving, moving into a house, breaking ground, treating illness, opening a market, trading, signing contracts, consecration, renovation, building vehicles, incense installation, setting the bed, catching and capturing, hunting and netting, twenty matters in all; avoid accepting betrothal gifts, pledging betrothal, channel therapy, funerals, burial and visiting the sick, six matters in all; clash Dog, Sha South; Dragon zodiac fortune and the lore of Jīnkuì the Golden Coffer." },
+    },
+    content: { zh: daily20260903Zh, en: daily20260903En },
+  },
   {
     date: "2026-09-02",
     meta: {
