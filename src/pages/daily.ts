@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260904Zh from "../content/daily/2026-09-04.zh.html";
+import daily20260904En from "../content/daily/2026-09-04.en.html";
 import daily20260903Zh from "../content/daily/2026-09-03.zh.html";
 import daily20260903En from "../content/daily/2026-09-03.en.html";
 import daily20260902Zh from "../content/daily/2026-09-02.zh.html";
@@ -84,6 +86,14 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-09-04",
+    meta: {
+      zh: { title: "2026年9月4日宜忌·蛇", description: "2026年9月4日黄历宜忌：天德黄道吉日值日，天恩、六合、五富、要安、宝光五颗吉神并趋，宜嫁娶、订盟、纳采、作灶、冠笄、裁衣、会亲友、纳畜、牧养、安机械、开市、立券、纳财、安床十四事，忌掘井、出行、破土、行丧、安葬五事，冲猪煞东；生肖蛇今日运势与天德吉神典故科普。" },
+      en: { title: "Daily Almanac — September 4, 2026 (Snake)", description: "September 4, 2026 Chinese almanac: a Tiāndé Heavenly Virtue Yellow Path day with five auspicious spirits — Tiān'ēn, Liùhé, Wǔfù, Yào'ān and Bǎoguāng — favorable for marriage, pledging alliance, accepting betrothal, installing a stove, capping ceremony, cutting garments, meeting friends and relatives, acquiring livestock, herding, installing machinery, opening a market, signing contracts, collecting wealth and setting the bed, fourteen matters in all; avoid digging wells, travel, breaking ground, funerals and burial, five matters in all; clash Pig, Sha East; Snake zodiac fortune and the lore of Tiāndé the Heavenly Virtue." },
+    },
+    content: { zh: daily20260904Zh, en: daily20260904En },
+  },
   {
     date: "2026-09-03",
     meta: {
