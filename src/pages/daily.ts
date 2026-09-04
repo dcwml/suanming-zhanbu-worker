@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260905Zh from "../content/daily/2026-09-05.zh.html";
+import daily20260905En from "../content/daily/2026-09-05.en.html";
 import daily20260904Zh from "../content/daily/2026-09-04.zh.html";
 import daily20260904En from "../content/daily/2026-09-04.en.html";
 import daily20260903Zh from "../content/daily/2026-09-03.zh.html";
@@ -86,6 +88,14 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-09-05",
+    meta: {
+      zh: { title: "2026年9月5日宜忌·马", description: "2026年9月5日黄历宜忌：白虎黑道值日，月德、天德、月恩、四相、天马、时阳、生气、不将、玉宇、鸣吠十颗吉神并趋化解厉气，宜嫁娶、订盟、纳采、祭祀、斋醮、普渡、解除、出行、会亲友、开市、纳财、修造、动土、竖柱、上梁、开光、开仓、出货财、纳畜、牧养、开池、破土、启钻二十三项，忌出火、入宅、盖屋、安门、安葬五项，冲鼠煞北；生肖马今日运势与天月德合典故科普。" },
+      en: { title: "Daily Almanac — September 5, 2026 (Horse)", description: "September 5, 2026 Chinese almanac: a White Tiger Black Path day tempered by ten auspicious spirits — Yuèdé, Tiāndé, Yuè'ēn, Sìxiàng, Tiānmǎ, Shíyáng, Shēngqì, Bùjiāng, Yùyǔ and Míngfèi — favorable for marriage, pledging alliance, accepting betrothal, sacrifice, vegetarian rites, universal salvation, dissolution, travel, meeting friends and relatives, opening a market, collecting wealth, construction, breaking ground, erecting pillars, raising the ridge beam, consecration, opening a storehouse, shipping goods, acquiring livestock, herding, digging a pool, breaking ground and opening a grave, twenty-three matters in all; avoid lighting fires, moving into a house, building a roof, installing a door and burial, five matters in all; clash Rat, Sha North; Horse zodiac fortune and the lore of Tiāndé and Yuèdé in Union." },
+    },
+    content: { zh: daily20260905Zh, en: daily20260905En },
+  },
   {
     date: "2026-09-04",
     meta: {
