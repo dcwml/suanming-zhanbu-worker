@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260906Zh from "../content/daily/2026-09-06.zh.html";
+import daily20260906En from "../content/daily/2026-09-06.en.html";
 import daily20260905Zh from "../content/daily/2026-09-05.zh.html";
 import daily20260905En from "../content/daily/2026-09-05.en.html";
 import daily20260904Zh from "../content/daily/2026-09-04.zh.html";
@@ -88,6 +90,14 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-09-06",
+    meta: {
+      zh: { title: "2026年9月6日宜忌·羊", description: "2026年9月6日黄历宜忌：玉堂黄道吉日值日，天德、天恩、母仓、四相、不将、金堂、玉堂七颗吉神并趋，宜嫁娶、普渡、祭祀、祈福、补垣、塞穴、断蚁、筑堤、入殓、除服、成服、安葬十二事，忌动土、破土、掘井、开光、上梁、词讼六事，冲牛煞西；生肖羊今日运势与白露节气民俗科普。" },
+      en: { title: "Daily Almanac — September 6, 2026 (Goat)", description: "September 6, 2026 Chinese almanac: a Yùtáng Jade Hall Yellow Path day with seven auspicious spirits — Tiāndé, Tiān'ēn, Mǔcāng, Sìxiāng, Bùjiāng, Jīntáng and Yùtáng — favorable for wedding, universal salvation rites, sacrifices, prayers, patching walls, sealing caves, ant control, building dikes, encoffining, ending mourning, completing mourning and burial, twelve matters in all; avoid earth moving, ground breaking, well digging, consecration, beam installation and litigation, six matters in all; clash Ox, Sha West; Goat zodiac fortune and the White Dew solar term folklore." },
+    },
+    content: { zh: daily20260906Zh, en: daily20260906En },
+  },
   {
     date: "2026-09-05",
     meta: {
