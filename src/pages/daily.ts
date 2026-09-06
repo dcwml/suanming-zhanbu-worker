@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260907Zh from "../content/daily/2026-09-07.zh.html";
+import daily20260907En from "../content/daily/2026-09-07.en.html";
 import daily20260906Zh from "../content/daily/2026-09-06.zh.html";
 import daily20260906En from "../content/daily/2026-09-06.en.html";
 import daily20260905Zh from "../content/daily/2026-09-05.zh.html";
@@ -90,6 +92,14 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-09-07",
+    meta: {
+      zh: { title: "2026年9月7日宜忌·猴", description: "2026年9月7日黄历宜忌：今日恰逢白露节气，白虎凶日值日，月空、王日、天马、五富、不将、圣心、除神、鸣吠八颗吉神并趋化解厉气，宜嫁娶、出行、伐木、拆卸、修造、动土、移徙、安葬、破土、修坟、立碑十一事，忌掘井、祈福、安床、开市、入宅、挂匾、开光七事，冲虎煞南；生肖猴今日运势与白露节气科普。" },
+      en: { title: "Daily Almanac — September 7, 2026 (Monkey)", description: "September 7, 2026 Chinese almanac: today is the White Dew solar term, a White Tiger day tempered by eight auspicious spirits — Yuèkōng, Wángrì, Tiānmǎ, Wǔfù, Bùjiāng, Shèngxīn, Chúshén and Míngfèi — favorable for wedding, travel, felling trees, dismantling, renovation, breaking ground, relocating, burial, ground breaking, grave repair and erecting tombstones, eleven matters in all; avoid well digging, prayers, setting the bed, opening a market, moving into a house, hanging plaques and consecration, seven matters in all; clash Tiger, Sha South; Monkey zodiac fortune and White Dew solar term lore." },
+    },
+    content: { zh: daily20260907Zh, en: daily20260907En },
+  },
   {
     date: "2026-09-06",
     meta: {
