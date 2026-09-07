@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260908Zh from "../content/daily/2026-09-08.zh.html";
+import daily20260908En from "../content/daily/2026-09-08.en.html";
 import daily20260907Zh from "../content/daily/2026-09-07.zh.html";
 import daily20260907En from "../content/daily/2026-09-07.en.html";
 import daily20260906Zh from "../content/daily/2026-09-06.zh.html";
@@ -92,6 +94,14 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-09-08",
+    meta: {
+      zh: { title: "2026年9月8日宜忌·鸡", description: "2026年9月8日黄历宜忌：玉堂黄道吉日值日，月德合、官日、六仪、益后、除神、玉堂、鸣吠七颗吉神并趋，但月建、小时、土府、月刑、厌对、招摇、五离七煞同临，宜祭祀、出行、扫舍、馀事勿取，忌诸事不宜，冲兔煞东；生肖鸡今日运势与玉堂黄道吉神科普。" },
+      en: { title: "Daily Almanac — September 8, 2026 (Rooster)", description: "September 8, 2026 Chinese almanac: a Yùtáng Yellow Path day with seven auspicious spirits — Yuèdéhé, Guānrì, Liùyí, Yìhòu, Chúshén, Yùtáng and Míngfèi — yet seven inauspicious spirits gather simultaneously: Yuèjiàn, Xiǎoshí, Tǔfǔ, Yuèxíng, Yānduì, Zhāoyáo and Wǔlí; favorable for sacrifice, travel, house sweeping, all else best avoided; avoid all undertakings; clash Rabbit, Sha East; Rooster zodiac fortune and the lore of Yùtáng the Jade Hall." },
+    },
+    content: { zh: daily20260908Zh, en: daily20260908En },
+  },
   {
     date: "2026-09-07",
     meta: {
