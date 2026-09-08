@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260909Zh from "../content/daily/2026-09-09.zh.html";
+import daily20260909En from "../content/daily/2026-09-09.en.html";
 import daily20260908Zh from "../content/daily/2026-09-08.zh.html";
 import daily20260908En from "../content/daily/2026-09-08.en.html";
 import daily20260907Zh from "../content/daily/2026-09-07.zh.html";
@@ -94,6 +96,14 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-09-09",
+    meta: {
+      zh: { title: "2026年9月9日宜忌·狗", description: "2026年9月9日黄历宜忌：天牢黑道凶日值日，母仓、守日、吉期、续世四颗吉神并趋化解囚气，宜嫁娶、祭祀、塑绘、开光、出行、解除、理发、整手足甲、动土、安床、开池、放水、扫舍十三事，忌伐木、行丧、作灶、作梁、安葬五事，冲龙煞北；生肖狗今日运势与天牢凶神科普。" },
+      en: { title: "Daily Almanac — September 9, 2026 (Dog)", description: "September 9, 2026 Chinese almanac: a Tiānláo Heavenly Prison Black Path day tempered by four auspicious spirits — Mǔcāng, Shǒurì, Jíqī and Xùshì — favorable for marriage, sacrifice, sculpting, consecration, travel, removal, haircutting, nail care, breaking ground, setting the bed, digging a pool, releasing water and house sweeping, thirteen matters in all; avoid felling trees, funerals, installing a stove, making ridge beams and burial, five matters in all; clash Dragon, Sha North; Dog zodiac fortune and the lore of Tiānláo the Heavenly Prison." },
+    },
+    content: { zh: daily20260909Zh, en: daily20260909En },
+  },
   {
     date: "2026-09-08",
     meta: {
