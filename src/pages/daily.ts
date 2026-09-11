@@ -2,6 +2,8 @@ import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
 import daily20260911Zh from "../content/daily/2026-09-11.zh.html";
 import daily20260911En from "../content/daily/2026-09-11.en.html";
+import daily20260910Zh from "../content/daily/2026-09-10.zh.html";
+import daily20260910En from "../content/daily/2026-09-10.en.html";
 import daily20260909Zh from "../content/daily/2026-09-09.zh.html";
 import daily20260909En from "../content/daily/2026-09-09.en.html";
 import daily20260908Zh from "../content/daily/2026-09-08.zh.html";
@@ -105,6 +107,14 @@ export const DAILY_POSTS: readonly DailyPost[] = [
       en: { title: "Daily Almanac — September 11, 2026 (Rat)", description: "September 11, 2026 Chinese almanac: a Sīmìng Yellow Path day with five auspicious spirits — Shídé, Yángdé, Mínrì, Yùyǔ and Sīmìng — yet five inauspicious spirits — Hékuí, Sǐshén, Tiānlì, Zhìsǐ and Wǎngwáng — gather around; favorable for sacrifice, bathing, decorating walls, leveling roads, all else best avoided; avoid all undertakings; clash Horse, Sha South; Rat zodiac fortune and the lore of Thunder Fire Na Yin." },
     },
     content: { zh: daily20260911Zh, en: daily20260911En },
+  },
+  {
+    date: "2026-09-10",
+    meta: {
+      zh: { title: "2026年9月10日宜忌·猪", description: "2026年9月10日黄历宜忌：玄武黑道凶神值日，相日、驿马、天后、天巫、福德、要安六颗吉神并临化解，宜开市、交易、立券、挂匾、开光、出行、入宅、移徙、安床、出火、上梁十一事，忌作灶、行丧、理发、乘船、嫁娶、安葬六事，冲蛇煞西；生肖猪今日运势与玄武凶神科普。" },
+      en: { title: "Daily Almanac — September 10, 2026 (Pig)", description: "September 10, 2026 Chinese almanac: a Xuánwǔ Black Path day tempered by six auspicious spirits — Xiāngrì, Yìmǎ, Tiānhòu, Tiānwū, Fúdé and Yào'ān — favorable for opening market, trading, signing contracts, hanging plaques, consecration, travel, moving into house, relocating, setting the bed, moving fire and raising the ridge beam, eleven matters in all; avoid installing a stove, funerals, haircutting, boat travel, marriage and burial, six matters in all; clash Snake, Sha West; Pig zodiac fortune and the lore of Xuánwǔ the Black Tortoise." },
+    },
+    content: { zh: daily20260910Zh, en: daily20260910En },
   },
   {
     date: "2026-09-09",
