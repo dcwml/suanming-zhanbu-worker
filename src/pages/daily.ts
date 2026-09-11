@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260911Zh from "../content/daily/2026-09-11.zh.html";
+import daily20260911En from "../content/daily/2026-09-11.en.html";
 import daily20260909Zh from "../content/daily/2026-09-09.zh.html";
 import daily20260909En from "../content/daily/2026-09-09.en.html";
 import daily20260908Zh from "../content/daily/2026-09-08.zh.html";
@@ -96,6 +98,14 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-09-11",
+    meta: {
+      zh: { title: "2026年9月11日宜忌·鼠", description: "2026年9月11日黄历宜忌：司命黄道吉日值日，时德、阳德、民日、玉宇、司命五颗吉神并趋，然河魁、死神、天吏、致死、往亡五凶煞环伺，宜祭祀、沐浴、修饰垣墙、平治道涂、馀事勿取，忌诸事不宜，冲马煞南；生肖鼠今日运势与霹雳火纳音科普。" },
+      en: { title: "Daily Almanac — September 11, 2026 (Rat)", description: "September 11, 2026 Chinese almanac: a Sīmìng Yellow Path day with five auspicious spirits — Shídé, Yángdé, Mínrì, Yùyǔ and Sīmìng — yet five inauspicious spirits — Hékuí, Sǐshén, Tiānlì, Zhìsǐ and Wǎngwáng — gather around; favorable for sacrifice, bathing, decorating walls, leveling roads, all else best avoided; avoid all undertakings; clash Horse, Sha South; Rat zodiac fortune and the lore of Thunder Fire Na Yin." },
+    },
+    content: { zh: daily20260911Zh, en: daily20260911En },
+  },
   {
     date: "2026-09-09",
     meta: {
