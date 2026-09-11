@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260912Zh from "../content/daily/2026-09-12.zh.html";
+import daily20260912En from "../content/daily/2026-09-12.en.html";
 import daily20260911Zh from "../content/daily/2026-09-11.zh.html";
 import daily20260911En from "../content/daily/2026-09-11.en.html";
 import daily20260910Zh from "../content/daily/2026-09-10.zh.html";
@@ -100,6 +102,14 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-09-12",
+    meta: {
+      zh: { title: "2026年9月12日宜忌·牛", description: "2026年9月12日黄历宜忌：勾陈黑道凶神值日，然母仓、三合、时阴、金堂四颗吉神并趋化凶为吉，竟至忌无，二十四项皆宜，百无禁忌，冲羊煞东；生肖牛今日运势与三合局巳酉丑金局科普。" },
+      en: { title: "Daily Almanac — September 12, 2026 (Ox)", description: "September 12, 2026 Chinese almanac: a Gōuchén Black Path day transformed by four auspicious spirits — Mǔcāng, Sānhé, Shíyīn and Jīntáng — turning ill fortune to good, with no taboos listed and all twenty-four matters favorable; clash Goat, Sha East; Ox zodiac fortune and the lore of the Sì-Yǒu-Chǒu Metal Sānhé triad." },
+    },
+    content: { zh: daily20260912Zh, en: daily20260912En },
+  },
   {
     date: "2026-09-11",
     meta: {
