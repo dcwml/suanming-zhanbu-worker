@@ -257,6 +257,10 @@ describe("tuiyan", () => {
     const html = await res.text();
     expect(html).toContain("时辰推演");
     expect(html).toContain('href="/zh/tuiyan/2026-08-13/"');
+    expect(html).toContain('href="/zh/tuiyan/2026-09-11/"');
+    expect(html.indexOf('href="/zh/tuiyan/2026-09-11/"')).toBeLessThan(
+      html.indexOf('href="/zh/tuiyan/2026-08-13/"'),
+    );
   });
 
   it("renders en tuiyan archive", async () => {
@@ -264,6 +268,8 @@ describe("tuiyan", () => {
     expect(res.status).toBe(200);
     const html = await res.text();
     expect(html).toContain("Hour Omens");
+    expect(html).toContain('href="/en/tuiyan/2026-08-13/"');
+    expect(html).toContain('href="/en/tuiyan/2026-09-11/"');
   });
 
   it("renders existing zh tuiyan post with sections, canonical and article jsonld", async () => {
@@ -284,6 +290,37 @@ describe("tuiyan", () => {
     const html = await res.text();
     expect(html).toContain("tuiyan-grand");
     expect(html).toContain('hreflang="en"');
+  });
+
+  it("renders lunar August zh tuiyan post with sections, canonical and article jsonld", async () => {
+    const res = await fetchNoFollow("/zh/tuiyan/2026-09-11/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain("tuiyan-summary");
+    expect(html).toContain("tuiyan-grand");
+    expect(html).toContain("tuiyan-kuigang");
+    expect(html).toContain("tuiyan-daily");
+    expect(html).toContain("纯阳孤本");
+    expect(html).toContain("三日并见");
+    expect(html).toContain(`<link rel="canonical" href="${SITE_ORIGIN}/zh/tuiyan/2026-09-11/">`);
+    expect(html).toContain('"@type":"Article"');
+  });
+
+  it("renders lunar August en tuiyan post with canonical and full hreflang set", async () => {
+    const res = await fetchNoFollow("/en/tuiyan/2026-09-11/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain("tuiyan-grand");
+    expect(html).toContain(`<link rel="canonical" href="${SITE_ORIGIN}/en/tuiyan/2026-09-11/">`);
+    expect(html).toContain(
+      `<link rel="alternate" hreflang="zh-CN" href="${SITE_ORIGIN}/zh/tuiyan/2026-09-11/">`,
+    );
+    expect(html).toContain(
+      `<link rel="alternate" hreflang="en" href="${SITE_ORIGIN}/en/tuiyan/2026-09-11/">`,
+    );
+    expect(html).toContain(
+      `<link rel="alternate" hreflang="x-default" href="${SITE_ORIGIN}/zh/tuiyan/2026-09-11/">`,
+    );
   });
 
   it("redirects /zh/tuiyan/2026-08-13 to trailing-slash", async () => {

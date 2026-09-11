@@ -61,11 +61,20 @@ describe("buildSitemapXml", () => {
     expect(xml).toContain(`<loc>${SITE_ORIGIN}/zh/tuiyan/</loc>`);
     expect(xml).toContain(`<loc>${SITE_ORIGIN}/en/tuiyan/</loc>`);
     expect(xml).toContain(`<loc>${SITE_ORIGIN}/zh/tuiyan/2026-08-13/</loc>`);
+    expect(xml).toContain(`<loc>${SITE_ORIGIN}/en/tuiyan/2026-08-13/</loc>`);
+    expect(xml).toContain(`<loc>${SITE_ORIGIN}/zh/tuiyan/2026-09-11/</loc>`);
+    expect(xml).toContain(`<loc>${SITE_ORIGIN}/en/tuiyan/2026-09-11/</loc>`);
     expect(xml).toContain(
       `<xhtml:link rel="alternate" hreflang="zh-CN" href="${SITE_ORIGIN}/zh/tuiyan/2026-08-13/"/>`,
     );
     expect(xml).toContain(
       `<xhtml:link rel="alternate" hreflang="en" href="${SITE_ORIGIN}/en/tuiyan/2026-08-13/"/>`,
+    );
+    expect(xml).toContain(
+      `<xhtml:link rel="alternate" hreflang="zh-CN" href="${SITE_ORIGIN}/zh/tuiyan/2026-09-11/"/>`,
+    );
+    expect(xml).toContain(
+      `<xhtml:link rel="alternate" hreflang="en" href="${SITE_ORIGIN}/en/tuiyan/2026-09-11/"/>`,
     );
   });
 });
