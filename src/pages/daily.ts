@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260913Zh from "../content/daily/2026-09-13.zh.html";
+import daily20260913En from "../content/daily/2026-09-13.en.html";
 import daily20260912Zh from "../content/daily/2026-09-12.zh.html";
 import daily20260912En from "../content/daily/2026-09-12.en.html";
 import daily20260911Zh from "../content/daily/2026-09-11.zh.html";
@@ -102,6 +104,14 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-09-13",
+    meta: {
+      zh: { title: "2026年9月13日宜忌·虎", description: "2026年9月13日黄历宜忌：青龙黄道吉日值日，月德、解神、五合、鸣吠对四颗吉神并趋，然劫煞、小耗、归忌三凶煞同临，宜解除、坏垣、馀事勿取，忌诸事不宜，冲猴煞北；生肖虎今日运势与「馀事勿取」黄历术语科普。" },
+      en: { title: "Daily Almanac — September 13, 2026 (Tiger)", description: "September 13, 2026 Chinese almanac: a Qīnglóng Yellow Path day with four auspicious spirits — Yuèdé, Jiěshén, Wǔhé and Míngfèiduì — yet three inauspicious spirits — Jiéshà, Xiǎohào and Guījì — arrive together; favorable for dissolving bindings, demolishing walls, all else best avoided; avoid all undertakings; clash Monkey, Sha North; Tiger zodiac fortune and the lore of the almanac term 'No other matters.'" },
+    },
+    content: { zh: daily20260913Zh, en: daily20260913En },
+  },
   {
     date: "2026-09-12",
     meta: {
