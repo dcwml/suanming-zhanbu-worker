@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import weekly20260914Zh from "../content/weekly/2026-09-14.zh.html";
+import weekly20260914En from "../content/weekly/2026-09-14.en.html";
 import weekly20260907Zh from "../content/weekly/2026-09-07.zh.html";
 import weekly20260907En from "../content/weekly/2026-09-07.en.html";
 import weekly20260831Zh from "../content/weekly/2026-08-31.zh.html";
@@ -28,6 +30,20 @@ export const WEEKLY_ARCHIVE_META = {
 } as const;
 
 export const WEEKLY_POSTS: readonly WeeklyPost[] = [
+  {
+    monday: "2026-09-14",
+    meta: {
+      zh: {
+        title: "十二生肖一周运势（2026年9月14日–20日）",
+        description: "2026年9月14日至20日十二生肖每周运势：特吉生肖蛇、羊、猴，次吉生肖龙、鸡、马，属虎者本周宜守；周四金匮吉日诸事顺遂，周五天德吉日馀事勿取，周日玉堂吉日收官；逐日干支速览与每日冲忌提醒。",
+      },
+      en: {
+        title: "Weekly Horoscope for All 12 Zodiacs — Sep 14–20, 2026",
+        description: "Weekly fortune for all twelve Chinese zodiac signs, September 14–20, 2026: Snake, Goat and Monkey top the luckiest signs with Dragon, Rooster and Horse following, while Tiger is advised to play it safe; Thursday's Golden Chest day brings all-around good fortune, Friday's Heavenly Virtue day offers a quiet window, and Sunday's Jade Hall day closes the week well; plus a day-by-day stems-and-branches overview with daily clash alerts.",
+      },
+    },
+    content: { zh: weekly20260914Zh, en: weekly20260914En },
+  },
   {
     monday: "2026-09-07",
     meta: {
