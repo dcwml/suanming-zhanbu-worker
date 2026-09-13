@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260914Zh from "../content/daily/2026-09-14.zh.html";
+import daily20260914En from "../content/daily/2026-09-14.en.html";
 import daily20260913Zh from "../content/daily/2026-09-13.zh.html";
 import daily20260913En from "../content/daily/2026-09-13.en.html";
 import daily20260912Zh from "../content/daily/2026-09-12.zh.html";
@@ -104,6 +106,14 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-09-14",
+    meta: {
+      zh: { title: "2026年9月14日宜忌·兔", description: "2026年9月14日黄历宜忌：明堂黄道值日，五合、明堂、鸣吠对三颗吉神并趋，然月破、大耗、灾煞、天火、月厌、地火、五虚、复日、大会九颗凶煞同临，宜祭祀、治病、破屋、坏垣、馀事勿取，忌诸事不宜，冲鸡煞西；生肖兔今日运势与月破日科普。" },
+      en: { title: "Daily Almanac — September 14, 2026 (Rabbit)", description: "September 14, 2026 Chinese almanac: a Míngtáng Yellow Path day with three auspicious spirits — Wǔhé, Míngtáng and Míngfèiduì — yet nine inauspicious spirits — Yuèpò, Dàhào, Zāishà, Tiānhuǒ, Yuèyàn, Dìhuǒ, Wǔxū, Fùrì and Dàhuì — arrive together; favorable for sacrificial rites, healing, demolishing houses, tearing down walls, all else best avoided; avoid all undertakings; clash Rooster, Sha West; Rabbit zodiac fortune and the lore of the Yuèpò monthly clash day." },
+    },
+    content: { zh: daily20260914Zh, en: daily20260914En },
+  },
   {
     date: "2026-09-13",
     meta: {
