@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260915Zh from "../content/daily/2026-09-15.zh.html";
+import daily20260915En from "../content/daily/2026-09-15.en.html";
 import daily20260914Zh from "../content/daily/2026-09-14.zh.html";
 import daily20260914En from "../content/daily/2026-09-14.en.html";
 import daily20260913Zh from "../content/daily/2026-09-13.zh.html";
@@ -106,6 +108,14 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-09-15",
+    meta: {
+      zh: { title: "2026年9月15日宜忌·龙", description: "2026年9月15日黄历宜忌：日支辰与月支酉六合，母仓、四相、六合、不将、敬安五颗吉神并趋，宜嫁娶、纳采、订盟、入宅、移徙、修造、动土等二十四事，忌开市、掘井、开渠、造桥、造船，冲狗煞南，天刑黑道值日；生肖龙今日运势与地支「六合」科普。" },
+      en: { title: "Daily Almanac — September 15, 2026 (Dragon)", description: "September 15, 2026 Chinese almanac: the day branch Chén forms the Six Harmonies with the month branch Yǒu; five auspicious spirits — Mǔcāng, Sìxiàng, Liùhé, Bùjiàng and Jìng'ān — arrive together, favorable for marriage ceremonies, betrothal gifts, engagement pledges, moving into a house, relocation, renovation, groundbreaking and more; avoid opening market, digging wells, cutting canals, building bridges and boats; clash Dog, Sha South, Tiānxíng Black Path day; Dragon zodiac fortune and the lore of the Six Harmonies." },
+    },
+    content: { zh: daily20260915Zh, en: daily20260915En },
+  },
   {
     date: "2026-09-14",
     meta: {
