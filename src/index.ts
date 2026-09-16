@@ -7,11 +7,8 @@ import { isBotUserAgent, recordApiCall, recordPagePathView, type StatsEnv } from
 
 const app = new Hono<{ Bindings: StatsEnv }>();
 
-// api 先挂载：/api/* 未命中时返回 JSON 404，而不是落入页面路由
-app.route("/", api);
-app.route("/", pages);
-
 // 全站访问统计埋点：一处中间件覆盖所有页面与 API（含未来新增路由）。
+// 必须先于 app.route() 注册——Hono 按注册顺序组链，后注册的中间件不会包裹先注册的 handler。
 // - API：/api/* 全部请求按「天 × 路径 × HTTP 状态码」记 api_stats
 // - 页面：GET 且 200 的 HTML 页按「天 × 规范路径」记 page_views（301/404 不算浏览量）
 // - 爬虫/脚本 UA 一律不计；waitUntil 异步写，不阻塞响应；D1 失败静默（统计不影响主流程）
@@ -43,6 +40,10 @@ app.use("*", async (c, next) => {
     }
   }
 });
+
+// api 先挂载：/api/* 未命中时返回 JSON 404，而不是落入页面路由
+app.route("/", api);
+app.route("/", pages);
 
 app.notFound((c) => c.html(renderNotFound(langFromPath(c.req.path)), 404));
 
