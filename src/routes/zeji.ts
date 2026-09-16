@@ -3,7 +3,6 @@ import { callLlm } from "../llm";
 import { buildZejiSystemPrompt, buildZejiUserPrompt } from "../zeji/prompt";
 import type { ZejiEnv } from "../zeji/types";
 import { validateZejiInterpretRequest } from "../zeji/validate";
-import { recordApiCall } from "../stats";
 import type { StatsEnv } from "../stats";
 
 const MAX_BODY_BYTES = 8 * 1024;
@@ -15,12 +14,6 @@ function err(code: string, message: string) {
 /** 注册择吉解读路由（在 api 子应用内，basePath 已是 /api） */
 export function registerZejiRoutes(api: Hono<{ Bindings: ZejiEnv & StatsEnv }>): void {
   api.post("/zeji/interpret", async (c) => {
-    // 0. 记录 API 调用（异步，不阻塞主流程）
-    const db = c.env?.STATS_DB;
-    if (db) {
-      recordApiCall(db, "/api/zeji/interpret").catch(() => {});
-    }
-
     // 1. 限流（绑定缺失则跳过，本地 dev / 测试环境可用）
     const limiter = c.env?.ZEJI_RATE_LIMITER;
     if (limiter) {

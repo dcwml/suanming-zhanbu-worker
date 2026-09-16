@@ -2254,3 +2254,52 @@ label:has(#zeji-strict:disabled) {
   .tuiyan-item { padding: 0.9rem 1rem; }
   .tuiyan-table { font-size: 0.82rem; display: block; overflow-x: auto; }
 }
+
+/* ========== 文章封面图（R2 covers/，npm run cover 生成） ========== */
+
+/* 单篇顶部头图 */
+.post-cover {
+  margin: 2rem 0 0;
+  border: 3px double var(--gold);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(43, 38, 34, 0.08);
+}
+
+.post-cover img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* daily 归档页：条目横排（缩略图 + 标题），无封面的条目仅文字 */
+.daily-archive-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.daily-archive-item h2 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.daily-archive-thumb {
+  flex: 0 0 auto;
+}
+
+.daily-archive-thumb img {
+  display: block;
+  width: 160px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+
+@media (max-width: 640px) {
+  .daily-archive-item { gap: 0.75rem; }
+  .daily-archive-thumb img { width: 112px; height: 63px; }
+}

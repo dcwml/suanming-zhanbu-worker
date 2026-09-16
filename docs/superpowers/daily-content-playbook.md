@@ -9,7 +9,7 @@
 - "写 YYYY-MM-DD 的内容"
 - 其他等价表达
 
-## 标准流程（7 步）
+## 标准流程（8 步）
 
 ### 第 1 步：确定目标日期
 
@@ -200,7 +200,24 @@ npm run almanac -- YYYY-MM-DD
 - 神煞名用「拼音 + 汉字」（如 `Qīnglóng 青龙`），前缀用 Auspicious spirits / Inauspicious spirits
 - 文案按英文习惯重写，非逐字直译
 
-### 第 7 步：注册文章并提交审核
+### 第 7 步：生成封面图
+
+本机运行的生成期工具，图片烘焙进 R2，站点零运行时依赖：
+
+```powershell
+npm run cover -- YYYY-MM-DD
+```
+
+脚本自动完成：读当日 almanac 数据构造 prompt（生肖主角 + 吉神意象 + 节气物候，国风水墨、**画面不含文字**）→ 调 Agnes 生图（1K 16:9）→ 压缩主图 jpg（1312×736）+ 归档缩略图 webp → 上传 R2 `covers/daily/` 前缀（复用本机 wrangler 登录态，无需额外凭证）。
+
+**生成后必须人工看图**：
+- 主角生肖与当日 `zodiac` 字段一致（prompt 内置十二生肖外形特征表防偏差——如蛇日容易误画成龙，脚本已用真实蛇种锚定；仍画错就重跑一次）
+- 画面无文字、无乱码、无明显畸变
+- 首次上传后如有 CDN 缓存旧图（迭代重跑同 URL），用 `node purge-cache.js <图片URL>` 清缓存
+
+上传成功后按脚本提示在第 8 步注册时带上 `cover` 字段。
+
+### 第 8 步：注册文章并提交审核
 
 1. 在 `src/pages/daily.ts` 顶部加两条 import：
    ```ts
@@ -211,6 +228,7 @@ npm run almanac -- YYYY-MM-DD
    ```ts
    {
      date: "YYYY-MM-DD",
+     cover: "/covers/daily/YYYY-MM-DD.jpg", // 第 7 步生成；若跳过封面则省略此行
      meta: {
        zh: { title: "YYYY年M月D日宜忌·{生肖}", description: "{含日期+核心宜忌+生肖+科普主题的简介}" },
        en: { title: "Daily Almanac — Month Day, YYYY ({Zodiac})", description: "{对应英文简介}" },
@@ -218,15 +236,16 @@ npm run almanac -- YYYY-MM-DD
      content: { zh: dailyYYYYMMDDZh, en: dailyYYYYMMDDEn },
    },
    ```
-3. 运行 `npm test` + `npm run typecheck` 确认通过
+3. 运行 `npm run covers:check`（有 cover 字段时，校验 R2 上主图与缩略图真实存在）+ `npm test` + `npm run typecheck`
 4. 把 diff 交给用户审核
 5. 用户审核通过 → git push → Cloudflare 自动部署
 
-## 用户审核重点（三看）
+## 用户审核重点（四看）
 
 1. **双语齐全**：zh.html + en.html 两文件都在，三段结构对应
 2. **三段齐全**：daily-almanac / daily-zodiac / daily-story 三个 section 都有
 3. **数据一致**：A 段的宜忌、生肖、冲煞与 `npm run almanac` 输出一致
+4. **封面正确**：主角生肖 = 当日生肖，画面无文字；`cover` 字段已注册且 `npm run covers:check` 通过
 
 ## 文件命名规范
 
@@ -283,6 +302,12 @@ A: 不行。一个日期对应一篇文章，URL 唯一。如需补发漏掉的�
 
 **Q: 写错了已发布的内容怎么办？**
 A: 直接修改对应 HTML 文件，git push 重新部署即可。`dateModified` 与 `datePublished` 目前相同（均为日期），如未来需要区分可扩展。
+
+**Q: 封面图生成失败或来不及生成怎么办？**
+A: 可以先省略 `cover` 字段照常发布（og:image 回落全站默认图，页面无头图），事后随时补跑 `npm run cover -- YYYY-MM-DD` 并在 daily.ts 补上 `cover` 字段，push 即生效。
+
+**Q: 想换掉某天的封面怎么办？**
+A: 重跑 `npm run cover -- YYYY-MM-DD` 会覆盖 R2 同名对象；因上传对象带 immutable 缓存头，重跑后用 `node purge-cache.js <图片URL>` 清一下 CDN 缓存。
 
 ## 禁止事项
 

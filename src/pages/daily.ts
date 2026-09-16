@@ -96,11 +96,14 @@ export interface DailyPost {
   date: string;
   meta: Record<Lang, PageMeta>;
   content: Record<Lang, string>;
+  /** 封面图 R2 路径（如 "/covers/daily/2026-09-16.jpg"），由 npm run cover 生成；缺省时 og:image 用全站默认图 */
+  cover?: string;
 }
 
 export interface DailyArchiveItem {
   date: string;
   title: Record<Lang, string>;
+  cover?: string;
 }
 
 /** 归档页元信息：供 nav.ts / footer.ts 引用（不进 registry） */
@@ -112,6 +115,7 @@ export const DAILY_ARCHIVE_META = {
 export const DAILY_POSTS: readonly DailyPost[] = [
   {
     date: "2026-09-16",
+    cover: "/covers/daily/2026-09-16.jpg",
     meta: {
       zh: { title: "2026年9月16日宜忌·蛇", description: "2026年9月16日黄历宜忌：朱雀黑道值日，月恩、四相、三合、临日、天喜、天医、不将、普护八颗吉神并趋化解，宜开市、交易、立券、纳财、挂匾、栽种、祭祀、祈福、开光、拆卸、动土、安床十二事，忌嫁娶、破土、进人口、出行、入宅、移徙、出火、纳畜、词讼、安葬十事，冲猪煞东；生肖蛇今日运势与重日凶煞科普。" },
       en: { title: "Daily Almanac — September 16, 2026 (Snake)", description: "September 16, 2026 Chinese almanac: a Zhūquè Black Path day tempered by eight auspicious spirits — Yuè'ēn, Sìxiàng, Sānhé, Línrì, Tiānxǐ, Tiānyī, Bùjiàng and Pǔhù — favorable for opening market, trading, signing contracts, collecting wealth, hanging plaques, planting, sacrifice, prayers, consecration, dismantling, groundbreaking and setting the bed, twelve matters in all; avoid marriage, breaking ground, welcoming people, travel, moving into a house, relocating, moving fire, acquiring livestock, litigation and burial, ten matters in all; clash Pig, Sha East; Snake zodiac fortune and the lore of the Chòngrì Repeated Day." },
@@ -479,5 +483,5 @@ export function findDailyPost(date: string): DailyPost | undefined {
 export function dailyArchive(): DailyArchiveItem[] {
   return [...DAILY_POSTS]
     .sort((a, b) => b.date.localeCompare(a.date))
-    .map((p) => ({ date: p.date, title: { zh: p.meta.zh.title, en: p.meta.en.title } }));
+    .map((p) => ({ date: p.date, title: { zh: p.meta.zh.title, en: p.meta.en.title }, cover: p.cover }));
 }

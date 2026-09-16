@@ -3,7 +3,7 @@ import { authProblem, type SiteAuthEnv } from "../auth";
 import { callLlm, type LlmEnv } from "../llm";
 import type { Lang } from "../config/site";
 import { GENERATORS } from "../llmgen/registry";
-import { recordApiCall, type StatsEnv } from "../stats";
+import type { StatsEnv } from "../stats";
 
 const MAX_BODY_BYTES = 64 * 1024;
 
@@ -14,12 +14,6 @@ function err(code: string, message: string) {
 /** 注册自用内容生成路由（在 api 子应用内，basePath 已是 /api） */
 export function registerLlmgenRoutes(api: Hono<{ Bindings: SiteAuthEnv & LlmEnv & StatsEnv }>): void {
   api.post("/llm/generate", async (c) => {
-    // 0. 记录 API 调用（异步，不阻塞主流程）
-    const db = c.env?.STATS_DB;
-    if (db) {
-      recordApiCall(db, "/api/llm/generate").catch(() => {});
-    }
-
     // 1. 鉴权（自用端点：SITE_API_KEY + x-api-key；未配置 → 503 优先于 401）
     const denied = authProblem(c.env, c.req.header("x-api-key"));
     if (denied) return c.json(err(denied.code, denied.message), denied.status);

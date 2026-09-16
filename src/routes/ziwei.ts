@@ -15,12 +15,6 @@ function err(code: string, message: string) {
 /** 注册紫微斗数解读路由（在 api 子应用内，basePath 已是 /api） */
 export function registerZiweiRoutes(api: Hono<{ Bindings: ZiweiEnv & StatsEnv }>): void {
   api.post("/ziwei/interpret", async (c) => {
-    // 0. 记录 API 调用（异步，不阻塞主流程）
-    const db = c.env?.STATS_DB;
-    if (db) {
-      recordApiCall(db, "/api/ziwei/interpret").catch(() => {});
-    }
-
     // 1. 限流（绑定缺失则跳过，本地 dev / 测试环境可用）
     const limiter = c.env?.ZIWEI_RATE_LIMITER;
     if (limiter) {

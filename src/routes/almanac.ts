@@ -2,7 +2,6 @@ import type { Hono } from "hono";
 import { compute } from "../almanac/compute";
 import { authProblem, type SiteAuthEnv } from "../auth";
 import { addDays, buildMonth, buildWeek } from "../fortune/skeleton";
-import { recordApiCall } from "../stats";
 import type { StatsEnv } from "../stats";
 
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
@@ -28,12 +27,6 @@ function shanghaiMonday(): string {
 /** 注册历法数据路由（在 api 子应用内，basePath 已是 /api） */
 export function registerAlmanacRoutes(api: Hono<{ Bindings: SiteAuthEnv & StatsEnv }>): void {
   api.get("/almanac", async (c) => {
-    // 0. 记录 API 调用（异步，不阻塞主流程；与 zeji 等现有路由一致）
-    const db = c.env?.STATS_DB;
-    if (db) {
-      recordApiCall(db, "/api/almanac").catch(() => {});
-    }
-
     // 1. 鉴权
     const denied = authProblem(c.env, c.req.header("x-api-key"));
     if (denied) return c.json(err(denied.code, denied.message), denied.status);
@@ -49,11 +42,6 @@ export function registerAlmanacRoutes(api: Hono<{ Bindings: SiteAuthEnv & StatsE
   });
 
   api.get("/fortune/week", async (c) => {
-    const db = c.env?.STATS_DB;
-    if (db) {
-      recordApiCall(db, "/api/fortune/week").catch(() => {});
-    }
-
     const denied = authProblem(c.env, c.req.header("x-api-key"));
     if (denied) return c.json(err(denied.code, denied.message), denied.status);
 
@@ -70,11 +58,6 @@ export function registerAlmanacRoutes(api: Hono<{ Bindings: SiteAuthEnv & StatsE
   });
 
   api.get("/fortune/month", async (c) => {
-    const db = c.env?.STATS_DB;
-    if (db) {
-      recordApiCall(db, "/api/fortune/month").catch(() => {});
-    }
-
     const denied = authProblem(c.env, c.req.header("x-api-key"));
     if (denied) return c.json(err(denied.code, denied.message), denied.status);
 

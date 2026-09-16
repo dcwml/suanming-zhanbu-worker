@@ -15,6 +15,7 @@ import {
   SITE_SLOGAN,
   SITE_SLOGAN_EN,
   absoluteUrl,
+  coverUrl,
   pagePath,
   type Lang,
 } from "../config/site";
@@ -109,6 +110,8 @@ interface StandardHeadInput {
   description: string;
   ogType: "website" | "article";
   jsonLdHtml: string;
+  /** 文章封面完整 URL；缺省用全站默认 og 图 */
+  image?: string;
 }
 
 /** daily / weekly / monthly 单篇与归档页共用的完整 head 构建 */
@@ -117,7 +120,7 @@ function buildStandardHead(input: StandardHeadInput): string {
   const canonical = absoluteUrl(pagePath(lang, slug));
   const title = escapeHtml(input.title);
   const description = escapeHtml(input.description);
-  const image = absoluteUrl(OG_IMAGE_PATH);
+  const image = input.image ?? absoluteUrl(OG_IMAGE_PATH);
   const otherLang = OTHER_LANG[lang];
 
   const hreflangs = LANGS.map(
@@ -151,7 +154,7 @@ function buildStandardHead(input: StandardHeadInput): string {
   ].join("\n    ");
 }
 
-/** daily 单篇 head：三段路径 canonical + Article JSON-LD */
+/** daily 单篇 head：三段路径 canonical + Article JSON-LD；有封面时 og:image 用封面 */
 export function buildDailyPostHead(post: DailyPost, lang: Lang): string {
   return buildStandardHead({
     lang,
@@ -160,6 +163,7 @@ export function buildDailyPostHead(post: DailyPost, lang: Lang): string {
     description: post.meta[lang].description,
     ogType: "article",
     jsonLdHtml: toJsonLdScript(articleJsonLd(post, lang)),
+    image: post.cover ? coverUrl(post.cover) : undefined,
   });
 }
 

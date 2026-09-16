@@ -8,6 +8,7 @@ import { registerZejiRoutes } from "./zeji";
 import { registerZiweiRoutes } from "./ziwei";
 import { registerHehunRoutes } from "./hehun";
 import { registerLlmgenRoutes } from "./llmgen";
+import { registerStatsRoutes } from "./stats";
 import type { SiteAuthEnv } from "../auth";
 import type { BaziEnv } from "../bazi/types";
 import type { LiuyaoEnv } from "../liuyao/types";
@@ -48,6 +49,7 @@ registerZiweiRoutes(api);
 registerHehunRoutes(api);
 registerAlmanacRoutes(api);
 registerLlmgenRoutes(api);
+registerStatsRoutes(api);
 
 // 兜底：/api/* 未命中一律返回 JSON 404（而非 HTML 404 页）
 api.all("*", (c) =>

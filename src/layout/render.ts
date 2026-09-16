@@ -1,4 +1,13 @@
-import { HTML_LANG, SITE_NAME, SITE_NAME_EN, pagePath, type Lang } from "../config/site";
+import {
+  HTML_LANG,
+  SITE_NAME,
+  SITE_NAME_EN,
+  coverThumbPath,
+  coverUrl,
+  pagePath,
+  type Lang,
+} from "../config/site";
+import { escapeHtml } from "../seo/meta";
 import type { PageEntry } from "../pages/registry";
 import { NOT_FOUND_CONTENT } from "../pages/registry";
 import type { DailyArchiveItem, DailyPost } from "../pages/daily";
@@ -106,24 +115,36 @@ export function renderError(lang: Lang): string {
   return layout(lang, buildPlainHead(lang, title), renderNav(lang, SENTINEL_ERROR, ""), body);
 }
 
+/** 封面头图（单篇顶部；尺寸对应生图档位 1K 16:9） */
+function postCoverHtml(cover: string, alt: string): string {
+  const url = escapeHtml(coverUrl(cover));
+  const altText = escapeHtml(alt);
+  return `\n      <figure class="post-cover"><img src="${url}" alt="${altText}" width="1312" height="736" loading="eager" fetchpriority="high"></figure>`;
+}
+
 /** daily 单篇：导航高亮归档页（slug="daily"），语言切换指向同日期另一语言版 */
 export function renderDailyPost(post: DailyPost, lang: Lang): string {
+  const cover = post.cover ? postCoverHtml(post.cover, post.meta[lang].title) : "";
+  const main = cover ? `${cover}\n${post.content[lang]}` : post.content[lang];
   return layout(
     lang,
     buildDailyPostHead(post, lang),
     renderNav(lang, "daily", `daily/${post.date}`),
-    post.content[lang],
+    main,
   );
 }
 
-/** daily 归档页：按日期倒序列出文章链接 */
+/** daily 归档页：按日期倒序列出文章链接（有封面的带缩略图） */
 export function renderDailyArchive(items: DailyArchiveItem[], lang: Lang): string {
   const title = DAILY_ARCHIVE_META.title[lang];
   const links = items
-    .map(
-      (item) =>
-        `      <article class="daily-archive-item">\n        <h2><a href="${pagePath(lang, `daily/${item.date}`)}">${item.title[lang]}</a></h2>\n      </article>`,
-    )
+    .map((item) => {
+      const href = pagePath(lang, `daily/${item.date}`);
+      const thumb = item.cover
+        ? `\n        <a class="daily-archive-thumb" href="${href}" tabindex="-1" aria-hidden="true"><img src="${escapeHtml(coverUrl(coverThumbPath(item.cover)))}" alt="" width="320" height="180" loading="lazy"></a>`
+        : "";
+      return `      <article class="daily-archive-item${item.cover ? " has-cover" : ""}">${thumb}\n        <h2><a href="${href}">${item.title[lang]}</a></h2>\n      </article>`;
+    })
     .join("\n");
   const main = `      <h1>${title}</h1>\n${links}`;
   return layout(lang, buildDailyArchiveHead(lang), renderNav(lang, "daily", "daily"), main);

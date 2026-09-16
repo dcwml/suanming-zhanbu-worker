@@ -8,6 +8,7 @@ import {
   SITE_NAME,
   SITE_NAME_EN,
   absoluteUrl,
+  coverUrl,
   pagePath,
   type Lang,
 } from "../config/site";
@@ -31,8 +32,10 @@ function articleJsonLdBase(opts: {
   date: string;
   slug: string;
   lang: Lang;
+  /** 文章封面完整 URL；缺省不输出 image 字段 */
+  image?: string;
 }): Record<string, unknown> {
-  return {
+  const base: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: opts.headline,
@@ -44,6 +47,8 @@ function articleJsonLdBase(opts: {
     mainEntityOfPage: { "@type": "WebPage", "@id": absoluteUrl(pagePath(opts.lang, opts.slug)) },
     inLanguage: HREFLANG_CODE[opts.lang],
   };
+  if (opts.image) base.image = [opts.image];
+  return base;
 }
 
 export function websiteJsonLd(): Record<string, unknown> {
@@ -99,6 +104,7 @@ export function articleJsonLd(post: DailyPost, lang: Lang): Record<string, unkno
     date: post.date,
     slug: `daily/${post.date}`,
     lang,
+    image: post.cover ? coverUrl(post.cover) : undefined,
   });
 }
 

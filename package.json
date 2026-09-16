@@ -14,6 +14,8 @@
     "fortune:week": "tsx scripts/fortune.ts week",
     "fortune:month": "tsx scripts/fortune.ts month",
     "tuiyan": "tsx scripts/tuiyan.ts",
+    "cover": "tsx scripts/cover.ts",
+    "covers:check": "tsx scripts/cover-check.ts",
     "qian:validate": "node scripts/validate-qian.mjs"
   },
   "dependencies": {
@@ -23,6 +25,7 @@
   "devDependencies": {
     "@cloudflare/vitest-pool-workers": "^0.9.0",
     "@cloudflare/workers-types": "^5.20250601.0",
+    "sharp": "^0.35.4",
     "tsx": "^4.23.5",
     "typescript": "^5.6.0",
     "vitest": "^3.2.0",

@@ -19,22 +19,24 @@ npm run almanac -- YYYY-MM-DD  # 生成期工具：输出指定日期的历法�
 npm run fortune:week -- YYYY-MM-DD  # 生成期工具：周运骨架生成器（参数必须是周一），输出该周 7 天历法骨架 + 生肖关系评分 + 特吉/次吉/忠告排序
 npm run fortune:month -- YYYY-MM    # 生成期工具：月运骨架生成器，输出月柱分段、节气、生肖月关系（六合/三合/值月/相害/相冲）、吉日速查
 npm run tuiyan -- YYYY-MM-DD  # 生成期工具：时辰推演骨架生成器（参数 = 农历月内任意一天，输出该农历月每天×12时辰的特殊格局：纯阳/纯阴、天乙、羊刃、桃花、驿马、将星、华盖、三合局、方会、魁罡、干支合，按一级大格/魁罡日/每日亮点分级）
+npm run cover -- YYYY-MM-DD     # 生成期工具：当日宜忌文章封面图生成（almanac 主题 → Agnes 生图 → sharp 压缩 → 上传 R2 covers/daily/；--local 上传本地模拟供 dev 预览）
+npm run covers:check            # 校验 daily.ts 引用的封面在 R2 上真实存在（主图 + 缩略图）；改 cover 字段后必跑
 npm run qian:validate # 灵签数据校验：三签种各 100 签、编号连续、等级合法、双语对称；改 public/assets/qian/ 后必跑
 ```
 
 提交前必须通过：`npm test` + `npm run typecheck`。测试结束时 Windows 上可能出现 miniflare 临时目录 EBUSY 警告，属无害噪音，不代表失败。
 
-LLM 密钥：本地开发在 `.dev.vars` 配置 `LLM_API_KEY`（不入库）；生产部署前执行 `wrangler secret put LLM_API_KEY`。`LLM_BASE_URL`/`LLM_MODEL` 是普通 vars，在 `wrangler.jsonc` 里改。
-自用 API（历法数据 GET /api/almanac、/api/fortune/week、/api/fortune/month 与内容生成 POST /api/llm/generate）统一用 x-api-key 鉴权：本地 .dev.vars 配 SITE_API_KEY，生产 wrangler secret put SITE_API_KEY（未配置时端点 503）。
+LLM 密钥：本地开发在 `.dev.vars` 配置 `LLM_API_KEY`（不入库）；生产部署前执行 `wrangler secret put LLM_API_KEY`。`LLM_BASE_URL`/`LLM_MODEL` 是普通 vars，在 `wrangler.jsonc` 里改。封面生成脚本（scripts/cover.ts）复用 `LLM_API_KEY`（或专用 `IMAGE_API_KEY`）调 `https://apihub.agnes-ai.cn` 生图，仅本机运行。
+自用 API（历法数据 GET /api/almanac、/api/fortune/week、/api/fortune/month、统计查询 GET /api/stats/overview、/api/stats/pages、/api/stats/apis 与内容生成 POST /api/llm/generate）统一用 x-api-key 鉴权：本地 .dev.vars 配 SITE_API_KEY，生产 wrangler secret put SITE_API_KEY（未配置时端点 503）。
 
 ## 目录结构与职责
 
 ```
 src/
-  index.ts            Worker 入口：挂载 api → pages，全局 notFound/onError
-  config/site.ts      ★ 全站配置单一来源：SITE_ORIGIN、语言表、pagePath/absoluteUrl/langFromPath
+  index.ts            Worker 入口：挂载 api → pages，全局访问统计埋点中间件（爬虫过滤 + waitUntil 异步写 D1），全局 notFound/onError
+  config/site.ts      ★ 全站配置单一来源：SITE_ORIGIN、COVERS_ORIGIN（封面 R2 域名）、语言表、pagePath/absoluteUrl/coverUrl/coverThumbPath/langFromPath
   pages/registry.ts   ★ 固定页面注册表单一来源：PAGES + NOT_FOUND_CONTENT + findPage/navPages
-  pages/daily.ts      ★ 每日宜忌聚合模块：DAILY_POSTS / DAILY_ARCHIVE_META / findDailyPost / dailyArchive（不进 registry）
+  pages/daily.ts      ★ 每日宜忌聚合模块：DAILY_POSTS（含可选 cover 封面字段）/ DAILY_ARCHIVE_META / findDailyPost / dailyArchive（不进 registry）
   pages/weekly.ts     ★ 每周运势聚合模块：WEEKLY_POSTS / WEEKLY_ARCHIVE_META / findWeeklyPost / weeklyArchive（不进 registry）
   pages/monthly.ts    ★ 每月运势聚合模块：MONTHLY_POSTS / MONTHLY_ARCHIVE_META / findMonthlyPost / monthlyArchive（不进 registry）
   pages/tuiyan.ts      ★ 时辰推演聚合模块：TUIYAN_POSTS / TUIYAN_ARCHIVE_META / findTuiyanPost / tuiyanArchive（不进 registry）
@@ -75,11 +77,15 @@ src/
   routes/hehun.ts     POST /api/hehun/interpret：限流→校验→LLM→Markdown 返回
   routes/almanac.ts   GET /api/almanac、/api/fortune/week、/api/fortune/month：鉴权（x-api-key + SITE_API_KEY secret，未配置 503 not_configured）→ 校验 → 计算 → JSON；缺省参数按 Asia/Shanghai 取今天/本周一/本月
   routes/llmgen.ts   POST /api/llm/generate：鉴权（SITE_API_KEY）→ 64KB 上限 → type 查表（GENERATORS）→ 浅校验 → callLlm → Markdown 返回（自用，无限流；type 清单见 src/llmgen/registry.ts）
+  routes/stats.ts    GET /api/stats/overview、/api/stats/pages?days=N、/api/stats/apis：鉴权（SITE_API_KEY）→ D1 聚合查询（自用统计，见 src/stats.ts）
+  stats.ts           ★ 统计模块：埋点写入（recordPageView UV 去重 / recordPagePathView 页面 PV / recordApiCall 按状态码）+ 查询聚合（getStats 首页展示 / getOverview / getPageStats / getApiCallStats）；日期口径统一 Asia/Shanghai（shanghaiTodayStr）；表结构见 migrations/
   html.d.ts           *.html 模块的 ambient 声明（配合 wrangler Text rules）
 scripts/
   almanac.ts          生成期 CLI 薄壳：参数解析 + 输出（计算核心在 src/almanac/compute.ts）
   fortune.ts          生成期 CLI 薄壳：周/月骨架输出（计算核心在 src/fortune/skeleton.ts）
   tuiyan.ts            生成期 CLI 薄壳：时辰推演骨架输出（计算核心在 src/tuiyan/scan.ts）
+  cover.ts            封面生成 CLI：almanac 当日数据构造 prompt（内置十二生肖外形特征表防画错，如蛇≠龙）→ Agnes 生图（1K 16:9 无文字）→ sharp 压主图 jpg + 缩略图 webp → wrangler r2 object put 上传（复用本机登录态）
+  cover-check.ts      封面引用校验：正则提取 daily.ts 的 cover 字段 → HEAD R2 自定义域名验证主图与缩略图存在
   validate-qian.mjs   灵签数据校验（qian:validate）：三签种各 100 签、编号连续、等级在公布集合内、双语对称、签诗非空
 public/assets/        静态资源（style.css、logo.png（印章 LOGO，兼作 favicon）、og-default.png、bazi.js、liuyao.js、meihua.js、xiaoliuren.js、zeji.js、ziwei.js、chouqian.js、vendor/iztro.min.js、qian/ 灵签数据），由 Workers assets 直接服务；bazi/liuyao/meihua/xiaoliuren/zeji/hehun 页面经 CDN 统一加载 lunar-javascript 1.7.7（cdnjs 主源 + staticfile 回退）；ziwei 页面经 unpkg → jsdelivr → 本地 vendor 三级链加载 iztro 2.6.0；三个灵签页面加载 qian/{id}.{lang}.js 数据 + chouqian.js 共享脚本（零外部 CDN）
   bazi.js             前端 lunar-javascript 排盘 + 三段串行解读渲染
@@ -99,9 +105,9 @@ test/                 集成测试 + 单元测试（vitest 全量，SELF.fetch /
 1. **新增固定页面 = 两步，别写第三步**：`src/content/` 加 `<slug>.zh.html` + `<slug>.en.html` → `registry.ts` 的 `PAGES` 加一条 `PageEntry`。SEO、sitemap、导航、语言切换全部自动派生，不要手写任何 meta 标签或 sitemap 条目。
 2. **新增运势内容（每日/每周/每月）= 两步，不碰 registry**：内容片段 + 对应聚合模块的 POSTS 数组加一条，SEO、sitemap、导航全部自动派生。① 每日：`src/content/daily/` 加 `YYYY-MM-DD.zh.html` + `.en.html` → `src/pages/daily.ts` 的 `DAILY_POSTS` 加一条 `DailyPost`。② 周运：`src/content/weekly/` 加 `YYYY-MM-DD.zh.html` + `.en.html`（日期为该周周一）→ `src/pages/weekly.ts` 的 `WEEKLY_POSTS` 加一条 `WeeklyPost`。③ 月运：`src/content/monthly/` 加 `YYYY-MM.zh.html` + `.en.html` → `src/pages/monthly.ts` 的 `MONTHLY_POSTS` 加一条 `MonthlyPost`。④ 时辰推演：src/content/tuiyan/ 加 YYYY-MM-DD.zh.html + .en.html（日期为农历月首日公历日期）→ src/pages/tuiyan.ts 的 TUIYAN_POSTS 加一条 TuiyanPost。详细流程分别见 [每日内容生产手册](./docs/superpowers/daily-content-playbook.md)、[周运生产手册](./docs/superpowers/weekly-content-playbook.md)、[月运生产手册](./docs/superpowers/monthly-content-playbook.md)。
 3. **URL 只有一种拼法**：所有绝对 URL 必须经 `absoluteUrl(pagePath(lang, slug))` 生成；正式 URL 均带尾斜杠，无尾斜杠路径由路由层 301。禁止手拼 `https://...` 字符串。
-4. **域名单一来源**：`SITE_ORIGIN` 已设为正式域名 `https://suanming-zhanbu.com`，如需换域名只改这一处。写测试时断言必须基于 `SITE_ORIGIN` 常量而非硬编码域名。
+4. **域名单一来源**：`SITE_ORIGIN` 已设为正式域名 `https://suanming-zhanbu.com`，如需换域名只改这一处。封面图走第二常量 `COVERS_ORIGIN`（`https://r2.suanming-zhanbu.com`，R2 桶 suanming-zhanbu-workers 的自定义域名，前缀 `covers/`）。写测试时断言必须基于 `SITE_ORIGIN`/`COVERS_ORIGIN` 常量而非硬编码域名。
 5. **转义纪律**：插入 HTML 属性/文本一律过 `escapeHtml`；JSON-LD 一律经 `toJsonLdScript`（内部把 `<` 转 `\u003c`）。正文片段是唯一被信任的原始 HTML（仓库内受控内容）。
-6. **API 形状**：`/api/*` 统一返回 `{ ok: true, data }` 或 `{ ok: false, error: { code, message } }`；错误响应不得回显未截断的用户输入（现有 404 用 `slice(0, 128)`）。未来 LLM 接口（如 `POST /api/divine`）沿用此模式加在 `routes/api.ts`。已落地实例：`POST /api/bazi/interpret`（见 `src/routes/bazi.ts`，错误码 invalid_request/rate_limited/not_configured/upstream_error/upstream_timeout）；`POST /api/liuyao/interpret`（见 `src/routes/liuyao.ts`，错误码同上 + payload_too_large/invalid_json）；`POST /api/meihua/interpret`（见 `src/routes/meihua.ts`，错误码同 liuyao）；`POST /api/xiaoliuren/interpret`（见 `src/routes/xiaoliuren.ts`，错误码同 liuyao）；`POST /api/zeji/interpret`（见 `src/routes/zeji.ts`，错误码同 liuyao）；`POST /api/ziwei/interpret`（见 `src/routes/ziwei.ts`，错误码同 liuyao）；`POST /api/hehun/interpret`（见 `src/routes/hehun.ts`，错误码同 liuyao）；GET /api/almanac、/api/fortune/week、/api/fortune/month（见 src/routes/almanac.ts，x-api-key 鉴权，错误码 unauthorized/invalid_request/not_configured，零 LLM 纯计算）。
+6. **API 形状**：`/api/*` 统一返回 `{ ok: true, data }` 或 `{ ok: false, error: { code, message } }`；错误响应不得回显未截断的用户输入（现有 404 用 `slice(0, 128)`）。未来 LLM 接口（如 `POST /api/divine`）沿用此模式加在 `routes/api.ts`。已落地实例：`POST /api/bazi/interpret`（见 `src/routes/bazi.ts`，错误码 invalid_request/rate_limited/not_configured/upstream_error/upstream_timeout）；`POST /api/liuyao/interpret`（见 `src/routes/liuyao.ts`，错误码同上 + payload_too_large/invalid_json）；`POST /api/meihua/interpret`（见 `src/routes/meihua.ts`，错误码同 liuyao）；`POST /api/xiaoliuren/interpret`（见 `src/routes/xiaoliuren.ts`，错误码同 liuyao）；`POST /api/zeji/interpret`（见 `src/routes/zeji.ts`，错误码同 liuyao）；`POST /api/ziwei/interpret`（见 `src/routes/ziwei.ts`，错误码同 liuyao）；`POST /api/hehun/interpret`（见 `src/routes/hehun.ts`，错误码同 liuyao）；GET /api/almanac、/api/fortune/week、/api/fortune/month（见 src/routes/almanac.ts，x-api-key 鉴权，错误码 unauthorized/invalid_request/not_configured，零 LLM 纯计算）；GET /api/stats/overview、/api/stats/pages、/api/stats/apis（见 src/routes/stats.ts，同款鉴权，D1 统计聚合查询）。
 7. **双语对称**：任何页面/文案改动必须同时覆盖 zh 与 en；`Lang` 类型收紧为 `"zh" | "en"`，新增语言需从 `site.ts` 的语言表全套扩展。
 8. **wrangler 配置陷阱**：Text 模块规则字段是 `rules[].globs`（不是 `include`）；`assets.directory` 必须存在，否则 vitest pool 启动失败。
 9. **TDD**：本仓库按测试先行开发。改行为先改/加测试；`SELF.fetch` 集成测试放 `test/integration.test.ts`，纯函数单测按模块拆分。
@@ -129,7 +135,7 @@ test/                 集成测试 + 单元测试（vitest 全量，SELF.fetch /
 
 ### 新增一篇内容的流程
 
-用户说"写一篇博客"时，按 [每日内容生产手册](./docs/superpowers/daily-content-playbook.md) 执行 7 步流程：
+用户说"写一篇博客"时，按 [每日内容生产手册](./docs/superpowers/daily-content-playbook.md) 执行 8 步流程：
 
 1. **确定日期** — 默认明天
 2. **跑 almanac** — `npm run almanac -- YYYY-MM-DD` 获取历法数据
@@ -137,19 +143,44 @@ test/                 集成测试 + 单元测试（vitest 全量，SELF.fetch /
 4. **写 B 段** — 当日生肖主角运势（其余生肖留占位）
 5. **写 C 段** — 科普/典故
 6. **写英文版** — 中英一一对应
-7. **注册提交** — 加 HTML 文件 + 更新 `daily.ts` 的 DAILY_POSTS
+7. **生成封面** — `npm run cover -- YYYY-MM-DD`（人工看图：生肖一致、无文字）→ daily.ts 注册 `cover` 字段 → `npm run covers:check`
+8. **注册提交** — 加 HTML 文件 + 更新 `daily.ts` 的 DAILY_POSTS
 
-### 用户审核三看
+### 用户审核四看
 
 - 双语齐全（zh + en 都有）
 - 三段齐全（almanac / zodiac / story 都有）
 - 数据一致（HTML 中的宜忌与 almanac 输出一致）
+- 封面正确（主角生肖 = 当日生肖、画面无文字；cover 字段已注册且 covers:check 通过）
 
 ### 已知边界
 
 - B 段目前只写当日地支对应的单一生肖，其余 11 个生肖显示占位文本（未来可扩展留言问答功能）
 - 无自动归档/过期机制，历史文章永久保留
 - `DAILY_ARCHIVE_META` 在 nav/footer 中显式引用（不经过 registry 的 `navPages()`），属合理破例
+- 封面图为可选字段：2026-09-16 起新文章配图，存量文章不补（cover 缺省时 og:image 回落 og-default.png，归档页无缩略图）
+
+## 访问统计（Cloudflare D1）
+
+埋点在 `src/index.ts` 全局中间件一处完成，覆盖所有页面与 API（含未来新增路由）：
+
+- **页面 PV**：非 `/api/*` 的 GET 且 200，按「天 × 规范路径」写 `page_views`（301/404/sitemap/robots 不计）
+- **API 调用**：`/api/*` 全部请求按「天 × 路径 × HTTP 状态码」写 `api_stats`（历史行的 status 'ok' 查询时归并为 '200'）
+- **过滤**：爬虫/脚本 UA（isBotUserAgent）一律不计；全部 `waitUntil` 异步写、D1 失败静默，不影响主流程
+- **UV/展示**：`daily_stats` + `daily_unique_visitors`（SHA256(ip) 去重，仅首页/八字/六爻三页）供首页底部公开统计栏
+- **日期口径**：统一 Asia/Shanghai（`shanghaiTodayStr`，与 /api/almanac 一致）
+- **查询**：自用接口 `GET /api/stats/overview`、`/api/stats/pages?days=N`、`/api/stats/apis`（x-api-key）
+- **migration**：`migrations/`（0001 建表、0002 page_views + api_stats 加 status）；Git 集成部署**不会自动跑** migration，改表后需手动 `npx wrangler d1 migrations apply suanming-zhanbu-stats --remote`
+- **测试**：test/stats.test.ts（内存 mock 覆盖写入与查询）、test/stats-api.test.ts（鉴权与空库降级）
+
+## 文章封面图（R2）
+
+生成期烘焙架构，站点零运行时依赖：
+
+- **存储**：R2 桶 `suanming-zhanbu-workers`，前缀 `covers/daily/YYYY-MM-DD.jpg`（主图 1312×736 jpg，immutable 缓存头）+ 同名 `.thumb.webp`（归档缩略图）；经自定义域名 `COVERS_ORIGIN` 直读，Worker 不经手
+- **数据**：`DailyPost.cover?`（可选，R2 路径），单篇头图 / 归档缩略图 / og:image / twitter:image / Article JSON-LD image 五处生效；缺省回落 og-default.png
+- **生成**：`npm run cover -- YYYY-MM-DD`（本机运行，详见 scripts/cover.ts 头注释）；改 cover 引用后跑 `npm run covers:check`
+- **缓存陷阱**：重生成同 URL 会覆盖 R2 对象，但 immutable 头会让 CDN 粘住旧图，需 `node purge-cache.js <图片URL>` 清缓存
 
 ## 每周 / 每月运势栏目
 
