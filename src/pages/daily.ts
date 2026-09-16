@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260917Zh from "../content/daily/2026-09-17.zh.html";
+import daily20260917En from "../content/daily/2026-09-17.en.html";
 import daily20260916Zh from "../content/daily/2026-09-16.zh.html";
 import daily20260916En from "../content/daily/2026-09-16.en.html";
 import daily20260915Zh from "../content/daily/2026-09-15.zh.html";
@@ -113,6 +115,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-09-17",
+    cover: "/covers/daily/2026-09-17.jpg",
+    meta: {
+      zh: { title: "2026年9月17日宜忌·马", description: "2026年9月17日黄历宜忌：金匮黄道值日，月空、不将、福生、金匮、鸣吠五颗吉神并趋，宜嫁娶、祭祀、理发、进人口、作灶、移柩、冠笄、会亲友八事，忌开仓、出货财、伐木、纳畜、开市、上梁、盖屋、破土、启钻、栽种十事，冲鼠煞北；生肖马今日运势与冠笄成人礼科普。" },
+      en: { title: "Daily Almanac — September 17, 2026 (Horse)", description: "September 17, 2026 Chinese almanac: a Jīnkuì Golden Casket Yellow Path day with five auspicious spirits — Yuèkōng, Bùjiàng, Fúshēng, Jīnkuì and Míngfèi — favorable for marriage ceremonies, sacrificial rites, haircuts, welcoming people, making stoves, moving coffins, coming-of-age ceremonies and gathering with kin and friends, eight matters in all; avoid opening granaries, shipping out wealth, felling trees, acquiring livestock, opening market, raising beams, roofing houses, breaking ground, reopening graves and planting, ten matters in all; clash Rat, Sha North; Horse zodiac fortune and the lore of the ancient capping and hairpin rites." },
+    },
+    content: { zh: daily20260917Zh, en: daily20260917En },
+  },
   {
     date: "2026-09-16",
     cover: "/covers/daily/2026-09-16.jpg",
