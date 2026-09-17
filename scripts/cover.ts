@@ -111,9 +111,9 @@ async function main(): Promise<void> {
   if (!date || !DATE_RE.test(date)) fail("用法：npm run cover -- YYYY-MM-DD [--local]");
 
   const data = compute(date);
-  const { prompt, mood, element, composition } = buildCoverPrompt(data, date);
+  const { prompt, mood, element, styleName, composition } = buildCoverPrompt(data, date);
   console.log(
-    `▶ ${date} 生肖${data.zodiac}日（${data.dayGanZhi}）情绪=${MOOD_LABELS[mood]} 纳音=${data.naYin}(${element}) 构图=${composition} — 正在生成封面…`,
+    `▶ ${date} 生肖${data.zodiac}日（${data.dayGanZhi}）情绪=${MOOD_LABELS[mood]} 画风=${styleName}（天干${data.wuxing}）纳音=${data.naYin}(${element}) 构图=${composition} — 正在生成封面…`,
   );
 
   const raw = await generateImage(prompt, apiKey());

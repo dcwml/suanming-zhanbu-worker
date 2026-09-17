@@ -67,6 +67,19 @@ describe("buildCoverPrompt", () => {
     expect(r.prompt).toContain("不得出现任何文字");
   });
 
+  it("天干五行 → 画风：五档各归其位", () => {
+    expect(buildCoverPrompt(d({ wuxing: "金" }), "2026-09-17").styleName).toBe("金碧山水");
+    expect(buildCoverPrompt(d({ wuxing: "木" }), "2026-09-17").styleName).toBe("木刻版画");
+    expect(buildCoverPrompt(d({ wuxing: "水" }), "2026-09-17").styleName).toBe("水墨写意");
+    expect(buildCoverPrompt(d({ wuxing: "火" }), "2026-09-17").styleName).toBe("敦煌壁画");
+    expect(buildCoverPrompt(d({ wuxing: "土" }), "2026-09-17").styleName).toBe("浅绛山水");
+  });
+
+  it("prompt 首句携带对应画风描述；未知五行回落默认水墨工笔", () => {
+    expect(buildCoverPrompt(d({ wuxing: "火" }), "2026-09-17").prompt).toContain("敦煌壁画风格");
+    expect(buildCoverPrompt(d({ wuxing: "未知" }), "2026-09-17").prompt).toContain("中国传统水墨画与工笔重彩");
+  });
+
   it("吉日凶煞偏多时叠加吉中带谨", () => {
     const r = buildCoverPrompt(d({ tianShenLuck: "吉", jiShen: ["1"], xiongSha: ["1", "2", "3"] }), "2026-09-17");
     expect(r.mood).toBe("auspicious");
@@ -91,11 +104,14 @@ describe("buildCoverPrompt", () => {
     expect(comps.size).toBeGreaterThan(1);
   });
 
-  it("真实日期示例：09-17 与 09-29 同为马日但场景不同", () => {
+  it("真实日期示例：09-17 与 09-29 同为马日但画风与场景均不同", () => {
     const r1 = buildCoverPrompt(compute("2026-09-17"), "2026-09-17");
     const r2 = buildCoverPrompt(compute("2026-09-29"), "2026-09-29");
     expect(r1.element).toBe("金");
     expect(r2.element).toBe("水");
+    // 天干五行：甲→木刻版画、丙→敦煌壁画
+    expect(r1.styleName).toBe("木刻版画");
+    expect(r2.styleName).toBe("敦煌壁画");
     expect(r1.prompt).not.toBe(r2.prompt);
   });
 });

@@ -1,12 +1,14 @@
 /**
  * 封面图 prompt 规则引擎（纯函数，scripts/cover.ts CLI 与 test/cover-prompt.test.ts 共用）
  *
- * 设计：不只是一张「生肖图」——画面由四层信号合成：
- * 1. 情绪（吉凶）：黄道/黑道天神定基调，吉凶神数量对比细分「吉 / 凶中化解 / 晦」三档，
+ * 设计：不只是一张「生肖图」——画面由五层信号合成：
+ * 1. 画风：天干五行 → 五个国风画种（金碧山水/木刻版画/水墨写意/敦煌壁画/浅绛山水）
+ * 2. 情绪（吉凶）：黄道/黑道天神定基调，吉凶神数量对比细分「吉 / 凶中化解 / 晦」三档，
  *    吉日金光朝霞、凶日阴雨暮色，吉日凶煞偏多时叠加「吉中带谨」远景云影
- * 2. 纳音五行场景：纳音尾字归五行（沙中金→金、天河水→水），各有意象池
- * 3. 生肖主角：外形特征表防画错（蛇≠龙）
- * 4. 构图视角：按日期确定性随机（同日重跑稳定，不同日错开）
+ * 3. 纳音五行场景：纳音尾字归五行（沙中金→金、天河水→水），各有意象池（与画风层的
+ *    天干五行相互独立，组合空间 5×5）
+ * 4. 生肖主角：外形特征表防画错（蛇≠龙）
+ * 5. 构图视角：按日期确定性随机（同日重跑稳定，不同日错开）
  *
  * 不用 LLM 生成 prompt：防错锚句与「画面无文字」约束必须原样保留，
  * 且生成期工具需要可复现、可测试；LLM 文学化润色留作二期可选开关。
@@ -81,6 +83,23 @@ const ELEMENT_SCENES: Record<string, readonly string[]> = {
   土: ["黄土山原、沟壑纵横", "厚土坡岭、梯田层叠", "苍茫大地、远山如黛"],
 };
 
+// ── 画风（天干五行 → 五个国风画种） ──────────────────────
+
+/** 画风按天干五行轮换，纳音场景按纳音五行——两套五行正交，组合空间 5×5 */
+export const WUXING_STYLES: Record<string, { name: string; phrase: string }> = {
+  金: { name: "金碧山水", phrase: "金碧山水风格：泥金勾廓、石青石绿辉煌富丽" },
+  木: { name: "木刻版画", phrase: "传统套色木刻版画风格：刀味线条硬朗、色块明快" },
+  水: { name: "水墨写意", phrase: "水墨写意风格：墨分五色、烟水云山、留白呼吸感" },
+  火: { name: "敦煌壁画", phrase: "敦煌壁画风格：朱砂赭石矿物暖色、斑斓古艳" },
+  土: { name: "浅绛山水", phrase: "浅绛山水风格：赭石浅绛设色、温厚浑朴" },
+};
+
+const DEFAULT_STYLE = { name: "水墨工笔", phrase: "中国传统水墨画与工笔重彩结合" };
+
+function styleOf(d: CoverAlmanacData): { name: string; phrase: string } {
+  return WUXING_STYLES[d.wuxing] ?? DEFAULT_STYLE;
+}
+
 // ── 生肖主角（防错锚句，务必原样保留在 prompt 中） ────────
 
 /** 十二生肖外形特征表：生图模型常把「蛇」画成龙，必须显式消歧 */
@@ -120,6 +139,7 @@ export interface CoverPrompt {
   prompt: string;
   mood: Mood;
   element: string;
+  styleName: string;
   composition: string;
 }
 
@@ -129,15 +149,16 @@ export const MOOD_LABELS: Record<Mood, string> = {
   somber: "晦",
 };
 
-/** 由当日黄历数据组装生图 prompt（国风水墨、画面不含文字避免乱码） */
+/** 由当日黄历数据组装生图 prompt（国风、画面不含文字避免乱码） */
 export function buildCoverPrompt(d: CoverAlmanacData, date: string): CoverPrompt {
   const mood = classifyMood(d);
   const element = elementOf(d);
+  const style = styleOf(d);
   const composition = pick(COMPOSITIONS, `${date}:comp`);
   const appearance = ZODIAC_APPEARANCE[d.zodiac] ?? `一只优雅的生肖${d.zodiac}`;
 
   const lines = [
-    "中国传统水墨画与工笔重彩结合的横幅插画。",
+    `${style.phrase}的横幅插画。`,
     `画面主角是${appearance}（生肖${d.zodiac}）`,
     `——${pick(MOOD_SCENES[mood], `${date}:scene`)}，主角${pick(MOOD_ACTIONS[mood], `${date}:act`)}`,
     `。环境是${pick(ELEMENT_SCENES[element] ?? ELEMENT_SCENES[d.wuxing], `${date}:env`)}。`,
@@ -151,5 +172,5 @@ export function buildCoverPrompt(d: CoverAlmanacData, date: string): CoverPrompt
   }
   lines.push("画面中不得出现任何文字、数字、印章、边框或水印。");
 
-  return { prompt: lines.join(""), mood, element, composition };
+  return { prompt: lines.join(""), mood, element, styleName: style.name, composition };
 }
