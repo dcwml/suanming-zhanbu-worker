@@ -158,7 +158,7 @@ test/                 集成测试 + 单元测试（vitest 全量，SELF.fetch /
 - B 段目前只写当日地支对应的单一生肖，其余 11 个生肖显示占位文本（未来可扩展留言问答功能）
 - 无自动归档/过期机制，历史文章永久保留
 - `DAILY_ARCHIVE_META` 在 nav/footer 中显式引用（不经过 registry 的 `navPages()`），属合理破例
-- 封面图为可选字段：2026-09-16 起新文章配图，存量文章不补（cover 缺省时 og:image 回落 og-default.png，归档页无缩略图）
+- 封面图为可选字段：2026-09-17 起存量 45 天已全量补齐；此后新文章按手册第 7 步配图（cover 缺省时 og:image 回落 og-default.png，归档页无缩略图）
 
 ## 访问统计（Cloudflare D1）
 
@@ -179,6 +179,7 @@ test/                 集成测试 + 单元测试（vitest 全量，SELF.fetch /
 
 - **存储**：R2 桶 `suanming-zhanbu-workers`，前缀 `covers/daily/YYYY-MM-DD.jpg`（主图 1312×736 jpg，immutable 缓存头）+ 同名 `.thumb.webp`（归档缩略图）；经自定义域名 `COVERS_ORIGIN` 直读，Worker 不经手
 - **数据**：`DailyPost.cover?`（可选，R2 路径），单篇头图 / 归档缩略图 / og:image / twitter:image / Article JSON-LD image 五处生效；缺省回落 og-default.png
+- **prompt 规则引擎**：`src/cover/prompt.ts`（纯函数有单测）——情绪三档（黄道吉/凶神化解/晦，取 tianShenLuck + 吉凶神数量对比）× 纳音五行场景（纳音尾字归五行）× 生肖防错锚句（蛇≠龙）× 按日期确定性随机构图；不用 LLM 生成 prompt（锚句与「画面无文字」约束不可被润色掉，LLM 润色留作二期可选开关）
 - **生成**：`npm run cover -- YYYY-MM-DD`（本机运行，详见 scripts/cover.ts 头注释）；改 cover 引用后跑 `npm run covers:check`
 - **缓存陷阱**：重生成同 URL 会覆盖 R2 对象，但 immutable 头会让 CDN 粘住旧图，需 `node purge-cache.js <图片URL>` 清缓存
 

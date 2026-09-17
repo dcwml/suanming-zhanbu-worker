@@ -18,6 +18,7 @@ import { mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import sharp from "sharp";
 import { compute } from "../src/almanac/compute";
+import { buildCoverPrompt, MOOD_LABELS } from "../src/cover/prompt";
 import { coverThumbPath } from "../src/config/site";
 
 const BUCKET = "suanming-zhanbu-workers";
@@ -25,7 +26,6 @@ const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 const API_BASE = process.env.IMAGE_API_BASE ?? "https://apihub.agnes-ai.cn";
 const IMAGE_MODEL = "agnes-image-2.5-flash";
 
-type AlmanacData = ReturnType<typeof compute>;
 
 function fail(message: string): never {
   console.error(`✗ ${message}`);
@@ -52,36 +52,6 @@ function apiKey(): string {
   const key = process.env.IMAGE_API_KEY ?? process.env.LLM_API_KEY ?? devVars.IMAGE_API_KEY ?? devVars.LLM_API_KEY;
   if (!key) fail("缺少生图 API key：请设置 IMAGE_API_KEY 或 LLM_API_KEY（env 或 .dev.vars）");
   return key;
-}
-
-/** 十二生肖外形特征表：生图模型常把「蛇」画成龙，必须显式消歧 */
-const ZODIAC_APPEARANCE: Record<string, string> = {
-  鼠: "一只灵巧的小老鼠，尖吻圆耳、细长尾巴",
-  牛: "一头温顺健壮的黄牛，双角弯月形",
-  虎: "一只威风凛凛的老虎，虎纹鲜明",
-  兔: "一只温顺可爱的白兔，长耳短尾",
-  龙: "一条神采奕奕的中国龙，鹿角蛇身、鹰爪飘逸",
-  蛇: "一条翡翠绿色的小青蛇，形似真实的竹叶青蛇：圆钝的小三角头、红色信子、纤细修长的身体，正优雅地盘绕在山岩灵芝之上",
-  马: "一匹俊逸矫健的骏马，鬃毛飞扬",
-  羊: "一只温顺优雅的山羊，卷角有须",
-  猴: "一只聪明灵动的猴子，体态轻盈",
-  鸡: "一只昂首挺立的雄鸡，彩羽金冠",
-  狗: "一只忠诚俊朗的猎犬，体态匀称",
-  猪: "一头圆润憨态的猪，体态丰腴",
-};
-
-/** 由当日黄历数据构造生图 prompt（国风水墨、画面不含文字避免乱码） */
-function buildPrompt(d: AlmanacData): string {
-  const jieQi = d.jieQi ? `，融入「${d.jieQi}」节气的物候意象` : "";
-  const shen = d.jiShen.slice(0, 3).join("、");
-  const appearance = ZODIAC_APPEARANCE[d.zodiac] ?? `一只优雅的生肖${d.zodiac}`;
-  return [
-    "中国传统水墨画与工笔重彩结合的横幅插画。",
-    `画面主角是${appearance}（生肖${d.zodiac}），位于画面中央偏右，细节精致，神态安详吉庆。`,
-    `背景为晨雾远山、苍松灵芝与祥云纹样${jieQi}，以柔和微光点缀${shen}等吉神意象。`,
-    "色调古朴雅致：黛青、赭石、米白，辅以淡淡金晕。构图疏朗留白，氛围安宁吉祥。",
-    "画面中不得出现任何文字、数字、印章、边框或水印。",
-  ].join("");
 }
 
 async function generateImage(prompt: string, key: string): Promise<Buffer> {
@@ -141,8 +111,10 @@ async function main(): Promise<void> {
   if (!date || !DATE_RE.test(date)) fail("用法：npm run cover -- YYYY-MM-DD [--local]");
 
   const data = compute(date);
-  const prompt = buildPrompt(data);
-  console.log(`▶ ${date} 生肖${data.zodiac}日（${data.dayGanZhi}）— 正在生成封面…`);
+  const { prompt, mood, element, composition } = buildCoverPrompt(data, date);
+  console.log(
+    `▶ ${date} 生肖${data.zodiac}日（${data.dayGanZhi}）情绪=${MOOD_LABELS[mood]} 纳音=${data.naYin}(${element}) 构图=${composition} — 正在生成封面…`,
+  );
 
   const raw = await generateImage(prompt, apiKey());
 

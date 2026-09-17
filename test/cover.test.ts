@@ -7,14 +7,22 @@
 
 import { describe, expect, it } from "vitest";
 import { absoluteUrl, COVERS_ORIGIN, OG_IMAGE_PATH, coverThumbPath, coverUrl } from "../src/config/site";
-import { DAILY_POSTS, dailyArchive, findDailyPost } from "../src/pages/daily";
+import { DAILY_POSTS, dailyArchive, findDailyPost, type DailyPost } from "../src/pages/daily";
 import { buildDailyPostHead } from "../src/seo/meta";
 import { articleJsonLd } from "../src/seo/jsonld";
 import { renderDailyArchive, renderDailyPost } from "../src/layout/render";
 
-/** 当前仓库中带封面的锚点文章（首个配置 cover 的条目） */
+/** 当前仓库中带封面的锚点文章（首个配置 cover 的条目）；2026-09-17 起存量已全量补齐 */
 const coveredPost = DAILY_POSTS.find((p) => p.cover)!;
-const uncoveredPost = DAILY_POSTS.find((p) => !p.cover)!;
+/** 合成的无封面文章（渲染层回落路径用） */
+const syntheticUncovered: DailyPost = {
+  date: "2000-01-01",
+  meta: {
+    zh: { title: "测试文章", description: "测试" },
+    en: { title: "Test Post", description: "test" },
+  },
+  content: { zh: "<p>zh</p>", en: "<p>en</p>" },
+};
 
 describe("cover url helpers", () => {
   it("coverUrl 拼接 R2 自定义域名", () => {
@@ -46,7 +54,7 @@ describe("post head with cover", () => {
 });
 
 describe("post head without cover", () => {
-  const head = buildDailyPostHead(uncoveredPost, "zh");
+  const head = buildDailyPostHead(syntheticUncovered, "zh");
 
   it("回落到全站默认 og 图", () => {
     expect(head).toContain(`<meta property="og:image" content="${absoluteUrl(OG_IMAGE_PATH)}">`);
@@ -68,7 +76,7 @@ describe("renderDailyPost cover figure", () => {
   });
 
   it("无封面时不插入 figure", () => {
-    const html = renderDailyPost(uncoveredPost, "zh");
+    const html = renderDailyPost(syntheticUncovered, "zh");
     expect(html).not.toContain("post-cover");
   });
 });
@@ -83,11 +91,11 @@ describe("renderDailyArchive cover thumbs", () => {
     expect(html).toContain('loading="lazy"');
   });
 
-  it("缩略图数量与带封面条目数一致，且少于总条目数（存量默认无封面）", () => {
+  it("缩略图数量与带封面条目数一致，且存量已全量补齐", () => {
     const thumbCount = (html.match(/daily-archive-thumb/g) ?? []).length;
     const coveredCount = items.filter((i) => i.cover).length;
     expect(thumbCount).toBe(coveredCount);
-    expect(coveredCount).toBeLessThan(items.length);
+    expect(coveredCount).toBe(items.length);
   });
 
   it("条目链接指向对应单篇", () => {
