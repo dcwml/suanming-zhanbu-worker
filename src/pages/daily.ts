@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260918Zh from "../content/daily/2026-09-18.zh.html";
+import daily20260918En from "../content/daily/2026-09-18.en.html";
 import daily20260917Zh from "../content/daily/2026-09-17.zh.html";
 import daily20260917En from "../content/daily/2026-09-17.en.html";
 import daily20260916Zh from "../content/daily/2026-09-16.zh.html";
@@ -115,6 +117,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-09-18",
+    cover: "/covers/daily/2026-09-18.jpg",
+    meta: {
+      zh: { title: "2026年9月18日宜忌·羊", description: "2026年9月18日黄历宜忌：天德黄道值日，月德合、母仓、阳德、时阳、生气、天仓、宝光七颗吉神并趋，宜祭祀、修坟、除服、成服、启钻、移柩六事，馀事勿取，忌开市、入宅、嫁娶、动土、破土、安葬六事，冲牛煞西；生肖羊今日运势与五服除服之礼科普。" },
+      en: { title: "Daily Almanac — September 18, 2026 (Goat)", description: "September 18, 2026 Chinese almanac: a Tiāndé Heavenly Virtue Yellow Path day with seven auspicious spirits — Yuèdéhé, Mǔcāng, Yángdé, Shíyáng, Shēngqì, Tiāncāng and Bǎoguāng — favorable for sacrificial rites, repairing graves, removing and donning mourning garments, reopening graves and moving coffins, six matters with no other undertakings; avoid opening market, moving into a new home, marriage ceremonies, groundbreaking, breaking ground for burial and burial, six matters in all; clash Ox, Sha West; Goat zodiac fortune and the lore of the Five Degrees of Mourning." },
+    },
+    content: { zh: daily20260918Zh, en: daily20260918En },
+  },
   {
     date: "2026-09-17",
     cover: "/covers/daily/2026-09-17.jpg",
