@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260919Zh from "../content/daily/2026-09-19.zh.html";
+import daily20260919En from "../content/daily/2026-09-19.en.html";
 import daily20260918Zh from "../content/daily/2026-09-18.zh.html";
 import daily20260918En from "../content/daily/2026-09-18.en.html";
 import daily20260917Zh from "../content/daily/2026-09-17.zh.html";
@@ -117,6 +119,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-09-19",
+    cover: "/covers/daily/2026-09-19.jpg",
+    meta: {
+      zh: { title: "2026年9月19日宜忌·猴", description: "2026年9月19日黄历宜忌：白虎黑道值日，王日、天马、五富、圣心、除神、鸣吠六颗吉神并趋，宜嫁娶、安葬、扫舍、沐浴等十七事，忌祈福、开光、开市、入宅、动土五事，冲虎煞南；生肖猴今日运势与「五离」凶煞科普。" },
+      en: { title: "Daily Almanac — September 19, 2026 (Monkey)", description: "September 19, 2026 Chinese almanac: a Báihǔ White Tiger Black Path day tempered by six auspicious spirits — Wángrì, Tiānmǎ, Wǔfù, Shèngxīn, Chúshén and Míngfèi — favorable for marriage ceremonies, burial, sweeping the house, bathing and seventeen matters in all; avoid praying for blessings, consecration, opening market, moving into a house and groundbreaking, five matters in all; clash Tiger, Sha South; Monkey zodiac fortune and the lore of the Wǔlí Five Departures." },
+    },
+    content: { zh: daily20260919Zh, en: daily20260919En },
+  },
   {
     date: "2026-09-18",
     cover: "/covers/daily/2026-09-18.jpg",
