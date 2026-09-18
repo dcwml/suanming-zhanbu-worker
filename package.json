@@ -16,6 +16,7 @@
     "tuiyan": "tsx scripts/tuiyan.ts",
     "cover": "tsx scripts/cover.ts",
     "covers:check": "tsx scripts/cover-check.ts",
+    "stats:report": "tsx scripts/stats-report.ts",
     "qian:validate": "node scripts/validate-qian.mjs"
   },
   "dependencies": {

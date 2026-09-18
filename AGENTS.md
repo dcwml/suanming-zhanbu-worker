@@ -21,6 +21,7 @@ npm run fortune:month -- YYYY-MM    # 生成期工具：月运骨架生成器，
 npm run tuiyan -- YYYY-MM-DD  # 生成期工具：时辰推演骨架生成器（参数 = 农历月内任意一天，输出该农历月每天×12时辰的特殊格局：纯阳/纯阴、天乙、羊刃、桃花、驿马、将星、华盖、三合局、方会、魁罡、干支合，按一级大格/魁罡日/每日亮点分级）
 npm run cover -- YYYY-MM-DD     # 生成期工具：当日宜忌文章封面图生成（almanac 主题 → Agnes 生图 → sharp 压缩 → 上传 R2 covers/daily/；--local 上传本地模拟供 dev 预览）
 npm run covers:check            # 校验 daily.ts 引用的封面在 R2 上真实存在（主图 + 缩略图）；改 cover 字段后必跑
+npm run stats:report -- --days 7 --top 20  # 拉取生产统计（/api/stats/*）输出终端可读报告；key 用 --key 或环境变量 SITE_API_KEY 传生产值（.dev.vars 是本地 key 会 401）
 npm run qian:validate # 灵签数据校验：三签种各 100 签、编号连续、等级合法、双语对称；改 public/assets/qian/ 后必跑
 ```
 
