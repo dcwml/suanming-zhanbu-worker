@@ -182,6 +182,43 @@ export function renderApis(a: ApiStats, top: number): string[] {
   return lines;
 }
 
+/** 单段路径 = 固定页面（工具/总览/归档），如 /zh/bazi/；文章页含日期段，留在排行区 */
+const FIXED_PAGE_RE = /^\/(zh|en)\/([a-z0-9-]+)\/$/;
+
+interface LangViews {
+  r: number;
+  t: number;
+}
+
+export function renderFixedPages(p: PageStats): string[] {
+  const byslug = new Map<string, Partial<Record<"zh" | "en", LangViews>>>();
+  for (const row of p.paths) {
+    const m = row.path.match(FIXED_PAGE_RE);
+    if (!m) continue;
+    const entry = byslug.get(m[2]) ?? {};
+    entry[m[1] as "zh" | "en"] = { r: row.recent_views, t: row.total_views };
+    byslug.set(m[2], entry);
+  }
+  const lines = [`【固定页面 · ${p.days} 天/累计】（工具与栏目页，zh · en 双语分列；文章页见上方排行区）`];
+  if (byslug.size === 0) {
+    lines.push("  （暂无数据）");
+    return lines;
+  }
+  const rows = [...byslug.entries()].sort(
+    (a, b) =>
+      (b[1].zh?.r ?? 0) + (b[1].en?.r ?? 0) - ((a[1].zh?.r ?? 0) + (a[1].en?.r ?? 0)) ||
+      (b[1].zh?.t ?? 0) + (b[1].en?.t ?? 0) - ((a[1].zh?.t ?? 0) + (a[1].en?.t ?? 0)) ||
+      a[0].localeCompare(b[0]),
+  );
+  lines.push(`  ${"页面".padEnd(12)}  ${"zh 近N/累计".padEnd(14)}  ${"en 近N/累计".padEnd(14)}`);
+  for (const [slug, v] of rows) {
+    const cell = (l: LangViews | undefined) =>
+      l ? `${pad(l.r, 6)}/${pad(l.t, 6)}` : `${pad(0, 6)}/${pad(0, 6)}`;
+    lines.push(`  ${slug.padEnd(14)}  ${cell(v.zh).padEnd(14)}  ${cell(v.en).padEnd(14)}`);
+  }
+  return lines;
+}
+
 // ── 主流程 ───────────────────────────────────────────────
 
 function keyFromDevVars(): string | undefined {
@@ -202,6 +239,8 @@ async function main(): Promise<void> {
   for (const line of renderOverview(overview)) console.log(line);
   console.log("");
   for (const line of renderPages(pages, top)) console.log(line);
+  console.log("");
+  for (const line of renderFixedPages(pages)) console.log(line);
   console.log("");
   for (const line of renderApis(apis, top)) console.log(line);
   console.log(`\n${rule}`);
