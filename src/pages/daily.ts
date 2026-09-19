@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260920Zh from "../content/daily/2026-09-20.zh.html";
+import daily20260920En from "../content/daily/2026-09-20.en.html";
 import daily20260919Zh from "../content/daily/2026-09-19.zh.html";
 import daily20260919En from "../content/daily/2026-09-19.en.html";
 import daily20260918Zh from "../content/daily/2026-09-18.zh.html";
@@ -119,6 +121,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-09-20",
+    cover: "/covers/daily/2026-09-20.jpg",
+    meta: {
+      zh: { title: "2026年9月20日宜忌·鸡", description: "2026年9月20日黄历宜忌：玉堂黄道值日，官日、六仪、益后、除神、鸣吠诸吉并从，宜祭祀、出行、沐浴、扫舍、安葬五事，馀事勿取，忌动土、破土、置产、掘井四事，冲兔煞东；生肖鸡今日运势与建除十二神科普。" },
+      en: { title: "Daily Almanac — September 20, 2026 (Rooster)", description: "September 20, 2026 Chinese almanac: a Yùtáng Jade Hall Yellow Path day attended by Guānrì, Liùyí, Yìhòu, Chúshén and Míngfèi — favorable for ancestral rites, travel, bathing, sweeping the house and burial, no other undertakings; avoid groundbreaking, breaking ground for burial, acquiring property and digging wells, four matters in all; clash Rabbit, Sha East; Rooster zodiac fortune and the lore of the twelve Jiànchú gods." },
+    },
+    content: { zh: daily20260920Zh, en: daily20260920En },
+  },
   {
     date: "2026-09-19",
     cover: "/covers/daily/2026-09-19.jpg",
