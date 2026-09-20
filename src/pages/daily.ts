@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260921Zh from "../content/daily/2026-09-21.zh.html";
+import daily20260921En from "../content/daily/2026-09-21.en.html";
 import daily20260920Zh from "../content/daily/2026-09-20.zh.html";
 import daily20260920En from "../content/daily/2026-09-20.en.html";
 import daily20260919Zh from "../content/daily/2026-09-19.zh.html";
@@ -121,6 +123,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-09-21",
+    cover: "/covers/daily/2026-09-21.jpg",
+    meta: {
+      zh: { title: "2026年9月21日宜忌·狗", description: "2026年9月21日黄历宜忌：天牢黑道值日，母仓、守日、吉期、续世四吉齐集，宜嫁娶、纳采、修造、动土、开市、上梁等十八事，忌造庙、行丧、安葬、伐木、作灶、造船六事，冲龙煞北；生肖狗今日运势与纳音平地木科普。" },
+      en: { title: "Daily Almanac — September 21, 2026 (Dog)", description: "September 21, 2026 Chinese almanac: a Tiānláo Heavenly Enclosure Black Path day tempered by four auspicious spirits — Mǔcāng, Shǒurì, Jíqī and Xùshì — favorable for marriage ceremonies, betrothal gifts, construction, groundbreaking, opening a business, raising the ridgepole and eighteen matters in all; avoid building temples, holding funerals, burial, felling trees, building stoves and building boats, six matters in all; clash Dragon, Sha North; Dog zodiac fortune and the lore of the Wood on the Plain." },
+    },
+    content: { zh: daily20260921Zh, en: daily20260921En },
+  },
   {
     date: "2026-09-20",
     cover: "/covers/daily/2026-09-20.jpg",
