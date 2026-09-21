@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import weekly20260921Zh from "../content/weekly/2026-09-21.zh.html";
+import weekly20260921En from "../content/weekly/2026-09-21.en.html";
 import weekly20260914Zh from "../content/weekly/2026-09-14.zh.html";
 import weekly20260914En from "../content/weekly/2026-09-14.en.html";
 import weekly20260907Zh from "../content/weekly/2026-09-07.zh.html";
@@ -30,6 +32,20 @@ export const WEEKLY_ARCHIVE_META = {
 } as const;
 
 export const WEEKLY_POSTS: readonly WeeklyPost[] = [
+  {
+    monday: "2026-09-21",
+    meta: {
+      zh: {
+        title: "十二生肖一周运势（2026年9月21日–27日）",
+        description: "2026年9月21日至27日十二生肖每周运势：特吉生肖鼠、虎、猪，次吉生肖兔、狗、牛，属龙者本周宜守；周三秋分司命吉日、周五中秋青龙吉日双节相映，周六明堂吉日馀事勿取，周日天刑凶日收官；逐日干支速览与每日冲忌提醒。",
+      },
+      en: {
+        title: "Weekly Horoscope for All 12 Zodiacs — Sep 21–27, 2026",
+        description: "Weekly fortune for all twelve Chinese zodiac signs, September 21–27, 2026: Rat, Tiger and Pig top the luckiest signs with Rabbit, Dog and Ox following, while Dragon is advised to play it safe; Wednesday's Autumn Equinox under Director of Fate and Friday's Mid-Autumn Festival under Azure Dragon brighten the week, Saturday's Bright Hall day keeps a quiet profile, and Sunday's Heavenly Punishment day closes with caution; plus a day-by-day stems-and-branches overview with daily clash alerts.",
+      },
+    },
+    content: { zh: weekly20260921Zh, en: weekly20260921En },
+  },
   {
     monday: "2026-09-14",
     meta: {
