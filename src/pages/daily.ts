@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260922Zh from "../content/daily/2026-09-22.zh.html";
+import daily20260922En from "../content/daily/2026-09-22.en.html";
 import daily20260921Zh from "../content/daily/2026-09-21.zh.html";
 import daily20260921En from "../content/daily/2026-09-21.en.html";
 import daily20260920Zh from "../content/daily/2026-09-20.zh.html";
@@ -123,6 +125,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-09-22",
+    cover: "/covers/daily/2026-09-22.jpg",
+    meta: {
+      zh: { title: "2026年9月22日宜忌·猪", description: "2026年9月22日黄历宜忌：玄武黑道值日，相日、驿马、天后、天巫、福德、要安六颗吉神并临化解，宜纳采、订盟、开市、交易、纳财、入宅、移徙、安床等十七事，忌斋醮、嫁娶、动土、安葬、破土七事，冲蛇煞西；生肖猪今日运势与秋分祭月科普。" },
+      en: { title: "Daily Almanac — September 22, 2026 (Pig)", description: "September 22, 2026 Chinese almanac: a Xuánwǔ Black Path day tempered by six auspicious spirits — Xiāngrì, Yìmǎ, Tiānhòu, Tiānwū, Fúdé and Yào'ān — favorable for betrothal gifts, pledging alliance, opening a business, trading, collecting wealth, moving into a house, relocating and setting the bed, seventeen matters in all; avoid vegetarian rites, marriage ceremonies, funerals, groundbreaking and burial, seven matters in all; clash Snake, Sha West; Pig zodiac fortune and the lore of the Autumn Equinox moon sacrifice." },
+    },
+    content: { zh: daily20260922Zh, en: daily20260922En },
+  },
   {
     date: "2026-09-21",
     cover: "/covers/daily/2026-09-21.jpg",
