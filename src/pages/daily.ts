@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260923Zh from "../content/daily/2026-09-23.zh.html";
+import daily20260923En from "../content/daily/2026-09-23.en.html";
 import daily20260922Zh from "../content/daily/2026-09-22.zh.html";
 import daily20260922En from "../content/daily/2026-09-22.en.html";
 import daily20260921Zh from "../content/daily/2026-09-21.zh.html";
@@ -125,6 +127,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-09-23",
+    cover: "/covers/daily/2026-09-23.jpg",
+    meta: {
+      zh: { title: "2026年9月23日宜忌·鼠", description: "2026年9月23日黄历宜忌：今日秋分，司命黄道值日，月德、时德、阳德、民日、玉宇、司命、鸣吠对七吉并趋，然河魁、死神、往亡七凶同临，宜祭祀、沐浴、修饰垣墙、平治道涂，馀事勿取，忌嫁娶、入宅、安床、出行四事，冲马煞南；生肖鼠今日运势与秋分三候科普。" },
+      en: { title: "Daily Almanac — September 23, 2026 (Rat)", description: "September 23, 2026 Chinese almanac: the Autumn Equinox itself, a Sīmìng Yellow Path day attended by seven auspicious spirits — Yuèdé, Shídé, Yángdé, Mínrì, Yùyǔ, Sīmìng and Míngfèiduì — tempered by seven inauspicious ones; favorable for sacrificial rites, bathing, decorating walls and leveling roads, all else best avoided; avoid marriage ceremonies, moving into a house, setting the bed and travel, four matters in all; clash Horse, Sha South; Rat zodiac fortune and the lore of the Autumn Equinox pentads." },
+    },
+    content: { zh: daily20260923Zh, en: daily20260923En },
+  },
   {
     date: "2026-09-22",
     cover: "/covers/daily/2026-09-22.jpg",
