@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260924Zh from "../content/daily/2026-09-24.zh.html";
+import daily20260924En from "../content/daily/2026-09-24.en.html";
 import daily20260923Zh from "../content/daily/2026-09-23.zh.html";
 import daily20260923En from "../content/daily/2026-09-23.en.html";
 import daily20260922Zh from "../content/daily/2026-09-22.zh.html";
@@ -127,6 +129,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-09-24",
+    cover: "/covers/daily/2026-09-24.jpg",
+    meta: {
+      zh: { title: "2026年9月24日宜忌·牛", description: "2026年9月24日黄历宜忌：勾陈黑道值日，母仓、三合、时阴、金堂四吉神并临化解，宜开光、祈福、求嗣、斋醮、修造、动土、纳财、造仓、栽种、牧养、会亲友等十二事，忌作灶、出火、进人口、开渠、入宅、移徙、祭祀七事，冲羊煞东；生肖牛今日运势与勾陈黑道值日科普。" },
+      en: { title: "Daily Almanac — September 24, 2026 (Ox)", description: "September 24, 2026 Chinese almanac: a Gōuchén Black Path day tempered by four auspicious spirits — Mǔcāng, Sānhé, Shíyīn and Jīntáng — favorable for consecration, blessing prayers, construction, collecting wealth, building granaries and gathering with friends, twelve matters in all; avoid building stoves, lighting fires, adding to the household, moving into a house, relocating and sacrificial rites, seven matters in all; clash Goat, Sha East; Ox zodiac fortune and the lore of Gōuchén, the Black Path guardian." },
+    },
+    content: { zh: daily20260924Zh, en: daily20260924En },
+  },
   {
     date: "2026-09-23",
     cover: "/covers/daily/2026-09-23.jpg",
