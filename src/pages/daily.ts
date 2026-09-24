@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260925Zh from "../content/daily/2026-09-25.zh.html";
+import daily20260925En from "../content/daily/2026-09-25.en.html";
 import daily20260924Zh from "../content/daily/2026-09-24.zh.html";
 import daily20260924En from "../content/daily/2026-09-24.en.html";
 import daily20260923Zh from "../content/daily/2026-09-23.zh.html";
@@ -129,6 +131,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-09-25",
+    cover: "/covers/daily/2026-09-25.jpg",
+    meta: {
+      zh: { title: "2026年9月25日宜忌·虎", description: "2026年9月25日中秋黄历宜忌：青龙黄道值日，四相、解神、五合、鸣吠对诸吉并临，宜开光、解除、拆卸、修造、动土、竖柱、安门、牧养、安葬、修坟、破土、移柩十二事，忌出火、入宅、移徙、祈福、祭祀、安床、开市、嫁娶、探病九事，冲猴煞北；生肖虎今日运势与中秋夕月溯源科普。" },
+      en: { title: "Daily Almanac — September 25, 2026 (Tiger)", description: "September 25, 2026 Mid-Autumn Chinese almanac: Qīnglóng keeps the Yellow Path with Sīxiàng, Jiěshén, Wǔhé and Míngwèiduì in attendance — favorable for consecration, dispelling misfortunes, demolition, construction, groundbreaking, raising pillars, installing doors, animal husbandry, burial, grave repair, breaking ground and moving coffins, twelve matters in all; avoid lighting fires, moving into a house, relocating, blessing prayers, sacrificial rites, setting the bed, opening a business, marriage ceremonies and visiting the sick, nine matters in all; clash Monkey, Sha North; Tiger zodiac fortune and the equinox origins of Mid-Autumn moon worship." },
+    },
+    content: { zh: daily20260925Zh, en: daily20260925En },
+  },
   {
     date: "2026-09-24",
     cover: "/covers/daily/2026-09-24.jpg",
