@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260926Zh from "../content/daily/2026-09-26.zh.html";
+import daily20260926En from "../content/daily/2026-09-26.en.html";
 import daily20260925Zh from "../content/daily/2026-09-25.zh.html";
 import daily20260925En from "../content/daily/2026-09-25.en.html";
 import daily20260924Zh from "../content/daily/2026-09-24.zh.html";
@@ -131,6 +133,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-09-26",
+    cover: "/covers/daily/2026-09-26.jpg",
+    meta: {
+      zh: { title: "2026年9月26日宜忌·兔", description: "2026年9月26日黄历宜忌：明堂黄道值日，月恩、四相、五合、鸣吠对诸吉并临，然卯日冲酉月建为月破大耗，宜破屋、坏垣、求医、治病、馀事勿取五事，忌移徙、入宅二事，冲鸡煞西；生肖兔今日运势与月破既望科普。" },
+      en: { title: "Daily Almanac — September 26, 2026 (Rabbit)", description: "Daily almanac for September 26, 2026: the Bright Hall of the Yellow Path shines while the Month Breaker holds the day — favor demolishing old houses, tearing down walls, seeking medical treatment and treating illness, avoid all other matters; taboos are relocating and moving into a house. Clash with the Rooster, Sha in the West; Rabbit zodiac fortune and the lore of the Month Breaker." },
+    },
+    content: { zh: daily20260926Zh, en: daily20260926En },
+  },
   {
     date: "2026-09-25",
     cover: "/covers/daily/2026-09-25.jpg",
