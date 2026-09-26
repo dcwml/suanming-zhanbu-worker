@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260927Zh from "../content/daily/2026-09-27.zh.html";
+import daily20260927En from "../content/daily/2026-09-27.en.html";
 import daily20260926Zh from "../content/daily/2026-09-26.zh.html";
 import daily20260926En from "../content/daily/2026-09-26.en.html";
 import daily20260925Zh from "../content/daily/2026-09-25.zh.html";
@@ -133,6 +135,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-09-27",
+    cover: "/covers/daily/2026-09-27.jpg",
+    meta: {
+      zh: { title: "2026年9月27日宜忌·龙", description: "2026年9月27日黄历宜忌：天刑黑道值日，月空、母仓、六合、不将、敬安五吉并临，日支辰与月支酉六合，由昨日之破转为今日之合，宜嫁娶、纳采、订盟、出行、入宅、移徙等二十五事，忌开市、开仓、安门、安葬四事，冲狗煞南；生肖龙今日运势与地支六合科普。" },
+      en: { title: "Daily Almanac — September 27, 2026 (Dragon)", description: "Daily almanac for September 27, 2026: the Heavenly Punisher of the Black Path holds the day, yet five auspicious spirits attend — Month Void, Mother's Granary, Six Harmony, No Bridal Escort and Reverent Peace — as the day's branch harmonizes with the month's, turning yesterday's break into union. Favor marriage, betrothal, travel, moving into a house and twenty-five matters; avoid opening a business, opening the granary, setting the gate and burial. Clash with the Dog, Sha in the South; Dragon zodiac fortune and the lore of the Six Harmonies." },
+    },
+    content: { zh: daily20260927Zh, en: daily20260927En },
+  },
   {
     date: "2026-09-26",
     cover: "/covers/daily/2026-09-26.jpg",
