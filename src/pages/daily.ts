@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260928Zh from "../content/daily/2026-09-28.zh.html";
+import daily20260928En from "../content/daily/2026-09-28.en.html";
 import daily20260927Zh from "../content/daily/2026-09-27.zh.html";
 import daily20260927En from "../content/daily/2026-09-27.en.html";
 import daily20260926Zh from "../content/daily/2026-09-26.zh.html";
@@ -135,6 +137,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-09-28",
+    cover: "/covers/daily/2026-09-28.jpg",
+    meta: {
+      zh: { title: "2026年9月28日宜忌·蛇", description: "2026年9月28日黄历宜忌：朱雀黑道值日，月德合、三合、临日、天喜、天医、普护六吉并临，日干乙正应月德合、日支巳与月建酉半合三合，宜嫁娶、纳采、订盟、入宅、移徙、开市、交易、立券、挂匾等十七事，忌安葬、出行、行丧等八事，冲猪煞东；生肖蛇今日运势与月德合科普。" },
+      en: { title: "Daily Almanac — September 28, 2026 (Snake)", description: "Daily almanac for September 28, 2026: the Vermilion Bird of the Black Path holds the day, yet six auspicious spirits attend — the Month Virtue in Harmony, Three Harmony, Approaching Day, Heavenly Joy, Heavenly Doctor and Universal Protection — as the day stem Yǐ answers the Month Virtue in harmony and the branch Sì half-joins the month's Yǒu. Favor marriage, betrothal, moving into a house, opening a business, trading and signing contracts, seventeen matters in all; avoid burial, travel and funeral processions, eight matters in all. Clash with the Pig, Sha in the East; Snake zodiac fortune and the lore of the Month Virtue in Harmony." },
+    },
+    content: { zh: daily20260928Zh, en: daily20260928En },
+  },
   {
     date: "2026-09-27",
     cover: "/covers/daily/2026-09-27.jpg",
