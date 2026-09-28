@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260929Zh from "../content/daily/2026-09-29.zh.html";
+import daily20260929En from "../content/daily/2026-09-29.en.html";
 import daily20260928Zh from "../content/daily/2026-09-28.zh.html";
 import daily20260928En from "../content/daily/2026-09-28.en.html";
 import daily20260927Zh from "../content/daily/2026-09-27.zh.html";
@@ -137,6 +139,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-09-29",
+    cover: "/covers/daily/2026-09-29.jpg",
+    meta: {
+      zh: { title: "2026年9月29日宜忌·马", description: "2026年9月29日黄历宜忌：金匮黄道值日，福生、金匮、鸣吠三吉并临，然天罡、大时、大败、咸池、天贼、九坎、九焦诸煞环伺，宜栏只开祭祀、冠笄、捕捉三门、馀事勿取，忌嫁娶、开市、盖屋、作梁、合寿木；丙午日一气火旺、纳音天河水，冲鼠煞北；生肖马今日运势与黄道十二神金匮科普。" },
+      en: { title: "Daily Almanac — September 29, 2026 (Horse)", description: "Daily almanac for September 29, 2026: the Gold Chest of the Yellow Path holds the day with Fu Sheng and Ming Fei beside it, yet Tiangang, Dashi, Dabai, Xian Chi, Tian Zei, Jiu Kan and Jiu Jiao crowd the sky — the favored column narrows to sacrifice, capping and capturing, with no other matters undertaken; avoid marriage, opening a business, roofing, beams and coffin wood. A Bing Wu day of doubled fire over Heavenly River Water Na Yin. Clash with the Rat, Sha in the North; Horse zodiac fortune and the lore of the Gold Chest." },
+    },
+    content: { zh: daily20260929Zh, en: daily20260929En },
+  },
   {
     date: "2026-09-28",
     cover: "/covers/daily/2026-09-28.jpg",
