@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import weekly20260928Zh from "../content/weekly/2026-09-28.zh.html";
+import weekly20260928En from "../content/weekly/2026-09-28.en.html";
 import weekly20260921Zh from "../content/weekly/2026-09-21.zh.html";
 import weekly20260921En from "../content/weekly/2026-09-21.en.html";
 import weekly20260914Zh from "../content/weekly/2026-09-14.zh.html";
@@ -32,6 +34,20 @@ export const WEEKLY_ARCHIVE_META = {
 } as const;
 
 export const WEEKLY_POSTS: readonly WeeklyPost[] = [
+  {
+    monday: "2026-09-28",
+    meta: {
+      zh: {
+        title: "十二生肖一周运势（2026年9月28日–10月4日）",
+        description: "2026年9月28日至10月4日十二生肖每周运势：特吉生肖兔、马、羊，次吉生肖虎、龙、蛇，属鼠者本周宜守；周二金匮吉日馀事勿取，周三天德吉日利会友求学，周四白虎凶日恰逢国庆黄金周首日，周日玄武凶日收官；逐日干支速览与每日冲忌提醒。",
+      },
+      en: {
+        title: "Weekly Horoscope for All 12 Zodiacs — Sep 28 – Oct 4, 2026",
+        description: "Weekly fortune for all twelve Chinese zodiac signs, September 28 – October 4, 2026: Rabbit, Horse and Goat top the luckiest signs with Tiger, Dragon and Snake following, while Rat is advised to play it safe; Tuesday's Golden Chest day keeps a quiet profile, Wednesday's Heavenly Virtue day favors gatherings and study, Thursday's White Tiger day lands on the first day of the Golden Week holiday, and Sunday's Black Tortoise day closes with caution; plus a day-by-day stems-and-branches overview with daily clash alerts.",
+      },
+    },
+    content: { zh: weekly20260928Zh, en: weekly20260928En },
+  },
   {
     monday: "2026-09-21",
     meta: {
