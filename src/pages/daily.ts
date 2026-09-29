@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20260930Zh from "../content/daily/2026-09-30.zh.html";
+import daily20260930En from "../content/daily/2026-09-30.en.html";
 import daily20260929Zh from "../content/daily/2026-09-29.zh.html";
 import daily20260929En from "../content/daily/2026-09-29.en.html";
 import daily20260928Zh from "../content/daily/2026-09-28.zh.html";
@@ -139,6 +141,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-09-30",
+    cover: "/covers/daily/2026-09-30.jpg",
+    meta: {
+      zh: { title: "2026年9月30日宜忌·羊", description: "2026年9月30日黄历宜忌：天德黄道值日，母仓、阴德、时阳、生气、天仓、宝光六吉并临，然五虚、八风、九空、土符、八专诸煞环伺，宜祭祀、解除、会亲友、入学、移柩、启钻、除服、成服等十一事，忌开市、祈福、动土、破土、入殓、安葬、造船七事，丁未日纳音天河水，冲牛煞西；生肖羊今日运势与天德、阴德科普。" },
+      en: { title: "Daily Almanac — September 30, 2026 (Goat)", description: "Daily almanac for September 30, 2026: Heavenly Virtue holds the Yellow Path with six auspicious spirits in attendance — Mother's Granary, Hidden Virtue, Seasonal Light, Vital Breath, Heavenly Granary and Treasured Light — while the Five Voids, Eight Winds, Nine Emptinesses, Earth Talisman and Eight Specialists crowd the sky; favor sacrifices, dispelling misfortunes, gathering with kin, studies and mourning matters, eleven in all; avoid opening a business, blessing prayers, groundbreaking, burial and shipbuilding, seven in all. A Ding Wei day over Heavenly River Water Na Yin. Clash with the Ox, Sha in the West; Goat zodiac fortune and the lore of Heavenly and Hidden Virtue." },
+    },
+    content: { zh: daily20260930Zh, en: daily20260930En },
+  },
   {
     date: "2026-09-29",
     cover: "/covers/daily/2026-09-29.jpg",
