@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261001Zh from "../content/daily/2026-10-01.zh.html";
+import daily20261001En from "../content/daily/2026-10-01.en.html";
 import daily20260930Zh from "../content/daily/2026-09-30.zh.html";
 import daily20260930En from "../content/daily/2026-09-30.en.html";
 import daily20260929Zh from "../content/daily/2026-09-29.zh.html";
@@ -141,6 +143,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-10-01",
+    cover: "/covers/daily/2026-10-01.jpg",
+    meta: {
+      zh: { title: "2026年10月1日宜忌·猴", description: "2026年10月1日黄历宜忌：白虎黑道值日，然秋戊申正逢四时天赦日，天赦当头，王日、天马、五富、不将、圣心、除神六吉并临，然游祸、血支、五离、白虎诸煞环伺，宜冠笄、沐浴、出行、修造、动土、移徙、入宅、破土、安葬九事，忌嫁娶、开市、祭祀、祈福、斋醮、纳采、修坟七事，戊申日纳音大驿土，冲虎煞南；生肖猴今日运势与天赦日科普。" },
+      en: { title: "Daily Almanac — October 1, 2026 (Monkey)", description: "Daily almanac for October 1, 2026: the White Tiger holds the Black Path, yet Heavenly Pardon rides at its head — an autumn Wù Shēn day, the once-a-season Day of Heavenly Pardon — with the King's Day, Heavenly Horse, Five Wealth, No Bridal Escort, Sagely Heart and Sweeping Spirit in attendance while the Wandering Misfortune, Blood Branch, Five Separations and the White Tiger crowd the sky; favor capping and hairpin ceremonies, bathing, travel, construction, groundbreaking, relocating, moving into a house, breaking ground and burial, nine matters in all; avoid marriage ceremonies, opening a business, sacrifices, blessing prayers, fasting rites, betrothal gifts and grave repair, seven in all. A Wù Shēn day over Earth of the Great Post Road Na Yin. Clash with the Tiger, Sha in the South; Monkey zodiac fortune and the lore of the Day of Heavenly Pardon." },
+    },
+    content: { zh: daily20261001Zh, en: daily20261001En },
+  },
   {
     date: "2026-09-30",
     cover: "/covers/daily/2026-09-30.jpg",
