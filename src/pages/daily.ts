@@ -1,5 +1,11 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261004Zh from "../content/daily/2026-10-04.zh.html";
+import daily20261004En from "../content/daily/2026-10-04.en.html";
+import daily20261003Zh from "../content/daily/2026-10-03.zh.html";
+import daily20261003En from "../content/daily/2026-10-03.en.html";
+import daily20261002Zh from "../content/daily/2026-10-02.zh.html";
+import daily20261002En from "../content/daily/2026-10-02.en.html";
 import daily20261001Zh from "../content/daily/2026-10-01.zh.html";
 import daily20261001En from "../content/daily/2026-10-01.en.html";
 import daily20260930Zh from "../content/daily/2026-09-30.zh.html";
@@ -143,6 +149,33 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-10-04",
+    cover: "/covers/daily/2026-10-04.jpg",
+    meta: {
+      zh: { title: "2026年10月4日宜忌·猪", description: "2026年10月4日黄历宜忌：驿马临日，天恩、相日、天后、天巫、福德、要安诸吉相扶，玄武黑道值日，四穷、九虎、五虚、大煞、复日、重日环伺，宜出行、开市、交易、立券、安机械、出火、上梁、移徙八事，忌嫁娶、安葬、动土、造桥四事，辛亥日纳音钗钏金，冲蛇煞西；生肖猪今日运势与驿马神煞科普。" },
+      en: { title: "Daily Almanac — October 4, 2026 (Pig)", description: "Daily almanac for October 4, 2026: the Travel Horse presides with Heavenly Grace, the Mutual Day, the Heavenly Queen, the Heavenly Shaman, the Fortune Virtue and the Spirit of Peace in support, while the Dark Warrior holds the Black Path with the Four Exhaustions, Nine Tigers, Five Emptinesses, Great Sha, Repeating Day and Heavy Day at hand — favorable for travel, opening a business, trade, signing contracts, installing machinery, kindling the stove, raising beams and relocation; avoid weddings, burial, groundbreaking and bridge building. A Xin Hai day of Hairpin and Bracelet Metal, clashing the Snake with the Sha in the West; Pig fortunes today and an insight into the Travel Horse spirit." },
+    },
+    content: { zh: daily20261004Zh, en: daily20261004En },
+  },
+  {
+    date: "2026-10-03",
+    cover: "/covers/daily/2026-10-03.jpg",
+    meta: {
+      zh: { title: "2026年10月3日宜忌·狗", description: "2026年10月3日黄历宜忌：月德临日，天恩、母仓、守日、吉期、续世诸吉相扶，天牢黑道值日，月害、血忌环伺，宜嫁娶、订盟、纳采、祭祀、祈福、出行、修造、动土、移徙、入宅十事，忌针灸、伐木、作梁、造庙、行丧、安葬六事，庚戌日纳音钗钏金，冲龙煞北；生肖狗今日运势与月德贵人科普。" },
+      en: { title: "Daily Almanac — October 3, 2026 (Dog)", description: "Daily almanac for October 3, 2026: the Month Virtue presides with Heavenly Grace, the Mother's Store, the Guarding Day, the Auspicious Date and the Continuation of Generations in support, while the Heavenly Prison holds the Black Path with the Month Harm and Blood Taboo at hand — favorable for weddings, engagement pledges, betrothal gifts, sacrifices, prayers, travel, repairs, groundbreaking, relocation and moving house; avoid acupuncture, felling trees, beam-making, temple building, funerals and burial. A Geng Xu day of Hairpin and Bracelet Metal, clashing the Dragon with the Sha in the North; Dog fortunes today and an insight into the Month Virtue spirit." },
+    },
+    content: { zh: daily20261003Zh, en: daily20261003En },
+  },
+  {
+    date: "2026-10-02",
+    cover: "/covers/daily/2026-10-02.jpg",
+    meta: {
+      zh: { title: "2026年10月2日宜忌·鸡", description: "2026年10月2日黄历宜忌：玉堂黄道值日，天恩、官日、六仪、益后、除神、鸣吠诸吉并临，然月建、小时、土府、月厌、厌对、招摇、五离、小会诸煞环伺，宜祭祀、出行两事，忌嫁娶、入宅、修造、动土、会亲友、破土六事，己酉日纳音大驿土，冲兔煞东；生肖鸡今日运势与黄道十二神玉堂科普。" },
+      en: { title: "Daily Almanac — October 2, 2026 (Rooster)", description: "Daily almanac for October 2, 2026: the Jade Hall holds the Yellow Path with Heavenly Grace, the Official's Day, the Six Instruments, Benefit of Posterity, the Sweeping Spirit and the Cocks' Crow and Dogs' Bark in attendance, while the Month Builder, Small Hour, Earth Treasury, Month Loathing, Loathing Pair, Swaying Banner, Five Separations and Small Assembly crowd the sky; favor sacrifices and travel, two matters in all; avoid marriage ceremonies, moving into a new house, construction and repairs, groundbreaking, gathering with kin and breaking ground, six in all. A Jǐ Yǒu day over Earth of the Great Post Road Na Yin. Clash with the Rabbit, Sha in the East; Rooster zodiac fortune and the lore of the twelve path spirits and the Jade Hall." },
+    },
+    content: { zh: daily20261002Zh, en: daily20261002En },
+  },
   {
     date: "2026-10-01",
     cover: "/covers/daily/2026-10-01.jpg",
