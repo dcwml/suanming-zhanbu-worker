@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261005Zh from "../content/daily/2026-10-05.zh.html";
+import daily20261005En from "../content/daily/2026-10-05.en.html";
 import daily20261004Zh from "../content/daily/2026-10-04.zh.html";
 import daily20261004En from "../content/daily/2026-10-04.en.html";
 import daily20261003Zh from "../content/daily/2026-10-03.zh.html";
@@ -149,6 +151,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-10-05",
+    cover: "/covers/daily/2026-10-05.jpg",
+    meta: {
+      zh: { title: "2026年10月5日宜忌·鼠", description: "2026年10月5日黄历宜忌：司命黄道值日，天恩、四相、时德、阳德、民日、玉宇、鸣吠对诸吉相扶，河魁、死神、天吏、致死、往亡环伺，宜祭祀、沐浴、修饰垣墙、平治道涂、馀事勿取，忌斋醮、嫁娶、移徙、出行、上梁、入宅，壬子日纳音桑柘木，冲马煞南；生肖鼠今日运势与司命神煞科普。" },
+      en: { title: "Daily Almanac — October 5, 2026 (Rat)", description: "Daily almanac for October 5, 2026: Siming holds the Yellow Path with Heavenly Grace, the Four Ministers, the Seasonal Virtue, Yang Virtue, the People's Day, the Jade Eaves and the Cockcrow Pair in support, while the River Chief, the Death Spirit, the Heavenly Clerk, the Fatal Hour and the Departed Journey stand in wait — favorable only for worship, bathing, wall repairs and road leveling, with no other matters; avoid Daoist fasts, weddings, relocation, travel, raising beams and moving into a new house. A Ren Zi day of Mulberry Wood, clashing the Horse with the Sha in the South; Rat fortunes today and an insight into the Siming spirit." },
+    },
+    content: { zh: daily20261005Zh, en: daily20261005En },
+  },
   {
     date: "2026-10-04",
     cover: "/covers/daily/2026-10-04.jpg",
