@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261006Zh from "../content/daily/2026-10-06.zh.html";
+import daily20261006En from "../content/daily/2026-10-06.en.html";
 import daily20261005Zh from "../content/daily/2026-10-05.zh.html";
 import daily20261005En from "../content/daily/2026-10-05.en.html";
 import daily20261004Zh from "../content/daily/2026-10-04.zh.html";
@@ -151,6 +153,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-10-06",
+    cover: "/covers/daily/2026-10-06.jpg",
+    meta: {
+      zh: { title: "2026年10月6日宜忌·牛", description: "2026年10月6日黄历宜忌：勾陈黑道值日，天恩、母仓、月恩、四相、三合、时阴、金堂诸吉相扶，死气、八专、触水龙环伺，宜嫁娶、开市、出行、立券、修造、动土、移徙、入宅、安葬等十七事，忌纳采、订盟、架马、词讼、开渠，癸丑日纳音桑柘木，冲羊煞东；生肖牛今日运势与宜嫁娶忌订盟科普。" },
+      en: { title: "Daily Almanac — October 6, 2026 (Ox)", description: "Daily almanac for October 6, 2026: Gouchen holds the Black Path, yet Heavenly Grace, the Mother's Store, the Moon's Grace, the Four Phases, the Triple Harmony, the Seasonal Shade and the Golden Hall arrive in support, while the Death Spirit, the Eight Speciality and the Water-Dragon Provoker stand in wait — favorable for weddings, opening a business, travel, signing contracts, construction, relocation, moving into a new house and burial among seventeen undertakings; avoid betrothal proposals, engagement pledges, raising roof frames, lawsuits and digging canals. A Gui Chou day of Mulberry Wood, clashing the Goat with the Sha in the East; Ox fortunes today and an insight into why weddings are favored while betrothals are not." },
+    },
+    content: { zh: daily20261006Zh, en: daily20261006En },
+  },
   {
     date: "2026-10-05",
     cover: "/covers/daily/2026-10-05.jpg",
