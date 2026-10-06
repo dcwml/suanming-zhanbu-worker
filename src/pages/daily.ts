@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261007Zh from "../content/daily/2026-10-07.zh.html";
+import daily20261007En from "../content/daily/2026-10-07.en.html";
 import daily20261006Zh from "../content/daily/2026-10-06.zh.html";
 import daily20261006En from "../content/daily/2026-10-06.en.html";
 import daily20261005Zh from "../content/daily/2026-10-05.zh.html";
@@ -153,6 +155,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-10-07",
+    cover: "/covers/daily/2026-10-07.jpg",
+    meta: {
+      zh: { title: "2026年10月7日宜忌·虎", description: "2026年10月7日黄历宜忌：青龙黄道值日，月空、解神、五合、鸣吠对诸吉相扶，劫煞、小耗、四废、归忌、八专环伺，宜沐浴、捕捉、入殓、除服、成服、破土、启钻、安葬八事，忌祭祀、嫁娶、安床、开市、入宅、探病、上梁七事，甲寅日纳音大溪水，冲猴煞北；生肖虎今日运势与四废日科普。" },
+      en: { title: "Daily Almanac — October 7, 2026 (Tiger)", description: "Daily almanac for October 7, 2026: the Azure Dragon holds the Yellow Path with the Month's Emptiness, the Resolving Spirit, the Five Harmonies and the Cockcrow Pair in support, while the Robbery Sha, the Little Consumer, the Four Abandonments, the Return Taboo and the Eight Speciality stand in wait — favorable for bathing, capturing, encoffinment, mourning rites, breaking earth and burial among eight undertakings; avoid sacrifices, weddings, bed-setting, opening a business, moving house, hospital visits and raising roof beams. A Jiǎ Yín day of Great Stream Water, clashing the Monkey with the Sha in the North; Tiger fortunes today and an insight into the Four Abandonment days." },
+    },
+    content: { zh: daily20261007Zh, en: daily20261007En },
+  },
   {
     date: "2026-10-06",
     cover: "/covers/daily/2026-10-06.jpg",
