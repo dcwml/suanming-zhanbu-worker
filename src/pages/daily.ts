@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261008Zh from "../content/daily/2026-10-08.zh.html";
+import daily20261008En from "../content/daily/2026-10-08.en.html";
 import daily20261007Zh from "../content/daily/2026-10-07.zh.html";
 import daily20261007En from "../content/daily/2026-10-07.en.html";
 import daily20261006Zh from "../content/daily/2026-10-06.zh.html";
@@ -155,6 +157,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-10-08",
+    cover: "/covers/daily/2026-10-08.jpg",
+    meta: {
+      zh: { title: "2026年10月8日宜忌·兔", description: "2026年10月8日黄历宜忌：今日寒露交节，月柱换戊戌；勾陈黑道值日，六合、圣心、五合、鸣吠对诸吉相扶，大时、大败、咸池、小耗、四废、五虚环伺，宜祭祀、入殓、移柩、开生坟、破土、启钻、安葬、除服、成服九事、馀事勿取，忌无；乙卯日纳音大溪水，冲鸡煞西；生肖兔今日运势与节气换月令科普。" },
+      en: { title: "Daily Almanac — October 8, 2026 (Rabbit)", description: "Daily almanac for October 8, 2026: Cold Dew arrives today and the month pillar turns to Wu Xu, as Gouchen holds the Black Path with the Six Harmonies, the Sacred Heart, the Five Harmonies and the Cockcrow Pair in support, while the Great Hour, the Great Defeat, the Pool of Salts, the Little Consumer, the Four Abandonments and the Five Emptinesses stand in wait — favorable only for sacrifices, encoffinment, moving the coffin, preparing a lifetime tomb, breaking earth, opening the vault, burial and the mourning rites, with no other matters and no listed prohibitions. A Yi Mao day of Great Stream Water, clashing the Rooster with the Sha in the West; Rabbit fortunes today and an insight into how solar terms turn the month's command." },
+    },
+    content: { zh: daily20261008Zh, en: daily20261008En },
+  },
   {
     date: "2026-10-07",
     cover: "/covers/daily/2026-10-07.jpg",
