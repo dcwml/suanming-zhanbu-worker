@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261009Zh from "../content/daily/2026-10-09.zh.html";
+import daily20261009En from "../content/daily/2026-10-09.en.html";
 import daily20261008Zh from "../content/daily/2026-10-08.zh.html";
 import daily20261008En from "../content/daily/2026-10-08.en.html";
 import daily20261007Zh from "../content/daily/2026-10-07.zh.html";
@@ -157,6 +159,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-10-09",
+    cover: "/covers/daily/2026-10-09.jpg",
+    meta: {
+      zh: { title: "2026年10月9日宜忌·龙", description: "2026年10月9日黄历宜忌：青龙黄道值日，天德、月德双临日干，母仓、益后、解神诸吉相扶，然日支辰冲月令戌成月破，大耗、四击、九空、往亡环伺，宜祭祀、解除、破屋、坏垣、馀事勿取，忌诸事不宜；丙辰日纳音沙中土，冲狗煞南；生肖龙今日运势与月破日以破用破科普。" },
+      en: { title: "Daily Almanac — October 9, 2026 (Dragon)", description: "Daily almanac for October 9, 2026: the Azure Dragon holds the Yellow Path with the Heavenly and Lunar Virtues both alighting on the day stem, the Mother's Store, the Benefactor of Posterity and the Resolving Spirit in support, yet the day branch Chen clashes the month's command Xu to form the Month Breaker, while the Great Consumer, the Four Strikes, the Nine Emptinesses and the Departed Journey stand in wait — favorable only for sacrifices, clearing away misfortune, demolishing dilapidated houses and tearing down walls, with no matters otherwise suitable. A Bing Chen day of Earth in the Sand, clashing the Dog with the Sha in the South; Dragon fortunes today and an insight into turning the breaker's force upon itself." },
+    },
+    content: { zh: daily20261009Zh, en: daily20261009En },
+  },
   {
     date: "2026-10-08",
     cover: "/covers/daily/2026-10-08.jpg",
