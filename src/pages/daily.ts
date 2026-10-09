@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261010Zh from "../content/daily/2026-10-10.zh.html";
+import daily20261010En from "../content/daily/2026-10-10.en.html";
 import daily20261009Zh from "../content/daily/2026-10-09.zh.html";
 import daily20261009En from "../content/daily/2026-10-09.en.html";
 import daily20261008Zh from "../content/daily/2026-10-08.zh.html";
@@ -159,6 +161,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-10-10",
+    cover: "/covers/daily/2026-10-10.jpg",
+    meta: {
+      zh: { title: "2026年10月10日宜忌·蛇", description: "2026年10月10日黄历宜忌：明堂黄道值日，阴德、续世吉神相扶，游祸、天贼、血忌、重日环伺，宜嫁娶、求嗣、纳采、进人口、纳财、结网、纳畜、牧养、会亲友，忌上梁、作灶、伐木、出行、安葬、安门、理发；丁巳日纳音沙中土，冲猪煞东；九月初一朔日启新，生肖蛇今日运势与黄道十二神明堂科普。" },
+      en: { title: "Daily Almanac — October 10, 2026 (Snake)", description: "Daily almanac for October 10, 2026: the Bright Hall presides over the Yellow Path with the Hidden Virtue and the Continuing Lineage in support, while the Wandering Calamity, the Heavenly Thief, the Blood Taboo and the Repeated Day stand watch — favorable for marriages, betrothal, praying for offspring, collecting wealth and meeting friends, avoid roof beams, stoves, felling trees, travel, burial, doors and haircuts. A Ding Si day of Earth in the Sand, clashing the Pig with the Sha in the East; the new moon of the ninth month opens a fresh cycle — Snake fortunes today and an insight into the twelve Yellow Path deities." },
+    },
+    content: { zh: daily20261010Zh, en: daily20261010En },
+  },
   {
     date: "2026-10-09",
     cover: "/covers/daily/2026-10-09.jpg",
