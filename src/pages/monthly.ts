@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import monthly202610Zh from "../content/monthly/2026-10.zh.html";
+import monthly202610En from "../content/monthly/2026-10.en.html";
 import monthly202609Zh from "../content/monthly/2026-09.zh.html";
 import monthly202609En from "../content/monthly/2026-09.en.html";
 import monthly202608Zh from "../content/monthly/2026-08.zh.html";
@@ -24,6 +26,20 @@ export const MONTHLY_ARCHIVE_META = {
 } as const;
 
 export const MONTHLY_POSTS: readonly MonthlyPost[] = [
+  {
+    month: "2026-10",
+    meta: {
+      zh: {
+        title: "2026年10月十二生肖每月运势（戊戌月）",
+        description: "2026年10月（农历戊戌月）十二生肖每月运势：寒露燥土当令，月支戌六合兔、三合虎马、冲龙害鸡；附本月嫁娶、搬家、开业、出行、修造吉日速查。",
+      },
+      en: {
+        title: "Monthly Horoscope for All 12 Zodiacs — October 2026",
+        description: "October 2026 monthly fortune for all twelve Chinese zodiac signs: the Wù Xū Dog month brings dry Earth energy from Cold Dew; the month branch harmonizes with Rabbit, Tiger and Horse while clashing with Dragon; plus a quick reference of auspicious days for weddings, moving, business, travel and construction.",
+      },
+    },
+    content: { zh: monthly202610Zh, en: monthly202610En },
+  },
   {
     month: "2026-09",
     meta: {
