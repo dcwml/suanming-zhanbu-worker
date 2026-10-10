@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261011Zh from "../content/daily/2026-10-11.zh.html";
+import daily20261011En from "../content/daily/2026-10-11.en.html";
 import daily20261010Zh from "../content/daily/2026-10-10.zh.html";
 import daily20261010En from "../content/daily/2026-10-10.en.html";
 import daily20261009Zh from "../content/daily/2026-10-09.zh.html";
@@ -161,6 +163,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-10-11",
+    cover: "/covers/daily/2026-10-11.jpg",
+    meta: {
+      zh: { title: "2026年10月11日宜忌·马", description: "2026年10月11日黄历宜忌：天刑黑道值日，然三合、天喜、天医、天仓、不将、要安六吉齐临，四耗、复日、天刑环伺，宜嫁娶、祭祀、开市、开光、出行、入宅、移徙、出火、拆卸、修造、安床，忌纳畜、伐木、置产、作梁、行丧、安葬、修坟、立碑；戊午日纳音天上火，冲鼠煞北；生肖马今日运势与复日「吉事复吉、凶事复凶」科普。" },
+      en: { title: "Daily Almanac — October 11, 2026 (Horse)", description: "Daily almanac for October 11, 2026: the Heavenly Punishment holds the Black Path, yet six auspicious spirits attend in force — the Triple Harmony, the Heavenly Joy, the Heavenly Doctor, the Heavenly Granary, the Unmatched Union and the Ease of Comfort — while the Four Depletions, the Repeated Day and the Heavenly Punishment stand in wait — favorable for marriages, worship, opening a business, consecration, travel, moving house, relocation, kindling the hearth, demolition, construction and bed-setting; avoid buying livestock, felling trees, acquiring property, making beams, funerals, burial, grave repairs and tombstones. A Wu Wu day of Heavenly Fire, clashing the Rat with the Sha in the North; Horse fortunes today and an insight into the Repeated Day — good doubled upon good, ill doubled upon ill." },
+    },
+    content: { zh: daily20261011Zh, en: daily20261011En },
+  },
   {
     date: "2026-10-10",
     cover: "/covers/daily/2026-10-10.jpg",
