@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import weekly20261012Zh from "../content/weekly/2026-10-12.zh.html";
+import weekly20261012En from "../content/weekly/2026-10-12.en.html";
 import weekly20261005Zh from "../content/weekly/2026-10-05.zh.html";
 import weekly20261005En from "../content/weekly/2026-10-05.en.html";
 import weekly20260928Zh from "../content/weekly/2026-09-28.zh.html";
@@ -36,6 +38,20 @@ export const WEEKLY_ARCHIVE_META = {
 } as const;
 
 export const WEEKLY_POSTS: readonly WeeklyPost[] = [
+  {
+    monday: "2026-10-12",
+    meta: {
+      zh: {
+        title: "十二生肖一周运势（2026年10月12日–18日）",
+        description: "2026年10月12日至18日十二生肖每周运势：特吉生肖兔、龙、蛇，次吉生肖鼠、牛、虎，属羊者本周宜守；周二金匮吉日宜嫁娶开市交易，周三天德吉日利嫁娶动土，周五玉堂吉日出行理发皆宜，周日玄武凶日恰逢重阳节馀事勿取；逐日干支速览与每日冲忌提醒。",
+      },
+      en: {
+        title: "Weekly Horoscope for All 12 Zodiacs — Oct 12–18, 2026",
+        description: "Weekly fortune for all twelve Chinese zodiac signs, October 12–18, 2026: Rabbit, Dragon and Snake top the luckiest signs with Rat, Ox and Tiger following, while Goat is advised to play it safe; Tuesday's Golden Chest day favors weddings and trade, Wednesday's Heavenly Virtue day suits weddings and ground-breaking, Friday's Jade Hall day favors travel, and Sunday's Black Tortoise day lands on the Double Ninth Festival with nothing else advisable; plus a day-by-day stems-and-branches overview with daily clash alerts.",
+      },
+    },
+    content: { zh: weekly20261012Zh, en: weekly20261012En },
+  },
   {
     monday: "2026-10-05",
     meta: {
