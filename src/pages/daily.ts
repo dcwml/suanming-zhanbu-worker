@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261012Zh from "../content/daily/2026-10-12.zh.html";
+import daily20261012En from "../content/daily/2026-10-12.en.html";
 import daily20261011Zh from "../content/daily/2026-10-11.zh.html";
 import daily20261011En from "../content/daily/2026-10-11.en.html";
 import daily20261010Zh from "../content/daily/2026-10-10.zh.html";
@@ -163,6 +165,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-10-12",
+    cover: "/covers/daily/2026-10-12.jpg",
+    meta: {
+      zh: { title: "2026年10月12日宜忌·羊", description: "2026年10月12日黄历宜忌：朱雀黑道值日，母仓、玉宇吉神相扶，河魁、月刑、五虚、八专环伺，宜嫁娶、祭祀、作灶、纳财，忌安葬、开市、修坟、立碑；己未日纳音天上火，冲牛煞西；九月戌刑其未，生肖羊今日运势与母仓「生我者如母、藏之者为仓」科普。" },
+      en: { title: "Daily Almanac — October 12, 2026 (Goat)", description: "Daily almanac for October 12, 2026: the Vermilion Bird holds the Black Path while the Mother's Granary and the Jade Eaves attend in support, with the River Chief, the Month's Punishment, the Five Depletions and the Eight Unions standing in wait — favorable for marriages, worship, making the stove and collecting wealth; avoid burial, opening a business, grave repairs and tombstones. A Ji Wei day of Heavenly Fire, clashing the Ox with the Sha in the West; the month's Xu punishes the day's Wei — Goat fortunes today and an insight into the Mother's Granary, the spirit that stores what the season engenders." },
+    },
+    content: { zh: daily20261012Zh, en: daily20261012En },
+  },
   {
     date: "2026-10-11",
     cover: "/covers/daily/2026-10-11.jpg",
