@@ -258,6 +258,10 @@ describe("tuiyan", () => {
     expect(html).toContain("时辰推演");
     expect(html).toContain('href="/zh/tuiyan/2026-08-13/"');
     expect(html).toContain('href="/zh/tuiyan/2026-09-11/"');
+    expect(html).toContain('href="/zh/tuiyan/2026-10-10/"');
+    expect(html.indexOf('href="/zh/tuiyan/2026-10-10/"')).toBeLessThan(
+      html.indexOf('href="/zh/tuiyan/2026-09-11/"'),
+    );
     expect(html.indexOf('href="/zh/tuiyan/2026-09-11/"')).toBeLessThan(
       html.indexOf('href="/zh/tuiyan/2026-08-13/"'),
     );
@@ -270,6 +274,7 @@ describe("tuiyan", () => {
     expect(html).toContain("Hour Omens");
     expect(html).toContain('href="/en/tuiyan/2026-08-13/"');
     expect(html).toContain('href="/en/tuiyan/2026-09-11/"');
+    expect(html).toContain('href="/en/tuiyan/2026-10-10/"');
   });
 
   it("renders existing zh tuiyan post with sections, canonical and article jsonld", async () => {
