@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261013Zh from "../content/daily/2026-10-13.zh.html";
+import daily20261013En from "../content/daily/2026-10-13.en.html";
 import daily20261012Zh from "../content/daily/2026-10-12.zh.html";
 import daily20261012En from "../content/daily/2026-10-12.en.html";
 import daily20261011Zh from "../content/daily/2026-10-11.zh.html";
@@ -165,6 +167,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-10-13",
+    cover: "/covers/daily/2026-10-13.jpg",
+    meta: {
+      zh: { title: "2026年10月13日宜忌·猴", description: "2026年10月13日黄历宜忌：金匮黄道吉日值日，月恩、王日、生气、驿马诸吉相扶，厌对、招摇、五离、八专势孤力薄，宜嫁娶、祭祀、祈福、开市、交易、立券、纳财、出行、移徙、入宅，忌安床、安葬；庚申日纳音石榴木，冲虎煞南；生肖猴今日运势与驿马「三合冲位、动中有喜」科普。" },
+      en: { title: "Daily Almanac — October 13, 2026 (Monkey)", description: "Daily almanac for October 13, 2026: the Golden Cabinet holds the Yellow Path, attended by the Month's Grace, the King's Day, the Living Breath and the Post-Horse, while Yan Dui, Zhao Yao, the Five Departures and the Eight Unions stand outnumbered — favorable for marriages, worship, prayers, opening a business, trade, contracts, collecting wealth, travel, relocation and moving house; avoid setting the bed and burial. A Geng Shen day of Pomegranate Wood, clashing the Tiger with the Sha in the South; Monkey fortunes today and an insight into the Post-Horse, the spirit of movement born where a triple harmony meets its clash." },
+    },
+    content: { zh: daily20261013Zh, en: daily20261013En },
+  },
   {
     date: "2026-10-12",
     cover: "/covers/daily/2026-10-12.jpg",
