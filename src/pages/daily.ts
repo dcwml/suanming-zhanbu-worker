@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261014Zh from "../content/daily/2026-10-14.zh.html";
+import daily20261014En from "../content/daily/2026-10-14.en.html";
 import daily20261013Zh from "../content/daily/2026-10-13.zh.html";
 import daily20261013En from "../content/daily/2026-10-13.en.html";
 import daily20261012Zh from "../content/daily/2026-10-12.zh.html";
@@ -167,6 +169,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-10-14",
+    cover: "/covers/daily/2026-10-14.jpg",
+    meta: {
+      zh: { title: "2026年10月14日宜忌·鸡", description: "2026年10月14日黄历宜忌：天德黄道吉日值日，天德合、月德合双德齐临，官日、除神、宝光、鸣吠相扶，月害、天吏、致死、血支、五离力薄难犯，宜嫁娶、祭祀、祈福、动土、安床、扫舍、安葬，忌开光、栽种；辛酉日纳音石榴木，冲兔煞东；生肖鸡今日运势与天德月德「三合旺干、德合百福」科普。" },
+      en: { title: "Daily Almanac — October 14, 2026 (Rooster)", description: "Daily almanac for October 14, 2026: the Heavenly Virtue holds the Yellow Path while the Union with the Heavenly Virtue and the Union with the Monthly Virtue descend together, attended by the Official's Day, the Remover, the Treasured Light and the Crying Hound — the Month's Harm, the Heavenly Officer, the Deadly, the Blood Branch and the Five Departures stand feeble. Favorable for marriages, worship, prayers, breaking ground, setting the bed, sweeping the house and burial; avoid consecration and planting. A Xin You day of Pomegranate Wood, clashing the Rabbit with the Sha in the East; Rooster fortunes today and an insight into the Heavenly and Monthly Virtues, born where a triple harmony's breath gathers into blessing." },
+    },
+    content: { zh: daily20261014Zh, en: daily20261014En },
+  },
   {
     date: "2026-10-13",
     cover: "/covers/daily/2026-10-13.jpg",
