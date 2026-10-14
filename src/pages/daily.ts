@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261015Zh from "../content/daily/2026-10-15.zh.html";
+import daily20261015En from "../content/daily/2026-10-15.en.html";
 import daily20261014Zh from "../content/daily/2026-10-14.zh.html";
 import daily20261014En from "../content/daily/2026-10-14.en.html";
 import daily20261013Zh from "../content/daily/2026-10-13.zh.html";
@@ -169,6 +171,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-10-15",
+    cover: "/covers/daily/2026-10-15.jpg",
+    meta: {
+      zh: { title: "2026年10月15日宜忌·狗", description: "2026年10月15日黄历宜忌：白虎黑道值日，月空、母仓、四相、守日、天马诸吉相扶，月建、小时、土府环伺，宜祭祀、祈福、出行、解除、上梁、入宅、移徙、纳财、纳畜，忌伐木、行丧、破土、嫁娶、安葬、开渠；壬戌日纳音大海水，冲龙煞北；生肖狗今日运势与白虎「黑道起例、麒麟化解」科普。" },
+      en: { title: "Daily Almanac — October 15, 2026 (Dog)", description: "Daily almanac for October 15, 2026: the White Tiger holds the Black Path, attended by the Void of the Month, the Mother's Granary, the Four strengths, the Guarding Day and the Heavenly Horse, while the Month's Pillar, the Small Hour and the Bureau of Soil stand about — favorable for worship, prayers, travel, dispelling misfortune, raising the ridgepole, moving house and collecting wealth; avoid felling trees, funerals, breaking earth, marriages, burial and cutting channels. A Rén Xū day of Vast Sea Water, clashing the Dragon with the Sha in the North; Dog fortunes today and an insight into the White Tiger — reckoning the Black Path's rota, and the Qilin charm that lays it to rest." },
+    },
+    content: { zh: daily20261015Zh, en: daily20261015En },
+  },
   {
     date: "2026-10-14",
     cover: "/covers/daily/2026-10-14.jpg",
