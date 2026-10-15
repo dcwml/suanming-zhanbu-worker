@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261016Zh from "../content/daily/2026-10-16.zh.html";
+import daily20261016En from "../content/daily/2026-10-16.en.html";
 import daily20261015Zh from "../content/daily/2026-10-15.zh.html";
 import daily20261015En from "../content/daily/2026-10-15.en.html";
 import daily20261014Zh from "../content/daily/2026-10-14.zh.html";
@@ -171,6 +173,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-10-16",
+    cover: "/covers/daily/2026-10-16.jpg",
+    meta: {
+      zh: { title: "2026年10月16日宜忌·猪", description: "2026年10月16日黄历宜忌：玉堂黄道吉日，四相、相日、吉期、五富、敬安诸吉相扶，劫煞、五虚、土符、重日环伺，宜祭祀、开光、出行、解除、理发、上梁、合脊、安床，忌嫁娶、安葬、行丧、词讼、造桥、作灶、破土、动土；癸亥日纳音大海水，冲蛇煞西；生肖猪今日运势与玉堂「黑道登殿、逢凶化吉」科普。" },
+      en: { title: "Daily Almanac — October 16, 2026 (Pig)", description: "Daily almanac for October 16, 2026: the Jade Hall holds the Yellow Path, attended by the Four strengths, the Minister Day, the Lucky Date, the Five Wealth and the Reverent Peace, while the Robbery Sha, the Five Voids, the Earth Talisman and the Double Day stand about — favorable for worship, consecration, travel, dispelling misfortune, haircuts, raising the ridgepole, completing the roof ridge and setting the bed; avoid marriages, burial, funeral processions, lawsuits, bridge-building, stove-making, breaking and moving earth. A Guǐ Hài day of Vast Sea Water, clashing the Snake with the Sha in the West; Pig fortunes today and an insight into the Jade Hall — where the Black Path ends, the Yellow Path ascends, and fortune turns at the heart of calamity." },
+    },
+    content: { zh: daily20261016Zh, en: daily20261016En },
+  },
   {
     date: "2026-10-15",
     cover: "/covers/daily/2026-10-15.jpg",
