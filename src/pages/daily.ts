@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261017Zh from "../content/daily/2026-10-17.zh.html";
+import daily20261017En from "../content/daily/2026-10-17.en.html";
 import daily20261016Zh from "../content/daily/2026-10-16.zh.html";
 import daily20261016En from "../content/daily/2026-10-16.en.html";
 import daily20261015Zh from "../content/daily/2026-10-15.zh.html";
@@ -173,6 +175,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-10-17",
+    cover: "/covers/daily/2026-10-17.jpg",
+    meta: {
+      zh: { title: "2026年10月17日宜忌·鼠", description: "2026年10月17日黄历宜忌：天牢黑道值日，天恩、时德、民日、天符、福德、普护六吉温和相扶，灾煞、天火、大煞、归忌环伺，宜纳采、订盟、会亲友、沐浴、理发、安床、安葬、开生坟，忌开市、出行、嫁娶、祈福、动土、上梁；甲子日纳音海中金，冲马煞南；生肖鼠今日运势与六十甲子「癸亥到甲子、一元复始」科普。" },
+      en: { title: "Daily Almanac — October 17, 2026 (Rat)", description: "Daily almanac for October 17, 2026: the Heavenly Prison holds the Black Path, attended by the gentle graces of Heaven's Grace, the Seasonal Virtue, the People's Day, the Heavenly Talisman, Fortune & Virtue and Universal Protection, while the Calamity Sha, Heavenly Fire, the Grand Sha and the Return Taboo stand about — favorable for betrothal gifts, the engagement pledge, meeting friends and kin, bathing, haircuts, setting the bed, burial and building a tomb in advance; avoid opening a business, travel, marriages, prayers, breaking ground and raising the ridgepole. A Jiǎ Zǐ day of Gold Within the Sea, clashing the Horse with the Sha in the South; Rat fortunes today and an insight into the sixty-day cycle — from Guǐ Hài to Jiǎ Zǐ, a new round begins." },
+    },
+    content: { zh: daily20261017Zh, en: daily20261017En },
+  },
   {
     date: "2026-10-16",
     cover: "/covers/daily/2026-10-16.jpg",
