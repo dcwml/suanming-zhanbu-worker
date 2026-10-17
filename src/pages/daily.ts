@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261018Zh from "../content/daily/2026-10-18.zh.html";
+import daily20261018En from "../content/daily/2026-10-18.en.html";
 import daily20261017Zh from "../content/daily/2026-10-17.zh.html";
 import daily20261017En from "../content/daily/2026-10-17.en.html";
 import daily20261016Zh from "../content/daily/2026-10-16.zh.html";
@@ -175,6 +177,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-10-18",
+    cover: "/covers/daily/2026-10-18.jpg",
+    meta: {
+      zh: { title: "2026年10月18日宜忌·牛", description: "2026年10月18日黄历宜忌：玄武黑道值日，天恩、母仓、福生三相扶，天罡、死神、月煞、月虚、元武环伺，宜解除、祭祀、修饰垣墙、平治道涂、造畜稠，忌嫁娶、开市、交易、入宅、入学、安葬；九月初九重阳节，乙丑日纳音海中金，冲羊煞东；生肖牛今日运势与重阳「登高避灾」典故科普。" },
+      en: { title: "Daily Almanac — October 18, 2026 (Ox)", description: "Daily almanac for October 18, 2026, the Double Ninth Festival: the Dark Warrior holds the Black Path, attended by the graces of Heaven's Grace, the Mother's Granary and Fortune Arising, while the Heavenly Gang, the Death Spirit, the Month Sha and the Month Void stand about — favorable for dispelling misfortune, worship and offerings, repairing walls, leveling roads and building livestock pens; avoid marriages, opening a business, trading, moving into a new home, enrolling in school and burial. A Yǐ Chǒu day of Gold Within the Sea, clashing the Goat with the Sha in the East; Ox fortunes today and an insight into the Double Ninth — climbing high to turn calamity aside." },
+    },
+    content: { zh: daily20261018Zh, en: daily20261018En },
+  },
   {
     date: "2026-10-17",
     cover: "/covers/daily/2026-10-17.jpg",
