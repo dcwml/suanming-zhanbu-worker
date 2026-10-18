@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261019Zh from "../content/daily/2026-10-19.zh.html";
+import daily20261019En from "../content/daily/2026-10-19.en.html";
 import daily20261018Zh from "../content/daily/2026-10-18.zh.html";
 import daily20261018En from "../content/daily/2026-10-18.en.html";
 import daily20261017Zh from "../content/daily/2026-10-17.zh.html";
@@ -177,6 +179,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-10-19",
+    cover: "/covers/daily/2026-10-19.jpg",
+    meta: {
+      zh: { title: "2026年10月19日宜忌·虎", description: "2026年10月19日黄历宜忌：司命黄道值日，天德、月德、天恩、三合、五合、鸣吠对诸吉齐临，月厌、地火、死气、九坎、九焦、孤辰环伺，宜入殓、破土、启钻、安葬、除服、成服，馀事勿取，忌开市、入宅、祭祀、置产、补垣、塞穴；丙寅日纳音炉中火，寅午戌三合火局齐整，冲猴煞北；生肖虎今日运势与「鸣吠对」安葬吉日科普。" },
+      en: { title: "Daily Almanac — October 19, 2026 (Tiger)", description: "Daily almanac for October 19, 2026: Siming holds the Yellow Path, attended by Heaven's Virtue, the Month's Virtue, Heaven's Grace, the Three Harmony, the Five Union and the Crowing-and-Barking Pair, while the Month's Weariness, Earthly Fire, Death's Breath, the Nine Pits, the Nine Scorchings and the Lonely Star stand about — favorable for encoffining, breaking earth, opening the grave vault, burial and the mourning garments, with all other matters set aside; avoid opening a business, moving into a new home, worship and offerings, acquiring property, mending walls and sealing holes. A Bǐng Yín day of Fire in the Furnace with the Yin-Wu-Xu fire trine complete, clashing the Monkey with the Sha in the North; Tiger fortunes today and an insight into the crowing-and-barking days that open the way for burial." },
+    },
+    content: { zh: daily20261019Zh, en: daily20261019En },
+  },
   {
     date: "2026-10-18",
     cover: "/covers/daily/2026-10-18.jpg",
