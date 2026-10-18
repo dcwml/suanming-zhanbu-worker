@@ -1,5 +1,5 @@
 import { fetchMock } from "cloudflare:test";
-import { afterEach, beforeAll, describe, expect, it } from "vitest";
+import { afterEach, beforeAll, describe, expect, it, vi } from "vitest";
 import { callLlm } from "../src/bazi/llm";
 
 const env = {
@@ -15,6 +15,7 @@ beforeAll(() => {
 
 afterEach(() => {
   fetchMock.assertNoPendingInterceptors();
+  vi.restoreAllMocks();
 });
 
 function intercept() {
@@ -40,6 +41,19 @@ describe("callLlm", () => {
     intercept().reply(500, "boom");
     const r = await callLlm(env, "sys", "user");
     expect(r).toMatchObject({ ok: false, code: "upstream_error", status: 502 });
+  });
+
+  it("logs upstream status and truncated body on non-2xx", async () => {
+    const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+    const longBody = "rate limited: " + "A".repeat(600) + "TAIL";
+    intercept().reply(429, longBody);
+    const r = await callLlm(env, "sys", "user");
+    expect(r).toMatchObject({ ok: false, code: "upstream_error", status: 502 });
+    expect(errorSpy).toHaveBeenCalledTimes(1);
+    const msg = String(errorSpy.mock.calls[0]?.[0]);
+    expect(msg).toContain("429");
+    expect(msg).toContain("rate limited:");
+    expect(msg).not.toContain("TAIL");
   });
 
   it("maps empty content to upstream_error/502", async () => {

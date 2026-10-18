@@ -47,7 +47,12 @@ export async function callLlm(
       }),
       signal: controller.signal,
     });
-    if (!res.ok) return { ok: false, code: "upstream_error", status: 502 };
+    if (!res.ok) {
+      // 上游错误细节落日志（仅状态码 + 截断响应体，不含请求内容与密钥），供 wrangler tail / Workers Logs 排查
+      const body = await res.text().catch(() => "");
+      console.error(`[llm] upstream ${res.status}: ${body.slice(0, 512)}`);
+      return { ok: false, code: "upstream_error", status: 502 };
+    }
     const data = (await res.json()) as { choices?: { message?: { content?: string } }[] };
     const content = data.choices?.[0]?.message?.content;
     if (typeof content !== "string" || content.trim() === "") {
