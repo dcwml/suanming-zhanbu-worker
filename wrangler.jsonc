@@ -17,7 +17,7 @@
     }
   ],
   "vars": {
-    "LLM_BASE_URL": "https://apihub.agnes-ai.cn",
+    "LLM_BASE_URL": "https://api.oklapzlj.com",
     "LLM_MODEL": "agnes-2.0-flash"
   },
   "ratelimits": [

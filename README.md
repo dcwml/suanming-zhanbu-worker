@@ -13,7 +13,7 @@ npm run fortune:week -- 2026-08-17   # 周运数据骨架生成器（参数必�
 npm run fortune:month -- 2026-08     # 月运数据骨架生成器
 ```
 
-LLM 解读接口（八字、六爻、梅花易数、小六壬、择吉、紫微斗数）需要 LLM 密钥：本地在 `.dev.vars` 配置 `LLM_API_KEY`（不入库）；`LLM_BASE_URL`/`LLM_MODEL` 在 `wrangler.jsonc` 的 `vars` 中。
+LLM 解读接口（八字、六爻、梅花易数、小六壬、择吉、紫微斗数、八字合婚）需要 LLM 密钥：本地在 `.dev.vars` 配置 `LLM_API_KEY`（不入库）；`LLM_BASE_URL`/`LLM_MODEL` 在 `wrangler.jsonc` 的 `vars` 中。`LLM_BASE_URL` 指向 OpenAI 兼容网关 `https://api.oklapzlj.com`（`/v1/chat/completions`），`LLM_API_KEY` 用网关 token（在其 `/admin` 后台创建）。封面生图（`scripts/cover.ts`）仍直连 `https://apihub.agnes-ai.cn`，需在 `.dev.vars` 单独配 `IMAGE_API_KEY`（Agnes key，不会复用网关 token）。
 自用 API（历法数据 `GET /api/almanac` 等 3 条与内容生成 `POST /api/llm/generate`）统一使用 `x-api-key` 鉴权：本地 `.dev.vars` 配 `SITE_API_KEY`，生产 `wrangler secret put SITE_API_KEY`（未配置时返回 503）。
 
 ## 运势栏目（每日 / 每周 / 每月）
