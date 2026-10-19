@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261020Zh from "../content/daily/2026-10-20.zh.html";
+import daily20261020En from "../content/daily/2026-10-20.en.html";
 import daily20261019Zh from "../content/daily/2026-10-19.zh.html";
 import daily20261019En from "../content/daily/2026-10-19.en.html";
 import daily20261018Zh from "../content/daily/2026-10-18.zh.html";
@@ -179,6 +181,14 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-10-20",
+    meta: {
+      zh: { title: "2026年10月20日宜忌·兔", description: "2026年10月20日黄历宜忌：勾陈黑道值日，天恩、六合、圣心、五合、鸣吠对诸吉齐临，大时、大败、咸池、小耗、五虚环伺，宜嫁娶、祭祀、祈福、求嗣、开光、出行、修造、动土、上梁、安床、纳畜、入殓、破土，忌入宅、移徙、开市、交易；丁卯日纳音炉中火，卯戌六合，咸池桃花应期，冲鸡煞西；生肖兔今日运势与「咸池桃花」神煞科普。" },
+      en: { title: "Daily Almanac — October 20, 2026 (Rabbit)", description: "Daily almanac for October 20, 2026: Gouchen holds the Black Path, attended by Heaven's Grace, the Six Harmony, the Sagely Heart, the Five Union and the Crowing-and-Barking Pair, while the Great Hour, the Great Ruin, the Peach Blossom, the Little Devourer and the Five Void stand about — favorable for marriage rites, worship, prayers, travel, construction and setting the bed; avoid moving into a new home, relocating, opening a business and transactions. A Dīng Mǎo day of Fire in the Furnace with the Mǎo-Xū six harmony and the Peach Blossom in season, clashing the Rooster with the Sha in the West; Rabbit fortunes today and an insight into Xiánchí, the Peach Blossom star." },
+    },
+    content: { zh: daily20261020Zh, en: daily20261020En },
+  },
   {
     date: "2026-10-19",
     cover: "/covers/daily/2026-10-19.jpg",
