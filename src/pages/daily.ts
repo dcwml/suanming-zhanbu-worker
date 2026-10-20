@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261021Zh from "../content/daily/2026-10-21.zh.html";
+import daily20261021En from "../content/daily/2026-10-21.en.html";
 import daily20261020Zh from "../content/daily/2026-10-20.zh.html";
 import daily20261020En from "../content/daily/2026-10-20.en.html";
 import daily20261019Zh from "../content/daily/2026-10-19.zh.html";
@@ -181,6 +183,14 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-10-21",
+    meta: {
+      zh: { title: "2026年10月21日宜忌·龙", description: "2026年10月21日黄历宜忌：青龙黄道值日，天恩、母仓、不将、益后、解神诸吉齐临，月破、大耗、四击、五墓、九空、往亡、复日环伺，宜祭祀、沐浴、破屋、坏垣，馀事勿取，忌嫁娶、入宅、上梁、出行、安葬；戊辰日纳音大林木，辰戌相冲月破，双龙相会，冲狗煞南；生肖龙今日运势与「青龙」黄道首神科普。" },
+      en: { title: "Daily Almanac — October 21, 2026 (Dragon)", description: "Daily almanac for October 21, 2026: The Azure Dragon heads the Yellow Path, attended by Heaven's Grace, the Mother's Store, the Benefactor of Posterity and the Resolving Spirit, while the Month Breaker, the Great Consumer, the Four Strikes, the Five Tombs, the Nine Emptinesses, the Departed Journey and the Repeated Day stand about — favorable for worship, bathing, demolition and tearing down walls, with all other matters set aside; avoid marriage rites, moving into a new home, raising the beam, travel and burial. A Wù Chén day of Wood of the Great Forest with the Chén–Xū month-break clash, a double-dragon meeting, clashing the Dog with the Sha in the South; Dragon fortunes today and an insight into Qīnglóng, first of the Yellow Path spirits." },
+    },
+    content: { zh: daily20261021Zh, en: daily20261021En },
+  },
   {
     date: "2026-10-20",
     meta: {
