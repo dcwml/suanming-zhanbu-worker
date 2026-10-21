@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261022Zh from "../content/daily/2026-10-22.zh.html";
+import daily20261022En from "../content/daily/2026-10-22.en.html";
 import daily20261021Zh from "../content/daily/2026-10-21.zh.html";
 import daily20261021En from "../content/daily/2026-10-21.en.html";
 import daily20261020Zh from "../content/daily/2026-10-20.zh.html";
@@ -183,6 +185,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-10-22",
+    cover: "/covers/daily/2026-10-22.jpg",
+    meta: {
+      zh: { title: "2026年10月22日宜忌·蛇", description: "2026年10月22日黄历宜忌：明堂黄道值日，阴德、续世诸吉相扶，游祸、天贼、血忌、重日环伺，宜祭祀、求嗣、会亲友、安门、安床、纳财，忌祈福、斋醮、纳采、订盟、嫁娶、入宅、安葬；己巳日纳音大林木，巳亥重日当值，冲猪煞东，明日霜降；生肖蛇今日运势与「明堂」黄道吉神科普。" },
+      en: { title: "Daily Almanac — October 22, 2026 (Snake)", description: "Daily almanac for October 22, 2026: The Bright Hall holds the Yellow Path, attended by Hidden Virtue and the Continuer of the Line, while the Wandering Misfortune, the Heavenly Thief, the Blood Taboo and the Repeated Day stand about — favorable for worship, praying for an heir, meeting friends and kin, installing doors, setting the bed and collecting wealth; avoid prayers and fasts, betrothal, marriage rites, moving home and burial. A Jǐ Sì day of Wood of the Great Forest with the Repeated Day upon the Sì branch, clashing the Pig with the Sha in the East, on the eve of Frost's Descent; Snake fortunes today and an insight into Míngtáng, the Bright Hall of the Yellow Path." },
+    },
+    content: { zh: daily20261022Zh, en: daily20261022En },
+  },
   {
     date: "2026-10-21",
     cover: "/covers/daily/2026-10-21.jpg",
