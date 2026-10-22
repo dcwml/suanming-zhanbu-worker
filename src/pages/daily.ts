@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261023Zh from "../content/daily/2026-10-23.zh.html";
+import daily20261023En from "../content/daily/2026-10-23.en.html";
 import daily20261022Zh from "../content/daily/2026-10-22.zh.html";
 import daily20261022En from "../content/daily/2026-10-22.en.html";
 import daily20261021Zh from "../content/daily/2026-10-21.zh.html";
@@ -185,6 +187,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-10-23",
+    cover: "/covers/daily/2026-10-23.jpg",
+    meta: {
+      zh: { title: "2026年10月23日宜忌·马", description: "2026年10月23日黄历宜忌：霜降交节，庚午马日天刑黑道值日，然月恩、三合、天喜、天医、天仓、不将、要安、鸣吠八吉齐临，吉众胜凶，宜嫁娶、纳采、订盟、开市、交易、祭祀、祈福、出行、入宅、移徙、安葬，忌探病、纳畜、伐木、盖屋；庚午日纳音路旁土，冲鼠煞北，秋之最后一气；生肖马今日运势与「霜降」节气科普。" },
+      en: { title: "Daily Almanac — October 23, 2026 (Horse)", description: "Daily almanac for October 23, 2026: Frost's Descent marks the day — a Gēng Wǔ day under the Black Path's Tiānxíng, yet graced by eight auspicious spirits, the Moon's Grace, the Triple Harmony, Heavenly Joy, the Heavenly Physician, the Heavenly Granary, Bùjiàng, Yào'ān and Míngfèi, their numbers outweighing the lone punisher — favorable for marriage rites, betrothal, business openings, trade, worship, blessings, travel, moving home and burial; avoid visiting the sick, buying livestock, felling trees and roofing. A Roadside Earth day clashing the Rat with the Sha in the North, on the last term of autumn; Horse fortunes today and an insight into Frost's Descent, the closing solar term of autumn." },
+    },
+    content: { zh: daily20261023Zh, en: daily20261023En },
+  },
   {
     date: "2026-10-22",
     cover: "/covers/daily/2026-10-22.jpg",
