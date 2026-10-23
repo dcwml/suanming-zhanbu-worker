@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261024Zh from "../content/daily/2026-10-24.zh.html";
+import daily20261024En from "../content/daily/2026-10-24.en.html";
 import daily20261023Zh from "../content/daily/2026-10-23.zh.html";
 import daily20261023En from "../content/daily/2026-10-23.en.html";
 import daily20261022Zh from "../content/daily/2026-10-22.zh.html";
@@ -187,6 +189,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-10-24",
+    cover: "/covers/daily/2026-10-24.jpg",
+    meta: {
+      zh: { title: "2026年10月24日宜忌·羊", description: "2026年10月24日黄历宜忌：霜降节后首日，辛未羊日朱雀黑道值日，然天德合、月德合双德同源齐临，母仓、不将、玉宇相扶，宜祭祀、冠笄、移徙、会亲友、纳财、理发，忌嫁娶、开市、开池、开厕、破土；辛未日纳音路旁土，冲牛煞西，九月望日月满之夜；生肖羊今日运势与「天德合·月德合」吉神科普。" },
+      en: { title: "Daily Almanac — October 24, 2026 (Goat)", description: "Daily almanac for October 24, 2026: the first day after Frost's Descent — a Xīn Wèi day under the Black Path's Vermilion Bird, yet graced by the twin unions of the Heaven's Virtue and the Moon's Virtue arriving from a single source, with the Mother's Granary, Bùjiàng and the Jade Eaves in support — favorable for worship, capping rites, relocation, meeting friends and kin, collecting wealth and grooming; avoid marriage rites, business openings, opening ponds, building privies and breaking ground. A Roadside Earth day clashing the Ox with the Sha in the West, on the full-moon night of the ninth month; Goat fortunes today and an insight into the Heaven's Virtue union and the Moon's Virtue union." },
+    },
+    content: { zh: daily20261024Zh, en: daily20261024En },
+  },
   {
     date: "2026-10-23",
     cover: "/covers/daily/2026-10-23.jpg",
