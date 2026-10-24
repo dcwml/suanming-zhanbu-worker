@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261025Zh from "../content/daily/2026-10-25.zh.html";
+import daily20261025En from "../content/daily/2026-10-25.en.html";
 import daily20261024Zh from "../content/daily/2026-10-24.zh.html";
 import daily20261024En from "../content/daily/2026-10-24.en.html";
 import daily20261023Zh from "../content/daily/2026-10-23.zh.html";
@@ -189,6 +191,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-10-25",
+    cover: "/covers/daily/2026-10-25.jpg",
+    meta: {
+      zh: { title: "2026年10月25日宜忌·猴", description: "2026年10月25日黄历宜忌：壬申猴日金匮黄道吉日，王日、四相、生气、驿马诸吉满列，宜出行、嫁娶、开仓、出货财、置产、动土、栽种、求医，忌安门、安床、裁衣、入宅、安葬；壬水长生在申，纳音剑锋金，冲虎煞南，霜降节后秋金正旺；生肖猴今日运势与黄道吉神「金匮」科普。" },
+      en: { title: "Daily Almanac — October 25, 2026 (Monkey)", description: "Daily almanac for October 25, 2026: a Rén Shēn day under the Yellow Path's Golden Casket, with the King's Day, the Four Phases, the Breath of Life and the Post Horse heading a twelve-spirit roster — favorable for travel, marriage rites, opening granaries, releasing wealth and goods, acquiring property, breaking ground and seeking medical care; avoid installing gates, setting beds, tailoring garments, moving into a new home and burial. A Sword's Edge Metal day with Rén water's birth-stage at Shēn, clashing the Tiger with the Sha in the South, autumn metal at its height after Frost's Descent; Monkey fortunes today and an insight into the Golden Casket of the Yellow Path." },
+    },
+    content: { zh: daily20261025Zh, en: daily20261025En },
+  },
   {
     date: "2026-10-24",
     cover: "/covers/daily/2026-10-24.jpg",
