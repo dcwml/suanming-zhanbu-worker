@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261026Zh from "../content/daily/2026-10-26.zh.html";
+import daily20261026En from "../content/daily/2026-10-26.en.html";
 import daily20261025Zh from "../content/daily/2026-10-25.zh.html";
 import daily20261025En from "../content/daily/2026-10-25.en.html";
 import daily20261024Zh from "../content/daily/2026-10-24.zh.html";
@@ -191,6 +193,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-10-26",
+    cover: "/covers/daily/2026-10-26.jpg",
+    meta: {
+      zh: { title: "2026年10月26日宜忌·鸡", description: "2026年10月26日黄历宜忌：癸酉鸡日天德黄道吉日，宝光、四相、官日、除神、鸣吠诸吉相扶，宜嫁娶、裁衣、冠笄、安床、移徙、出行、祭祀、安葬，忌开市、置产、栽种、词讼、安门；金白水清，纳音剑锋金，冲兔煞东，霜降后深秋向冬；生肖鸡今日运势与黄道吉神「天德·宝光」科普。" },
+      en: { title: "Daily Almanac — October 26, 2026 (Rooster)", description: "Daily almanac for October 26, 2026: a Guǐ Yǒu day under the Yellow Path's Heavenly Virtue, with Treasured Light, the Four Phases, the Official's Day, the Cleansing Spirit and the Crowing and Barking in support — favorable for marriage rites, tailoring garments, setting beds, moving residence, travel, worship and burial; avoid opening for trade, acquiring property, planting and lawsuits. White metal and clear water on a Sword's Edge Metal day, clashing the Rabbit with the Sha in the East, deep autumn turning toward winter after Frost's Descent; Rooster fortunes today and an insight into the Heavenly Virtue, the Treasured Light of the Yellow Path." },
+    },
+    content: { zh: daily20261026Zh, en: daily20261026En },
+  },
   {
     date: "2026-10-25",
     cover: "/covers/daily/2026-10-25.jpg",
