@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import weekly20261026Zh from "../content/weekly/2026-10-26.zh.html";
+import weekly20261026En from "../content/weekly/2026-10-26.en.html";
 import weekly20261019Zh from "../content/weekly/2026-10-19.zh.html";
 import weekly20261019En from "../content/weekly/2026-10-19.en.html";
 import weekly20261012Zh from "../content/weekly/2026-10-12.zh.html";
@@ -40,6 +42,20 @@ export const WEEKLY_ARCHIVE_META = {
 } as const;
 
 export const WEEKLY_POSTS: readonly WeeklyPost[] = [
+  {
+    monday: "2026-10-26",
+    meta: {
+      zh: {
+        title: "十二生肖一周运势（2026年10月26日–11月1日）",
+        description: "2026年10月26日至11月1日十二生肖每周运势：特吉生肖牛、虎、猪，次吉生肖兔、狗、鼠，属猴者本周宜守；周一癸酉天德吉日开局宜嫁娶出行移徙，周四天牢凶日宜项最丰、开市交易立券皆宜，周五周六连日馀事勿取，周日勾陈凶日仍宜嫁娶入宅上梁收官；逐日干支速览与每日冲忌提醒。",
+      },
+      en: {
+        title: "Weekly Horoscope for All 12 Zodiacs — Oct 26 – Nov 1, 2026",
+        description: "Weekly fortune for all twelve Chinese zodiac signs, October 26 – November 1, 2026: Ox, Tiger and Pig top the luckiest signs with Rabbit, Dog and Rat following, while Monkey is advised to play it safe; Monday's Heavenly Virtue day opens with weddings, travel and relocation favored, Thursday's Heavenly Lock day carries the week's richest almanac with market openings, trade and contracts all favored, Friday and Saturday both mark nothing else advisable, and Sunday's Hook Array day still favors weddings and raising beams to close; plus a day-by-day stems-and-branches overview with daily clash alerts.",
+      },
+    },
+    content: { zh: weekly20261026Zh, en: weekly20261026En },
+  },
   {
     monday: "2026-10-19",
     meta: {
