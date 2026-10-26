@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261027Zh from "../content/daily/2026-10-27.zh.html";
+import daily20261027En from "../content/daily/2026-10-27.en.html";
 import daily20261026Zh from "../content/daily/2026-10-26.zh.html";
 import daily20261026En from "../content/daily/2026-10-26.en.html";
 import daily20261025Zh from "../content/daily/2026-10-25.zh.html";
@@ -193,6 +195,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-10-27",
+    cover: "/covers/daily/2026-10-27.jpg",
+    meta: {
+      zh: { title: "2026年10月27日宜忌·狗", description: "2026年10月27日黄历宜忌：甲戌狗日白虎黑道值日，母仓、守日、天马三吉化解，宜祭祀、造车器、出行、修造、上梁、盖屋、安门、安床，忌出货财、开仓、动土、破土、安葬、行丧；甲木坐戌，纳音山头火，冲龙煞北，霜降后深秋土旺；生肖狗今日运势与黑道凶神「白虎」科普。" },
+      en: { title: "Daily Almanac — October 27, 2026 (Dog)", description: "Daily almanac for October 27, 2026: a Jiǎ Xū day under the Black Path's White Tiger, softened by the Mother's Granary, the Keeping Day and the Post Horse — favorable for worship, making vehicle fittings, travel, construction, raising ridgepoles, roofing houses, installing gates and setting beds; avoid releasing wealth, opening granaries, breaking ground, burial, funerals, felling trees and planting. Wood seated on its wealth vault on a Fire on the Mountaintop day, clashing the Dragon with the Sha in the North, deep autumn earth at its heaviest after Frost's Descent; Dog fortunes today and an insight into the White Tiger, the Black Path's most famed spirit." },
+    },
+    content: { zh: daily20261027Zh, en: daily20261027En },
+  },
   {
     date: "2026-10-26",
     cover: "/covers/daily/2026-10-26.jpg",
