@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261028Zh from "../content/daily/2026-10-28.zh.html";
+import daily20261028En from "../content/daily/2026-10-28.en.html";
 import daily20261027Zh from "../content/daily/2026-10-27.zh.html";
 import daily20261027En from "../content/daily/2026-10-27.en.html";
 import daily20261026Zh from "../content/daily/2026-10-26.zh.html";
@@ -195,6 +197,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-10-28",
+    cover: "/covers/daily/2026-10-28.jpg",
+    meta: {
+      zh: { title: "2026年10月28日宜忌·猪", description: "2026年10月28日黄历宜忌：乙亥猪日玉堂黄道吉日，相日、吉期、五富、敬安、玉堂五吉满列，宜祭祀、开光、出行、入宅、移徙、安床、修造、作梁、扫舍，忌造庙、嫁娶、掘井、栽种、造桥、作灶、动土；乙木坐亥得水滋根，纳音山头火，冲蛇煞西，霜降后深秋向冬；生肖猪今日运势与黄道吉神「玉堂」科普。" },
+      en: { title: "Daily Almanac — October 28, 2026 (Pig)", description: "Daily almanac for October 28, 2026: a Yǐ Hài day under the Yellow Path's Jade Hall, with the Minister's Day, the Lucky Date, Abundant Wealth, Reverent Peace and the Jade Hall heading the roster — favorable for worship, consecrating objects, travel, entering a new home, moving residence, setting beds, construction and sweeping the house; avoid building temples, marriage rites, digging wells, planting, building bridges, the stove and breaking ground. Water-nourished wood on the second day of Fire on the Mountaintop, clashing the Snake with the Sha in the West, deep autumn turning toward winter after Frost's Descent; Pig fortunes today and an insight into the Jade Hall, the Yellow Path's hall of letters." },
+    },
+    content: { zh: daily20261028Zh, en: daily20261028En },
+  },
   {
     date: "2026-10-27",
     cover: "/covers/daily/2026-10-27.jpg",
