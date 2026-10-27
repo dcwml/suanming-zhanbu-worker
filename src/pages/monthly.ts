@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import monthly202611Zh from "../content/monthly/2026-11.zh.html";
+import monthly202611En from "../content/monthly/2026-11.en.html";
 import monthly202610Zh from "../content/monthly/2026-10.zh.html";
 import monthly202610En from "../content/monthly/2026-10.en.html";
 import monthly202609Zh from "../content/monthly/2026-09.zh.html";
@@ -26,6 +28,20 @@ export const MONTHLY_ARCHIVE_META = {
 } as const;
 
 export const MONTHLY_POSTS: readonly MonthlyPost[] = [
+  {
+    month: "2026-11",
+    meta: {
+      zh: {
+        title: "2026年11月十二生肖每月运势（己亥月）",
+        description: "2026年11月（农历己亥月）十二生肖每月运势：立冬寒水当令，月支亥六合虎、三合兔羊、冲蛇害猴；附本月嫁娶、搬家、开业、出行、修造吉日速查。",
+      },
+      en: {
+        title: "Monthly Horoscope for All 12 Zodiacs — November 2026",
+        description: "November 2026 monthly fortune for all twelve Chinese zodiac signs: the Jǐ Hài Pig month brings deep Water energy from the Start of Winter; the month branch harmonizes with Tiger, Rabbit and Goat while clashing with Snake; plus a quick reference of auspicious days for weddings, moving, business, travel and construction.",
+      },
+    },
+    content: { zh: monthly202611Zh, en: monthly202611En },
+  },
   {
     month: "2026-10",
     meta: {
