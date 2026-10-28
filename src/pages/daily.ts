@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261029Zh from "../content/daily/2026-10-29.zh.html";
+import daily20261029En from "../content/daily/2026-10-29.en.html";
 import daily20261028Zh from "../content/daily/2026-10-28.zh.html";
 import daily20261028En from "../content/daily/2026-10-28.en.html";
 import daily20261027Zh from "../content/daily/2026-10-27.zh.html";
@@ -197,6 +199,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-10-29",
+    cover: "/covers/daily/2026-10-29.jpg",
+    meta: {
+      zh: { title: "2026年10月29日宜忌·鼠", description: "2026年10月29日黄历宜忌：丙子鼠日天牢黑道值日，天德、月德、时德三德齐临、干支俱德，众煞自伏，宜开市、交易、立券、开仓、出货财、纳采、订盟、问名、移徙、安床、入学、安葬，忌入宅、上梁、斋醮、出火、谢土；丙火坐子得年柱丙午帮身，纳音涧下水，冲马煞南，霜降后深秋向冬；生肖鼠今日运势与德神化解天牢的「三德齐临」科普。" },
+      en: { title: "Daily Almanac — October 29, 2026 (Rat)", description: "Daily almanac for October 29, 2026: a Bǐng Zǐ day under the Black Path's Heavenly Prison, held at bay by three virtues in one day — the Heavenly and Monthly Virtues crowning the day stem and the Seasonal Virtue seating the branch — favorable for opening a business, trade, signing contracts, opening granaries, releasing wealth, betrothal pledges, moving residence, setting beds, school and burial; avoid entering a new home, raising ridgepoles, fasts and offerings, moving the hearth fire and thanking the earth. Fire over water with the year's noon flame propping it up, a Ravine Water day clashing the Horse with the Sha in the South, deep autumn turning toward winter after Frost's Descent; Rat fortunes today and an insight into how virtue stills the Heavenly Prison." },
+    },
+    content: { zh: daily20261029Zh, en: daily20261029En },
+  },
   {
     date: "2026-10-28",
     cover: "/covers/daily/2026-10-28.jpg",
