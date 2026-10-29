@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261030Zh from "../content/daily/2026-10-30.zh.html";
+import daily20261030En from "../content/daily/2026-10-30.en.html";
 import daily20261029Zh from "../content/daily/2026-10-29.zh.html";
 import daily20261029En from "../content/daily/2026-10-29.en.html";
 import daily20261028Zh from "../content/daily/2026-10-28.zh.html";
@@ -199,6 +201,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-10-30",
+    cover: "/covers/daily/2026-10-30.jpg",
+    meta: {
+      zh: { title: "2026年10月30日宜忌·牛", description: "2026年10月30日黄历宜忌：丁丑牛日玄武黑道值日，母仓、福生双吉护持，宜祭祀、平治道涂，馀事勿取，忌嫁娶、开市；昨日三德齐临百事皆宜，今日德神轮休诸煞当班，天罡、死神、月煞、月虚环伺；丁火坐丑光焰内收，纳音涧下水与丙子合璧，冲羊煞东，霜降后深秋向冬；生肖牛今日运势与黑道「玄武」、四象北方水神科普。" },
+      en: { title: "Daily Almanac — October 30, 2026 (Ox)", description: "Daily almanac for October 30, 2026: a Dīng Chǒu day under the Black Path's Black Tortoise, held by the twin auspicious spirits Mǔcāng and Fúshēng — favorable for worship and offerings and leveling roads, with all other matters set aside; avoid marriages and opening a business. Where yesterday three virtues opened every gate, today the virtues stand down and Tiāngāng, the Death Spirit, the Month Sha and the Month Void take the watch. Fire dimmed by damp earth, a Ravine Water day completing the couplet with Bǐng Zǐ, clashing the Goat with the Sha in the East, deep autumn turning toward winter after Frost's Descent; Ox fortunes today and an insight into Xuánwǔ, the Black Tortoise of the Black Path and the North of the Four Symbols." },
+    },
+    content: { zh: daily20261030Zh, en: daily20261030En },
+  },
   {
     date: "2026-10-29",
     cover: "/covers/daily/2026-10-29.jpg",
