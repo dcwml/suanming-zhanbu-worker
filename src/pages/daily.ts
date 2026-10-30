@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261031Zh from "../content/daily/2026-10-31.zh.html";
+import daily20261031En from "../content/daily/2026-10-31.en.html";
 import daily20261030Zh from "../content/daily/2026-10-30.zh.html";
 import daily20261030En from "../content/daily/2026-10-30.en.html";
 import daily20261029Zh from "../content/daily/2026-10-29.zh.html";
@@ -201,6 +203,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-10-31",
+    cover: "/covers/daily/2026-10-31.jpg",
+    meta: {
+      zh: { title: "2026年10月31日宜忌·虎", description: "2026年10月31日黄历宜忌：戊寅虎日司命黄道值日，阳德、三合、临日、五合吉神照列，年月日三支寅午戌暗会火局，宜捕捉、畋猎，馀事勿取，忌开市、交易、祭祀、入宅、安葬；月厌当权、复日再临，孤辰死气环伺；戊土坐寅得火长生，纳音城头土，冲猴煞北，立冬在望；生肖虎今日运势与黄道吉神「司命」灶神科普。" },
+      en: { title: "Daily Almanac — October 31, 2026 (Tiger)", description: "Daily almanac for October 31, 2026: a Wù Yín day under the Yellow Path's Fate Master, with Yang Virtue, Three Harmony, the Minister's Day, Seasonal Shade, Five Unions and the Fate Master heading the auspicious roster as the year's Wǔ, month's Xū and day's Yín assemble the fire trine in full — favorable for capturing and hunting, with all other matters set aside; avoid opening a business, trade, worship and offerings, moving into a new home and burial. The Month Loathing holds power and the Repeated Day returns; Yang Earth seated where fire gains long life, a City Wall Earth day clashing the Monkey with the Sha in the North, Start of Winter a week away; Tiger fortunes today and an insight into Sīmìng, the Fate Master of the Yellow Path — the Stove God." },
+    },
+    content: { zh: daily20261031Zh, en: daily20261031En },
+  },
   {
     date: "2026-10-30",
     cover: "/covers/daily/2026-10-30.jpg",
