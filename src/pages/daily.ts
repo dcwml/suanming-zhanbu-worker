@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261101Zh from "../content/daily/2026-11-01.zh.html";
+import daily20261101En from "../content/daily/2026-11-01.en.html";
 import daily20261031Zh from "../content/daily/2026-10-31.zh.html";
 import daily20261031En from "../content/daily/2026-10-31.en.html";
 import daily20261030Zh from "../content/daily/2026-10-30.zh.html";
@@ -203,6 +205,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-11-01",
+    cover: "/covers/daily/2026-11-01.jpg",
+    meta: {
+      zh: { title: "2026年11月1日宜忌·兔", description: "2026年11月1日黄历宜忌：己卯兔日勾陈黑道值日，天恩、六合、圣心、五合四吉拱照，日支卯与月支戌六合应「六合」吉神，宜嫁娶、纳采、订盟、纳婿、移徙、入宅、安床、安葬等二十二事，忌开市、破土、掘井、合寿木；咸池桃花照命、小耗防小破财，城头土成对收官，冲鸡煞西，立冬在望；生肖兔今日运势与黑道收官之神「勾陈」科普。" },
+      en: { title: "Daily Almanac — November 1, 2026 (Rabbit)", description: "Daily almanac for November 1, 2026: a Jǐ Mǎo day under the Black Path's Gōuchén, the Hook Array, with the Heavenly Grace, Six Harmony, Sacred Heart and Five Unions holding the watch fourfold while the day's Mǎo stands in Six Harmony with the month's Xū — favorable for twenty-two matters, marriages, betrothal pledges, adopting a son-in-law, moving residence, entering a new home and burial among them; avoid opening a business, breaking ground, digging wells and fitting coffin wood. The Peach Blossom of the Pool of Sweetness shines on romance while the Little Spender counts small losses; a City Wall Earth day closing the couplet, clashing the Rooster with the Sha in the West, Start of Winter in sight; Rabbit fortunes today and an insight into Gōuchén, the last of the Black Path six — the most exalted of them all." },
+    },
+    content: { zh: daily20261101Zh, en: daily20261101En },
+  },
   {
     date: "2026-10-31",
     cover: "/covers/daily/2026-10-31.jpg",
