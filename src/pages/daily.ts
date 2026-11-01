@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261102Zh from "../content/daily/2026-11-02.zh.html";
+import daily20261102En from "../content/daily/2026-11-02.en.html";
 import daily20261101Zh from "../content/daily/2026-11-01.zh.html";
 import daily20261101En from "../content/daily/2026-11-01.en.html";
 import daily20261031Zh from "../content/daily/2026-10-31.zh.html";
@@ -205,6 +207,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-11-02",
+    cover: "/covers/daily/2026-11-02.jpg",
+    meta: {
+      zh: { title: "2026年11月2日宜忌·龙", description: "2026年11月2日黄历宜忌：庚辰龙日青龙黄道开印，却逢日支辰冲月支戌之月破，大耗、往亡、九空、四击环伺，天恩、母仓、月恩、解神等七吉拱照，宜祭祀、沐浴、解除、破屋、坏垣，馀事勿取，忌开市、嫁娶；白蜡金纳音，冲狗煞南，立冬在望；生肖龙今日运势与「月破大耗」破日宜破屋坏垣的辩证科普。" },
+      en: { title: "Daily Almanac — November 2, 2026 (Dragon)", description: "Daily almanac for November 2, 2026: a Gēng Chén day on which the Azure Dragon opens the Yellow Path anew — yet the day branch strikes the month's Xū and the Month Breaker holds power, the Great Depletion, Departure Doom, Nine Voids and Four Strikes attending while seven auspicious spirits, the Heavenly Grace, the Mother's Granary and the Resolving Spirit among them, hold the watch; favorable for worship, bathing, dissolving old ties, demolishing a house and razing walls, with all other matters set aside; avoid opening a business and marriages. A White Wax Metal day clashing the Dog with the Sha in the South, Start of Winter in sight; Dragon fortunes today and an insight into the Month Breaker — why the breaking day favors tearing down, and the thousand-year dialectic of riding the current." },
+    },
+    content: { zh: daily20261102Zh, en: daily20261102En },
+  },
   {
     date: "2026-11-01",
     cover: "/covers/daily/2026-11-01.jpg",
