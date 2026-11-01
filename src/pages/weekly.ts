@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import weekly20261102Zh from "../content/weekly/2026-11-02.zh.html";
+import weekly20261102En from "../content/weekly/2026-11-02.en.html";
 import weekly20261026Zh from "../content/weekly/2026-10-26.zh.html";
 import weekly20261026En from "../content/weekly/2026-10-26.en.html";
 import weekly20261019Zh from "../content/weekly/2026-10-19.zh.html";
@@ -42,6 +44,20 @@ export const WEEKLY_ARCHIVE_META = {
 } as const;
 
 export const WEEKLY_POSTS: readonly WeeklyPost[] = [
+  {
+    monday: "2026-11-02",
+    meta: {
+      zh: {
+        title: "十二生肖一周运势（2026年11月2日–8日）",
+        description: "2026年11月2日至8日十二生肖每周运势：特吉生肖蛇、马、猴，次吉生肖龙、鸡、羊，属狗者本周宜守；周一青龙吉日开局馀事勿取，周三天刑凶日宜项最丰、嫁娶开市出行皆宜，周五金匮吉日嫁娶移徙入宅皆宜，周六朱雀凶日恰逢立冬馀事勿取，周日金匮吉日忌入宅嫁娶开市收官；逐日干支速览与每日冲忌提醒。",
+      },
+      en: {
+        title: "Weekly Horoscope for All 12 Zodiacs — Nov 2–8, 2026",
+        description: "Weekly fortune for all twelve Chinese zodiac signs, November 2–8, 2026: Snake, Horse and Monkey top the luckiest signs with Dragon, Rooster and Goat following, while Dog is advised to play it safe; Monday's Azure Dragon day opens quiet with nothing else advisable, Wednesday's Heavenly Punishment day carries the week's richest almanac with weddings, travel and market openings favored, Friday's Golden Chest day suits weddings and moving in, Saturday's Vermilion Bird day lands on the Start of Winter with nothing else advisable, and Sunday's Golden Chest day bars moving in, weddings and openings to close; plus a day-by-day stems-and-branches overview with daily clash alerts.",
+      },
+    },
+    content: { zh: weekly20261102Zh, en: weekly20261102En },
+  },
   {
     monday: "2026-10-26",
     meta: {
