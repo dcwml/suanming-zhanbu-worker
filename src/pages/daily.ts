@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261103Zh from "../content/daily/2026-11-03.zh.html";
+import daily20261103En from "../content/daily/2026-11-03.en.html";
 import daily20261102Zh from "../content/daily/2026-11-02.zh.html";
 import daily20261102En from "../content/daily/2026-11-02.en.html";
 import daily20261101Zh from "../content/daily/2026-11-01.zh.html";
@@ -207,6 +209,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-11-03",
+    cover: "/covers/daily/2026-11-03.jpg",
+    meta: {
+      zh: { title: "2026年11月3日宜忌·蛇", description: "2026年11月3日黄历宜忌：辛巳蛇日明堂黄道续班，天德合、月德合双德齐至，巳中丙火官星合身应订盟立券之象，宜订盟、纳采、会亲友、交易、立券、纳财、栽种等九事，忌嫁娶、开市、入宅、祈福、安葬；白蜡金纳音，血忌、游祸、天贼、重日环伺，冲猪煞东，立冬在望；生肖蛇今日运势与「天德合月德合」暗德入命科普。" },
+      en: { title: "Daily Almanac — November 3, 2026 (Snake)", description: "Daily almanac for November 3, 2026: a Xīn Sì day on which the Hall of Light keeps the Yellow Path for a second day and the Combined Heavenly and Lunar Virtue descend together — the hidden Bǐng–Xīn union answering the day's betrothal and contract works; favorable for nine matters, betrothal pledges, presenting gifts, gathering with kin, transactions, drawing up contracts and collecting wealth among them; avoid marriages, opening a business, entering a new home, prayers and burial. A White Wax Metal day with the Blood Taboo, Wandering Calamity, Heavenly Thief and Repeat Day attending, clashing the Pig with the Sha in the East, Start of Winter in sight; Snake fortunes today and an insight into the Virtue Combinations — how the hidden virtue enters the day through the Bǐng–Xīn union." },
+    },
+    content: { zh: daily20261103Zh, en: daily20261103En },
+  },
   {
     date: "2026-11-02",
     cover: "/covers/daily/2026-11-02.jpg",
