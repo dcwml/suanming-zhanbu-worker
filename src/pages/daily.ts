@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261104Zh from "../content/daily/2026-11-04.zh.html";
+import daily20261104En from "../content/daily/2026-11-04.en.html";
 import daily20261103Zh from "../content/daily/2026-11-03.zh.html";
 import daily20261103En from "../content/daily/2026-11-03.en.html";
 import daily20261102Zh from "../content/daily/2026-11-02.zh.html";
@@ -209,6 +211,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-11-04",
+    cover: "/covers/daily/2026-11-04.jpg",
+    meta: {
+      zh: { title: "2026年11月4日宜忌·马", description: "2026年11月4日黄历宜忌：壬午马日天刑黑道当值，然月空、天恩、四相、三合、天喜、天医、天仓、不将、要安、鸣吠十吉压阵，孤煞难敌满堂吉光，宜嫁娶、订盟、纳采、开市、立券、出行、移徙、入宅、破土、安葬等十三事，忌上梁、开光、盖屋、架马、合寿木；杨柳木纳音，冲鼠煞北，立冬在即；生肖马今日运势与黑道首神「天刑」科普。" },
+      en: { title: "Daily Almanac — November 4, 2026 (Horse)", description: "Daily almanac for November 4, 2026: a Rén Wǔ day under the Black Path's Tiānxíng, the Heavenly Punisher — yet with the Moon's Void, the Heavenly Grace, the Four Ministers, the Triple Harmony, the Heavenly Joy, the Heavenly Physician, the Heavenly Granary, the No Bride Unclaimed, the Peace of Mind and the Crying Hound holding the watch tenfold, the lone punisher cannot outweigh a hall full of blessings; favorable for thirteen matters, marriages, betrothal pledges, presenting gifts, opening a business, drawing up contracts, travel, moving residence, entering a new home, breaking ground and burial among them; avoid raising the ridgepole, consecration, roofing a house, setting the frame horses and fitting coffin wood. A Willow Wood day clashing the Rat with the Sha in the North, Start of Winter three days away; Horse fortunes today and an insight into Tiānxíng, the first of the Black Path six to take the floor — why a black-path day is not always an ill day." },
+    },
+    content: { zh: daily20261104Zh, en: daily20261104En },
+  },
   {
     date: "2026-11-03",
     cover: "/covers/daily/2026-11-03.jpg",
