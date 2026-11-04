@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261105Zh from "../content/daily/2026-11-05.zh.html";
+import daily20261105En from "../content/daily/2026-11-05.en.html";
 import daily20261104Zh from "../content/daily/2026-11-04.zh.html";
 import daily20261104En from "../content/daily/2026-11-04.en.html";
 import daily20261103Zh from "../content/daily/2026-11-03.zh.html";
@@ -211,6 +213,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-11-05",
+    cover: "/covers/daily/2026-11-05.jpg",
+    meta: {
+      zh: { title: "2026年11月5日宜忌·羊", description: "2026年11月5日黄历宜忌：癸未羊日朱雀黑道当值，天恩、母仓、四相、不将、玉宇五吉齐列足堪压阵，宜祭祀、作灶、纳财、捕捉、畋猎、馀事勿取，忌动土、破土、开市、安葬；杨柳木纳音财星入库，冲牛煞西，立冬在后日；生肖羊今日运势与黑道之神「朱雀」科普。" },
+      en: { title: "Daily Almanac — November 5, 2026 (Goat)", description: "Daily almanac for November 5, 2026: a Guǐ Wèi day under the Black Path's Zhūquè, the Vermilion Bird — yet five auspicious spirits, the Heavenly Grace, the Mother's Granary, the Four Ministers, the No Bride Unclaimed and the Jade Eaves, stand ranged enough to hold the floor; favorable for worship and offerings, making the kitchen stove, collecting wealth, capturing and hunting, with all other matters set aside; avoid groundbreaking, breaking earth for burial, opening a business and burial. A Willow Wood day with the wealth star tucked in the storehouse, clashing the Ox with the Sha in the West, Start of Winter two days away; Goat fortunes today and an insight into Zhūquè — the southern fire bird of the Four Symbols that keeps the Black Path's watch." },
+    },
+    content: { zh: daily20261105Zh, en: daily20261105En },
+  },
   {
     date: "2026-11-04",
     cover: "/covers/daily/2026-11-04.jpg",
