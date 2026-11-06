@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261107Zh from "../content/daily/2026-11-07.zh.html";
+import daily20261107En from "../content/daily/2026-11-07.en.html";
 import daily20261105Zh from "../content/daily/2026-11-05.zh.html";
 import daily20261105En from "../content/daily/2026-11-05.en.html";
 import daily20261104Zh from "../content/daily/2026-11-04.zh.html";
@@ -213,6 +215,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-11-07",
+    cover: "/covers/daily/2026-11-07.jpg",
+    meta: {
+      zh: { title: "2026年11月7日宜忌·鸡", description: "2026年11月7日（立冬）黄历宜忌：乙酉鸡日朱雀黑道再值，天德、除神、生气等九吉齐列，宜解除、馀事勿取，忌无——诸禁尽收「馀事勿取」四字；月柱换己亥、水令开场，泉中水应节，冲兔煞东；生肖鸡今日运势与立冬「冬藏」科普。" },
+      en: { title: "Daily Almanac — November 7, 2026 (Rooster)", description: "Daily almanac for November 7, 2026, Start of Winter: a Yǐ Yǒu day under the Black Path's Zhūquè, the Vermilion Bird, with nine auspicious spirits ranged — the Heavenly Virtue, the Mother's Granary, the Spirit of Sweeping and more; favorable for dispelling and releasing, all other matters set aside, and the avoided column empty — every ban gathered into \"no other matters.\" The month pillar turns to Jǐ Hài as water's season opens, a Spring Middle Water day answering the term, clashing the Rabbit with the Sha in the East; Rooster fortunes today and an insight into Start of Winter — the Eight Nodes, the three pentads of storing, and the old rite of welcoming winter in the northern suburbs." },
+    },
+    content: { zh: daily20261107Zh, en: daily20261107En },
+  },
   {
     date: "2026-11-05",
     cover: "/covers/daily/2026-11-05.jpg",
