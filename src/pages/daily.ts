@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261108Zh from "../content/daily/2026-11-08.zh.html";
+import daily20261108En from "../content/daily/2026-11-08.en.html";
 import daily20261107Zh from "../content/daily/2026-11-07.zh.html";
 import daily20261107En from "../content/daily/2026-11-07.en.html";
 import daily20261105Zh from "../content/daily/2026-11-05.zh.html";
@@ -215,6 +217,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-11-08",
+    cover: "/covers/daily/2026-11-08.jpg",
+    meta: {
+      zh: { title: "2026年11月8日宜忌·狗", description: "2026年11月8日黄历宜忌：丙戌狗日金匮黄道值日，益后、金匮二吉护安顿送别，月煞、月虚、血支、五虚四凶压阵，宜安床、祭祀、开池、补垣及入殓移柩破土启钻，忌入宅、移徙、嫁娶、开市等九事；屋上土纳音，冲龙煞北，农历九月三十晦日；生肖狗今日运势与晦日「月尽送穷」科普。" },
+      en: { title: "Daily Almanac — November 8, 2026 (Dog)", description: "Daily almanac for November 8, 2026: a Bǐng Xū Dog day on the Yellow Path under Jīnkuì, the Golden Treasury, with Yìhòu and Jīnkuì guarding settling and farewell while Yuèshà, Yuèxū, Xuèzhī and Wǔxū press upon the lists — favorable for setting the bed, offerings and sacrifice, pond-digging and wall-mending, and the four funerary matters; avoided are nine matters, from moving house and marriage to opening a business. An Earth on the Roof day clashing the Dragon with the Sha in the North, and the thirtieth of the ninth lunar month — the dark of the moon; Dog fortunes today and an insight into Huì, the moon's exhaustion — the moon-phase calendar, the Tang dark-day festival and the Sending Off of Poverty." },
+    },
+    content: { zh: daily20261108Zh, en: daily20261108En },
+  },
   {
     date: "2026-11-07",
     cover: "/covers/daily/2026-11-07.jpg",
