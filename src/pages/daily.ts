@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261109Zh from "../content/daily/2026-11-09.zh.html";
+import daily20261109En from "../content/daily/2026-11-09.en.html";
 import daily20261108Zh from "../content/daily/2026-11-08.zh.html";
 import daily20261108En from "../content/daily/2026-11-08.en.html";
 import daily20261107Zh from "../content/daily/2026-11-07.zh.html";
@@ -217,6 +219,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-11-09",
+    cover: "/covers/daily/2026-11-09.jpg",
+    meta: {
+      zh: { title: "2026年11月9日宜忌·猪", description: "2026年11月9日（寒衣节）黄历宜忌：丁亥猪日天德黄道值日，王日、续世、宝光三吉护祭祀追远，月建、月刑、血忌、重日八凶压阵，宜祭祀、沐浴、馀事勿取，忌无；屋上土纳音，冲蛇煞西，农历十月初一寒衣节；生肖猪今日运势与「十月一送寒衣」科普。" },
+      en: { title: "Daily Almanac — November 9, 2026 (Pig)", description: "Daily almanac for November 9, 2026, the Cold Clothing Festival: a Dīng Hài Pig day on the Yellow Path under Tiāndé, the Heavenly Virtue, with the King's Day, the World Continuing and the Treasured Light guarding worship and remembrance while the Monthly Established, the Monthly Punisher, the Blood Taboo and the Double Day press upon the lists — favorable for offerings and bathing, all other matters set aside, and the avoided column empty. An Earth on the Roof day clashing the Snake with the Sha in the West, the first day of the tenth lunar month; Pig fortunes today and an insight into the Cold Clothing Festival — the giving of winter robes, Meng Jiangnü at the Great Wall and the folk rite of burning paper clothes." },
+    },
+    content: { zh: daily20261109Zh, en: daily20261109En },
+  },
   {
     date: "2026-11-08",
     cover: "/covers/daily/2026-11-08.jpg",
