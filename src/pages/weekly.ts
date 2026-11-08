@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import weekly20261109Zh from "../content/weekly/2026-11-09.zh.html";
+import weekly20261109En from "../content/weekly/2026-11-09.en.html";
 import weekly20261102Zh from "../content/weekly/2026-11-02.zh.html";
 import weekly20261102En from "../content/weekly/2026-11-02.en.html";
 import weekly20261026Zh from "../content/weekly/2026-10-26.zh.html";
@@ -44,6 +46,20 @@ export const WEEKLY_ARCHIVE_META = {
 } as const;
 
 export const WEEKLY_POSTS: readonly WeeklyPost[] = [
+  {
+    monday: "2026-11-09",
+    meta: {
+      zh: {
+        title: "十二生肖一周运势（2026年11月9日–15日）",
+        description: "2026年11月9日至15日十二生肖每周运势：特吉生肖鸡、鼠、牛，次吉生肖猴、狗、猪，丙午本命年的属马者本周宜守；周一寒衣节天德吉日宜祭祀沐浴馀事勿取，周二白虎凶日宜项全周最丰、嫁娶出行入宅移徙皆宜，周四天牢凶日宜开市交易立券，周五玄武凶日宜开市交易挂匾，周六司命吉日忌项繁多，周日勾陈凶日馀事勿取收官；逐日干支速览与每日冲忌提醒。",
+      },
+      en: {
+        title: "Weekly Horoscope for All 12 Zodiacs — Nov 9–15, 2026",
+        description: "Weekly fortune for all twelve Chinese zodiac signs, November 9–15, 2026: Rooster, Rat and Ox top the luckiest signs with Monkey, Dog and Pig following, while Horse — in its own Bǐng Wǔ year — is advised to play it safe; Monday's Heavenly Virtue day lands on the Winter Clothing Festival with worship only and nothing else advisable, Tuesday's White Tiger day carries the week's richest almanac with weddings, travel and moving in favored, Thursday's Heavenly Prison day suits market openings and contracts, Friday's Black Tortoise day favors trade and plaques, Saturday's Siming day runs a long avoid-list, and Sunday's Hook Array day closes with nothing else advisable; plus a day-by-day stems-and-branches overview with daily clash alerts.",
+      },
+    },
+    content: { zh: weekly20261109Zh, en: weekly20261109En },
+  },
   {
     monday: "2026-11-02",
     meta: {
