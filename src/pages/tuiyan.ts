@@ -6,6 +6,8 @@ import tuiyan20260911Zh from "../content/tuiyan/2026-09-11.zh.html";
 import tuiyan20260911En from "../content/tuiyan/2026-09-11.en.html";
 import tuiyan20261010Zh from "../content/tuiyan/2026-10-10.zh.html";
 import tuiyan20261010En from "../content/tuiyan/2026-10-10.en.html";
+import tuiyan20261109Zh from "../content/tuiyan/2026-11-09.zh.html";
+import tuiyan20261109En from "../content/tuiyan/2026-11-09.en.html";
 
 export interface TuiyanPost {
   /** 农历月首日公历日期 "YYYY-MM-DD"（URL 键） */
@@ -74,6 +76,23 @@ export const TUIYAN_POSTS: readonly TuiyanPost[] = [
       },
     },
     content: { zh: tuiyan20261010Zh, en: tuiyan20261010En },
+  },
+  {
+    firstDay: "2026-11-09",
+    meta: {
+      zh: {
+        title: "2026农历十月特殊时辰推演：北水三对、三局并陈与纯阳末日",
+        description:
+          "农历十月360个时辰逐时推演：20个一级大格、亥子丑北水六会三旬三对、木火水三局并陈、魁罡日三日、纯阳六格凝于十月三十与每日亮点速查。",
+      },
+      en: {
+        title:
+          "Hour Omens of Lunar October 2026: Three Pairs of Northern Waters, Three Trines Together and All-Yang at the Month's End",
+        description:
+          "All 360 double-hours of lunar October 2026 charted one by one: twenty grand configurations, six northern water unions in three mirrored decade-pairs, fire, wood and water trines together, three Kui Gang days, six all-yang hours gathered on the month's final day, and a day-by-day quick reference.",
+      },
+    },
+    content: { zh: tuiyan20261109Zh, en: tuiyan20261109En },
   },
 ];
 

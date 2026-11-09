@@ -259,6 +259,10 @@ describe("tuiyan", () => {
     expect(html).toContain('href="/zh/tuiyan/2026-08-13/"');
     expect(html).toContain('href="/zh/tuiyan/2026-09-11/"');
     expect(html).toContain('href="/zh/tuiyan/2026-10-10/"');
+    expect(html).toContain('href="/zh/tuiyan/2026-11-09/"');
+    expect(html.indexOf('href="/zh/tuiyan/2026-11-09/"')).toBeLessThan(
+      html.indexOf('href="/zh/tuiyan/2026-10-10/"'),
+    );
     expect(html.indexOf('href="/zh/tuiyan/2026-10-10/"')).toBeLessThan(
       html.indexOf('href="/zh/tuiyan/2026-09-11/"'),
     );
@@ -275,6 +279,7 @@ describe("tuiyan", () => {
     expect(html).toContain('href="/en/tuiyan/2026-08-13/"');
     expect(html).toContain('href="/en/tuiyan/2026-09-11/"');
     expect(html).toContain('href="/en/tuiyan/2026-10-10/"');
+    expect(html).toContain('href="/en/tuiyan/2026-11-09/"');
   });
 
   it("renders existing zh tuiyan post with sections, canonical and article jsonld", async () => {
@@ -326,6 +331,20 @@ describe("tuiyan", () => {
     expect(html).toContain(
       `<link rel="alternate" hreflang="x-default" href="${SITE_ORIGIN}/zh/tuiyan/2026-09-11/">`,
     );
+  });
+
+  it("renders lunar October zh tuiyan post with sections, canonical and article jsonld", async () => {
+    const res = await fetchNoFollow("/zh/tuiyan/2026-11-09/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain("tuiyan-summary");
+    expect(html).toContain("tuiyan-grand");
+    expect(html).toContain("tuiyan-kuigang");
+    expect(html).toContain("tuiyan-daily");
+    expect(html).toContain("北水三对");
+    expect(html).toContain("三日并见");
+    expect(html).toContain(`<link rel="canonical" href="${SITE_ORIGIN}/zh/tuiyan/2026-11-09/">`);
+    expect(html).toContain('"@type":"Article"');
   });
 
   it("redirects /zh/tuiyan/2026-08-13 to trailing-slash", async () => {
