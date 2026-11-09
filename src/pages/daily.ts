@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261110Zh from "../content/daily/2026-11-10.zh.html";
+import daily20261110En from "../content/daily/2026-11-10.en.html";
 import daily20261109Zh from "../content/daily/2026-11-09.zh.html";
 import daily20261109En from "../content/daily/2026-11-09.en.html";
 import daily20261108Zh from "../content/daily/2026-11-08.zh.html";
@@ -219,6 +221,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-11-10",
+    cover: "/covers/daily/2026-11-10.jpg",
+    meta: {
+      zh: { title: "2026年11月10日宜忌·鼠", description: "2026年11月10日黄历宜忌：戊子鼠日白虎黑道值日，官日、天马、吉期、要安四吉合力护驾，大时、大败、咸池、白虎、岁薄五凶在列，宜嫁娶、出行、修造、入宅等十七事，忌置产、安床；霹雳火纳音，冲马煞南，农历十月初二；生肖鼠今日运势与「子鼠为何居首」科普。" },
+      en: { title: "Daily Almanac — November 10, 2026 (Rat)", description: "Daily almanac for November 10, 2026: a Wù Zǐ Rat day on the Black Path under Báihǔ, the White Tiger, with four auspicious spirits standing guard in force — the Officer's Day, the Heavenly Horse, the Auspicious Hour and the Peace Keeper — while the Great Hour, the Great Defeat, the Pool of Xian and the Year's Thinness press upon the lists; favorable for seventeen matters, from marriages and travel to construction and moving in, avoided are acquiring property and setting up the bed. A Thunderbolt Fire day clashing the Horse with the Sha in the South, the second day of the tenth lunar month; Rat fortunes today and an insight into why the Rat stands first among the twelve — the Zǐ hour, the odd-and-even toes of the Qi Xiu Lei Gao, and the folk tale of the Rat biting open heaven." },
+    },
+    content: { zh: daily20261110Zh, en: daily20261110En },
+  },
   {
     date: "2026-11-09",
     cover: "/covers/daily/2026-11-09.jpg",
