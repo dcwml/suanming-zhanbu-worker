@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261111Zh from "../content/daily/2026-11-11.zh.html";
+import daily20261111En from "../content/daily/2026-11-11.en.html";
 import daily20261110Zh from "../content/daily/2026-11-10.zh.html";
 import daily20261110En from "../content/daily/2026-11-10.en.html";
 import daily20261109Zh from "../content/daily/2026-11-09.zh.html";
@@ -221,6 +223,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-11-11",
+    cover: "/covers/daily/2026-11-11.jpg",
+    meta: {
+      zh: { title: "2026年11月11日宜忌·牛", description: "2026年11月11日黄历宜忌：己丑牛日玉堂黄道值日，月德合、六合、五富、金堂等十吉护佑，河魁、死神、游祸、五虚、天牢五凶压阵，宜开光、裁衣、安门、会亲友、安床、结网、理发七事，忌嫁娶、出行、动土等十二事；霹雳火纳音，冲羊煞东，农历十月初三；生肖牛今日运势与「丑牛辟地」科普。" },
+      en: { title: "Daily Almanac — November 11, 2026 (Ox)", description: "Daily almanac for November 11, 2026: a Jǐ Chǒu Ox day on the Yellow Path under Yùtáng, the Jade Hall, with ten auspicious spirits standing guard — the Moon Virtue's Union, the Double Harmony, Abundant Wealth and the Golden Hall among them — while the River Chief, Death's Spirit, the Wandering Calamity, the Five Emptinesses and the Heavenly Prison press upon the lists; favorable for seven matters of ordering, from consecration and tailoring to installing doors and setting the bed, avoided are twelve matters, from marriages and travel to breaking ground and raising beams. A Thunderbolt Fire day clashing the Goat with the Sha in the East, the third day of the tenth lunar month; Ox fortunes today and an insight into how the Chǒu Ox cleaves the earth — the star-spirit and the fumbled decree, the ruminating hours of Chǒu, and the Ox that stands first in the Tàiláo offering." },
+    },
+    content: { zh: daily20261111Zh, en: daily20261111En },
+  },
   {
     date: "2026-11-10",
     cover: "/covers/daily/2026-11-10.jpg",
