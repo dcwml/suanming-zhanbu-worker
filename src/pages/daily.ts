@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261112Zh from "../content/daily/2026-11-12.zh.html";
+import daily20261112En from "../content/daily/2026-11-12.en.html";
 import daily20261111Zh from "../content/daily/2026-11-11.zh.html";
 import daily20261111En from "../content/daily/2026-11-11.en.html";
 import daily20261110Zh from "../content/daily/2026-11-10.zh.html";
@@ -223,6 +225,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-11-12",
+    cover: "/covers/daily/2026-11-12.jpg",
+    meta: {
+      zh: { title: "2026年11月12日宜忌·虎", description: "2026年11月12日黄历宜忌：庚寅虎日天牢黑道值日，天德合、六合、五富、金堂等十吉护佑，河魁、死神、游祸、五虚、天牢五凶在列，宜嫁娶、出行、修造、动土、入宅、开市等十五事，忌祈福、祭祀、伐木等六事；松柏木纳音，冲猴煞北，农历十月初四；生肖虎今日运势与「画虎于门」科普。" },
+      en: { title: "Daily Almanac — November 12, 2026 (Tiger)", description: "Daily almanac for November 12, 2026: a Gēng Yín Tiger day on the Black Path under Tiānláo, the Heavenly Prison, yet with ten auspicious spirits standing guard — the Heavenly Virtue's Union arriving in person on a Gēng day, the Double Harmony, Abundant Wealth and the Golden Hall among them — while the River Chief, Death's Spirit, the Wandering Calamity, the Five Emptinesses and the Heavenly Prison press upon the lists; favorable for fifteen matters, from marriages, travel and breaking ground to moving in and opening a market, avoided are six matters, from prayers and offerings to felling timber. A Pine and Cypress Wood day clashing the Monkey with the Sha in the North, the fourth day of the tenth lunar month; Tiger fortunes today and an insight into the tiger painted upon the door — the peach tree of Mount Dùshuò, the ghosts fed to tigers, and the roar at daybreak in the Yín hours." },
+    },
+    content: { zh: daily20261112Zh, en: daily20261112En },
+  },
   {
     date: "2026-11-11",
     cover: "/covers/daily/2026-11-11.jpg",
