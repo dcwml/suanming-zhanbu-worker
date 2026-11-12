@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261113Zh from "../content/daily/2026-11-13.zh.html";
+import daily20261113En from "../content/daily/2026-11-13.en.html";
 import daily20261112Zh from "../content/daily/2026-11-12.zh.html";
 import daily20261112En from "../content/daily/2026-11-12.en.html";
 import daily20261111Zh from "../content/daily/2026-11-11.zh.html";
@@ -225,6 +227,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-11-13",
+    cover: "/covers/daily/2026-11-13.jpg",
+    meta: {
+      zh: { title: "2026年11月13日宜忌·兔", description: "2026年11月13日黄历宜忌：辛卯兔日玄武黑道值日，阴德、民日、三合、时阴、不将、五合、鸣吠对七吉压死气、元武二凶，宜嫁娶、祭祀、祈福、开市、交易、入宅、伐木等十七事，忌栽种、掘井、置产三事；松柏木纳音，冲鸡煞西，农历十月初五；生肖兔今日运势与「玉兔捣药」科普。" },
+      en: { title: "Daily Almanac — November 13, 2026 (Rabbit)", description: "Daily almanac for November 13, 2026: a Xīn Mǎo Rabbit day on the Black Path under Xuánwǔ, the Black Tortoise, master of thieves and hidden losses, yet seven auspicious spirits face but two — Hidden Merit, the People's Day, the Three Harmonies, the Esoteric Hour, the No-Clash, the Fivefold Union and the Burial Cry in answer — while the Breath of Death and the Tortoise press upon the lists; favorable for seventeen matters, from marriages, offerings and prayers to opening a market, trading and felling timber, avoided are planting, digging wells and acquiring property. A Pine and Cypress Wood day clashing the Rooster with the Sha in the West, the fifth day of the tenth lunar month; Rabbit fortunes today and an insight into the Jade Rabbit in the moon — the Heavenly Questions of the Songs of Chu, the rabbit that gave itself to the fire, and the elixir pounded in the lunar court." },
+    },
+    content: { zh: daily20261113Zh, en: daily20261113En },
+  },
   {
     date: "2026-11-12",
     cover: "/covers/daily/2026-11-12.jpg",
