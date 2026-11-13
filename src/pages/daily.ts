@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261114Zh from "../content/daily/2026-11-14.zh.html";
+import daily20261114En from "../content/daily/2026-11-14.en.html";
 import daily20261113Zh from "../content/daily/2026-11-13.zh.html";
 import daily20261113En from "../content/daily/2026-11-13.en.html";
 import daily20261112Zh from "../content/daily/2026-11-12.zh.html";
@@ -227,6 +229,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-11-14",
+    cover: "/covers/daily/2026-11-14.jpg",
+    meta: {
+      zh: { title: "2026年11月14日宜忌·龙", description: "2026年11月14日黄历宜忌：壬辰龙日司命黄道值日，阳德、不将、解神、司命四吉临位，小耗、天贼、五墓、土符、复日五凶在列，宜祭祀、理发、针灸、解除、进人口、整手足甲六事，忌嫁娶、出行、动土、入宅、开市等十四事；长流水纳音，冲狗煞南，农历十月初六；生肖龙今日运势与「潜龙勿用」科普。" },
+      en: { title: "Daily Almanac — November 14, 2026 (Dragon)", description: "Daily almanac for November 14, 2026: a Rén Chén Dragon day on the Yellow Path under Sīmìng, the Director of Destinies, with Yang Virtue, the No-Clash, the Resolving Spirit and the Director four auspicious spirits attending, yet the Lesser Depletion, Heaven's Thief, the Five Burials, the Earth Talisman and the Day of Return press five strong upon the lists; favorable for six small matters of care — offerings, hairdressing, acupuncture, clearing away ill fortune, admitting new members and trimming nails — avoided are fourteen, from marriages, travel, breaking ground and moving home to opening a market. A Long Flowing Water day clashing the Dog with the Sha in the South, the sixth day of the tenth lunar month; Dragon fortunes today and an insight into the hidden dragon — the Qian hexagram's do-not-act, the Directors of Destinies in the Nine Songs of Chu, and water gathered into its Chén storehouse." },
+    },
+    content: { zh: daily20261114Zh, en: daily20261114En },
+  },
   {
     date: "2026-11-13",
     cover: "/covers/daily/2026-11-13.jpg",
