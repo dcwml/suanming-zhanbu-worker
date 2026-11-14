@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261115Zh from "../content/daily/2026-11-15.zh.html";
+import daily20261115En from "../content/daily/2026-11-15.en.html";
 import daily20261114Zh from "../content/daily/2026-11-14.zh.html";
 import daily20261114En from "../content/daily/2026-11-14.en.html";
 import daily20261113Zh from "../content/daily/2026-11-13.zh.html";
@@ -229,6 +231,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-11-15",
+    cover: "/covers/daily/2026-11-15.jpg",
+    meta: {
+      zh: { title: "2026年11月15日宜忌·蛇", description: "2026年11月15日黄历宜忌：癸巳蛇日勾陈黑道值日，驿马、天后、天仓、不将、敬安五吉临位，月破、大耗、重日、勾陈四凶在列，巳亥相冲月破之日，宜破屋、坏垣、求医、治病、馀事勿取，忌嫁娶、安葬两事；长流水纳音，冲猪煞东，农历十月初七；生肖蛇今日运势与「月破日破旧立新」科普。" },
+      en: { title: "Daily Almanac — November 15, 2026 (Snake)", description: "Daily almanac for November 15, 2026: a Guǐ Sì Snake day on the Black Path under Gōuchén, the god of entanglement, with the Post-Horse, the Empress of Heaven, the Heavenly Granary, the No-Clash and Reverent Peace — five auspicious spirits attending, yet Month Break, the Great Depletion, the Day of Return and Gōuchén press four strong upon the lists: Sì clashing Hài, a day broken against the month's own foundation. Favorable only for breaking down the old and driving out illness — demolishing the house, breaking walls, seeking care, treating illness — take up nothing else; avoided are marriages and burial. A Long Flowing Water day clashing the Pig with the Sha in the East, the seventh day of the tenth lunar month; Snake fortunes today and an insight into the Month Break — the twelve Day Officers, the snake that sheds its skin, and the Empress of Heaven who guards the crossing." },
+    },
+    content: { zh: daily20261115Zh, en: daily20261115En },
+  },
   {
     date: "2026-11-14",
     cover: "/covers/daily/2026-11-14.jpg",
