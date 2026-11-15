@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import weekly20261116Zh from "../content/weekly/2026-11-16.zh.html";
+import weekly20261116En from "../content/weekly/2026-11-16.en.html";
 import weekly20261109Zh from "../content/weekly/2026-11-09.zh.html";
 import weekly20261109En from "../content/weekly/2026-11-09.en.html";
 import weekly20261102Zh from "../content/weekly/2026-11-02.zh.html";
@@ -46,6 +48,20 @@ export const WEEKLY_ARCHIVE_META = {
 } as const;
 
 export const WEEKLY_POSTS: readonly WeeklyPost[] = [
+  {
+    monday: "2026-11-16",
+    meta: {
+      zh: {
+        title: "十二生肖一周运势（2026年11月16日–22日）",
+        description: "2026年11月16日至22日十二生肖每周运势：特吉生肖虎、兔、龙，次吉生肖蛇、马、羊，属鼠者本周宜守；周一青龙吉日冲鼠开局宜项全周次丰、嫁娶开市入宅皆宜，周三周六两度馀事勿取，周五金匮吉日宜嫁娶安床，周日白虎凶日恰逢小雪却宜项全周最丰收官；逐日干支速览与每日冲忌提醒。",
+      },
+      en: {
+        title: "Weekly Horoscope for All 12 Zodiacs — Nov 16–22, 2026",
+        description: "Weekly fortune for all twelve Chinese zodiac signs, November 16–22, 2026: Tiger, Rabbit and Dragon top the luckiest signs with Snake, Horse and Goat following, while Rat is advised to play it safe; Monday's Azure Dragon day opens with the week's second-richest almanac as weddings, market openings and moving in are favored, Wednesday and Saturday both mark nothing else advisable, Friday's Golden Chest day suits weddings and bed-setting, and Sunday's White Tiger day lands on Minor Snow with the week's richest almanac to close; plus a day-by-day stems-and-branches overview with daily clash alerts.",
+      },
+    },
+    content: { zh: weekly20261116Zh, en: weekly20261116En },
+  },
   {
     monday: "2026-11-09",
     meta: {
