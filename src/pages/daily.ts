@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261116Zh from "../content/daily/2026-11-16.zh.html";
+import daily20261116En from "../content/daily/2026-11-16.en.html";
 import daily20261115Zh from "../content/daily/2026-11-15.zh.html";
 import daily20261115En from "../content/daily/2026-11-15.en.html";
 import daily20261114Zh from "../content/daily/2026-11-14.zh.html";
@@ -231,6 +233,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-11-16",
+    cover: "/covers/daily/2026-11-16.jpg",
+    meta: {
+      zh: { title: "2026年11月16日宜忌·马", description: "2026年11月16日黄历宜忌：甲午马日青龙黄道值日，月德、四相、普护、青龙、鸣吠五吉临位，天吏、致死、五虚三凶在列，宜纳采、订盟、嫁娶、开市、纳财、移徙、出行二十三事，忌上梁、开仓、出货财、盖屋、造船五事；沙中金纳音，冲鼠煞北，农历十月初八；生肖马今日运势与「龙马负图」科普。" },
+      en: { title: "Daily Almanac — November 16, 2026 (Horse)", description: "Daily almanac for November 16, 2026: a Jiǎ Wǔ Horse day under the Azure Dragon, first of the Yellow Path lucky ones, with the Month's Virtue, the Four Phases, Universal Protection, the Azure Dragon and Mingwu — five auspicious spirits attending, while the Heavenly Clerk, Death-Bringing and the Five Emptinesses stand as three inauspicious ones. Favorable for twenty-three matters — betrothal, engagement, marriage, opening a business, collecting wealth, moving house, travel and more; avoided are raising the ridge beam, opening storehouses, shipping out wealth, roofing and shipbuilding. A Gold in the Sand day clashing the Rat with the Sha in the North, the eighth day of the tenth lunar month; Horse fortunes today and an insight into the Dragon-Horse that bore the River Chart, the seat of pure yang, and Bólè who knows a thousand-li steed." },
+    },
+    content: { zh: daily20261116Zh, en: daily20261116En },
+  },
   {
     date: "2026-11-15",
     cover: "/covers/daily/2026-11-15.jpg",
