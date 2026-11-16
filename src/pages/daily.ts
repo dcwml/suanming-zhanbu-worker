@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261117Zh from "../content/daily/2026-11-17.zh.html";
+import daily20261117En from "../content/daily/2026-11-17.en.html";
 import daily20261116Zh from "../content/daily/2026-11-16.zh.html";
 import daily20261116En from "../content/daily/2026-11-16.en.html";
 import daily20261115Zh from "../content/daily/2026-11-15.zh.html";
@@ -233,6 +235,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-11-17",
+    cover: "/covers/daily/2026-11-17.jpg",
+    meta: {
+      zh: { title: "2026年11月17日宜忌·羊", description: "2026年11月17日黄历宜忌：乙未羊日明堂黄道值日，天德、月恩、四相、三合、临日、天喜、天医、六仪、福生、明堂十吉临位，厌对、招摇、四击、往亡四凶在列，宜祭祀、祈福、求嗣、栽种、纳畜、安葬、修坟、立碑十三事，忌嫁娶、出行、移徙、入宅六事；沙中金纳音，冲牛煞西，农历十月初九；生肖羊今日运势与「五羊衔穗」科普。" },
+      en: { title: "Daily Almanac — November 17, 2026 (Goat)", description: "Daily almanac for November 17, 2026: a Yǐ Wèi Goat day under the Hall of Light, one of the Yellow Path lucky ones, with the Heaven's Virtue, the Month's Grace, the Four Phases, the Three Harmonies, the Heaven's Physician and six more — ten auspicious spirits attending, while the Opposing Repulsion, the Flaunting Star, the Four Strikes and Gone-Without-Return stand as four inauspicious ones. Favorable for thirteen matters — sacrificial rites, prayers for blessings and an heir, planting, acquiring livestock, burial, tending graves and raising gravestones; avoided are marriages, travel, moving residence and entering a new home. A Gold in the Sand day clashing the Ox with the Sha in the West, the ninth day of the tenth lunar month; Goat fortunes today and an insight into the Three Harmonies wood frame and the Five Goats that bore the grain." },
+    },
+    content: { zh: daily20261117Zh, en: daily20261117En },
+  },
   {
     date: "2026-11-16",
     cover: "/covers/daily/2026-11-16.jpg",
