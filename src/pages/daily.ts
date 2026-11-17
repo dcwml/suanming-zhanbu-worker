@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261118Zh from "../content/daily/2026-11-18.zh.html";
+import daily20261118En from "../content/daily/2026-11-18.en.html";
 import daily20261117Zh from "../content/daily/2026-11-17.zh.html";
 import daily20261117En from "../content/daily/2026-11-17.en.html";
 import daily20261116Zh from "../content/daily/2026-11-16.zh.html";
@@ -235,6 +237,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-11-18",
+    cover: "/covers/daily/2026-11-18.jpg",
+    meta: {
+      zh: { title: "2026年11月18日宜忌·猴", description: "2026年11月18日黄历宜忌：丙申猴日天刑黑道值日，母仓、除神、鸣吠三吉临位，天罡、劫煞、月害、五离、天刑五凶在列，宜沐浴、扫舍、捕捉、畋猎、解除、塞穴六事馀事勿取，忌嫁娶、入宅、开市、安床、破土、修坟六事；山下火纳音，冲虎煞南，农历十月初十；生肖猴今日运势与「申字电光」及「朝三暮四」科普。" },
+      en: { title: "Daily Almanac — November 18, 2026 (Monkey)", description: "Daily almanac for November 18, 2026: a Bǐng Shēn Monkey day under the Heavenly Punisher, one of the Black Path ill ones, with the Mother's Granary, the Sweeping Spirit and the Crying of Dogs — three auspicious spirits attending, while the Heavenly Gang, the Robber Spirit, the Month's Harm, the Five Partings and the Heavenly Punisher stand as five baleful ones. Favorable for bathing, sweeping the house, capturing, hunting, clearing misfortune and sealing holes — other matters not advised; avoided are marriages, entering a new home, opening a business, setting the bed, breaking ground and tending graves. A Fire at the Foot of the Mountain day clashing the Tiger with the Sha in the South, the tenth day of the tenth lunar month; Monkey fortunes today and an insight into the lightning-shaped root of the graph Shēn and the monkeys' three-at-dawn, four-at-dusk." },
+    },
+    content: { zh: daily20261118Zh, en: daily20261118En },
+  },
   {
     date: "2026-11-17",
     cover: "/covers/daily/2026-11-17.jpg",
