@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261119Zh from "../content/daily/2026-11-19.zh.html";
+import daily20261119En from "../content/daily/2026-11-19.en.html";
 import daily20261118Zh from "../content/daily/2026-11-18.zh.html";
 import daily20261118En from "../content/daily/2026-11-18.en.html";
 import daily20261117Zh from "../content/daily/2026-11-17.zh.html";
@@ -237,6 +239,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-11-19",
+    cover: "/covers/daily/2026-11-19.jpg",
+    meta: {
+      zh: { title: "2026年11月19日宜忌·鸡", description: "2026年11月19日黄历宜忌：丁酉鸡日朱雀黑道值日，母仓、时阳、生气、圣心、除神、鸣吠六吉临位，灾煞、天火、五离、朱雀四凶在列，宜嫁娶、冠笄、祭祀、祈福、求嗣、斋醮、开光、出行、解除、动土、开市、交易、立券、挂匾、拆卸、破土十六事，忌伐木、上梁、修造、入殓、理发、会亲友、入宅、安葬、作灶十事；山下火纳音，冲兔煞东，农历十月十一；生肖鸡今日运势与「酉字酒坛」及「呆若木鸡」科普。" },
+      en: { title: "Daily Almanac — November 19, 2026 (Rooster)", description: "Daily almanac for November 19, 2026: a Dīng Yǒu Rooster day under the Vermilion Bird, one of the Black Path ill ones, with the Mother's Granary, the Hour's Yang, the Quickening Breath, the Sage's Heart, the Sweeping Spirit and the Crying of Dogs — six auspicious spirits attending, while the Calamity Spirit, the Heavenly Fire, the Five Partings and the Vermilion Bird stand as four baleful ones. Favorable for sixteen matters — marriages, capping rites, sacrifices, prayers and consecration, travel, opening a business, trading, signing contracts, hanging plaques, dismantling and breaking ground; avoided are felling timber, ridge beams and repairs, coffin placement, hair-cutting, meeting kin and friends, entering a new home, installing doors, burial and building the stove. A Fire at the Foot of the Mountain day clashing the Rabbit with the Sha in the East, the eleventh day of the tenth lunar month; Rooster fortunes today and an insight into the wine-jar root of the graph Yǒu and the wooden rooster whose virtue is complete." },
+    },
+    content: { zh: daily20261119Zh, en: daily20261119En },
+  },
   {
     date: "2026-11-18",
     cover: "/covers/daily/2026-11-18.jpg",
