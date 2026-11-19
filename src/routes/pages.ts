@@ -6,7 +6,6 @@ import {
   renderMonthlyArchive,
   renderMonthlyPost,
   renderPage,
-  renderPageWithStats,
   renderTuiyanArchive,
   renderTuiyanPost,
   renderWeeklyArchive,
@@ -185,8 +184,8 @@ pages.get("/:lang/:slug", (c) => {
   return c.redirect(pagePath(lang, slug), 301);
 });
 
-// 首页（记录 PV + 注入统计数据）
-pages.get("/:lang/", async (c) => {
+// 首页（记录 PV）
+pages.get("/:lang/", (c) => {
   const lang = c.req.param("lang");
   if (!isLang(lang)) return c.notFound();
 
@@ -196,10 +195,7 @@ pages.get("/:lang/", async (c) => {
     recordPageView(db, c.req.raw, "homepage").catch(() => {});
   }
 
-  // 查询统计数据
-  const stats = db ? await getStats(db) : null;
-
-  return c.html(renderPageWithStats(findPage("")!, lang, stats));
+  return c.html(renderPage(findPage("")!, lang));
 });
 
 // 内容页（记录工具页面访问）

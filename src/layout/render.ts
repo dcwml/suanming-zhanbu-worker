@@ -70,37 +70,6 @@ export function renderPage(page: PageEntry, lang: Lang): string {
   return layout(lang, buildHead(page, lang), renderNav(lang, page.slug), page.content[lang]);
 }
 
-/** 首页专用：渲染页面并注入统计数据 */
-export function renderPageWithStats(page: PageEntry, lang: Lang, stats: StatsData | null): string {
-  const main = page.content[lang];
-  const statsHtml = stats ? buildStatsHtml(stats, lang) : "";
-  return layout(lang, buildHead(page, lang), renderNav(lang, page.slug), main + statsHtml);
-}
-
-/** 构建统计数据的 HTML 片段（注入到首页底部，一行小字） */
-function buildStatsHtml(stats: StatsData, lang: Lang): string {
-  const isZh = lang === "zh";
-  const fmt = (n: number) => n.toLocaleString("en-US");
-
-  const labels = isZh
-    ? { pv: "访问", bazi: "八字", liuyao: "六爻", today: "今日", api: "API" }
-    : { pv: "visits", bazi: "BaZi", liuyao: "I Ching", today: "today", api: "API" };
-
-  const parts = [
-    `${labels.pv} ${fmt(stats.total.homepage_pv)}`,
-    `${labels.bazi} ${fmt(stats.total.bazi_usage)}`,
-    `${labels.liuyao} ${fmt(stats.total.liuyao_usage)}`,
-    `${labels.today} ${fmt(stats.today.homepage_pv)}`,
-  ];
-
-  // API 调用数据追加到后面
-  stats.api_calls.forEach((api) => {
-    parts.push(`${api.api_path} ${fmt(api.total_calls)}(${fmt(api.today_calls)})`);
-  });
-
-  return `\n<p class="site-stats" role="status" aria-label="${isZh ? '访问统计' : 'Statistics'}">${parts.join(" · ")}</p>`;
-}
-
 export function renderNotFound(lang: Lang): string {
   const title = lang === "zh" ? `页面未找到 - ${SITE_NAME}` : `Page Not Found - ${SITE_NAME_EN}`;
   return layout(lang, buildPlainHead(lang, title), renderNav(lang, SENTINEL_NOTFOUND, ""), NOT_FOUND_CONTENT[lang]);

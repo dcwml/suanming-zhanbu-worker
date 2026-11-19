@@ -29,6 +29,7 @@ describe("pages", () => {
     expect(html).toContain(`<link rel="canonical" href="${SITE_ORIGIN}/zh/">`);
     expect(html).toContain('hreflang="x-default"');
     expect(html).toContain('application/ld+json');
+    expect(html).not.toContain("site-stats");
   });
 
   it("zh home renders tool cards with CTA links", async () => {
