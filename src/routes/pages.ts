@@ -6,6 +6,7 @@ import {
   renderMonthlyArchive,
   renderMonthlyPost,
   renderPage,
+  renderStatsPage,
   renderTuiyanArchive,
   renderTuiyanPost,
   renderWeeklyArchive,
@@ -28,6 +29,10 @@ function isLang(v: string): v is Lang {
 
 // 根路径 → 默认语言首页
 pages.get("/", (c) => c.redirect(pagePath("zh", ""), 301));
+
+// /stats 与 /stats/ → 默认语言统计页
+pages.get("/stats", (c) => c.redirect(pagePath("zh", "stats"), 301));
+pages.get("/stats/", (c) => c.redirect(pagePath("zh", "stats"), 301));
 
 pages.get("/sitemap.xml", (c) =>
   c.body(buildSitemapXml(), 200, { "Content-Type": "application/xml; charset=utf-8" }),
@@ -196,6 +201,18 @@ pages.get("/:lang/", (c) => {
   }
 
   return c.html(renderPage(findPage("")!, lang));
+});
+
+// 独立统计页（从 D1 聚合统计并渲染卡片与 API 表格）
+pages.get("/:lang/stats/", async (c) => {
+  const lang = c.req.param("lang");
+  if (!isLang(lang)) return c.notFound();
+  const page = findPage("stats");
+  if (!page) return c.notFound();
+
+  const db = c.env?.STATS_DB;
+  const stats = db ? await getStats(db) : null;
+  return c.html(renderStatsPage(page, lang, stats));
 });
 
 // 内容页（记录工具页面访问）

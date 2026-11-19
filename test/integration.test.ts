@@ -18,6 +18,18 @@ describe("redirects", () => {
     expect(res.status).toBe(301);
     expect(res.headers.get("location")).toBe("/zh/");
   });
+
+  it("redirects /stats to /zh/stats/", async () => {
+    const res = await fetchNoFollow("/stats");
+    expect(res.status).toBe(301);
+    expect(res.headers.get("location")).toBe("/zh/stats/");
+  });
+
+  it("redirects /stats/ to /zh/stats/", async () => {
+    const res = await fetchNoFollow("/stats/");
+    expect(res.status).toBe(301);
+    expect(res.headers.get("location")).toBe("/zh/stats/");
+  });
 });
 
 describe("pages", () => {
@@ -79,6 +91,25 @@ describe("pages", () => {
     const res = await fetchNoFollow("/robots.txt");
     expect(res.status).toBe(200);
     expect(await res.text()).toContain("Sitemap:");
+  });
+
+  it("renders zh stats page with noindex, overview cards and api table", async () => {
+    const res = await fetchNoFollow("/zh/stats/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain('<meta name="robots" content="noindex, nofollow">');
+    expect(html).toContain("全站与接口数据统计");
+    expect(html).toContain("stats-card");
+    expect(html).toContain("stats-table");
+  });
+
+  it("renders en stats page with localized headings", async () => {
+    const res = await fetchNoFollow("/en/stats/");
+    expect(res.status).toBe(200);
+    const html = await res.text();
+    expect(html).toContain("Site & API Statistics");
+    expect(html).toContain("stats-card");
+    expect(html).toContain("stats-table");
   });
 });
 
