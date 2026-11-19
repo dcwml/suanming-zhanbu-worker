@@ -35,6 +35,10 @@ describe("buildSitemapXml", () => {
     expect(xml).not.toContain("404");
   });
 
+  it("does not list pages marked excludeFromSitemap", () => {
+    expect(xml).not.toContain("/stats/");
+  });
+
   it("includes daily posts with bilingual alternates", () => {
     expect(xml).toContain(`<loc>${SITE_ORIGIN}/zh/daily/2026-08-03/</loc>`);
     expect(xml).toContain(`<xhtml:link rel="alternate" hreflang="zh-CN" href="${SITE_ORIGIN}/zh/daily/2026-08-03/"/>`);

@@ -11,7 +11,7 @@ import { MONTHLY_POSTS } from "../pages/monthly";
 import { TUIYAN_POSTS } from "../pages/tuiyan";
 
 export function buildSitemapXml(): string {
-  const pageUrls = PAGES.flatMap((page) =>
+  const pageUrls = PAGES.filter((page) => !page.excludeFromSitemap).flatMap((page) =>
     LANGS.map((lang) => ({ lang, slug: page.slug })),
   );
 

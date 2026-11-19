@@ -64,10 +64,15 @@ export function buildHead(page: PageEntry, lang: Lang): string {
   ).join("\n    ");
   const xDefault = `<link rel="alternate" hreflang="x-default" href="${absoluteUrl(pagePath(DEFAULT_LANG, page.slug))}">`;
 
-  return [
+  const tags = [
     `<meta charset="utf-8">`,
     `<meta name="viewport" content="width=device-width, initial-scale=1">`,
     `<link rel="icon" type="image/png" href="/assets/logo.png">`,
+  ];
+  if (page.robots) {
+    tags.push(`<meta name="robots" content="${escapeHtml(page.robots)}">`);
+  }
+  tags.push(
     `<title>${title}</title>`,
     `<meta name="description" content="${description}">`,
     `<link rel="canonical" href="${canonical}">`,
@@ -86,7 +91,9 @@ export function buildHead(page: PageEntry, lang: Lang): string {
     `<meta name="twitter:description" content="${description}">`,
     `<meta name="twitter:image" content="${image}">`,
     buildJsonLdScripts(page, lang),
-  ].join("\n    ");
+  );
+
+  return tags.join("\n    ");
 }
 
 /** 404/500 用的极简 head：noindex，无 canonical/og */

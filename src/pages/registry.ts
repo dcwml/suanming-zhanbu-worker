@@ -44,6 +44,10 @@ export interface PageEntry {
   slug: string;
   /** 是否出现在顶部导航 */
   inNav: boolean;
+  /** 是否从 sitemap.xml 中排除，默认 false */
+  excludeFromSitemap?: boolean;
+  /** 自定义 robots meta 属性，如 "noindex, nofollow" */
+  robots?: string;
   /** JSON-LD @type，默认 WebPage */
   jsonldType?: "Article" | "FAQPage";
   meta: Record<Lang, PageMeta>;

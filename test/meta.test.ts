@@ -60,6 +60,14 @@ describe("buildHead", () => {
   it("embeds json-ld", () => {
     expect(head).toContain('application/ld+json');
   });
+  it("emits robots tag when page.robots is specified", () => {
+    const pageWithRobots: PageEntry = {
+      ...fixture,
+      robots: "noindex, nofollow",
+    };
+    const robotsHead = buildHead(pageWithRobots, "zh");
+    expect(robotsHead).toContain('<meta name="robots" content="noindex, nofollow">');
+  });
   it("home uses website og:type and slogan title", () => {
     const homeHead = buildHead(home, "zh");
     expect(homeHead).toContain('<meta property="og:type" content="website">');
