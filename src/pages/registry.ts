@@ -33,6 +33,8 @@ import aboutZh from "../content/about.zh.html";
 import aboutEn from "../content/about.en.html";
 import methodologyZh from "../content/methodology.zh.html";
 import methodologyEn from "../content/methodology.en.html";
+import statsZh from "../content/stats.zh.html";
+import statsEn from "../content/stats.en.html";
 
 export interface PageMeta {
   title: string;
@@ -554,6 +556,18 @@ export const PAGES: readonly PageEntry[] = [
       en: { title: "Methods & Sources", description: "How this site computes — calendar engine, fortune scoring, date-selection rules and oracle text collation, with source references." },
     },
     content: { zh: methodologyZh, en: methodologyEn },
+  },
+  {
+    slug: "stats",
+    // 隐蔽页面：不在顶部导航、不进页脚，不进 sitemap，仅通过直接路径访问
+    inNav: false,
+    excludeFromSitemap: true,
+    robots: "noindex, nofollow",
+    meta: {
+      zh: { title: "数据统计", description: "全站访问热度与各术数工具接口使用统计。" },
+      en: { title: "Statistics", description: "Real-time site visits and divination tool API usage statistics." },
+    },
+    content: { zh: statsZh, en: statsEn },
   },
 ];
 
