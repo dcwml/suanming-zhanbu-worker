@@ -1,8 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { renderError, renderNotFound, renderPage } from "../src/layout/render";
+import { renderError, renderNotFound, renderPage, renderStatsPage } from "../src/layout/render";
 import bodyStartSnippet from "../src/layout/snippets/body-start.html";
 import headSnippet from "../src/layout/snippets/head.html";
 import { findPage } from "../src/pages/registry";
+import type { StatsData } from "../src/stats";
 
 describe("renderPage", () => {
   const html = renderPage(findPage("")!, "zh");
@@ -88,5 +89,45 @@ describe("renderError", () => {
     const html = renderError("zh");
     expect(html).toContain('content="noindex"');
     expect(html).not.toContain("stack");
+  });
+});
+
+describe("renderStatsPage", () => {
+  const statsPage = findPage("stats")!;
+  const mockStats: StatsData = {
+    total: { homepage_pv: 1234, bazi_usage: 234, liuyao_usage: 120 },
+    today: { homepage_pv: 45, bazi_usage: 12, liuyao_usage: 5 },
+    api_calls: [
+      { api_path: "/api/bazi/interpret", total_calls: 500, today_calls: 30 },
+      { api_path: "/api/fortune/week", total_calls: 200, today_calls: 15 },
+    ],
+  };
+
+  it("renders overview cards and api table with data", () => {
+    const html = renderStatsPage(statsPage, "zh", mockStats);
+    expect(html).toContain("全站与接口数据统计");
+    expect(html).toContain("1,234");
+    expect(html).toContain("234");
+    expect(html).toContain("120");
+    expect(html).toContain("45");
+    expect(html).toContain("/api/bazi/interpret");
+    expect(html).toContain("500");
+    expect(html).toContain("30");
+    expect(html).toContain("/api/fortune/week");
+    expect(html).toContain("stats-card");
+    expect(html).toContain("stats-table");
+  });
+
+  it("renders empty state gracefully when stats is null", () => {
+    const html = renderStatsPage(statsPage, "zh", null);
+    expect(html).toContain("0");
+    expect(html).toContain("暂无接口调用记录");
+  });
+
+  it("renders localized en version", () => {
+    const enHtml = renderStatsPage(statsPage, "en", mockStats);
+    expect(enHtml).toContain("Site & API Statistics");
+    expect(enHtml).toContain("API Endpoint");
+    expect(enHtml).toContain("Total Calls");
   });
 });

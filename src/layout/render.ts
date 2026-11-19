@@ -70,6 +70,108 @@ export function renderPage(page: PageEntry, lang: Lang): string {
   return layout(lang, buildHead(page, lang), renderNav(lang, page.slug), page.content[lang]);
 }
 
+/** 统计页面专用：渲染概览卡片与 API 接口调用明细表格 */
+export function renderStatsPage(page: PageEntry, lang: Lang, stats: StatsData | null): string {
+  const isZh = lang === "zh";
+  const fmt = (n: number) => n.toLocaleString("en-US");
+
+  const s = stats ?? {
+    total: { homepage_pv: 0, bazi_usage: 0, liuyao_usage: 0 },
+    today: { homepage_pv: 0, bazi_usage: 0, liuyao_usage: 0 },
+    api_calls: [],
+  };
+
+  const labels = isZh
+    ? {
+        overviewTitle: "数据概览",
+        pvTotal: "全站总访问",
+        pvToday: "今日访问",
+        baziTotal: "八字排盘",
+        liuyaoTotal: "六爻起卦",
+        apiTitle: "接口调用明细",
+        apiColPath: "接口路径",
+        apiColToday: "今日调用",
+        apiColTotal: "累计调用",
+        emptyApi: "暂无接口调用记录",
+      }
+    : {
+        overviewTitle: "Overview",
+        pvTotal: "Total Site Visits",
+        pvToday: "Today's Visits",
+        baziTotal: "BaZi Chart",
+        liuyaoTotal: "I Ching Casting",
+        apiTitle: "API Endpoints Breakdown",
+        apiColPath: "API Endpoint",
+        apiColToday: "Today",
+        apiColTotal: "Total Calls",
+        emptyApi: "No API call records yet",
+      };
+
+  const cardsHtml = `
+    <section class="stats-section">
+      <h2 class="stats-section-title">${labels.overviewTitle}</h2>
+      <div class="stats-grid">
+        <div class="stats-card">
+          <div class="stats-card-val">${fmt(s.total.homepage_pv)}</div>
+          <div class="stats-card-lbl">${labels.pvTotal}</div>
+        </div>
+        <div class="stats-card">
+          <div class="stats-card-val">${fmt(s.today.homepage_pv)}</div>
+          <div class="stats-card-lbl">${labels.pvToday}</div>
+        </div>
+        <div class="stats-card">
+          <div class="stats-card-val">${fmt(s.total.bazi_usage)}</div>
+          <div class="stats-card-lbl">${labels.baziTotal}</div>
+        </div>
+        <div class="stats-card">
+          <div class="stats-card-val">${fmt(s.total.liuyao_usage)}</div>
+          <div class="stats-card-lbl">${labels.liuyaoTotal}</div>
+        </div>
+      </div>
+    </section>
+  `;
+
+  let apiTableBody = "";
+  if (s.api_calls.length === 0) {
+    apiTableBody = `<tr><td colspan="3" class="stats-table-empty">${labels.emptyApi}</td></tr>`;
+  } else {
+    apiTableBody = s.api_calls
+      .map(
+        (api) => `<tr>
+          <td class="stats-table-path"><code>${escapeHtml(api.api_path)}</code></td>
+          <td class="stats-table-num">${fmt(api.today_calls)}</td>
+          <td class="stats-table-num stats-table-total">${fmt(api.total_calls)}</td>
+        </tr>`,
+      )
+      .join("\n");
+  }
+
+  const tableHtml = `
+    <section class="stats-section">
+      <h2 class="stats-section-title">${labels.apiTitle}</h2>
+      <div class="stats-table-wrapper">
+        <table class="stats-table">
+          <thead>
+            <tr>
+              <th>${labels.apiColPath}</th>
+              <th>${labels.apiColToday}</th>
+              <th>${labels.apiColTotal}</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${apiTableBody}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  `;
+
+  const dashboardHtml = `<div class="stats-dashboard">${cardsHtml}${tableHtml}</div>`;
+  const main = `${page.content[lang]}\n${dashboardHtml}`;
+
+  return layout(lang, buildHead(page, lang), renderNav(lang, page.slug), main);
+}
+
 export function renderNotFound(lang: Lang): string {
   const title = lang === "zh" ? `页面未找到 - ${SITE_NAME}` : `Page Not Found - ${SITE_NAME_EN}`;
   return layout(lang, buildPlainHead(lang, title), renderNav(lang, SENTINEL_NOTFOUND, ""), NOT_FOUND_CONTENT[lang]);

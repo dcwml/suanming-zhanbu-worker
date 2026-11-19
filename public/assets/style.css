@@ -1671,15 +1671,141 @@ label:has(#zeji-strict:disabled) {
   .zeji-card-mid { flex-direction: column; gap: 0.2rem; }
 }
 
-/* ========== 站点统计 ========== */
+/* ========== 独立数据统计页面 ========== */
 
-.site-stats {
-  text-align: center;
-  font-size: 0.78rem;
+.stats-header {
+  margin-bottom: 2rem;
+}
+
+.stats-lead {
   color: var(--muted);
-  margin: 2.5rem 0 0.5rem;
-  padding: 0 1rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.stats-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  margin-top: 1.5rem;
+}
+
+.stats-section-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--fg);
+  margin-bottom: 1rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.04em;
+}
+
+/* 4 张卡片网格 */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.stats-card {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.25rem 1rem;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(43, 38, 34, 0.04);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.stats-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(43, 38, 34, 0.08);
+}
+
+.stats-card-val {
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1.2;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.stats-card-lbl {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 0.5rem;
   letter-spacing: 0.02em;
+}
+
+/* API 表格 */
+.stats-table-wrapper {
+  overflow-x: auto;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(43, 38, 34, 0.04);
+}
+
+.stats-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.stats-table th {
+  background: rgba(176, 141, 87, 0.08);
+  color: var(--fg);
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.stats-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--fg);
+}
+
+.stats-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.stats-table tbody tr:hover {
+  background: rgba(176, 141, 87, 0.03);
+}
+
+.stats-table-path code {
+  font-size: 0.85rem;
+  color: var(--accent);
+  background: rgba(138, 51, 36, 0.06);
+  padding: 0.15rem 0.35rem;
+  border-radius: 4px;
+}
+
+.stats-table-num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.stats-table th:nth-child(2),
+.stats-table th:nth-child(3) {
+  text-align: right;
+}
+
+.stats-table-total {
+  font-weight: 600;
+  color: var(--fg);
+}
+
+.stats-table-empty {
+  text-align: center;
+  color: var(--muted);
+  padding: 2.5rem 1rem;
+  font-style: italic;
 }
 
 /* ========== 每周运势 / 每月运势 ========== */
