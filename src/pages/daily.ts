@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261120Zh from "../content/daily/2026-11-20.zh.html";
+import daily20261120En from "../content/daily/2026-11-20.en.html";
 import daily20261119Zh from "../content/daily/2026-11-19.zh.html";
 import daily20261119En from "../content/daily/2026-11-19.en.html";
 import daily20261118Zh from "../content/daily/2026-11-18.zh.html";
@@ -239,6 +241,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-11-20",
+    cover: "/covers/daily/2026-11-20.jpg",
+    meta: {
+      zh: { title: "2026年11月20日宜忌·狗", description: "2026年11月20日黄历宜忌：戊戌狗日金匮黄道吉值日，益后、金匮二吉临位，月煞、月虚、血支、五虚、绝阳五凶在列，宜合帐、裁衣、嫁娶、安床、入殓、移柩、破土、造畜稠八事，忌置产、造船、开光、掘井、作灶五事；平地木纳音，冲龙煞北，农历十月十二；生肖狗今日运势与「戌字大斧」及「黄耳传书」科普。" },
+      en: { title: "Daily Almanac — November 20, 2026 (Dog)", description: "Daily almanac for November 20, 2026: a Wù Xū Dog day under the Golden Cabinet, one of the Yellow Path lucky ones, with the Guardian of Descendants and the Golden Cabinet as two auspicious spirits attending, while the Month's Bane, the Month's Emptiness, the Blood Branch, the Five Empties and the Severed Yang stand as five baleful ones. Favorable for eight matters — making bed curtains, cutting garments, marriages, setting the marriage bed, coffin placement, moving the coffin, breaking ground and building livestock pens; avoided are acquiring property, building boats, consecration, digging wells and building the stove. A Wood on the Plain day clashing the Dragon with the Sha in the North, the twelfth day of the tenth lunar month; Dog fortunes today and an insight into the axe root of the graph Xū and the Yellow Ear who carried the letter home." },
+    },
+    content: { zh: daily20261120Zh, en: daily20261120En },
+  },
   {
     date: "2026-11-19",
     cover: "/covers/daily/2026-11-19.jpg",
