@@ -1,5 +1,11 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261123Zh from "../content/daily/2026-11-23.zh.html";
+import daily20261123En from "../content/daily/2026-11-23.en.html";
+import daily20261122Zh from "../content/daily/2026-11-22.zh.html";
+import daily20261122En from "../content/daily/2026-11-22.en.html";
+import daily20261121Zh from "../content/daily/2026-11-21.zh.html";
+import daily20261121En from "../content/daily/2026-11-21.en.html";
 import daily20261120Zh from "../content/daily/2026-11-20.zh.html";
 import daily20261120En from "../content/daily/2026-11-20.en.html";
 import daily20261119Zh from "../content/daily/2026-11-19.zh.html";
@@ -241,6 +247,33 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-11-23",
+    cover: "/covers/daily/2026-11-23.jpg",
+    meta: {
+      zh: { title: "2026年11月23日宜忌·牛", description: "2026年11月23日黄历宜忌：辛丑牛日玉堂黄道吉值日，守日、天巫、福德、玉宇、玉堂五吉护守，月厌、地火、九空、大煞、归忌、行狠六凶压阵，宜祭祀、塑绘、理发、会亲友、牧养、开池、造畜稠、畋猎、结网九事，忌祈福、谢土、安葬、上梁、作灶、开市、嫁娶、出行、入宅、动土十事；壁上土纳音，冲羊煞东，农历十月十五下元节；生肖牛今日运势与「三官手书」科普。" },
+      en: { title: "Daily Almanac — November 23, 2026 (Ox)", description: "Daily almanac for November 23, 2026: an Xīn Chǒu Ox day under the Jade Hall, one of the Yellow Path lucky ones, with the Keeping Day, Tiānwū, Fúdé and Yùyǔ sheltering the quiet, while the Month's Aversion, the Earth Fire, the Nine Voids, Dàshà, the Returning Taboo and Xínghěn stand as six baleful ones. Favorable for nine matters — offerings, sculpting and painting sacred images, haircuts, meeting family and friends, rearing livestock, digging a pond, building livestock pens, hunting and weaving nets; avoided are ten, among them praying for blessings, opening a business, marriages, travel, entering a house and breaking ground. An Earth on the Wall day clashing the Sheep with the Sha in the East, the fifteenth day of the tenth lunar month and the Lower Origin festival; Ox fortunes today and an insight into the Three Officials' letter." },
+    },
+    content: { zh: daily20261123Zh, en: daily20261123En },
+  },
+  {
+    date: "2026-11-22",
+    cover: "/covers/daily/2026-11-22.jpg",
+    meta: {
+      zh: { title: "2026年11月22日宜忌·鼠", description: "2026年11月22日黄历宜忌：庚子鼠日小雪交节，白虎黑道值日而天德合、月空、官日、天马、吉期、要安、鸣吠对七吉压阵，吉足胜凶，宜纳采、订盟、嫁娶、开市、入宅、移徙、出行、动土等二十五事，忌作灶、经络、安床；壁上土纳音，冲马煞南，农历十月十四；生肖鼠今日运势与小雪三候科普。" },
+      en: { title: "Daily Almanac — November 22, 2026 (Rat)", description: "Daily almanac for November 22, 2026: a Gēng Zǐ Rat day on Minor Snow, with the White Tiger of the Black Path held down by seven auspicious spirits — Heaven's Virtue in Combination, Yuèkōng, Guānrì, the Heavenly Horse, Jíqī, Yào'ān and Míngfèiduì — so the favorable outweighs the baleful. Twenty-five matters favorable, from proposals, betrothals and marriages to opening a business, entering a house, relocation, travel and breaking ground; avoided are building the stove, warping and weaving, and setting up the bed. An Earth on the Wall day clashing the Horse with the Sha in the South, the fourteenth day of the tenth lunar month; Rat fortunes today and an insight into the three manifestations of Minor Snow." },
+    },
+    content: { zh: daily20261122Zh, en: daily20261122En },
+  },
+  {
+    date: "2026-11-21",
+    cover: "/covers/daily/2026-11-21.jpg",
+    meta: {
+      zh: { title: "2026年11月21日宜忌·猪", description: "2026年11月21日黄历宜忌：己亥猪日天德黄道吉值日，月德合、王日、续世、宝光四吉临位，月建、小时、土府、月刑、九坎、九焦、血忌、重日、小会、纯阴十凶在列，宜解除、修饰垣墙、冠笄、出行，馀事勿取，忌开市、动土、破土、嫁娶、安葬；平地木纳音，冲蛇煞西，农历十月十三；生肖猪今日运势与「亥字草根」及「王亥服牛」科普。" },
+      en: { title: "Daily Almanac — November 21, 2026 (Pig)", description: "Daily almanac for November 21, 2026: a Jǐ Hài Pig day under Heavenly Virtue, one of the Yellow Path lucky ones, with the Moon's Virtue in Combination, the King's Day, Xùshì and Bǎoguāng as four auspicious spirits attending, while ten baleful ones stand in the list — the Month Commander, Xiǎoshí, Tǔfǔ, the Month's Punishment, Jiǔkǎn, Jiǔjiāo, the Blood Taboo, the Repeated Day and more. Favorable for clearing away misfortune, repairing walls, coming-of-age ceremonies and travel, all other matters set aside; avoided are opening a business, breaking ground, breaking soil for burial, marriages and burial. A Wood on the Plain day clashing the Snake with the Sha in the West, the thirteenth day of the tenth lunar month; Pig fortunes today and an insight into the root beneath the graph Hài and Wáng Hǎi, the first merchant." },
+    },
+    content: { zh: daily20261121Zh, en: daily20261121En },
+  },
   {
     date: "2026-11-20",
     cover: "/covers/daily/2026-11-20.jpg",
