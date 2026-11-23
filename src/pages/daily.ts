@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261124Zh from "../content/daily/2026-11-24.zh.html";
+import daily20261124En from "../content/daily/2026-11-24.en.html";
 import daily20261123Zh from "../content/daily/2026-11-23.zh.html";
 import daily20261123En from "../content/daily/2026-11-23.en.html";
 import daily20261122Zh from "../content/daily/2026-11-22.zh.html";
@@ -247,6 +249,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-11-24",
+    cover: "/covers/daily/2026-11-24.jpg",
+    meta: {
+      zh: { title: "2026年11月24日宜忌·虎", description: "2026年11月24日黄历宜忌：壬寅虎日天牢黑道值日，然寅亥六合日月相合，天愿、时德、相日、六合、五富、不将、金堂、五合、鸣吠对九吉压河魁、死神、游祸、五虚、复日、天牢六凶，宜出行、纳财、开市、交易、立券、动土、移徙、入宅等十七事，忌造庙、作灶、作梁、伐木、安葬、行丧、修坟、探病九事；金箔金纳音，冲猴煞北，农历十月十六；生肖虎今日运势与「地支六合」科普。" },
+      en: { title: "Daily Almanac — November 24, 2026 (Tiger)", description: "Daily almanac for November 24, 2026: a Rén Yín Tiger day under the Heavenly Cage of the Black Path, yet day branch and month branch form the Six Harmonies of Yín and Hài, and nine auspicious spirits — the Heaven's Wish, Shídé, Xiàngrì, the Six Harmonies, the Five Abundances, Bùjiāng, the Golden Hall, the Five Unions and Míngfèiduì — outweigh the six baleful ones: Hékuí, the Death Spirit, the Wandering Calamity, the Five Voids, the Repeated Day and the Heavenly Cage. Seventeen matters favorable — travel, taking in wealth, opening a business, trade, contracts, breaking ground, relocation, entering a new home and more; avoided are nine — building a temple, building the stove, making roof beams, felling trees, burial, funeral rites, tending graves and visiting the sick. A Goldfoil Metal day clashing the Monkey with the Sha in the North, the sixteenth day of the tenth lunar month; Tiger fortunes today and an insight into the Six Harmonies of the earthly branches." },
+    },
+    content: { zh: daily20261124Zh, en: daily20261124En },
+  },
   {
     date: "2026-11-23",
     cover: "/covers/daily/2026-11-23.jpg",
