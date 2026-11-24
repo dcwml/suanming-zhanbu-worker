@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261125Zh from "../content/daily/2026-11-25.zh.html";
+import daily20261125En from "../content/daily/2026-11-25.en.html";
 import daily20261124Zh from "../content/daily/2026-11-24.zh.html";
 import daily20261124En from "../content/daily/2026-11-24.en.html";
 import daily20261123Zh from "../content/daily/2026-11-23.zh.html";
@@ -249,6 +251,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-11-25",
+    cover: "/covers/daily/2026-11-25.jpg",
+    meta: {
+      zh: { title: "2026年11月25日宜忌·兔", description: "2026年11月25日黄历宜忌：癸卯兔日玄武黑道值日，而卯亥半合三合成局，阴德、民日、三合、时阴、不将、五合、鸣吠对七吉压死气、元武二凶，宜嫁娶、纳采、订盟、祭祀、纳财、交易、立券、移徙、安葬等二十二事，忌置产、掘井、词讼、栽种四事；金箔金纳音，冲鸡煞西，农历十月十七；生肖兔今日运势与「地支三合」科普。" },
+      en: { title: "Daily Almanac — November 25, 2026 (Rabbit)", description: "Daily almanac for November 25, 2026: a Guǐ Mǎo Rabbit day under the Black Tortoise of the Black Path, yet day branch and month branch form the Hài–Mǎo half-frame of the Three Harmonies, and seven auspicious spirits — Yīndé, Mínrì, the Three Harmonies, Shíyīn, Bùjiāng, the Five Unions and Míngfèiduì — outweigh the two baleful ones, the Death's Breath and Yuánwǔ. Twenty-two matters favorable, led by marriage, proposals, betrothal pledges, offerings, taking in wealth, trade, contracts, relocation and burial; avoided are only four — acquiring property, digging a well, lawsuits and planting. A Goldfoil Metal day clashing the Rooster with the Sha in the West, the seventeenth day of the tenth lunar month; Rabbit fortunes today and an insight into the Three Harmonies of the earthly branches." },
+    },
+    content: { zh: daily20261125Zh, en: daily20261125En },
+  },
   {
     date: "2026-11-24",
     cover: "/covers/daily/2026-11-24.jpg",
