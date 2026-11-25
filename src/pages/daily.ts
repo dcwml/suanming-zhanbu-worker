@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261126Zh from "../content/daily/2026-11-26.zh.html";
+import daily20261126En from "../content/daily/2026-11-26.en.html";
 import daily20261125Zh from "../content/daily/2026-11-25.zh.html";
 import daily20261125En from "../content/daily/2026-11-25.en.html";
 import daily20261124Zh from "../content/daily/2026-11-24.zh.html";
@@ -251,6 +253,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-11-26",
+    cover: "/covers/daily/2026-11-26.jpg",
+    meta: {
+      zh: { title: "2026年11月26日宜忌·龙", description: "2026年11月26日黄历宜忌：甲辰龙日司命黄道值日，月德、四相、阳德、解神、司命五吉照应，宜嫁娶、纳采、订盟、祭祀、出行、解除、入宅、移徙、栽种、安葬等十六事，忌破土、动土、安门、作灶、开市、交易六事；覆灯火纳音，冲狗煞南，农历十月十八；生肖龙今日运势与「黄道黑道十二神与司命双神」科普。" },
+      en: { title: "Daily Almanac — November 26, 2026 (Dragon)", description: "Daily almanac for November 26, 2026: a Jiǎ Chén Dragon day on the Yellow Path under Sīmìng, the Arbiter of Destiny, with five auspicious spirits — Yuèdé, Sìxiàng, Yángdé, Jiěshén and Sīmìng — standing in rank. Sixteen matters favorable, led by marriage, proposals, betrothal pledges, offerings, travel, clearing misfortune, moving into a home, relocation, planting and burial; avoided are six — breaking earth for burial, breaking ground, installing a door, building the stove, opening a market and trade. A Lampshade Fire day clashing the Dog with the Sha in the South, the eighteenth day of the tenth lunar month; Dragon fortunes today and an insight into the twelve Yellow and Black Path day-gods and the two Arbiters of Destiny." },
+    },
+    content: { zh: daily20261126Zh, en: daily20261126En },
+  },
   {
     date: "2026-11-25",
     cover: "/covers/daily/2026-11-25.jpg",
