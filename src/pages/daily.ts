@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261127Zh from "../content/daily/2026-11-27.zh.html";
+import daily20261127En from "../content/daily/2026-11-27.en.html";
 import daily20261126Zh from "../content/daily/2026-11-26.zh.html";
 import daily20261126En from "../content/daily/2026-11-26.en.html";
 import daily20261125Zh from "../content/daily/2026-11-25.zh.html";
@@ -253,6 +255,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-11-27",
+    cover: "/covers/daily/2026-11-27.jpg",
+    meta: {
+      zh: { title: "2026年11月27日宜忌·蛇", description: "2026年11月27日黄历宜忌：乙巳蛇日月破大耗，勾陈黑道值日，天德、月恩、四相、驿马、天后、天仓、敬安七吉在列，宜祭祀、解除、破屋、坏垣、求医、治病，馀事勿取，忌嫁娶、安葬；覆灯火纳音，冲猪煞东，农历十月十九；生肖蛇今日运势与「月破大耗」科普。" },
+      en: { title: "Daily Almanac — November 27, 2026 (Snake)", description: "Daily almanac for November 27, 2026: a Yǐ Sì Snake day under the Monthly Rupture and the Great Consumer, with Gōuchén of the Black Path holding the watch, yet seven auspicious spirits in list — Tiāndé, Yuè'ēn, Sìxiàng, Yìmǎ, Tiānhòu, Tiāncāng and Jìng'ān. Favorable are worship and offerings, clearing away misfortune, demolishing a dilapidated house, tearing down walls, seeking medical care and treatment — all else set aside; avoided are marriage and burial. A Lampshade Fire day clashing the Pig with the Sha in the East, the nineteenth day of the tenth lunar month; Snake fortunes today and an insight into the Monthly Rupture and the Great Consumer." },
+    },
+    content: { zh: daily20261127Zh, en: daily20261127En },
+  },
   {
     date: "2026-11-26",
     cover: "/covers/daily/2026-11-26.jpg",
