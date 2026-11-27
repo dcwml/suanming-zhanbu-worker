@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261128Zh from "../content/daily/2026-11-28.zh.html";
+import daily20261128En from "../content/daily/2026-11-28.en.html";
 import daily20261127Zh from "../content/daily/2026-11-27.zh.html";
 import daily20261127En from "../content/daily/2026-11-27.en.html";
 import daily20261126Zh from "../content/daily/2026-11-26.zh.html";
@@ -255,6 +257,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-11-28",
+    cover: "/covers/daily/2026-11-28.jpg",
+    meta: {
+      zh: { title: "2026年11月28日宜忌·马", description: "2026年11月28日黄历宜忌：丙午马日青龙黄道值日，然立冬后火绝于亥犯四废，天吏、致死、五虚随之，普护、青龙、鸣吠三吉护持，宜祭祀、扫舍、破土、安葬、除服、成服、启钻、移柩、入殓、立碑十事馀事勿取，忌嫁娶、入宅、修造、动土；天河水纳音，冲鼠煞北，农历十月二十；生肖马今日运势与「四废日」科普。" },
+      en: { title: "Daily Almanac — November 28, 2026 (Horse)", description: "Daily almanac for November 28, 2026: a Bǐng Wǔ Horse day under the Azure Dragon, first of the Yellow Path lucky ones, yet fallen in the month where fire is cut off and marked Sìfèi, the Four Wastes, with the Heavenly Clerk, the Death-Bearing and the Five Emptinesses beside it, while the Universal Guard and the Crowing and Barking keep their two narrow roads open: ten matters favorable — worship, sweeping the house, breaking ground for burial, burial, removing and donning mourning, opening the grave, relocating the coffin, encoffining and erecting a gravestone — and four avoided: marriage, entering a new home, construction and breaking ground. A Celestial River Water day clashing the Rat with the Sha in the North, the twentieth day of the tenth lunar month; Horse fortunes today and an insight into the Four Wasted Days." },
+    },
+    content: { zh: daily20261128Zh, en: daily20261128En },
+  },
   {
     date: "2026-11-27",
     cover: "/covers/daily/2026-11-27.jpg",
