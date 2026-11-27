@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import monthly202612Zh from "../content/monthly/2026-12.zh.html";
+import monthly202612En from "../content/monthly/2026-12.en.html";
 import monthly202611Zh from "../content/monthly/2026-11.zh.html";
 import monthly202611En from "../content/monthly/2026-11.en.html";
 import monthly202610Zh from "../content/monthly/2026-10.zh.html";
@@ -28,6 +30,20 @@ export const MONTHLY_ARCHIVE_META = {
 } as const;
 
 export const MONTHLY_POSTS: readonly MonthlyPost[] = [
+  {
+    month: "2026-12",
+    meta: {
+      zh: {
+        title: "2026年12月十二生肖每月运势（庚子月）",
+        description: "2026年12月（农历庚子月）十二生肖每月运势：大雪寒水至旺、冬至一阳初生，月支子六合牛、三合猴龙、冲马害羊；附本月嫁娶、搬家、开业、出行、修造吉日速查。",
+      },
+      en: {
+        title: "Monthly Horoscope for All 12 Zodiacs — December 2026",
+        description: "December 2026 monthly fortune for all twelve Chinese zodiac signs: the Gēng Zǐ Rat month brings peak Winter Water from Major Snow to the Winter Solstice; the month branch harmonizes with Ox, forms a trinity with Monkey and Dragon while clashing with Horse; plus a quick reference of auspicious days for weddings, moving, business, travel and construction.",
+      },
+    },
+    content: { zh: monthly202612Zh, en: monthly202612En },
+  },
   {
     month: "2026-11",
     meta: {
