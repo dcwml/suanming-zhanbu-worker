@@ -1,5 +1,7 @@
 import type { Lang } from "../config/site";
 import type { PageMeta } from "./registry";
+import daily20261129Zh from "../content/daily/2026-11-29.zh.html";
+import daily20261129En from "../content/daily/2026-11-29.en.html";
 import daily20261128Zh from "../content/daily/2026-11-28.zh.html";
 import daily20261128En from "../content/daily/2026-11-28.en.html";
 import daily20261127Zh from "../content/daily/2026-11-27.zh.html";
@@ -257,6 +259,15 @@ export const DAILY_ARCHIVE_META = {
 } as const;
 
 export const DAILY_POSTS: readonly DailyPost[] = [
+  {
+    date: "2026-11-29",
+    cover: "/covers/daily/2026-11-29.jpg",
+    meta: {
+      zh: { title: "2026年11月29日宜忌·羊", description: "2026年11月29日黄历宜忌：丁未羊日明堂黄道值日，三合、临日、天喜、天医、六仪、福生七吉拱照，宜订盟、纳采、会亲友、祭祀、祈福、修造、动土、安机械、破土、安葬十事，忌嫁娶、移徙、出火、开市、入宅；厌对、招摇、往亡、八专随之，天河水纳音，冲牛煞西，农历十月廿一；生肖羊今日运势与「一神三名：厌对、六仪、招摇」科普。" },
+      en: { title: "Daily Almanac — November 29, 2026 (Goat)", description: "Daily almanac for November 29, 2026: a Dīng Wèi Goat day under Míngtáng 明堂, second of the Yellow Path gods, with seven auspicious spirits — Three Harmonies, Arrival Day, Heavenly Joy, Heavenly Doctor, Six Regalia, Fortune-Bearing and the Bright Hall — opening ten favorable matters from betrothal pledges and proposal gifts through worship, construction, breaking ground and burial, while marriage, moving house, relocating the stove fire, market openings and entering a home stay avoided under Yànduì 厌对, Zhāoyáo 招摇, Wǎngwáng 往亡 and the Eight Specialized; a Celestial River Water day clashing the Ox with the Sha in the West, the twenty-first day of the tenth lunar month; Goat fortunes today and an insight into one star wearing three name-tags: Yànduì, Liùyí and Zhāoyáo." },
+    },
+    content: { zh: daily20261129Zh, en: daily20261129En },
+  },
   {
     date: "2026-11-28",
     cover: "/covers/daily/2026-11-28.jpg",
